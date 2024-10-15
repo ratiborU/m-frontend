@@ -1,10 +1,9 @@
-// 'use client'
-// todo вынести код в отдельный компонент который сделать client
-// import styles from "./page.module.css";
-// import Input from "@/components/UI/Input/Input";
-// import Title from "@/components/UI/Title/Title";
-// import Button from "@/components/UI/Button/Button";
-import Registration from "@/components/Registration/Registration";
+import { Metadata } from "next";
+import Registration from "@/widjets/Registration/Registration";
+
+export const metadata: Metadata = {
+    title: 'Регистрация'
+}
 
 export default function RegistrationPage() {
     return (

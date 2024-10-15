@@ -1,0 +1,9 @@
+.edit {
+    width: 52px;
+    height: 52px;
+    /* margin-left: -10px; */
+    padding: 0;
+    text-align: center;
+    /* line-height: 32px; */
+    background-color: #494949;
+}

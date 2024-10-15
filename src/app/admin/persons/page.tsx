@@ -1,9 +1,23 @@
 import React from 'react';
+import { productsData } from '@/services/mock/mockProducts';
+import { productColumns } from './columns';
+import BaseGrid from '@/widjets/BaseGrid/BaseGrid';
+// import Button from '@/components/UI/Button/Button';
 
-const page = () => {
+// const requestFetch = async () => {
+//     'use server'
+//     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+//     const products = await response.json();
+//     return products;
+// }
+
+const page = async () => {
     return (
         <div>
-            Пользователи
+            пользователи
+            {/* <Button text='кнопка' size='s' onClick={requestFetch}/> */}
+            <BaseGrid columns={productColumns} data={productsData}/>
+            
         </div>
     );
 };

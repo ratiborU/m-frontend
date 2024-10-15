@@ -1,21 +1,21 @@
 'use client'
 import React from 'react';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
-type EditButtonProps = {
+type AddButtonProps = {
     path: string
 }
 
-const EditButton = (props: EditButtonProps) => {
+const AddButton = (props: AddButtonProps) => {
     const {path="#"} = props;
     const router = useRouter()
     return (
         <IconButton onClick={() => {router.push(path)}}>
-            <BorderColorIcon/>
+            <AddIcon/>
         </IconButton>        
     );
 };
 
-export default EditButton;
+export default AddButton;

@@ -1,13 +1,15 @@
 'use client'
 import { GridColDef } from "@mui/x-data-grid";
 import EditButton from "@/components/EditButton/EditButton";
+import AddButton from "@/components/AddButton/AddButton";
 
 export const productColumns: GridColDef[] = [
     {
         field: '+',
         headerName: '',
-        width: 52,
-        renderCell: () => <EditButton/>,
+        width: 60,
+        renderCell: (props) => <EditButton path={`/admin/products/edit/${props.id}`}/>,
+        renderHeader: () => <AddButton path='/admin/products/create'/>,
         align: 'center',
         display: 'flex',
         sortable: false,

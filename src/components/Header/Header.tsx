@@ -14,19 +14,8 @@ const isActive = (path: string, currentPath: string) => {
 
 const Header = () => {
     const pathName = usePathname();
-    // console.log(isActive('products', pathName));
     return (
         <header className={styles.header}>
-            {/* <nav className={styles.nav}>
-                <Link className={styles.activeLink} href={'/admin/products'}>Товары</Link>
-                <Link className={styles.link} href={'/admin/orders'}>Заказы</Link>
-                <Link className={styles.link} href={'/admin/persons'}>Пользователи</Link>
-                <Link className={styles.link} href={'/admin/comments'}>Комментарии</Link>
-                
-                <Link className={styles.link} href={'/admin/products'}>Статистика</Link>
-                <Link className={styles.link} href={'/admin/products'}>Другое</Link>
-                <Link className={styles.link} href={'/'}>Сайт</Link>
-            </nav> */}
             <nav className={styles.nav}>
                 <Link className={isActive('products', pathName)} href={'/admin/products'}>Товары</Link>
                 <Link className={isActive('orders', pathName)} href={'/admin/orders'}>Заказы</Link>

@@ -47,3 +47,7 @@
 .input:focus::placeholder {
     opacity: 1;
 }
+
+.inputLarge {
+    width: 400px;
+}

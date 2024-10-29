@@ -9,7 +9,7 @@ import { putProduct, postImage, deleteImage } from './action';
 import Image from 'next/image';
 import EditImage from '@/components/EditImage/EditImage';
 import { ProductScheme, MainImageScheme, ImageScheme, EditProductProps } from './models';
-
+import InputFile from '@/components/UI/InputFile/InputFile';
 
 // раскидать все по 3 разным файлам
 const EditProduct = (props: EditProductProps) => {
@@ -158,12 +158,17 @@ const EditProduct = (props: EditProductProps) => {
           height={400}
         />
 
-        <form onSubmit={handleSubmitMainImage(onSubmitMainImage)}>
-          <input
+        <form className={styles.formImageButtons} onSubmit={handleSubmitMainImage(onSubmitMainImage)}>
+          <InputFile
+            inputProps={{
+              ...registerMainImage('file')
+            }}
+          />
+          {/* <input
             className={styles.addImage}
             type="file"
             {...registerMainImage('file')}
-          />
+          /> */}
           <Button type='submit' variant='contained'>Сохранить картинку</Button>
         </form>
 
@@ -180,11 +185,11 @@ const EditProduct = (props: EditProductProps) => {
           )}
         </div>
 
-        <form onSubmit={handleSubmitImage(onSubmitImage)}>
-          <input
-            className={styles.addImage}
-            type="file"
-            {...registerImage('img')}
+        <form className={styles.formImageButtons} onSubmit={handleSubmitImage(onSubmitImage)}>
+          <InputFile
+            inputProps={{
+              ...registerImage('img')
+            }}
           />
           <Button type='submit' variant='contained'>Добавить картинку</Button>
         </form>

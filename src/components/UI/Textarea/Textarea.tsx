@@ -18,11 +18,20 @@ const Textarea = (props: TextareaProps) => {
     e.target.style.height = e.target.scrollHeight + "px";
   }
 
+  // Ужас ужасный но пока что как сделать иначе я не знаю
+  // ибо ref использовать не могу так как он передается
+  // в react-hook-form
+  const linesCount = Number(String(inputProps?.defaultValue).match(/\n/g)?.length || 0)
+  const defaultHeight = 49 + linesCount * 18.715 + 'px';
+
   return (
     <div className={styles.field}>
       <textarea
         className={`${styles.textarea} ${sizeInput == 'l' ? styles.inputLarge : ''}`}
         {...inputProps}
+        style={{
+          height: defaultHeight
+        }}
         onChange={(e) => {
           handleChange(e);
           if (inputProps?.onChange) {

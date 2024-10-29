@@ -2,49 +2,29 @@
 import React from 'react';
 import styles from "./editPerson.module.css";
 import Input from '@/components/UI/Input/Input';
-// import { Button } from '@mui/material';
 import { Button } from '@mui/material';
 import { TPerson } from '@/services/types/personType';
 import { useForm } from 'react-hook-form';
 import { postPerson } from './action';
-// import { revalidatePath, revalidateTag } from 'next/cache';
+import { PersonScheme } from './models';
 
-type PersonScheme = {
-  firstName: string,
-  secondName: string,
-  fatherName: string,
-  email: string,
-  phoneNumber: string,
-  // password: string,
-  // role: string,
-  // isActivated: boolean,
-  // activationLink: string
-}
-
-// interface EditPersonProps extends TPerson {
-//   // onSubmit?: (person: TPerson) => void;
-// }
 
 const EditPerson = (props: TPerson) => {
   const { firstName, secondName, fatherName, email, phoneNumber } = props;
-  // console.log(props.firstName);
 
   const { register, handleSubmit } = useForm<PersonScheme>();
-  // const [state, formAction] = useFormState<State, PersonScheme>(postPerson, null);
 
   const onSubmit = async (data: PersonScheme) => {
-    const person = await postPerson({ ...props, ...data });
-    console.log(person);
+    await postPerson({ ...props, ...data });
   }
 
   return (
     <>
-      {/* <Button size='large' variant='contained'>Сохранить</Button> */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.block}>
           <Input
             label='Фамилия'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'edit-person-second-name',
@@ -55,7 +35,7 @@ const EditPerson = (props: TPerson) => {
           />
           <Input
             label='Имя'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'edit-person-first-name',
@@ -66,7 +46,7 @@ const EditPerson = (props: TPerson) => {
           />
           <Input
             label='Отчество'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'edit-person-father-name',
@@ -77,7 +57,7 @@ const EditPerson = (props: TPerson) => {
           />
           <Input
             label='Почта'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'edit-person-email',
@@ -88,7 +68,7 @@ const EditPerson = (props: TPerson) => {
           />
           <Input
             label='Телефон'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'edit-person-phone',

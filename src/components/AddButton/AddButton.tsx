@@ -5,17 +5,17 @@ import { IconButton } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
 type AddButtonProps = {
-    path: string
+  path: string
 }
 
 const AddButton = (props: AddButtonProps) => {
-    const {path="#"} = props;
-    const router = useRouter()
-    return (
-        <IconButton onClick={() => {router.push(path)}}>
-            <AddIcon/>
-        </IconButton>        
-    );
+  const { path = "#" } = props;
+  const router = useRouter()
+  return (
+    <IconButton onClick={() => { router.push(path) }}>
+      <AddIcon />
+    </IconButton>
+  );
 };
 
 export default AddButton;

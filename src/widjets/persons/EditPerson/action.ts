@@ -1,16 +1,9 @@
 'use server'
-
+import { PersonScheme } from "./models";
 import { revalidateTag } from "next/cache";
 
-export type State =
-  | {
-    status: "success";
-    message: string;
-  }
-  | null;
 
-export const postPerson = async (data) => {
-  console.log(JSON.stringify(data));
+export const postPerson = async (data: PersonScheme) => {
   await fetch(`http://localhost:5000/api/persons`, {
     method: "PUT",
     headers: {

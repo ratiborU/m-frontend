@@ -3,35 +3,15 @@ import React from 'react';
 import styles from "./editProduct.module.css";
 import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
-import { TProduct } from '@/services/types/productType';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { putProduct, postImage, deleteImage } from './action';
 import Image from 'next/image';
 import EditImage from '@/components/EditImage/EditImage';
-import { TImage } from '@/services/types/imageType';
+import { ProductScheme, MainImageScheme, ImageScheme, EditProductProps } from './models';
 
-type ProductScheme = {
-  title: string,
-  description: string,
-  characteristics: string,
-  price: string,
-  rate: string,
-  commentsCount: string,
-}
 
-type MainImageScheme = {
-  file: FileList
-}
-
-type ImageScheme = {
-  img: FileList
-}
-
-interface EditProductProps extends TProduct {
-  images: TImage[]
-}
-
+// раскидать все по 3 разным файлам
 const EditProduct = (props: EditProductProps) => {
   const {
     id,
@@ -47,9 +27,6 @@ const EditProduct = (props: EditProductProps) => {
     // updatedAt
   } = props;
 
-  console.log(props);
-  console.log('hola');
-
   const { register, handleSubmit } = useForm<ProductScheme>();
   const { register: registerMainImage, handleSubmit: handleSubmitMainImage } = useForm<MainImageScheme>();
   const { register: registerImage, handleSubmit: handleSubmitImage } = useForm<ImageScheme>();
@@ -63,16 +40,13 @@ const EditProduct = (props: EditProductProps) => {
     formData.append('price', data.price);
     formData.append('rate', '0');
     formData.append('commentsCount', '0');
-    // formData.append('file', data.file[0]);
     await putProduct(formData);
-    console.log(data);
   }
 
   const onSubmitMainImage = async (data: MainImageScheme) => {
     const formData = new FormData();
     formData.append('id', String(id));
     formData.append('file', data.file[0]);
-    console.log(data.file[0]);
     await putProduct(formData);
   }
 
@@ -80,7 +54,6 @@ const EditProduct = (props: EditProductProps) => {
     const formData = new FormData();
     formData.append('productId', String(id));
     formData.append('img', data.img[0]);
-    console.log(data.img[0]);
     await postImage(formData);
   }
 
@@ -195,7 +168,7 @@ const EditProduct = (props: EditProductProps) => {
         </form>
 
         <div className={styles.images}>
-          {...images?.map((x: TImage) =>
+          {...images?.map((x) =>
             <EditImage
               key={x.id}
               src={`http://localhost:5000/${x.path}`}

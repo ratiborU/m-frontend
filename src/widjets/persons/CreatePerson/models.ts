@@ -4,8 +4,8 @@ export type PersonScheme = {
   fatherName: string,
   email: string,
   phoneNumber: string,
-  // password: string,
-  // role: string,
+  password: string,
+  role: string,
   // isActivated: boolean,
   // activationLink: string
 }

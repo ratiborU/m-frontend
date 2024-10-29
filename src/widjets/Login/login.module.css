@@ -1,28 +1,28 @@
 .block {
-    width: 360px;
-    margin: 0 auto;
-    /* margin-top: 100px; */
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
+  width: 360px;
+  margin: 0 auto;
+  /* margin-top: 100px; */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .text {
-    width: 100%;
-    font-size: 16px;
-    font-weight: 300;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+  display: flex;
+  justify-content: space-between;
 }
 .link {
-    color: #2F77E7;
-    text-decoration: underline;
+  color: #2f77e7;
+  text-decoration: underline;
 }
 .mt {
-    margin-top: -14px;
+  margin-top: -14px;
 }

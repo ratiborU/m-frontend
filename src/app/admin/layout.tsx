@@ -14,10 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Header/>
-        <div style={{margin: '0 70px'}}>
-            {children}
+      <body suppressHydrationWarning={true}>
+        <Header />
+        <div style={{ margin: '0 70px' }}>
+          {children}
         </div>
       </body>
     </html>

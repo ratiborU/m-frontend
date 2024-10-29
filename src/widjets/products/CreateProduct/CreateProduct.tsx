@@ -6,16 +6,8 @@ import Textarea from '@/components/UI/Textarea/Textarea';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { postProduct } from './action';
+import { ProductScheme } from './models';
 
-type ProductScheme = {
-  title: string,
-  description: string,
-  characteristics: string,
-  price: string,
-  rate: string,
-  commentsCount: string,
-  file: FileList
-}
 
 const CreateProduct = () => {
   const { register, handleSubmit } = useForm<ProductScheme>();

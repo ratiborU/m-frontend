@@ -13,8 +13,20 @@ export default function Login() {
   return (
     <div className={styles.block}>
       <Title text='Вход' size='l' />
-      {/* <Input label='Логин' placeholder='Ваша почта...' id='login-login' />
-      <Input label='Пароль' placeholder='Пароль...' id='login-password' /> */}
+      <Input
+        label='Логин'
+        inputProps={{
+          placeholder: '',
+          id: 'login-login'
+        }}
+      />
+      <Input
+        label='Пароль'
+        inputProps={{
+          placeholder: '',
+          id: 'login-password'
+        }}
+      />
       <Button text='Войти' size='l' onClick={() => { router.push('/admin/products') }} />
       <div className={styles.text}>
         <p>Еще нет аккаунта?</p>

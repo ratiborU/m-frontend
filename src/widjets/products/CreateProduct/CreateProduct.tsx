@@ -7,10 +7,11 @@ import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { postProduct } from './action';
 import { ProductScheme } from './models';
+import InputFile from '@/components/UI/InputFile/InputFile';
 
 
 const CreateProduct = () => {
-  const { register, handleSubmit } = useForm<ProductScheme>();
+  const { register, handleSubmit, getValues } = useForm<ProductScheme>();
 
   const onSubmit = async (data: ProductScheme) => {
     const formData = new FormData();
@@ -21,8 +22,15 @@ const CreateProduct = () => {
     formData.append('rate', '0');
     formData.append('commentsCount', '0');
     formData.append('file', data.file[0]);
+    console.log(getValues('file')[0].name)
     await postProduct(formData);
   }
+
+  // useEffect(() => {
+  //   if (getValues('file') && getValues('file').length != 0) {
+  //     setFileName(getValues('file')[0].name);
+  //   }
+  // }, [getValues, register]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,19 +75,22 @@ const CreateProduct = () => {
             }}
           />
           {/* Пока не реализовано на сервере */}
-          {/* <Input
+          <Input
             label='В наличии'
             sizeInput='small'
             inputProps={{
               placeholder: '',
               id: 'create-product-have',
               autoComplete: 'new-passport',
+              disabled: true
             }}
-          /> */}
+          />
         </div>
-        <input
-          {...register('file')}
-          type="file"
+        <InputFile
+          inputProps={{
+            id: 'load-image',
+            ...register('file')
+          }}
         />
         <div className={styles.buttons}>
           <Button type="submit" size='large' variant='contained'>Создать</Button>

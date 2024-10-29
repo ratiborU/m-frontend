@@ -37,7 +37,7 @@ const CreatePerson = () => {
         <div className={styles.block}>
           <Input
             label='Фамилия'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-second-name',
@@ -47,7 +47,7 @@ const CreatePerson = () => {
           />
           <Input
             label='Имя'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-first-name',
@@ -57,7 +57,7 @@ const CreatePerson = () => {
           />
           <Input
             label='Отчество'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-father-name',
@@ -67,7 +67,7 @@ const CreatePerson = () => {
           />
           <Input
             label='Почта'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-email',
@@ -77,7 +77,7 @@ const CreatePerson = () => {
           />
           <Input
             label='Телефон'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-phone',
@@ -87,7 +87,7 @@ const CreatePerson = () => {
           />
           <Input
             label='Пароль'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-password',
@@ -97,7 +97,7 @@ const CreatePerson = () => {
           />
           <Input
             label='Роль'
-            sizeInput='l'
+            sizeInput='large'
             inputProps={{
               placeholder: '',
               id: 'create-person-role',

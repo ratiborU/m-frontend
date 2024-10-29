@@ -1,0 +1,7 @@
+.block {
+  display: flex;
+  flex-direction: column;
+}
+.image {
+  margin-bottom: 8px;
+}

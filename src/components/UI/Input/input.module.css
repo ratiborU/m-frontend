@@ -48,6 +48,12 @@
     opacity: 1;
 }
 
-.inputLarge {
-    width: 400px;
+.small {
+    width: 190px;
+}
+.medium {
+  width: 360px;
+}
+.large {
+  width: 400px;
 }

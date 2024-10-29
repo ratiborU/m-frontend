@@ -1,11 +1,10 @@
 import React from 'react';
+import CreateProduct from '@/widjets/products/CreateProduct/CreateProduct';
 
 const page = () => {
-    return (
-        <div>
-            создать продукт
-        </div>
-    );
+  return (
+    <CreateProduct />
+  );
 };
 
 export default page;

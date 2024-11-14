@@ -13,21 +13,25 @@ export default function Login() {
   return (
     <div className={styles.block}>
       <Title text='Вход' size='l' />
-      <Input
-        label='Логин'
-        inputProps={{
-          placeholder: '',
-          id: 'login-login'
-        }}
-      />
-      <Input
-        label='Пароль'
-        inputProps={{
-          placeholder: '',
-          id: 'login-password'
-        }}
-      />
-      <Button text='Войти' size='l' onClick={() => { router.push('/admin/products') }} />
+      <form className={styles.form}>
+        <Input
+          label='Логин'
+          inputProps={{
+            placeholder: '',
+            id: 'login-login'
+          }}
+        />
+        <Input
+          label='Пароль'
+          inputProps={{
+            placeholder: '',
+            id: 'login-password'
+          }}
+        />
+        <Button text='Войти' size='l' onClick={() => { router.push('/admin/products') }} />
+      </form>
+
+
       <div className={styles.text}>
         <p>Еще нет аккаунта?</p>
         <Link href="http://localhost:3000/authorization/registration" className={styles.link}>Зарегистрироваться</Link>

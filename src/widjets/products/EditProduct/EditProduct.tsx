@@ -15,12 +15,17 @@ import InputFile from '@/components/UI/InputFile/InputFile';
 const EditProduct = (props: EditProductProps) => {
   const {
     id,
-    title,
+    name,
     description,
+    seoTitle,
+    seoDescription,
     characteristics,
     price,
+    discount,
     rate,
     commentsCount,
+    productsCount,
+    categoryId,
     mainImage,
     images
     // createdAt,
@@ -34,12 +39,17 @@ const EditProduct = (props: EditProductProps) => {
   const onSubmitData = async (data: ProductScheme) => {
     const formData = new FormData();
     formData.append('id', String(id));
-    formData.append('title', data.title);
+    formData.append('name', data.name);
     formData.append('description', data.description);
+    formData.append('seoTitle', data.seoTitle);
+    formData.append('seoDescription', data.seoDescription);
     formData.append('characteristics', data.characteristics);
     formData.append('price', data.price);
+    formData.append('discount', data.discount);
     formData.append('rate', '0');
     formData.append('commentsCount', '0');
+    formData.append('productsCount', data.productsCount);
+    formData.append('categoryId', data.categoryId);
     await putProduct(formData);
   }
 
@@ -68,8 +78,8 @@ const EditProduct = (props: EditProductProps) => {
               placeholder: '',
               id: 'edit-product-title',
               autoComplete: 'new-passport',
-              defaultValue: title,
-              ...register('title'),
+              defaultValue: name,
+              ...register('name'),
             }}
           />
           <Textarea
@@ -80,6 +90,27 @@ const EditProduct = (props: EditProductProps) => {
               autoComplete: 'new-passport',
               defaultValue: description,
               ...register('description')
+            }}
+          />
+          <Input
+            label='Название'
+            sizeInput='large'
+            inputProps={{
+              placeholder: '',
+              id: 'edit-product-seo-title',
+              autoComplete: 'new-passport',
+              defaultValue: seoTitle,
+              ...register('seoTitle'),
+            }}
+          />
+          <Textarea
+            label='Описание'
+            inputProps={{
+              placeholder: "",
+              id: 'create-product-seo-description',
+              autoComplete: 'new-passport',
+              defaultValue: seoDescription,
+              ...register('seoDescription')
             }}
           />
           <Textarea
@@ -104,6 +135,19 @@ const EditProduct = (props: EditProductProps) => {
                 ...register('price')
               }}
             />
+            <Input
+              label='Скидка'
+              sizeInput='small'
+              inputProps={{
+                placeholder: '',
+                id: 'create-product-discount',
+                autoComplete: 'new-passport',
+                defaultValue: discount,
+                ...register('discount')
+              }}
+            />
+          </div>
+          <div className={styles.inputs}>
             {/* Пока не реализовано на сервере */}
             <Input
               label='В наличии x'
@@ -112,8 +156,19 @@ const EditProduct = (props: EditProductProps) => {
                 placeholder: '',
                 id: 'create-product-have',
                 autoComplete: 'new-passport',
-                defaultValue: '',
-                // ...register('have')
+                defaultValue: productsCount,
+                ...register('productsCount')
+              }}
+            />
+            <Input
+              label='Категория'
+              sizeInput='small'
+              inputProps={{
+                placeholder: '',
+                id: 'create-product-category',
+                autoComplete: 'new-passport',
+                defaultValue: categoryId,
+                ...register('categoryId')
               }}
             />
           </div>

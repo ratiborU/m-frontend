@@ -11,16 +11,22 @@ import InputFile from '@/components/UI/InputFile/InputFile';
 
 
 const CreateProduct = () => {
+  // добавить валидацию по zod
   const { register, handleSubmit, getValues } = useForm<ProductScheme>();
 
   const onSubmit = async (data: ProductScheme) => {
     const formData = new FormData();
-    formData.append('title', data.title);
+    formData.append('name', data.name);
     formData.append('description', data.description);
+    formData.append('seoTitle', data.seoTitle);
+    formData.append('seoDescription', data.seoDescription);
     formData.append('characteristics', data.characteristics);
     formData.append('price', data.price);
+    formData.append('discount', data.discount);
     formData.append('rate', '0');
     formData.append('commentsCount', '0');
+    formData.append('productsCount', data.productsCount);
+    formData.append('categoryId', data.categoryId);
     formData.append('file', data.file[0]);
     console.log(getValues('file')[0].name)
     await postProduct(formData);
@@ -42,7 +48,7 @@ const CreateProduct = () => {
             placeholder: '',
             id: 'create-product-title',
             autoComplete: 'new-passport',
-            ...register('title')
+            ...register('name')
           }}
         />
         <Textarea
@@ -52,6 +58,25 @@ const CreateProduct = () => {
             id: 'create-product-description',
             autoComplete: 'new-passport',
             ...register('description')
+          }}
+        />
+        <Input
+          label='Seo Title'
+          sizeInput='large'
+          inputProps={{
+            placeholder: '',
+            id: 'create-product-seo-title',
+            autoComplete: 'new-passport',
+            ...register('seoTitle')
+          }}
+        />
+        <Textarea
+          label='Seo Description'
+          inputProps={{
+            placeholder: "",
+            id: 'create-product-seo-description',
+            autoComplete: 'new-passport',
+            ...register('seoDescription')
           }}
         />
         <Textarea
@@ -74,7 +99,18 @@ const CreateProduct = () => {
               ...register('price')
             }}
           />
-          {/* Пока не реализовано на сервере */}
+          <Input
+            label='Скидка'
+            sizeInput='small'
+            inputProps={{
+              placeholder: '',
+              id: 'create-product-discount',
+              autoComplete: 'new-passport',
+              ...register('discount')
+            }}
+          />
+        </div>
+        <div className={styles.inputs}>
           <Input
             label='В наличии'
             sizeInput='small'
@@ -82,10 +118,22 @@ const CreateProduct = () => {
               placeholder: '',
               id: 'create-product-have',
               autoComplete: 'new-passport',
-              disabled: true
+              ...register('productsCount')
+              // disabled: true
+            }}
+          />
+          <Input
+            label='Категория'
+            sizeInput='small'
+            inputProps={{
+              placeholder: '',
+              id: 'create-product-categoryId',
+              autoComplete: 'new-passport',
+              ...register('categoryId')
             }}
           />
         </div>
+
         <InputFile
           inputProps={{
             id: 'load-image',

@@ -16,13 +16,13 @@ export const productColumns: GridColDef[] = [
     filterable: false,
     disableColumnMenu: true,
   },
-  {
-    field: 'id',
-    headerName: 'Id',
-    width: 80,
-    align: 'center',
-    headerAlign: 'center'
-  },
+  // {
+  //   field: 'id',
+  //   headerName: 'Id',
+  //   width: 80,
+  //   align: 'center',
+  //   headerAlign: 'center'
+  // },
   {
     field: 'name',
     headerName: 'Заголовок',

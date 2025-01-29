@@ -1,5 +1,4 @@
-export type TOrder = {
-  id: string,
+export type PersonScheme = {
   price: string,
   address: string,
   delivery: string,
@@ -7,6 +6,4 @@ export type TOrder = {
   comment: string,
   status: string,
   personId: string,
-  createdAt: string,
-  updatedAt: string,
 }

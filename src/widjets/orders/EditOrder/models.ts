@@ -1,5 +1,4 @@
-export type TOrder = {
-  id: string,
+export type PersonScheme = {
   price: string,
   address: string,
   delivery: string,

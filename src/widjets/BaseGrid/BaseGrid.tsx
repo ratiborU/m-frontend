@@ -24,6 +24,11 @@ const BaseGrid = (props: BaseGridProps) => {
           paginationModel: { pageSize: 10, page: 0 },
         },
       }}
+      sx={{
+        "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+          outline: "none !important",
+        },
+      }}
     />
   );
 };

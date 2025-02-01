@@ -1,3 +1,7 @@
+import { TOrderProduct } from "@/services/types/orderProductType"
+import { TOrder } from "@/services/types/orderType"
+import { TProduct } from "@/services/types/productType"
+
 export type PersonScheme = {
   price: string,
   address: string,
@@ -8,4 +12,9 @@ export type PersonScheme = {
   personId: string,
   createdAt: string,
   updatedAt: string,
+}
+
+export interface EditOrderProps extends TOrder {
+  orderProducts: TOrderProduct[],
+  products: TProduct[]
 }

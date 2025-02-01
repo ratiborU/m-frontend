@@ -8,12 +8,10 @@ import { useForm } from 'react-hook-form';
 import { putOrder } from './action';
 import { EditOrderProps, PersonScheme } from './models';
 import OrderProduct from '@/components/OrderProduct/OrderProduct';
-import { TProduct } from '@/services/types/productType';
 
 
 const EditOrder = (props: EditOrderProps) => {
   const {
-    // id,
     price,
     address,
     delivery,
@@ -22,7 +20,8 @@ const EditOrder = (props: EditOrderProps) => {
     status,
     personId,
     createdAt,
-    products
+    products,
+    orderProducts
   } = props;
 
   const { register, handleSubmit } = useForm<PersonScheme>();
@@ -132,10 +131,8 @@ const EditOrder = (props: EditOrderProps) => {
           </div>
         </form>
         <div className={styles.products}>
-          {!!products && products.map(async (x) => {
-            const response = await fetch(`http://localhost:5000/api/products/${x.productId}`, { cache: 'no-cache' });
-            const product: TProduct = await response.json();
-            return <OrderProduct key={x.id} product={product} count={x.count} />
+          {!!products && products.map((product, i) => {
+            return <OrderProduct key={product.id} product={product} count={orderProducts[i].count} />
           })}
         </div>
       </div>

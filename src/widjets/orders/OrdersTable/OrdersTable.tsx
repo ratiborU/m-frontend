@@ -5,7 +5,6 @@ import { getAllProducts } from './action';
 
 const OrdersTable = async () => {
   const orders = await getAllProducts();
-  console.log(orders);
 
   return (
     <div>

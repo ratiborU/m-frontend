@@ -12,7 +12,6 @@ export async function generateStaticParams() {
     }
   });
   const persons = await response.json();
-  console.log(persons);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return persons.map((persons: { id: any; }) => persons.id);

@@ -12,7 +12,7 @@ import InputFile from '@/components/UI/InputFile/InputFile';
 
 const CreateProduct = () => {
   // добавить валидацию по zod
-  const { register, handleSubmit, getValues } = useForm<ProductScheme>();
+  const { register, handleSubmit } = useForm<ProductScheme>();
 
   const onSubmit = async (data: ProductScheme) => {
     const formData = new FormData();
@@ -28,7 +28,6 @@ const CreateProduct = () => {
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
     formData.append('file', data.file[0]);
-    console.log(getValues('file')[0].name)
     await postProduct(formData);
   }
 

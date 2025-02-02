@@ -1,8 +1,10 @@
 'use server'
+import { cookies } from "next/headers";
 import { PersonScheme } from "./models";
 import { revalidateTag } from "next/cache";
 
 export const postPerson = async (data: PersonScheme) => {
+  console.log(cookies().get('access')?.value)
   await fetch(`http://localhost:5000/api/persons`, {
     method: "POST",
     headers: {

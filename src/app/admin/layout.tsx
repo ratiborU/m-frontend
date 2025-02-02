@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 // import "../globals.css";
 import Header from "@/components/Header/Header";
 
-export const metadata: Metadata = {
-  title: 'Панель администратора - Mircos',
-  description: "Магазин косметики",
-};
+// export const metadata: Metadata = {
+//   title: 'Панель администратора - Mircos',
+//   description: "Магазин косметики",
+// };
 
 export default function RootLayout({
   children,
@@ -19,6 +19,7 @@ export default function RootLayout({
         <div style={{ margin: '0 70px' }}>
           {children}
         </div>
+
       </body>
     </html>
   );

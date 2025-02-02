@@ -12,3 +12,8 @@ export type TPerson = {
   createdAt: string,
   updatedAt: string,
 }
+
+export type IAuthResponse = {
+  accessToken: string;
+  refreshToken: string;
+};

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -13,13 +13,13 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Mircos',
-    template: '%s - Mircos' // не обязательно
-  },
-  description: "Магазин косметики",
-};
+// export const metadata: Metadata = {
+//   title: {
+//     default: 'Mircos',
+//     template: '%s - Mircos' // не обязательно
+//   },
+//   description: "Магазин косметики",
+// };
 
 export default function RootLayout({
   children,
@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={`${geistSans.variable} ${geistMono.variable}`}>
+
         {children}
       </body>
     </html>

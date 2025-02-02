@@ -7,28 +7,43 @@ import Title from "@/components/UI/Title/Title";
 import Button from "@/components/UI/Button/Button";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { LoginScheme } from "./models";
+import { login } from "./action";
+// import { cookies } from "next/headers";
 
 export default function Login() {
-  const router = useRouter()
+  const router = useRouter();
+
+  const { register, handleSubmit } = useForm<LoginScheme>();
+
+  const onSubmit = async (data: LoginScheme) => {
+    await login(data);
+    // await cookies().get('session')?.value
+    // router.push('/admin/products')
+  }
+
   return (
     <div className={styles.block}>
       <Title text='Вход' size='l' />
-      <form className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           label='Логин'
           inputProps={{
             placeholder: '',
-            id: 'login-login'
+            id: 'login-login',
+            ...register('email')
           }}
         />
         <Input
           label='Пароль'
           inputProps={{
             placeholder: '',
-            id: 'login-password'
+            id: 'login-password',
+            ...register('password')
           }}
         />
-        <Button text='Войти' size='l' onClick={() => { router.push('/admin/products') }} />
+        <Button text='Войти' size='l' />
       </form>
 
 

@@ -1,3 +1,5 @@
+'use client'
+
 export type TProduct = {
   id: number,
   name: string,
@@ -15,3 +17,17 @@ export type TProduct = {
   createdAt: string,
   updatedAt: string,
 }
+
+export type TProductCreate = {
+  name: string,
+  description: string,
+  seoTitle: string,
+  seoDescription: string,
+  characteristics: string,
+  price: string,
+  discount: string,
+  productsCount: string,
+  categoryId: string,
+  file: File, // ?
+}
+

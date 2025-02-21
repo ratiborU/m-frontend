@@ -1,6 +1,7 @@
-// import type { Metadata } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ReactQueryProvider from "@/providers/QueryProvider/QueryProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,13 +14,13 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// export const metadata: Metadata = {
-//   title: {
-//     default: 'Mircos',
-//     template: '%s - Mircos' // не обязательно
-//   },
-//   description: "Магазин косметики",
-// };
+export const metadata: Metadata = {
+  title: {
+    default: 'Mircos',
+    template: '%s - Mircos' // не обязательно
+  },
+  description: "Магазин косметики",
+};
 
 export default function RootLayout({
   children,
@@ -29,8 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={`${geistSans.variable} ${geistMono.variable}`}>
-
-        {children}
+        <ReactQueryProvider>
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );

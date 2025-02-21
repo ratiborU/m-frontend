@@ -1,57 +1,80 @@
 'use server'
+
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+
+
+type TRequest = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 type TApiProps = {
-  link: string,
+  type?: TRequest,
+  data?: string | FormData | BodyInit | null | undefined
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSuccess?: (data?: any) => void,
   onError?: (error: Error) => void,
-  revalidate?: string,
+  revalidate?: number,
+  contentType?: string,
   next?: NextFetchRequestConfig | undefined,
-  data?: object,
-  type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+  isRefresh?: boolean
 }
 
 
-export const api = async (props: TApiProps) => {
+export const api = async (link: string, props: TApiProps = {}) => {
   const {
-    link,
+    type = 'GET',
     data,
-    type,
     next,
     onSuccess = () => { return },
     onError = (error: Error) => { return error },
-    revalidate
+    isRefresh = false,
+    revalidate,
+    contentType = 'application/json',
   } = props;
-  const token = cookies().get('token')?.value
+
+  const token = cookies().get('access')?.value
+  const tags = type == "GET" ? link.split('/') : [];
+  // const contentType = 'application/json'
+  const headers: HeadersInit = {
+    'Authorization': `Bearer ${token}`,
+  };
+  if (contentType == 'application/json') {
+    headers['Content-type'] = 'application/json';
+  }
 
   const response = await fetch(`http://localhost:5000/api/${link}`, {
     method: type,
-    headers: {
-      'Content-type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+    headers,
+    next: { // сложно, нужно проверить
+      revalidate, // Обновлять через день автоматически
+      ...next,
+      tags,
     },
-    next,
-    body: JSON.stringify(data)
+    // cache: "no-cache", // нельзя использовать с revalidate
+    body: data
   })
-    .then(response => response.json())
+    .then(response => {
+      console.log(response.status);
+      if (Number(response.status) >= 300) {
+        throw new Error("", { cause: response.status })
+      }
+      return response.json();
+    })
     .then(async (data) => {
       onSuccess(data);
+      if (type != "GET" && !isRefresh) {
+        revalidateTag(tags[0] || '');
+      }
       return data;
     })
-    .catch(error => {
+    .catch(async (error: Error) => {
       onError(error)
-      console.log(error);
+      if (error.cause == 401) {
+        redirect('/authorization/login')
+      }
+      console.log(error.cause);
+      return error
     });
-  revalidateTag(revalidate || '');
+
   return response;
 }
-
-// fetch
-// then error
-// onSuccess
-// onError
-// check token
-// check refresh token
-//  

@@ -1,3 +1,5 @@
+'use client'
+
 export type TPerson = {
   id: string,
   firstName: string,
@@ -11,6 +13,22 @@ export type TPerson = {
   activationLink: string,
   createdAt: string,
   updatedAt: string,
+}
+
+export type TPersonCreate = {
+  // id: string,
+  firstName: string,
+  secondName: string,
+  fatherName: string,
+  email: string,
+  phoneNumber: string,
+  password: string,
+  role?: string,
+}
+
+export type TLogin = {
+  email: string,
+  password: string,
 }
 
 export type IAuthResponse = {

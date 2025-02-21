@@ -6,10 +6,22 @@ import Button from "@/components/UI/Button/Button";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { RegistrationScheme } from "./models";
-import { registration } from "@/services/api/authorizationService";
+import { useRegistrationMutation } from "@/hooks/auth/useRegistrationMutation";
+import { useRouter } from "next/navigation";
 
 export default function Registration() {
+  const router = useRouter();
   const { register, handleSubmit } = useForm<RegistrationScheme>();
+
+  const onSuccess = () => {
+    router.push('/admin/products')
+  }
+
+  const onError = (error: Error) => {
+    alert('не получилось' + error.message,)
+  }
+
+  const { registration } = useRegistrationMutation({ onSuccess, onError });
 
   const onSubmit = async (data: RegistrationScheme) => {
     const sendData = {
@@ -21,7 +33,6 @@ export default function Registration() {
       password: data.password,
     }
     await registration(sendData);
-    // router.push('/admin/products')
   }
 
   return (

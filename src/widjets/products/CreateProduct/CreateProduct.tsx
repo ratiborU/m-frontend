@@ -5,14 +5,25 @@ import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { postProduct } from './action';
+// import { postProduct } from './action';
 import { ProductScheme } from './models';
 import InputFile from '@/components/UI/InputFile/InputFile';
+import { useCreateProductMutation } from '@/hooks/products/useCreateProductMutation';
 
 
 const CreateProduct = () => {
   // добавить валидацию по zod
   const { register, handleSubmit } = useForm<ProductScheme>();
+
+  const onSuccess = () => {
+    alert('Получилось')
+  }
+
+  const onError = () => {
+    alert('не получилось')
+  }
+
+  const { createProduct } = useCreateProductMutation({ onSuccess, onError });
 
   const onSubmit = async (data: ProductScheme) => {
     const formData = new FormData();
@@ -28,14 +39,9 @@ const CreateProduct = () => {
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
     formData.append('file', data.file[0]);
-    await postProduct(formData);
+    await createProduct(formData);
   }
 
-  // useEffect(() => {
-  //   if (getValues('file') && getValues('file').length != 0) {
-  //     setFileName(getValues('file')[0].name);
-  //   }
-  // }, [getValues, register]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

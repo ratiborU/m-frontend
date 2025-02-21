@@ -2,11 +2,11 @@
 
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from "@mui/x-data-grid";
-import { TProduct } from '@/services/types/productType';
+// import { TProduct } from '@/services/types/productType';
 
 type BaseGridProps = {
   columns: GridColDef[],
-  data: TProduct[];
+  data: object[];
 }
 
 const BaseGrid = (props: BaseGridProps) => {

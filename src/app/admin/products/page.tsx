@@ -2,7 +2,7 @@ import React from 'react';
 import ProductsTable from '@/widjets/products/ProductsTable/ProductsTable';
 
 export async function generateStaticParams() {
-  const response = await fetch(`http://localhost:5000/api/products?limit=101&page=1`, {
+  const response = await fetch(`http://localhost:5000/api/products?limit=100&page=1`, {
     next: {
       revalidate: 3600, // обновлять каждый час
       tags: ['products']

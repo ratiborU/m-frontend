@@ -1,23 +1,18 @@
-// import { cookies } from 'next/headers';
-// import { NextResponse } from 'next/server'
-// import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-// const protectedRoutes = ['/admin/products'];
-// const publicRoutes = ['/'];
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  
+  console.log('hola');
+  return NextResponse.redirect(new URL('/', request.url))
+}
 
-// // This function can be marked `async` if using `await` inside
-// export default async function middleware(request: NextRequest) {
-//   // const path = request.nextUrl.pathname;
-//   // const isProtectedRoute = protectedRoutes.includes(path)
-//   console.log('middleware');
-
-//   // const cookie = cookies().get('access')?.value
-//   // console.log(cookie);
-//   // return NextResponse.redirect("/authorization/login")
-//   // return NextResponse.redirect(new URL('/authorization/login', request.url))
-// }
-
-// // See "Matching Paths" below to learn more
-// // export const config = {
-// //   matcher: '/authorization/login',
-// // }
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: [
+    '/admin/:path*',
+    '/about/:path*',
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+  ],
+}

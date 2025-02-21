@@ -2,19 +2,19 @@
 import { cookies } from "next/headers";
 import { api } from "./api";
 
-export type TLoginRequest = {
+type TLoginRequest = {
   email: string,
   password: string
 }
 
-export type TLoginResponse = {
+type TLoginResponse = {
   tokens: {
     accessToken: string,
     refreshToken: string
   }
 }
 
-export type TRegistrationRequest = {
+type TRegistrationRequest = {
   firstName: string,
   secondName: string,
   fatherName: string,
@@ -23,7 +23,7 @@ export type TRegistrationRequest = {
   password: string,
 }
 
-export type TRegistrationResponse = {
+type TRegistrationResponse = {
   tokens: {
     accessToken: string,
     refreshToken: string
@@ -35,9 +35,12 @@ type TTokens = {
   refreshToken: string
 }
 
-const setCookies = (tokens: TTokens) => {
-  const accessExpiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000); // 1 дней
+export const setCookies = (tokens: TTokens) => {
+  // console.log(tokens.accessToken);
+  // console.log(tokens.refreshToken);
+  const accessExpiresAt = new Date(Date.now() + 1 * 1 * 1 * 20 * 1000); // 1 дней
   const refreshExpiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 дней
+
   cookies().set("access", tokens.accessToken, {
     httpOnly: true,
     secure: true,
@@ -50,64 +53,43 @@ const setCookies = (tokens: TTokens) => {
   });
 }
 
-export const login = async (data: TLoginRequest, onSuccess?: () => void, onError?: (error: Error) => void) => {
-  const response = await api({
-    link: 'persons/login',
+export const login = async (data: TLoginRequest) => {
+  // const body = JSON.stringify(data);
+  const response = await api('persons/login', {
     type: "POST",
-    data,
+    data: JSON.stringify(data),
     onSuccess: (data: TLoginResponse) => {
       setCookies(data.tokens);
-      if (onSuccess) {
-        onSuccess();
-      };
     },
-    onError: (error: Error) => {
-      if (onError) {
-        onError(error);
-      };
-    }
   });
   return response;
 }
 
 
-export const registration = async (data: TRegistrationRequest, onSuccess?: () => void, onError?: (error: Error) => void) => {
-  const response = api({
-    link: 'persons/registration',
+export const registration = async (data: TRegistrationRequest) => {
+  const response = api('persons/registration', {
     type: "POST",
-    data,
+    data: JSON.stringify(data),
     onSuccess: (data: TRegistrationResponse) => {
       setCookies(data.tokens);
-      if (onSuccess) {
-        onSuccess();
-      };
     },
-    onError: (error: Error) => {
-      if (onError) {
-        onError(error);
-      };
-    }
   });
   return response;
 }
 
 
-export const refresh = async (data: TRegistrationRequest, onSuccess?: () => void, onError?: (error: Error) => void) => {
-  const response = api({
-    link: 'persons/refresh',
+export const refresh = async () => {
+  const refresh = cookies().get('refresh')?.value;
+  const response = await api('persons/refresh', {
     type: "POST",
-    data,
-    onSuccess: (data: TRegistrationResponse) => {
-      setCookies(data.tokens);
-      if (onSuccess) {
-        onSuccess();
-      };
+    data: JSON.stringify({
+      refreshToken: refresh
+    }),
+    isRefresh: true,
+    onSuccess: () => {
+      // console.log(data.tokens);
+      // setCookies(data.tokens);
     },
-    onError: (error: Error) => {
-      if (onError) {
-        onError(error);
-      };
-    }
   });
   return response;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import EditOrder from '@/widjets/orders/EditOrder/EditOrder';
-import { TOrder } from '@/services/types/orderType';
-import { TOrderProduct } from '@/services/types/orderProductType';
-import { TProduct } from '@/services/types/productType';
+import { TOrder } from '@/services/api/orders/orderType';
+import { TOrderProduct } from '@/services/api/orderProducts/orderProductType';
+import { TProduct } from '@/services/api/products/productType';
 
 const page = async ({ params }: { params: { orderId: string } }) => {
   const { orderId } = params;

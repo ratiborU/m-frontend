@@ -1,6 +1,6 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
-import { getAllPersons } from "@/services/api/personService";
+import { getAllPersons } from "@/services/api/persons/personService";
 
 // хз как тут делать пагинацию
 export const useGetPersonsQuery = () => {

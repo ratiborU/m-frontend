@@ -1,6 +1,6 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
-import { getOnePerson } from "@/services/api/personService";
+import { getOnePerson } from "@/services/api/persons/personService";
 
 export const useGetOnePersonQuery = (id: string | number) => {
   const { data, isFetching, error } = useQuery({

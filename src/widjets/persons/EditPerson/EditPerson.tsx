@@ -3,7 +3,7 @@ import React from 'react';
 import styles from "./editPerson.module.css";
 import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
-import { TPerson } from '@/services/types/personType';
+import { TPerson } from '@/services/api/persons/personType';
 import { useForm } from 'react-hook-form';
 import { postPerson } from './action';
 import { PersonScheme } from './models';

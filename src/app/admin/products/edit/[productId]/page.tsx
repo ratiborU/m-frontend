@@ -1,6 +1,6 @@
 import React from 'react';
 import EditProduct from '@/widjets/products/EditProduct/EditProduct';
-import { TProduct } from '@/services/types/productType';
+import { TProduct } from '@/services/api/products/productType';
 import { TPagination } from '@/services/types/paginationType';
 
 export async function generateStaticParams() {

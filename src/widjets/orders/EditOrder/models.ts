@@ -1,6 +1,6 @@
-import { TOrderProduct } from "@/services/types/orderProductType"
-import { TOrder } from "@/services/types/orderType"
-import { TProduct } from "@/services/types/productType"
+import { TOrderProduct } from "@/services/api/orderProducts/orderProductType"
+import { TOrder } from "@/services/api/orders/orderType"
+import { TProduct } from "@/services/api/products/productType"
 
 export type PersonScheme = {
   price: string,

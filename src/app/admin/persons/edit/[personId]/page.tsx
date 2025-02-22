@@ -1,6 +1,6 @@
 import React from 'react';
 import EditPerson from '@/widjets/persons/EditPerson/EditPerson';
-import { TPerson } from '@/services/types/personType';
+import { TPerson } from '@/services/api/persons/personType';
 
 const page = async ({ params }: { params: { personId: string } }) => {
   const { personId } = params;

@@ -1,7 +1,7 @@
 'use server'
-import { api } from "./api";
-import { TPerson, TPersonCreate } from "../types/personType";
-import { TPagination } from "../types/paginationType";
+import { api } from "../api";
+import { TPerson, TPersonCreate } from "./personType";
+import { TPagination } from "../../types/paginationType";
 
 export const createPerson = async (data: TPersonCreate): Promise<TPerson> => {
   const response = await api('persons', {

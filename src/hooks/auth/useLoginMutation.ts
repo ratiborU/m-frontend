@@ -1,9 +1,8 @@
 'use client'
 
 import { useMutation } from '@tanstack/react-query';
-import { TLogin } from '@/services/types/personType';
-import { login as loginApi } from '@/services/api/authorizationService';
-// import { createProduct as loginApi } from '@/services/api/testAuthService';
+import { TLogin } from '@/services/api/persons/personType';
+import { login as loginApi } from '@/services/api/auth/authorizationService';
 
 interface LoginMutationArgs {
   onSuccess?: () => void;

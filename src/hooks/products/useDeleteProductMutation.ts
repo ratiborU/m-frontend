@@ -1,6 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteProduct as deleteProductApi } from '@/services/api/productService';
+import { deleteProduct as deleteProductApi } from '@/services/api/products/productService';
 
 
 interface DeleteProductMutationArgs {

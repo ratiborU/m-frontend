@@ -1,7 +1,7 @@
 import BaseGrid from '@/widjets/BaseGrid/BaseGrid';
 import React from 'react';
 import { productColumns } from './columns';
-import { getAllProducts } from '@/services/api/productService';
+import { getAllProducts } from '@/services/api/products/productService';
 
 const ProductsTable = async () => {
   const products = await getAllProducts();

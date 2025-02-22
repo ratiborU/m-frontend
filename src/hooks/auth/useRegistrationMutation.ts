@@ -1,7 +1,7 @@
 'use client'
 import { useMutation } from '@tanstack/react-query';
-import { TPersonCreate } from '@/services/types/personType';
-import { registration as registrationApi } from '@/services/api/authorizationService';
+import { TPersonCreate } from '@/services/api/persons/personType';
+import { registration as registrationApi } from '@/services/api/auth/authorizationService';
 // import { login } from '@/services/api/authorizationService';
 
 interface RegistrationMutationArgs {

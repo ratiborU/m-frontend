@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './orderProduct.module.css'
-import { TProduct } from '@/services/types/productType';
+import { TProduct } from '@/services/api/products/productType';
 
 type OrderProductProps = {
   product: TProduct,

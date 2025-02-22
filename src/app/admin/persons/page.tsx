@@ -3,7 +3,7 @@ import React from 'react';
 import { productColumns } from './columns';
 import BaseGrid from '@/widjets/BaseGrid/BaseGrid';
 // import { cookies } from 'next/headers';
-import { getAllPersons } from '@/services/api/personService';
+import { getAllPersons } from '@/services/api/persons/personService';
 // import Button from '@/components/UI/Button/Button';
 
 export async function generateStaticParams() {

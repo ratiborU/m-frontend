@@ -1,5 +1,5 @@
-import { TAnswer } from '@/services/types/answerType';
-import { TComment } from '@/services/types/commentType';
+import { TAnswer } from '@/services/api/answers/answerType';
+import { TComment } from '@/services/api/comments/commentType';
 import EditComment from '@/widjets/comments/EditComment/EditComment';
 import React from 'react';
 

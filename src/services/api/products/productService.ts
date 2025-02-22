@@ -1,8 +1,8 @@
 'use server'
-import { TProduct } from "../types/productType";
-import { TPagination } from "../types/paginationType";
+import { TProduct } from "./productType";
+import { TPagination } from "../../types/paginationType";
 // import { revalidateTag } from "next/cache";
-import { api } from "./api";
+import { api } from "../api";
 
 export const createProduct = async (data: FormData): Promise<TProduct> => {
   const response = await api(`products`, {

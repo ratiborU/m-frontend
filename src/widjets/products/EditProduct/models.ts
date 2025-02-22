@@ -1,5 +1,5 @@
-import { TImage } from "@/services/types/imageType"
-import { TProduct } from "@/services/types/productType"
+import { TImage } from "@/services/api/images/imageType"
+import { TProduct } from "@/services/api/products/productType"
 
 export type ProductScheme = {
   name: string,

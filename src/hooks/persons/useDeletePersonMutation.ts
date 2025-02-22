@@ -1,6 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deletePerson as deletePersonApi } from '@/services/api/personService';
+import { deletePerson as deletePersonApi } from '@/services/api/persons/personService';
 
 
 interface DeletePersonMutationArgs {

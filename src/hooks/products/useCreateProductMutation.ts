@@ -1,6 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct as createProductApi } from '@/services/api/productService';
+import { createProduct as createProductApi } from '@/services/api/products/productService';
 
 
 interface CreateProductMutationArgs {

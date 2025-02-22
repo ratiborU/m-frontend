@@ -1,6 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateProduct as updateProductApi } from '@/services/api/productService';
+import { updateProduct as updateProductApi } from '@/services/api/products/productService';
 
 
 interface UpdateProductMutationArgs {

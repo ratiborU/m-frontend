@@ -1,39 +1,15 @@
 'use server'
 import { cookies } from "next/headers";
-import { api } from "./api";
+import { api } from "../api";
+import {
+  TLoginRequest,
+  TLoginResponse,
+  TRegistrationRequest,
+  TRegistrationResponse,
+  TTokens
+} from "./authType";
 
-type TLoginRequest = {
-  email: string,
-  password: string
-}
 
-type TLoginResponse = {
-  tokens: {
-    accessToken: string,
-    refreshToken: string
-  }
-}
-
-type TRegistrationRequest = {
-  firstName: string,
-  secondName: string,
-  fatherName: string,
-  email: string,
-  phoneNumber: string,
-  password: string,
-}
-
-type TRegistrationResponse = {
-  tokens: {
-    accessToken: string,
-    refreshToken: string
-  }
-}
-
-type TTokens = {
-  accessToken: string,
-  refreshToken: string
-}
 
 export const setCookies = (tokens: TTokens) => {
   const accessExpiresAt = new Date(Date.now() + 1 * 1 * 60 * 60 * 1000); // 1 дней

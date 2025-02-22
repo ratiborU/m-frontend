@@ -1,26 +1,26 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct as createProductApi } from '@/services/api/productService';
+import { createComment as createCommentApi } from '@/services/api/comments/commentService';
+import { TCommentCreate } from '@/services/api/comments/commentType';
 
-
-interface CreateProductMutationArgs {
+interface CreateCommentMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useCreateProductMutation = (args: CreateProductMutationArgs) => {
+export const useCreateCommentMutation = (args: CreateCommentMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: createProduct,
+    mutateAsync: createComment,
   } = useMutation({
-    mutationFn: async (data: FormData) => await createProductApi(data),
+    mutationFn: async (data: TCommentCreate) => await createCommentApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['comments'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +29,5 @@ export const useCreateProductMutation = (args: CreateProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, createProduct };
+  return { isPending, isError, createComment };
 };

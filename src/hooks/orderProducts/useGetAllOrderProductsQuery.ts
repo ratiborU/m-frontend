@@ -1,12 +1,12 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
-import { getAllProducts } from "@/services/api/productService";
+import { getAllOrderProducts } from "@/services/api/orderProducts/orderProductService";
 
 // хз как тут делать пагинацию
-export const useGetProductsQuery = () => {
+export const useGetOrderProductsQuery = () => {
   const { data, isFetching, error } = useQuery({
-    queryFn: async () => await getAllProducts(),
-    queryKey: ['products'],
+    queryFn: async () => await getAllOrderProducts(),
+    queryKey: ['orderProducts'],
     staleTime: Infinity,
   });
 

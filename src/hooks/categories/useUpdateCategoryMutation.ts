@@ -1,26 +1,26 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateProduct as updateProductApi } from '@/services/api/productService';
+import { updateCategory as updateCategoryApi } from '@/services/api/categories/categoryService';
+import { TCategory } from '@/services/api/categories/categoryType';
 
-
-interface UpdateProductMutationArgs {
+interface UpdateCategoryMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useUpdateProductMutation = (args: UpdateProductMutationArgs) => {
+export const useUpdateCategoryMutation = (args: UpdateCategoryMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: updateProduct,
+    mutateAsync: updateCategory,
   } = useMutation({
-    mutationFn: async (data: FormData) => await updateProductApi(data),
+    mutationFn: async (data: TCategory) => await updateCategoryApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['categories'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +29,5 @@ export const useUpdateProductMutation = (args: UpdateProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, updateProduct };
+  return { isPending, isError, updateCategory };
 };

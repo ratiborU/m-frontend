@@ -1,26 +1,26 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateProduct as updateProductApi } from '@/services/api/productService';
+import { updateOrderProduct as updateOrderProductApi } from '@/services/api/orderProducts/orderProductService';
+import { TOrderProduct } from '@/services/api/orderProducts/orderProductType';
 
-
-interface UpdateProductMutationArgs {
+interface UpdateOrderProductMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useUpdateProductMutation = (args: UpdateProductMutationArgs) => {
+export const useUpdateOrderProductMutation = (args: UpdateOrderProductMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: updateProduct,
+    mutateAsync: updateOrderProduct,
   } = useMutation({
-    mutationFn: async (data: FormData) => await updateProductApi(data),
+    mutationFn: async (data: TOrderProduct) => await updateOrderProductApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['orderProducts'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +29,5 @@ export const useUpdateProductMutation = (args: UpdateProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, updateProduct };
+  return { isPending, isError, updateOrderProduct };
 };

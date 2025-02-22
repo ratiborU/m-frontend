@@ -1,11 +1,11 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
-import { getOneProduct } from "@/services/api/productService";
+import { getOneAnswer } from "@/services/api/answers/answerService";
 
-export const useGetOneProductQuery = (id: string | number) => {
+export const useGetOneAnswerQuery = (id: string | number) => {
   const { data, isFetching, error } = useQuery({
-    queryFn: async () => await getOneProduct(id),
-    queryKey: ['products', Number(id)],
+    queryFn: async () => await getOneAnswer(id),
+    queryKey: ['answers', Number(id)],
     staleTime: Infinity,
   });
 

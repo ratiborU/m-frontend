@@ -1,26 +1,25 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteProduct as deleteProductApi } from '@/services/api/productService';
+import { deleteFavoriteProduct as deleteFavoriteProductApi } from '@/services/api/favoriteProducts/favoriteProductService';
 
-
-interface DeleteProductMutationArgs {
+interface DeleteFavoriteProductMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useDeleteProductMutation = (args: DeleteProductMutationArgs) => {
+export const useDeleteFavoriteProductMutation = (args: DeleteFavoriteProductMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: deleteProduct,
+    mutateAsync: deleteFavoriteProduct,
   } = useMutation({
-    mutationFn: async (id: number | string) => await deleteProductApi(id),
+    mutationFn: async (id: number | string) => await deleteFavoriteProductApi(id),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['favoriteProducts'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +28,5 @@ export const useDeleteProductMutation = (args: DeleteProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, deleteProduct };
+  return { isPending, isError, deleteFavoriteProduct };
 };

@@ -1,26 +1,25 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteProduct as deleteProductApi } from '@/services/api/productService';
+import { deleteCategory as deleteCategoryApi } from '@/services/api/categories/categoryService';
 
-
-interface DeleteProductMutationArgs {
+interface DeleteCategoryMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useDeleteProductMutation = (args: DeleteProductMutationArgs) => {
+export const useDeleteCategoryMutation = (args: DeleteCategoryMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: deleteProduct,
+    mutateAsync: deleteCategory,
   } = useMutation({
-    mutationFn: async (id: number | string) => await deleteProductApi(id),
+    mutationFn: async (id: number | string) => await deleteCategoryApi(id),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['categories'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +28,5 @@ export const useDeleteProductMutation = (args: DeleteProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, deleteProduct };
+  return { isPending, isError, deleteCategory };
 };

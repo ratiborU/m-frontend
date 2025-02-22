@@ -1,26 +1,25 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct as createProductApi } from '@/services/api/productService';
+import { createImage as createImageApi } from '@/services/api/images/imageService';
 
-
-interface CreateProductMutationArgs {
+interface CreateImageMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useCreateProductMutation = (args: CreateProductMutationArgs) => {
+export const useCreateImageMutation = (args: CreateImageMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: createProduct,
+    mutateAsync: createImage,
   } = useMutation({
-    mutationFn: async (data: FormData) => await createProductApi(data),
+    mutationFn: async (data: FormData) => await createImageApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['images'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +28,5 @@ export const useCreateProductMutation = (args: CreateProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, createProduct };
+  return { isPending, isError, createImage };
 };

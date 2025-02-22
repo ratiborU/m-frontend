@@ -1,26 +1,25 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteProduct as deleteProductApi } from '@/services/api/productService';
+import { deleteImage as deleteImageApi } from '@/services/api/images/imageService';
 
-
-interface DeleteProductMutationArgs {
+interface DeleteImageMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useDeleteProductMutation = (args: DeleteProductMutationArgs) => {
+export const useDeleteImageMutation = (args: DeleteImageMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: deleteProduct,
+    mutateAsync: deleteImage,
   } = useMutation({
-    mutationFn: async (id: number | string) => await deleteProductApi(id),
+    mutationFn: async (id: number | string) => await deleteImageApi(id),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['products'],
+        queryKey: ['images'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +28,5 @@ export const useDeleteProductMutation = (args: DeleteProductMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, deleteProduct };
+  return { isPending, isError, deleteImage };
 };

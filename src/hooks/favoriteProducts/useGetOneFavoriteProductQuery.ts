@@ -1,11 +1,11 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
-import { getOneProduct } from "@/services/api/productService";
+import { getOneFavoriteProduct } from "@/services/api/favoriteProducts/favoriteProductService";
 
-export const useGetOneProductQuery = (id: string | number) => {
+export const useGetOneFavoriteProductQuery = (id: string | number) => {
   const { data, isFetching, error } = useQuery({
-    queryFn: async () => await getOneProduct(id),
-    queryKey: ['products', Number(id)],
+    queryFn: async () => await getOneFavoriteProduct(id),
+    queryKey: ['favoriteProducts', Number(id)],
     staleTime: Infinity,
   });
 

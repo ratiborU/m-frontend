@@ -1,14 +1,14 @@
-'use server'
-import { revalidateTag } from "next/cache";
+// 'use server'
+// import { revalidateTag } from "next/cache";
 
-export const postProduct = async (formData: FormData) => {
-  await fetch(`http://localhost:5000/api/products`, {
-    method: "POST",
-    body: formData
-  })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  revalidateTag('products')
-  return;
-}
+// export const postProduct = async (formData: FormData) => {
+//   await fetch(`http://localhost:5000/api/products`, {
+//     method: "POST",
+//     body: formData
+//   })
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err));
+//   revalidateTag('products')
+//   return;
+// }

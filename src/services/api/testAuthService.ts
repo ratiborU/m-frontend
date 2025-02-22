@@ -6,7 +6,6 @@ export const loginApi = async (data) => {
     type: "POST",
     data: data,
     onSuccess: (data) => {
-      console.log('login');
       // setCookies(data.tokens);
     },
   });
@@ -14,7 +13,6 @@ export const loginApi = async (data) => {
 }
 
 export const createProduct = async (data) => {
-  // console.log(cookies().get('access')?.value)
   const response = await api(`products`, {
     type: 'POST',
     data: data

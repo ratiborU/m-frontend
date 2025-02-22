@@ -41,4 +41,3 @@ useGetAllBasketProductsMutation.ts
 useGetOneBasketProductMutation.ts
 useUpdateBasketProductMutation.ts
 `
-console.log(text);

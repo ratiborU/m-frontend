@@ -19,8 +19,6 @@ export const useRegistrationMutation = (args: RegistrationMutationArgs = {}) => 
   } = useMutation({
     mutationFn: async (data: TPersonCreate) => {
       const response = await registrationApi(data)
-      console.log('hola');
-      console.log(response);
       return response;
     },
     // mutationFn: async (data: TRegistrationRequest) => alert('hola'),

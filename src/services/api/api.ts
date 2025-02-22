@@ -27,13 +27,13 @@ export const api = async (link: string, props: TApiProps = {}) => {
     next,
     onSuccess = () => { return },
     onError = (error: Error) => { return error },
-    isRefresh = false,
-    revalidate,
+    // isRefresh = false,
+    // revalidate = type == "GET" ? 3600 : 0,
     contentType = 'application/json',
   } = props;
 
   const token = cookies().get('access')?.value
-  const tags = type == "GET" ? link.split('/') : [];
+  const tags = link.split('/');
   // const contentType = 'application/json'
   const headers: HeadersInit = {
     'Authorization': `Bearer ${token}`,
@@ -46,15 +46,14 @@ export const api = async (link: string, props: TApiProps = {}) => {
     method: type,
     headers,
     next: { // сложно, нужно проверить
-      revalidate, // Обновлять через день автоматически
+      revalidate: 86400, // Обновлять через день автоматически
       ...next,
-      tags,
+      tags: type == "GET" ? link.split('/') : undefined,
     },
     // cache: "no-cache", // нельзя использовать с revalidate
     body: data
   })
     .then(response => {
-      console.log(response.status);
       if (Number(response.status) >= 300) {
         throw new Error("", { cause: response.status })
       }
@@ -62,8 +61,8 @@ export const api = async (link: string, props: TApiProps = {}) => {
     })
     .then(async (data) => {
       onSuccess(data);
-      if (type != "GET" && !isRefresh) {
-        revalidateTag(tags[0] || '');
+      if (type != "GET") {
+        revalidateTag(tags[0]);
       }
       return data;
     })
@@ -72,7 +71,7 @@ export const api = async (link: string, props: TApiProps = {}) => {
       if (error.cause == 401) {
         redirect('/authorization/login')
       }
-      console.log(error.cause);
+      console.error(error.cause);
       return error
     });
 

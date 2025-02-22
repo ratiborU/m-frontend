@@ -27,7 +27,6 @@ export default function Login() {
   const { login } = useLoginMutation({ onSuccess, onError });
 
   const onSubmit = async (data: LoginScheme) => {
-    console.log(data)
     await login(data);
   }
 

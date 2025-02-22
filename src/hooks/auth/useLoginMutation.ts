@@ -19,7 +19,6 @@ export const useLoginMutation = (args: LoginMutationArgs = {}) => {
     mutateAsync: login,
   } = useMutation({
     mutationFn: async (data: TLogin) => await loginApi(data),
-    // mutationFn: async (data: TLogin) => console.log(),
     onSuccess,
     onError
   });

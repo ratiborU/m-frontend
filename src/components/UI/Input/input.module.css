@@ -8,6 +8,7 @@
   font-weight: 300;
   display: block;
 }
+
 /* можно добавить еще один placeholder */
 .input::placeholder {
   color: #888888;
@@ -15,10 +16,12 @@
   opacity: 0;
   transition: 0.3s;
 }
+
 .field {
   position: relative;
   /* margin-bottom: 20px; */
 }
+
 .label {
   display: inline-block;
   padding: 0 3px;
@@ -32,18 +35,21 @@
   cursor: inherit;
   /* todo на область padding не действует */
 }
-.input:focus + .label {
+
+.input:focus+.label {
   top: -7px;
   left: 12px;
   font-size: 12px;
   background-color: white;
 }
-.input:not(:placeholder-shown) + .label {
+
+.input:not(:placeholder-shown)+.label {
   top: -7px;
   left: 12px;
   font-size: 12px;
   background-color: white;
 }
+
 .input:focus::placeholder {
   opacity: 1;
 }
@@ -51,9 +57,18 @@
 .small {
   width: 190px;
 }
+
 .medium {
   width: 360px;
 }
+
 .large {
   width: 400px;
+}
+
+.error {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 4px;
+  color: red;
 }

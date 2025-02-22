@@ -1,20 +1,15 @@
 import React from 'react';
 import ProductsTable from '@/widjets/products/ProductsTable/ProductsTable';
+// import { getAllProducts } from '@/services/api/productService';
+// import { TProduct } from '@/services/types/productType';
 
-export async function generateStaticParams() {
-  const response = await fetch(`http://localhost:5000/api/products?limit=100&page=1`, {
-    next: {
-      revalidate: 3600, // обновлять каждый час
-      tags: ['products']
-    }
-  });
-  const products = await response.json();
+// export async function generateStaticParams() {
+//   const products = await getAllProducts();
+//   // при загрузке все равно отправляется запрос по id на бек
+//   return products.rows.map((product: TProduct) => product);
+// }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return products.map((products: { id: any; }) => products.id);
-}
-
-const page = () => {
+const page = async () => {
   return (
     <ProductsTable />
   );

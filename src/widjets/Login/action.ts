@@ -25,7 +25,6 @@ export const login = async (data: LoginScheme) => {
         expires: expiresAt,
       });
       return data;
-      // console.log(cookies().get('access')?.value);
     })
     .catch(err => console.log(err));
   // // revalidateTag('persons')

@@ -7,7 +7,6 @@ import type { NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl
   if (!request.cookies.get('access') && !!request.cookies.get('refresh')) {
-    console.log('no access');
     const response = NextResponse.redirect(url)
     const tokens = await fetch('http://localhost:5000/api/persons/refresh', {
       method: 'POST',

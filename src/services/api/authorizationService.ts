@@ -36,9 +36,7 @@ type TTokens = {
 }
 
 export const setCookies = (tokens: TTokens) => {
-  // console.log(tokens.accessToken);
-  // console.log(tokens.refreshToken);
-  const accessExpiresAt = new Date(Date.now() + 1 * 1 * 1 * 20 * 1000); // 1 дней
+  const accessExpiresAt = new Date(Date.now() + 1 * 1 * 60 * 60 * 1000); // 1 дней
   const refreshExpiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 дней
 
   cookies().set("access", tokens.accessToken, {
@@ -87,7 +85,6 @@ export const refresh = async () => {
     }),
     isRefresh: true,
     onSuccess: () => {
-      // console.log(data.tokens);
       // setCookies(data.tokens);
     },
   });

@@ -1,9 +1,21 @@
 import React from 'react';
 import EditProduct from '@/widjets/products/EditProduct/EditProduct';
 import { TProduct } from '@/services/types/productType';
+import { TPagination } from '@/services/types/paginationType';
 
-const page = async ({ params }: { params: { productId: string } }) => {
-  const { productId } = params;
+export async function generateStaticParams() {
+  const products: TPagination<TProduct> = await fetch(`http://localhost:5000/api/products`, {
+    next: { tags: ['products'] }
+  }).then(response => response.json());
+  // при загрузке все равно отправляется запрос по id на бек
+  // наверное так и должно быть
+  return products.rows.map((product: TProduct) => ({
+    productId: String(product.id)
+  }));
+}
+
+const page = async ({ params }: { params: Promise<{ category: string; productId: string }> }) => {
+  const { productId } = await params;
   const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
     next: {
       tags: ['products', productId]

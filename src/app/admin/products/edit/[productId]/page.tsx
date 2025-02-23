@@ -14,7 +14,7 @@ export async function generateStaticParams() {
   }));
 }
 
-const page = async ({ params }: { params: Promise<{ category: string; productId: string }> }) => {
+const page = async ({ params }: { params: Promise<{ productId: string }> }) => {
   const { productId } = await params;
   const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
     next: {

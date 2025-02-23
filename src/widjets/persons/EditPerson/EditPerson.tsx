@@ -7,15 +7,57 @@ import { TPerson } from '@/services/api/persons/personType';
 import { useForm } from 'react-hook-form';
 import { postPerson } from './action';
 import { PersonScheme } from './models';
+import { z } from 'zod';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
+import { useDeletePersonMutation } from '@/hooks/persons/useDeletePersonMutation';
 
+const editProductSchema = z.object({
+  firstName: z.string().min(1, 'мало'),
+  secondName: z.string().min(1, 'мало'),
+  fatherName: z.string().min(1, 'мало'),
+  email: z.string().min(1, 'мало'),
+  phoneNumber: z.string().min(1, 'мало'),
+})
+
+type TEditProductSchema = z.infer<typeof editProductSchema>;
 
 const EditPerson = (props: TPerson) => {
   const { firstName, secondName, fatherName, email, phoneNumber } = props;
 
+  const notify = () => toast.success("Пользователь успешно изменен!");
+  const notifyDelete = () => toast.success("Пользователь успешно удален!");
+  const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
+
   const { register, handleSubmit } = useForm<PersonScheme>();
 
+  const onSuccess = () => {
+    notify();
+  }
+
+  const onError = (error: Error) => {
+    notifyError(error.message);
+  }
+
+  const { updatePerson, isPending } = useUpdatePersonMutation({ onSuccess, onError });
+
+  const onSuccessDelete = () => {
+    notifyDelete();
+  }
+
+  const onErrorDelete = (error: Error) => {
+    notifyError(error.message);
+  }
+
+  const { deletePerson, isPending: isPendingDelete } = useDeletePersonMutation({ onSuccess: onSuccessDelete, onError: onErrorDelete });
+
   const onSubmit = async (data: PersonScheme) => {
-    await postPerson({ ...props, ...data });
+    await updatePerson({ ...props, ...data });
+  }
+
+  const onDelete = async () => {
+    await deletePerson(props.id);
   }
 
   return (
@@ -79,13 +121,31 @@ const EditPerson = (props: TPerson) => {
           />
 
           <div className={styles.buttons}>
-            <Button type="submit" size='large' variant='contained'>Сохранить</Button>
-            <Button size='large' variant='outlined'>Удалить</Button>
+            <Button
+              loading={isPending}
+              type="submit"
+              size='large'
+              variant='contained'
+            >
+              Сохранить
+            </Button>
+            <Button
+              loading={isPendingDelete}
+              onClick={onDelete}
+              size='large'
+              variant='outlined'
+            >
+              Удалить
+            </Button>
           </div>
         </div>
       </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={4}
+      />
     </>
-
   );
 };
 

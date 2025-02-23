@@ -3,11 +3,8 @@ import React from 'react';
 import styles from "./createProduct.module.css";
 import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
-// import { Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm } from 'react-hook-form';
-// import { postProduct } from './action';
-// import { ProductScheme } from './models';
 import InputFile from '@/components/UI/InputFile/InputFile';
 import { useCreateProductMutation } from '@/hooks/products/useCreateProductMutation';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,16 +13,15 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const createProductSchema = z.object({
-  name: z.string().min(1, 'мало'),
-  description: z.string(),
-  seoTitle: z.string(),
-  seoDescription: z.string(),
-  characteristics: z.string(),
-  price: z.string(),
-  discount: z.string(),
-  // rate: z.string(),
-  categoryId: z.string(),
-  productsCount: z.string(),
+  name: z.string().min(1, 'Минимальная длина 1 символ'),
+  description: z.string().min(1, 'Минимальная длина 1 символ'),
+  seoTitle: z.string().min(1, 'Минимальная длина 1 символ'),
+  seoDescription: z.string().min(1, 'Минимальная длина 1 символ'),
+  characteristics: z.string().min(1, 'Минимальная длина 1 символ'),
+  price: z.string().min(1, 'Минимальная длина 1 символ'),
+  discount: z.string().min(1, 'Минимальная длина 1 символ'),
+  categoryId: z.string().min(1, 'Минимальная длина 1 символ'),
+  productsCount: z.string().min(1, 'Минимальная длина 1 символ'),
   file: z.instanceof(FileList),
 })
 type TCreateProductSchema = z.infer<typeof createProductSchema>;
@@ -33,7 +29,6 @@ type TCreateProductSchema = z.infer<typeof createProductSchema>;
 const CreateProduct = () => {
   const notify = () => toast.success("Товар успешно создан");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
-  // добавить валидацию по zod
   const { register, handleSubmit, formState: { errors } } = useForm<TCreateProductSchema>({ resolver: zodResolver(createProductSchema) });
 
   const onSuccess = () => {
@@ -82,6 +77,7 @@ const CreateProduct = () => {
           {/* {errors.name && <p className='error-form-message'>{`${errors.name.message}`}</p>} */}
           <Textarea
             label='Описание'
+            error={errors.description?.message}
             inputProps={{
               placeholder: "",
               id: 'create-product-description',
@@ -92,6 +88,7 @@ const CreateProduct = () => {
           <Input
             label='Seo Title'
             sizeInput='large'
+            error={errors.seoTitle?.message}
             inputProps={{
               placeholder: '',
               id: 'create-product-seo-title',
@@ -101,6 +98,7 @@ const CreateProduct = () => {
           />
           <Textarea
             label='Seo Description'
+            error={errors.seoDescription?.message}
             inputProps={{
               placeholder: "",
               id: 'create-product-seo-description',
@@ -110,6 +108,7 @@ const CreateProduct = () => {
           />
           <Textarea
             label='Характеристики'
+            error={errors.characteristics?.message}
             inputProps={{
               placeholder: "",
               id: 'create-product-characteristics',
@@ -121,6 +120,7 @@ const CreateProduct = () => {
             <Input
               label='Цена'
               sizeInput='small'
+              error={errors.price?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-product-price',
@@ -131,6 +131,7 @@ const CreateProduct = () => {
             <Input
               label='Скидка'
               sizeInput='small'
+              error={errors.discount?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-product-discount',
@@ -143,6 +144,7 @@ const CreateProduct = () => {
             <Input
               label='В наличии'
               sizeInput='small'
+              error={errors.productsCount?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-product-have',
@@ -154,6 +156,7 @@ const CreateProduct = () => {
             <Input
               label='Категория'
               sizeInput='small'
+              error={errors.categoryId?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-product-categoryId',

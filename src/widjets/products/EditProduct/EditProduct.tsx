@@ -3,7 +3,6 @@ import React from 'react';
 import styles from "./editProduct.module.css";
 import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
-// import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { putProduct, postImage, deleteImage } from './action';
 import Image from 'next/image';
@@ -15,8 +14,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUpdateProductMutation } from '@/hooks/products/useUpdateProductMutation';
-import { LoadingButton } from '@mui/lab';
+import { Button } from '@mui/material'
 import { useDeleteProductMutation } from '@/hooks/products/useDeleteProductMutation';
+
 
 const editProductSchema = z.object({
   name: z.string().min(1, 'мало'),
@@ -25,16 +25,14 @@ const editProductSchema = z.object({
   seoDescription: z.string().min(1, 'мало'),
   characteristics: z.string().min(1, 'мало'),
   price: z.string().min(1, 'мало'),
-  discount: z.string(),
-  // rate: z.string(),
-  // commentsCount: z.string(),
+  discount: z.string().min(1, 'мало'),
   categoryId: z.string().min(1, 'мало'),
   productsCount: z.string().min(1, 'мало'),
-  // file: z.instanceof(FileList),
 })
+
 type TEditProductSchema = z.infer<typeof editProductSchema>;
 
-// раскидать все по 3 разным файлам ?
+
 const EditProduct = (props: EditProductProps) => {
   const {
     id,
@@ -60,7 +58,7 @@ const EditProduct = (props: EditProductProps) => {
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
 
   // добавить мутации для загрузки изображений
-  const { register, handleSubmit } = useForm<TEditProductSchema>({ resolver: zodResolver(editProductSchema) });
+  const { register, handleSubmit, formState: { errors } } = useForm<TEditProductSchema>({ resolver: zodResolver(editProductSchema) });
   const { register: registerMainImage, handleSubmit: handleSubmitMainImage } = useForm<MainImageScheme>();
   const { register: registerImage, handleSubmit: handleSubmitImage } = useForm<ImageScheme>();
 
@@ -127,6 +125,7 @@ const EditProduct = (props: EditProductProps) => {
             <Input
               label='Название'
               sizeInput='large'
+              error={errors.name?.message}
               inputProps={{
                 placeholder: '',
                 id: 'edit-product-title',
@@ -137,6 +136,7 @@ const EditProduct = (props: EditProductProps) => {
             />
             <Textarea
               label='Описание'
+              error={errors.description?.message}
               inputProps={{
                 placeholder: "",
                 id: 'create-product-description',
@@ -148,6 +148,7 @@ const EditProduct = (props: EditProductProps) => {
             <Input
               label='Название'
               sizeInput='large'
+              error={errors.seoTitle?.message}
               inputProps={{
                 placeholder: '',
                 id: 'edit-product-seo-title',
@@ -158,6 +159,7 @@ const EditProduct = (props: EditProductProps) => {
             />
             <Textarea
               label='Описание'
+              error={errors.seoDescription?.message}
               inputProps={{
                 placeholder: "",
                 id: 'create-product-seo-description',
@@ -168,6 +170,7 @@ const EditProduct = (props: EditProductProps) => {
             />
             <Textarea
               label='Характеристики'
+              error={errors.characteristics?.message}
               inputProps={{
                 placeholder: "",
                 id: 'create-product-characteristics',
@@ -180,6 +183,7 @@ const EditProduct = (props: EditProductProps) => {
               <Input
                 label='Цена'
                 sizeInput='small'
+                error={errors.price?.message}
                 inputProps={{
                   placeholder: '',
                   id: 'create-product-price',
@@ -191,6 +195,7 @@ const EditProduct = (props: EditProductProps) => {
               <Input
                 label='Скидка'
                 sizeInput='small'
+                error={errors.discount?.message}
                 inputProps={{
                   placeholder: '',
                   id: 'create-product-discount',
@@ -205,6 +210,7 @@ const EditProduct = (props: EditProductProps) => {
               <Input
                 label='В наличии x'
                 sizeInput='small'
+                error={errors.productsCount?.message}
                 inputProps={{
                   placeholder: '',
                   id: 'create-product-have',
@@ -216,6 +222,7 @@ const EditProduct = (props: EditProductProps) => {
               <Input
                 label='Категория'
                 sizeInput='small'
+                error={errors.categoryId?.message}
                 inputProps={{
                   placeholder: '',
                   id: 'create-product-category',
@@ -252,22 +259,22 @@ const EditProduct = (props: EditProductProps) => {
               />
             </div>
             <div className={styles.buttons}>
-              <LoadingButton
+              <Button
                 loading={isPending}
                 type="submit"
                 size='large'
                 variant='contained'
               >
                 Сохранить
-              </LoadingButton>
-              <LoadingButton
+              </Button>
+              <Button
                 loading={isPendingDelete}
                 size='large'
                 variant='outlined'
                 onClick={onDelete}
               >
                 Удалить
-              </LoadingButton>
+              </Button>
             </div>
           </div>
         </form>
@@ -291,13 +298,13 @@ const EditProduct = (props: EditProductProps) => {
             type="file"
             {...registerMainImage('file')}
           /> */}
-            <LoadingButton
+            <Button
               // loading={isPending}
               type='submit'
               variant='contained'
             >
               Сохранить картинку
-            </LoadingButton>
+            </Button>
           </form>
 
           <div className={styles.images}>
@@ -319,12 +326,12 @@ const EditProduct = (props: EditProductProps) => {
                 ...registerImage('img')
               }}
             />
-            <LoadingButton
+            <Button
               type='submit'
               variant='contained'
             >
               Добавить картинку
-            </LoadingButton>
+            </Button>
           </form>
         </div>
       </div>

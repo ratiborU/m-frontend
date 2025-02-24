@@ -17,12 +17,19 @@ export const getAllAnswers = async (): Promise<TPagination<TAnswer>> => {
   return response;
 }
 
+export const getAllAnswersByCommentId = async (id: number | string): Promise<TAnswer[]> => {
+  // добавить пагинацию
+  const response = await api(`answers/byCommentId/${id}`);
+  return response;
+}
+
 export const getOneAnswer = async (id: number | string): Promise<TAnswer> => {
   const response = await api(`answers/${id}`);
   return response;
 }
 
 export const updateAnswer = async (data: TAnswer): Promise<TAnswer> => {
+  console.log(data);
   const response = await api('answers', {
     type: 'PUT',
     data: JSON.stringify(data)

@@ -1,18 +1,22 @@
 'use client'
+import { TProduct } from "../products/productType";
+import { TPerson } from "../persons/personType";
 
 export type TComment = {
-  id: number,
+  id: string,
   text: string,
-  rate: number,
-  personId: number,
-  productId: number,
+  rate: string,
+  personId: string,
+  productId: string,
   createdAt: string,
   updatedAt: string,
+  product: TProduct,
+  person: TPerson,
 }
 
 export type TCommentCreate = {
   text: string,
-  rate: number,
-  personId: number,
-  productId: number,
+  rate: string,
+  personId: string,
+  productId: string,
 }

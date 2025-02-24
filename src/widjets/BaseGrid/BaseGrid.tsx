@@ -6,11 +6,13 @@ import { GridColDef } from "@mui/x-data-grid";
 
 type BaseGridProps = {
   columns: GridColDef[],
-  data: object[];
+  data: object[],
+  width?: string,
+
 }
 
 const BaseGrid = (props: BaseGridProps) => {
-  const { columns, data } = props;
+  const { columns, data, width = "1080px" } = props;
 
   return (
     <DataGrid
@@ -19,12 +21,17 @@ const BaseGrid = (props: BaseGridProps) => {
       disableRowSelectionOnClick
       disableMultipleRowSelection
       pageSizeOptions={[10, 20, 100]}
+
       initialState={{
         pagination: {
           paginationModel: { pageSize: 10, page: 0 },
         },
       }}
       sx={{
+        "width": width,
+        "max-width": "100%",
+        "min-width": "40%",
+        margin: '0 auto',
         "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
           outline: "none !important",
         },

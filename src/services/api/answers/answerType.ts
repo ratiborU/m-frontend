@@ -1,16 +1,16 @@
 'use client'
 
 export type TAnswer = {
-  id: number,
+  id: string,
   text: string,
-  personId: number,
-  commentId: number,
+  personId: string,
+  commentId: string,
   createdAt: string,
   updatedAt: string,
 }
 
 export type TAnswerCreate = {
   text: string,
-  personId: number,
-  commentId: number,
+  personId: string,
+  commentId: string,
 }

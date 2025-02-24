@@ -5,27 +5,75 @@ import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { postAnswer, postPerson, putAnswer } from './action';
-import { AnswerScheme, EditPersonProps, PersonScheme } from './models';
-// import { TComment } from '@/services/types/commentType';
+import { editCommentSchema, TEditCommentSchema, answerSchema, TAnswerSchema, EditCommentProps } from './models';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useUpdateCommentMutation } from '@/hooks/comments/useUpdateCommentMutation';
+import { useDeleteCommentMutation } from '@/hooks/comments/useDeleteCommentMutation';
+import { useUpdateAnswerMutation } from '@/hooks/answers/useUpdateAnswerMutation';
+import { useCreateAnswerMutation } from '@/hooks/answers/useCreateAnswerMutation';
+import { useDeleteAnswerMutation } from '@/hooks/answers/useDeleteAnswerMutation';
 
+// в идеале разделить на 2 виджета
+const EditComment = (props: EditCommentProps) => {
+  const { id, text, rate, personId, productId, createdAt, updatedAt, answer } = props;
+  // какая-то херня внизу
+  const notify = () => toast.success("Комментарий успешно изменен");
+  const notifyDelete = () => toast.success("Комментарий успешно удален");
+  const notifyAnswer = () => toast.success("Ответ успешно сохранен");
+  const notifyAnswerDelete = () => toast.success("Ответ успешно удален");
+  const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
 
-const EditComment = (props: EditPersonProps) => {
-  const { id, text, rate, personId, productId, answer } = props;
+  const { register, handleSubmit, formState: { errors } } = useForm<TEditCommentSchema>({ resolver: zodResolver(editCommentSchema) });
+  const { register: registerAnswer, handleSubmit: handleSubmitAnswer, formState: { errors: answerErrors } } = useForm<TAnswerSchema>({ resolver: zodResolver(answerSchema) });
 
-  const { register, handleSubmit } = useForm<PersonScheme>();
-  const { register: registerAnswer, handleSubmit: handleSubmitAnswer } = useForm<AnswerScheme>();
+  // мутации комментария
+  const onSuccess = () => notify()
+  const onError = (error: Error) => notifyError(error.message)
+  const { updateComment, isPending } = useUpdateCommentMutation({ onSuccess, onError });
 
-  const onSubmit = async (data: PersonScheme) => {
-    await postPerson({ ...props, ...data });
-  }
+  const onSuccessDelete = () => notifyDelete()
+  const onErrorDelete = (error: Error) => notifyError(error.message)
+  const { deleteComment, isPending: isPendingDelete } = useDeleteCommentMutation({ onSuccess: onSuccessDelete, onError: onErrorDelete });
 
-  const onSubmitAnswer = async (data: AnswerScheme) => {
+  const onSubmit = async (data: TEditCommentSchema) => await updateComment({ ...props, ...data })
+  const onDelete = async () => await deleteComment(id)
+
+  // мутации ответа
+  const onSuccessAnswer = () => notify()
+  const onErrorAnswer = (error: Error) => notifyError(error.message)
+  const { updateAnswer, isPending: isPendingAnswerUpdate } = useUpdateAnswerMutation({ onSuccess: onSuccessAnswer, onError: onErrorAnswer });
+  const { createAnswer, isPending: isPendingAnswerCreate } = useCreateAnswerMutation({ onSuccess: onSuccessAnswer, onError: onErrorAnswer });
+
+  const onSuccessAnswerDelete = () => notifyDelete()
+  const onErrorAnswerDelete = (error: Error) => notifyError(error.message)
+  const { deleteAnswer, isPending: isPendingAnswerDelete } = useDeleteAnswerMutation({ onSuccess: onSuccessAnswerDelete, onError: onErrorAnswerDelete });
+
+  const onSubmitAnswer = async (data: TAnswerSchema) => {
     if (!answer) {
-      await postAnswer({ ...data, commentId: String(id), personId: '1' });
+      console.log('create');
+      await createAnswer({ ...data, commentId: String(id), personId: '1' });
     } else {
-      await putAnswer({ ...answer, ...data, commentId: String(id), personId: '1' });
+      console.log('update');
+      await updateAnswer({ text: data.text, commentId: String(id), personId: '1', id: answer.id, createdAt, updatedAt, });
     }
   }
+  const onDeleteAnswer = async () => {
+    if (!!answer) {
+      await deleteAnswer(answer.id)
+    } else {
+      notifyError('');
+    }
+  }
+
+  // const onSubmitAnswer = async (data: TAnswerSchema) => {
+  //   if (!answer) {
+  //     await postAnswer({ ...data, commentId: String(id), personId: '1' });
+  //   } else {
+  //     await putAnswer({ ...answer, ...data, commentId: String(id), personId: '1' });
+  //   }
+  // }
 
   return (
     <>
@@ -77,8 +125,22 @@ const EditComment = (props: EditPersonProps) => {
           />
 
           <div className={styles.buttons}>
-            <Button type="submit" size='large' variant='contained'>Сохранить</Button>
-            <Button size='large' variant='outlined'>Удалить</Button>
+            <Button
+              loading={isPending}
+              type="submit"
+              size='large'
+              variant='contained'
+            >
+              Сохранить
+            </Button>
+            <Button
+              loading={isPendingDelete}
+              size='large'
+              variant='outlined'
+              onClick={onDelete}
+            >
+              Удалить
+            </Button>
           </div>
         </div>
       </form>
@@ -95,35 +157,32 @@ const EditComment = (props: EditPersonProps) => {
               ...registerAnswer('text')
             }}
           />
-          {/* <Input
-            label='Оценка'
-            sizeInput='large'
-            inputProps={{
-              placeholder: '',
-              id: 'edit-person-first-name1',
-              autoComplete: 'new-passport',
-              defaultValue: answer?.personId,
-              ...registerAnswer('personId')
-            }}
-          />
-          <Input
-            label='ФИО'
-            sizeInput='large'
-            inputProps={{
-              placeholder: '',
-              id: 'edit-person-father-name1',
-              autoComplete: 'new-passport',
-              defaultValue: answer?.commentId,
-              ...registerAnswer('commentId')
-            }}
-          /> */}
           <div className={styles.buttons}>
-            <Button type="submit" size='large' variant='contained'>Сохранить</Button>
-            <Button size='large' variant='outlined'>Удалить</Button>
+            <Button
+              loading={isPendingAnswerUpdate || isPendingAnswerCreate}
+              type="submit"
+              size='large'
+              variant='contained'
+            >
+              Сохранить
+            </Button>
+            <Button
+              loading={isPendingAnswerDelete}
+              size='large'
+              variant='outlined'
+              onClick={onDeleteAnswer}
+            >
+              Удалить
+            </Button>
           </div>
         </div>
 
       </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={4}
+      />
     </>
 
   );

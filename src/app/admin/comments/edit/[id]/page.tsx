@@ -1,16 +1,12 @@
-import { TAnswer } from '@/services/api/answers/answerType';
-import { TComment } from '@/services/api/comments/commentType';
 import EditComment from '@/widjets/comments/EditComment/EditComment';
 import React from 'react';
+import { getOneComment } from '@/services/api/comments/commentService';
+import { getAllAnswersByCommentId } from '@/services/api/answers/answerService';
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const response = await fetch(`http://localhost:5000/api/comments/${id}`, { cache: 'no-cache' });
-  const comment: TComment = await response.json();
-
-
-  const responseAnswer = await fetch(`http://localhost:5000/api/answers/byCommentId/${id}`, { cache: 'no-cache' });
-  const answers: TAnswer[] = await responseAnswer.json();
+  const comment = await getOneComment(id);
+  const answers = await getAllAnswersByCommentId(id)
 
   return (
     <div>

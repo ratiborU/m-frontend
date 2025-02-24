@@ -1,10 +1,10 @@
 import BaseGrid from '@/widjets/BaseGrid/BaseGrid';
 import React from 'react';
 import { productColumns } from './columns';
-import { getAllProducts } from './action';
+import { getAllComments } from '@/services/api/comments/commentService';
 
 const CommentsTable = async () => {
-  const products = await getAllProducts();
+  const products = await getAllComments();
 
   return (
     <div>

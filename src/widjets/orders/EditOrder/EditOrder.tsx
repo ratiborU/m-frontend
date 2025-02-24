@@ -72,6 +72,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='ФИО'
               sizeInput='large'
+              error={errors.personId?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-second-name',
@@ -83,6 +84,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='Сумма'
               sizeInput='large'
+              error={errors.price?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-first-name',
@@ -94,6 +96,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='Адрес'
               sizeInput='large'
+              error={errors.address?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-first-name',
@@ -105,6 +108,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='Доставка'
               sizeInput='large'
+              error={errors.delivery?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-father-name',
@@ -116,6 +120,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='Дни'
               sizeInput='large'
+              error={errors.deliveryDays?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-email',
@@ -127,6 +132,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='Комментарий'
               sizeInput='large'
+              error={errors.comment?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-phone',
@@ -138,6 +144,7 @@ const EditOrder = (props: EditOrderProps) => {
             <Input
               label='Статус'
               sizeInput='large'
+              error={errors.status?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-person-password',

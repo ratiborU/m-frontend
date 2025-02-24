@@ -27,15 +27,15 @@ export const productColumns: GridColDef[] = [
     field: 'text',
     headerName: 'Текст',
     // width: 200,
-    flex: 2,
-    minWidth: 160
+    flex: 1,
+    // minWidth: 160
   },
   {
     field: 'rate',
     headerName: 'Оценка',
-    // width: 50,
-    flex: 1,
-    minWidth: 100
+    // flex: 1,
+    minWidth: 100,
+    maxWidth: 100,
   },
   // {
   //   field: 'characteristics',
@@ -47,19 +47,22 @@ export const productColumns: GridColDef[] = [
   {
     field: 'createdAt',
     headerName: 'Дата',
-    flex: 1,
-    width: 120,
+    // flex: 1,
+    // width: 120,
   },
   {
     field: 'productId',
+    renderCell: (props) => <>{props.row.product.name}</>,
     headerName: 'Продукт',
-    flex: 1,
-    width: 80,
+    // flex: 1,
+    // width: 80,
   },
   {
     field: 'personId',
+    renderCell: (props) => <>{props.row.person.secondName} {props.row.person.firstName}</>,
     headerName: 'Пользователь',
-    flex: 1,
-    width: 80,
+    // flex: 1,
+    width: 200,
+    maxWidth: 200,
   },
 ]

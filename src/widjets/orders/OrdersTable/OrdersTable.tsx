@@ -1,10 +1,10 @@
 import BaseGrid from '@/widjets/BaseGrid/BaseGrid';
 import React from 'react';
 import { orderColumns } from './columns';
-import { getAllProducts } from './action';
+import { getAllOrders } from '@/services/api/orders/orderService';
 
 const OrdersTable = async () => {
-  const orders = await getAllProducts();
+  const orders = await getAllOrders();
 
   return (
     <div>

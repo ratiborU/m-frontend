@@ -18,6 +18,7 @@ export const orderColumns: GridColDef[] = [
   },
   {
     field: 'personId',
+    renderCell: (props) => <>{props.row.person.secondName} {props.row.person.firstName}</>,
     // renderCell: (props) => <></>,
     headerName: 'ФИО',
     flex: 1,

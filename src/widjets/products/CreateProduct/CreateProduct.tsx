@@ -9,22 +9,9 @@ import InputFile from '@/components/UI/InputFile/InputFile';
 import { useCreateProductMutation } from '@/hooks/products/useCreateProductMutation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { createProductSchema, TCreateProductSchema } from './models';
 
-const createProductSchema = z.object({
-  name: z.string().min(1, 'Минимальная длина 1 символ'),
-  description: z.string().min(1, 'Минимальная длина 1 символ'),
-  seoTitle: z.string().min(1, 'Минимальная длина 1 символ'),
-  seoDescription: z.string().min(1, 'Минимальная длина 1 символ'),
-  characteristics: z.string().min(1, 'Минимальная длина 1 символ'),
-  price: z.string().min(1, 'Минимальная длина 1 символ'),
-  discount: z.string().min(1, 'Минимальная длина 1 символ'),
-  categoryId: z.string().min(1, 'Минимальная длина 1 символ'),
-  productsCount: z.string().min(1, 'Минимальная длина 1 символ'),
-  file: z.instanceof(FileList),
-})
-type TCreateProductSchema = z.infer<typeof createProductSchema>;
 
 const CreateProduct = () => {
   const notify = () => toast.success("Товар успешно создан");

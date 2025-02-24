@@ -4,7 +4,6 @@ import { TPerson, TPersonCreate } from "./personType";
 import { TPagination } from "../../types/paginationType";
 
 export const createPerson = async (data: TPersonCreate): Promise<TPerson> => {
-  console.log(data);
   const response = await api('persons', {
     type: 'POST',
     data: JSON.stringify(data)

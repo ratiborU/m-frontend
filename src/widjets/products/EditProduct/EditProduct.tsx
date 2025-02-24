@@ -9,28 +9,13 @@ import Image from 'next/image';
 import EditImage from '@/components/EditImage/EditImage';
 import { MainImageScheme, ImageScheme, EditProductProps } from './models';
 import InputFile from '@/components/UI/InputFile/InputFile';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUpdateProductMutation } from '@/hooks/products/useUpdateProductMutation';
 import { Button } from '@mui/material'
 import { useDeleteProductMutation } from '@/hooks/products/useDeleteProductMutation';
-
-
-const editProductSchema = z.object({
-  name: z.string().min(1, 'мало'),
-  description: z.string().min(1, 'мало'),
-  seoTitle: z.string().min(1, 'мало'),
-  seoDescription: z.string().min(1, 'мало'),
-  characteristics: z.string().min(1, 'мало'),
-  price: z.string().min(1, 'мало'),
-  discount: z.string().min(1, 'мало'),
-  categoryId: z.string().min(1, 'мало'),
-  productsCount: z.string().min(1, 'мало'),
-})
-
-type TEditProductSchema = z.infer<typeof editProductSchema>;
+import { editProductSchema, TEditProductSchema } from './models';
 
 
 const EditProduct = (props: EditProductProps) => {

@@ -1,20 +1,20 @@
 import { TImage } from "@/services/api/images/imageType"
 import { TProduct } from "@/services/api/products/productType"
+import { z } from "zod";
 
-export type ProductScheme = {
-  name: string,
-  description: string,
-  seoTitle: string,
-  seoDescription: string,
-  characteristics: string,
-  price: string,
-  discount: string,
-  rate: string,
-  commentsCount: string,
-  productsCount: string,
-  categoryId: string,
-  file: FileList
-}
+export const editProductSchema = z.object({
+  name: z.string().min(1, 'мало'),
+  description: z.string().min(1, 'мало'),
+  seoTitle: z.string().min(1, 'мало'),
+  seoDescription: z.string().min(1, 'мало'),
+  characteristics: z.string().min(1, 'мало'),
+  price: z.string().min(1, 'мало'),
+  discount: z.string().min(1, 'мало'),
+  categoryId: z.string().min(1, 'мало'),
+  productsCount: z.string().min(1, 'мало'),
+})
+
+export type TEditProductSchema = z.infer<typeof editProductSchema>;
 
 export type MainImageScheme = {
   file: FileList

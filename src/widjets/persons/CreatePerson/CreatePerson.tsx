@@ -4,25 +4,12 @@ import styles from "./createPerson.module.css";
 import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { postPerson } from './action';
-import { PersonScheme } from './models';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCreatePersonMutation } from '@/hooks/persons/useCreatePersonMutation';
+import { createPersonSchema, TCreatePersonSchema } from './models';
 
-const createPersonSchema = z.object({
-  firstName: z.string().min(1, 'мало'),
-  secondName: z.string().min(1, 'мало'),
-  fatherName: z.string().min(1, 'мало'),
-  email: z.string().min(1, 'мало'),
-  phoneNumber: z.string().min(1, 'мало'),
-  password: z.string().min(1, 'мало'),
-  role: z.string().min(1, 'мало'),
-})
-
-type TCreatePersonSchema = z.infer<typeof createPersonSchema>;
 
 const CreatePerson = () => {
   const notify = () => toast.success("Пользователь успешно создан");
@@ -39,8 +26,7 @@ const CreatePerson = () => {
 
   const { createPerson, isPending } = useCreatePersonMutation({ onSuccess, onError });
 
-  const onSubmit = async (data: PersonScheme) => {
-    console.log(data);
+  const onSubmit = async (data: TCreatePersonSchema) => {
     await createPerson(data);
   }
 

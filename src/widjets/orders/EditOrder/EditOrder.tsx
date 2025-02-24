@@ -3,15 +3,20 @@ import React from 'react';
 import styles from "./editOrder.module.css";
 import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
-// import { TOrder } from '@/services/types/orderType';
 import { useForm } from 'react-hook-form';
 import { putOrder } from './action';
 import { EditOrderProps, PersonScheme } from './models';
 import OrderProduct from '@/components/OrderProduct/OrderProduct';
-
+import { editOrderSchema, TEditOrderSchema } from './models';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useUpdateOrderMutation } from '@/hooks/orders/useUpdateOrderMutation';
+import { useDeleteOrderMutation } from '@/hooks/orders/useDeleteOrderMutation';
 
 const EditOrder = (props: EditOrderProps) => {
   const {
+    id,
     price,
     address,
     delivery,
@@ -19,15 +24,44 @@ const EditOrder = (props: EditOrderProps) => {
     comment,
     status,
     personId,
+    updatedAt,
     createdAt,
-    products,
     orderProducts
   } = props;
+  const notify = () => toast.success("Заказ успешно создан");
+  const notifyDelete = () => toast.success("Заказ успешно удален");
+  const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
 
-  const { register, handleSubmit } = useForm<PersonScheme>();
+  const { register, handleSubmit, formState: { errors } } = useForm<TEditOrderSchema>({ resolver: zodResolver(editOrderSchema) });
 
-  const onSubmit = async (data: PersonScheme) => {
-    await putOrder({ ...props, ...data });
+  const onSuccess = () => {
+    notify();
+  }
+
+  const onError = (error: Error) => {
+    notifyError(error.message);
+  }
+
+  const { updateOrder, isPending } = useUpdateOrderMutation({ onSuccess, onError });
+
+  const onSuccessDelete = () => {
+    notifyDelete();
+  }
+
+  const onErrorDelete = (error: Error) => {
+    notifyError(error.message);
+  }
+
+  const { deleteOrder, isPending: isPendingDelete } = useDeleteOrderMutation({ onSuccess: onSuccessDelete, onError: onErrorDelete });
+
+  const onSubmit = async (data: TEditOrderSchema) => {
+    await updateOrder({
+      id, createdAt, updatedAt, ...data
+    });
+  }
+
+  const onDelete = async () => {
+    await deleteOrder(id);
   }
 
   return (
@@ -120,25 +154,41 @@ const EditOrder = (props: EditOrderProps) => {
                 id: 'create-person-password',
                 autoComplete: 'new-passport',
                 defaultValue: createdAt,
-                ...register('createdAt')
               }}
             />
 
             <div className={styles.buttons}>
-              <Button type="submit" size='large' variant='contained'>Сохранить</Button>
-              <Button size='large' variant='outlined'>Удалить</Button>
+              <Button
+                loading={isPending}
+                type="submit"
+                size='large'
+                variant='contained'
+              >
+                Сохранить
+              </Button>
+              <Button
+                loading={isPendingDelete}
+                size='large'
+                variant='outlined'
+                onClick={onDelete}
+              >
+                Удалить
+              </Button>
             </div>
           </div>
         </form>
         <div className={styles.products}>
-          {!!products && products.map((product, i) => {
-            return <OrderProduct key={product.id} product={product} count={orderProducts[i].count} />
+          {!!orderProducts && orderProducts.map((product, i) => {
+            return <OrderProduct key={product.id} product={product.product} count={orderProducts[i].count} />
           })}
         </div>
       </div>
-
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={4}
+      />
     </>
-
   );
 };
 

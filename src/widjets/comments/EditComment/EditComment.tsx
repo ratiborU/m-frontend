@@ -4,7 +4,6 @@ import styles from "./editComment.module.css";
 import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { postAnswer, postPerson, putAnswer } from './action';
 import { editCommentSchema, TEditCommentSchema, answerSchema, TAnswerSchema, EditCommentProps } from './models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,6 +13,9 @@ import { useDeleteCommentMutation } from '@/hooks/comments/useDeleteCommentMutat
 import { useUpdateAnswerMutation } from '@/hooks/answers/useUpdateAnswerMutation';
 import { useCreateAnswerMutation } from '@/hooks/answers/useCreateAnswerMutation';
 import { useDeleteAnswerMutation } from '@/hooks/answers/useDeleteAnswerMutation';
+import { useGetProductOptionsQuery } from '@/hooks/products/useGetProductOptionsQuery';
+import { useGetPersonOptionsQuery } from '@/hooks/persons/useGetPersonOptionsQuery';
+import SelectInput from '@/components/UI/SelectInput/SelectInput';
 
 // в идеале разделить на 2 виджета
 const EditComment = (props: EditCommentProps) => {
@@ -24,6 +26,9 @@ const EditComment = (props: EditCommentProps) => {
   const notifyAnswer = () => toast.success("Ответ успешно сохранен");
   const notifyAnswerDelete = () => toast.success("Ответ успешно удален");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
+
+  const { data: productOptions } = useGetProductOptionsQuery();
+  const { data: personOptions } = useGetPersonOptionsQuery();
 
   const { register, handleSubmit, formState: { errors } } = useForm<TEditCommentSchema>({ resolver: zodResolver(editCommentSchema) });
   const { register: registerAnswer, handleSubmit: handleSubmitAnswer, formState: { errors: answerErrors } } = useForm<TAnswerSchema>({ resolver: zodResolver(answerSchema) });
@@ -41,12 +46,12 @@ const EditComment = (props: EditCommentProps) => {
   const onDelete = async () => await deleteComment(id)
 
   // мутации ответа
-  const onSuccessAnswer = () => notify()
+  const onSuccessAnswer = () => notifyAnswer()
   const onErrorAnswer = (error: Error) => notifyError(error.message)
   const { updateAnswer, isPending: isPendingAnswerUpdate } = useUpdateAnswerMutation({ onSuccess: onSuccessAnswer, onError: onErrorAnswer });
   const { createAnswer, isPending: isPendingAnswerCreate } = useCreateAnswerMutation({ onSuccess: onSuccessAnswer, onError: onErrorAnswer });
 
-  const onSuccessAnswerDelete = () => notifyDelete()
+  const onSuccessAnswerDelete = () => notifyAnswerDelete()
   const onErrorAnswerDelete = (error: Error) => notifyError(error.message)
   const { deleteAnswer, isPending: isPendingAnswerDelete } = useDeleteAnswerMutation({ onSuccess: onSuccessAnswerDelete, onError: onErrorAnswerDelete });
 
@@ -82,6 +87,7 @@ const EditComment = (props: EditCommentProps) => {
           <Input
             label='Комментарий'
             sizeInput='large'
+            error={errors.text?.message}
             inputProps={{
               placeholder: '',
               id: 'edit-person-second-name',
@@ -93,6 +99,7 @@ const EditComment = (props: EditCommentProps) => {
           <Input
             label='Оценка'
             sizeInput='large'
+            error={errors.rate?.message}
             inputProps={{
               placeholder: '',
               id: 'edit-person-first-name',
@@ -101,9 +108,11 @@ const EditComment = (props: EditCommentProps) => {
               ...register('rate')
             }}
           />
-          <Input
+
+          {/* <Input
             label='ФИО'
             sizeInput='large'
+            error={errors.personId?.message}
             inputProps={{
               placeholder: '',
               id: 'edit-person-father-name',
@@ -115,6 +124,7 @@ const EditComment = (props: EditCommentProps) => {
           <Input
             label='Продукт'
             sizeInput='large'
+            error={errors.productId?.message}
             inputProps={{
               placeholder: '',
               id: 'edit-person-email',
@@ -122,6 +132,25 @@ const EditComment = (props: EditCommentProps) => {
               defaultValue: productId,
               ...register('productId')
             }}
+          /> */}
+          <SelectInput
+            label='ФИО'
+            sizeInput='large'
+            selectProps={{
+              ...register('personId'),
+              defaultValue: personId,
+            }}
+            options={personOptions || []}
+          />
+
+          <SelectInput
+            label='Продукт'
+            sizeInput='large'
+            selectProps={{
+              ...register('productId'),
+              defaultValue: productId,
+            }}
+            options={productOptions || []}
           />
 
           <div className={styles.buttons}>
@@ -149,6 +178,7 @@ const EditComment = (props: EditCommentProps) => {
           <Input
             label='Комментарий'
             sizeInput='large'
+            error={answerErrors.text?.message}
             inputProps={{
               placeholder: '',
               id: 'edit-person-second-name1',

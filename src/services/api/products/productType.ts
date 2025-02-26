@@ -1,7 +1,7 @@
 'use client'
 
 export type TProduct = {
-  id: number,
+  id: string,
   name: string,
   description: string,
   seoTitle: string,

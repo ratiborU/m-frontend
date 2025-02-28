@@ -1,14 +1,14 @@
 'use client'
 
 export type TCategory = {
-  id: number,
-  title: string,
-  description: number,
+  id: string,
+  name: string,
+  description: string,
   createdAt: string,
   updatedAt: string,
 }
 
 export type TCategoryCreate = {
-  title: string,
-  description: number,
+  name: string,
+  description: string,
 }

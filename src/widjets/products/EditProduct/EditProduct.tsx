@@ -16,6 +16,8 @@ import { useUpdateProductMutation } from '@/hooks/products/useUpdateProductMutat
 import { Button } from '@mui/material'
 import { useDeleteProductMutation } from '@/hooks/products/useDeleteProductMutation';
 import { editProductSchema, TEditProductSchema } from './models';
+import { useGetCategoryOptionsQuery } from '@/hooks/categories/useGetCategoryOptions';
+import SelectInput from '@/components/UI/SelectInput/SelectInput';
 
 
 const EditProduct = (props: EditProductProps) => {
@@ -41,6 +43,8 @@ const EditProduct = (props: EditProductProps) => {
   const notify = () => toast.success("Товар успешно изменен!");
   const notifyDelete = () => toast.success("Товар успешно удален!");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
+
+  const { data: categoryOptions } = useGetCategoryOptionsQuery();
 
   // добавить мутации для загрузки изображений
   const { register, handleSubmit, formState: { errors } } = useForm<TEditProductSchema>({ resolver: zodResolver(editProductSchema) });
@@ -204,7 +208,16 @@ const EditProduct = (props: EditProductProps) => {
                   ...register('productsCount')
                 }}
               />
-              <Input
+              <SelectInput
+                label='Категория'
+                sizeInput='small'
+                selectProps={{
+                  ...register('categoryId'),
+                  defaultValue: categoryId,
+                }}
+                options={categoryOptions || []}
+              />
+              {/* <Input
                 label='Категория'
                 sizeInput='small'
                 error={errors.categoryId?.message}
@@ -215,7 +228,7 @@ const EditProduct = (props: EditProductProps) => {
                   defaultValue: categoryId,
                   ...register('categoryId')
                 }}
-              />
+              /> */}
             </div>
             <div className={styles.inputs}>
               <Input

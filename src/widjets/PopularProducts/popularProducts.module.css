@@ -1,0 +1,10 @@
+.products {
+  margin: 0 70px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 410px;
+  overflow: hidden;
+  gap: 10px;
+  margin-bottom: 70px;
+}

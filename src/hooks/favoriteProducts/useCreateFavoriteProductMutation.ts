@@ -22,6 +22,9 @@ export const useCreateFavoriteProductMutation = (args: CreateFavoriteProductMuta
       client.invalidateQueries({
         queryKey: ['favoriteProducts'],
       });
+      client.invalidateQueries({
+        queryKey: ['products'],
+      });
       if (onSuccess) {
         onSuccess();
       }

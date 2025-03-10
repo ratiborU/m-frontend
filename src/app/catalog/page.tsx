@@ -1,10 +1,13 @@
+import Catalog from '@/widjets/Catalog/Catalog';
 import React from 'react';
+import { getAllProducts } from '@/services/api/products/productService';
 
 const page = async () => {
+  const products = await getAllProducts()
   return (
-    <div>
-      каталог
-    </div>
+    <>
+      <Catalog products={products.rows} />
+    </>
   );
 };
 

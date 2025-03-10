@@ -3,6 +3,7 @@ import React from 'react';
 import styles from "./button.module.css";
 
 type ButtonProps = {
+  className?: string,
   text: string;
   size: 'l' | 'm' | 's',
   type?: 'filled' | 'outlined',
@@ -10,9 +11,12 @@ type ButtonProps = {
 }
 
 const Button = (props: ButtonProps) => {
-  const { text, size = 'l', type = 'filled', onClick = () => { } } = props;
+  const { text, className = '', size = 'l', type = 'filled', onClick = () => { } } = props;
   return (
-    <button className={`${styles.button} ${styles[size]} ${styles[type]}`} onClick={onClick}>
+    <button
+      className={`${styles.button} ${className} ${styles[size]} ${styles[type]}`}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

@@ -17,7 +17,10 @@ export const useUpdateProductMutation = (args: UpdateProductMutationArgs) => {
     isError,
     mutateAsync: updateProduct,
   } = useMutation({
-    mutationFn: async (data: FormData) => await updateProductApi(data),
+    mutationFn: async (data: FormData) => {
+      const response = await updateProductApi(data)
+      return response;
+    },
     onSuccess: () => {
       client.invalidateQueries({
         queryKey: ['products'],

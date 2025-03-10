@@ -1,0 +1,64 @@
+.button {
+  border-radius: 5px;
+  font-weight: 300;
+  font-size: 16px;
+  transition: 0.1s;
+}
+
+.button:hover {
+  background-color: #e6f1ff;
+}
+
+.button:active {
+  background-color: #f1f7ff;
+}
+
+.plusMinusButton {
+  border-radius: 5px;
+  font-weight: 300;
+  font-size: 20px;
+  transition: 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 0 4px; */
+  overflow: hidden;
+}
+
+.iconButton {
+  background-color: #ffffff00;
+  width: 48px;
+  height: 40px;
+}
+
+.iconButton:hover {
+  background-color: #e6f1ff;
+}
+
+.iconButton:active {
+  background-color: #f1f7ff;
+}
+
+.l {
+  height: 50px;
+  width: 100%;
+}
+
+.m {
+  height: 40px;
+  width: 100%;
+}
+
+.s {
+  height: 40px;
+  padding: 0 50px;
+}
+
+.filled {
+  background-color: #deebff;
+}
+
+
+.outlined {
+  font-weight: 300;
+}

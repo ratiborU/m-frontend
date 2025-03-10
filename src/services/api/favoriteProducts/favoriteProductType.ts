@@ -1,14 +1,14 @@
 'use client'
 
 export type TFavoriteProduct = {
-  id: number,
-  productId: number,
-  personId: number,
+  id: string,
+  productId: string,
+  personId: string,
   createdAt: string,
   updatedAt: string,
 }
 
 export type TFavoriteProductCreate = {
-  productId: number,
-  personId: number,
+  productId: string,
+  personId: string,
 }

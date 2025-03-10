@@ -96,7 +96,7 @@ const EditProduct = (props: EditProductProps) => {
     const formData = new FormData();
     formData.append('id', String(id));
     formData.append('file', data.file[0]);
-    await putProduct(formData);
+    await updateProduct(formData);
   }
 
   const onSubmitImage = async (data: ImageScheme) => {
@@ -291,11 +291,6 @@ const EditProduct = (props: EditProductProps) => {
                 ...registerMainImage('file')
               }}
             />
-            {/* <input
-            className={styles.addImage}
-            type="file"
-            {...registerMainImage('file')}
-          /> */}
             <Button
               // loading={isPending}
               type='submit'

@@ -22,6 +22,9 @@ export const useDeleteBasketProductMutation = (args: DeleteBasketProductMutation
       client.invalidateQueries({
         queryKey: ['basketProducts'],
       });
+      client.invalidateQueries({
+        queryKey: ['products'],
+      });
       if (onSuccess) {
         onSuccess();
       }

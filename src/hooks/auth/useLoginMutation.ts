@@ -5,7 +5,8 @@ import { TLogin } from '@/services/api/persons/personType';
 import { login as loginApi } from '@/services/api/auth/authorizationService';
 
 interface LoginMutationArgs {
-  onSuccess?: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 

@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ReactQueryProvider from "@/providers/QueryProvider/QueryProvider";
 import ClientHeader from "@/components/ClientHeader/ClientHeader";
+import { CatalogFilterContextProvider } from "@/providers/CatalogFilterProvider/CatalogFilterProvider";
+import { CatalogSortContextProvider } from "@/providers/CatalogSortProvider/CatalogSortProvider";
+import { PersonContextProvider } from "@/providers/PersonProvider/PersonContextProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,8 +35,14 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={`${geistSans.variable} ${geistMono.variable}`}>
         <ReactQueryProvider>
-          <ClientHeader />
-          {children}
+          <CatalogFilterContextProvider>
+            <CatalogSortContextProvider>
+              <PersonContextProvider>
+                <ClientHeader />
+                {children}
+              </PersonContextProvider>
+            </CatalogSortContextProvider>
+          </CatalogFilterContextProvider>
         </ReactQueryProvider>
       </body>
     </html>

@@ -1,4 +1,7 @@
 'use client'
+import { TFavoriteProduct } from "../favoriteProducts/favoriteProductType"
+import { TBasketProduct } from "../basketProducts/basketProductType"
+import { TCategory } from "../categories/categoryType"
 
 export type TProduct = {
   id: string,
@@ -16,6 +19,9 @@ export type TProduct = {
   mainImage: string,
   createdAt: string,
   updatedAt: string,
+  category: TCategory,
+  favoriteProduct?: TFavoriteProduct,
+  basketProduct?: TBasketProduct
 }
 
 export type TProductCreate = {

@@ -1,3 +1,4 @@
+'use client'
 import { FC, ReactNode, useMemo, useState } from 'react';
 import { AuthContext } from './contexts/authContext';
 import { AuthSetterContext } from './contexts/authSetterContext';

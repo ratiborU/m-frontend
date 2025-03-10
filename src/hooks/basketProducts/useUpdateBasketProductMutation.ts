@@ -22,6 +22,9 @@ export const useUpdateBasketProductMutation = (args: UpdateBasketProductMutation
       client.invalidateQueries({
         queryKey: ['basketProducts'],
       });
+      client.invalidateQueries({
+        queryKey: ['products'],
+      });
       if (onSuccess) {
         onSuccess();
       }

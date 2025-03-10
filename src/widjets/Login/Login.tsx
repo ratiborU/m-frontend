@@ -10,14 +10,23 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { LoginScheme } from "./models";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
+import { usePersonSetterContext } from "@/providers/PersonProvider/hooks/usePersonSetterContext";
+import { LocalStorageService } from "@/lib/helpers/localStorageService";
 
 export default function Login() {
   const router = useRouter();
   const { register, handleSubmit } = useForm<LoginScheme>();
+  const setPerson = usePersonSetterContext()
 
-  const onSuccess = () => {
-    router.push('/admin/products')
-    // alert('Получилось')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSuccess = (data: any) => {
+    setPerson.setId(data.person.id);
+    setPerson.setFio(`${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`)
+    setPerson.setEmail(data.person.email)
+    LocalStorageService.save('id', data.person.id);
+    LocalStorageService.save('fio', `${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`);
+    LocalStorageService.save('email', data.person.email);
+    router.push('/admin/products');
   }
 
   const onError = () => {

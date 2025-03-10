@@ -26,12 +26,24 @@ export const getOneProduct = async (id: number | string): Promise<TProduct> => {
 }
 
 export const updateProduct = async (data: FormData): Promise<TProduct> => {
-  const response = await api(`products`, {
+  console.log(data.get('id'));
+  // const response = await fetch(`http://localhost:5000/api/products/${93}`, {
+  //   method: 'PUT',
+  //   body: data,
+  //   cache: "no-cache",
+  // },
+
+  // ).then((response) => {
+  //   return response.json();
+  // });
+  const response = await api(`products/${data.get('id')}`, {
     type: 'PUT',
     data: data,
     contentType: 'multipart/form-data'
   });
   return response;
+  // console.log(response);
+  // return response;
 }
 
 export const deleteProduct = async (id: number | string) => {

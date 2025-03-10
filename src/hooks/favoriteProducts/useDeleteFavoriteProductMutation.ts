@@ -21,6 +21,9 @@ export const useDeleteFavoriteProductMutation = (args: DeleteFavoriteProductMuta
       client.invalidateQueries({
         queryKey: ['favoriteProducts'],
       });
+      client.invalidateQueries({
+        queryKey: ['products'],
+      });
       if (onSuccess) {
         onSuccess();
       }

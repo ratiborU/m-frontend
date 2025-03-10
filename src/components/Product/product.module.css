@@ -1,3 +1,11 @@
+.mainBlock {
+  width: 288px;
+  margin: 2px;
+  position: relative;
+  /* проблема с длинными названиями */
+  height: 403px;
+}
+
 .block {
   width: 288px;
   /* height: 368px; */
@@ -5,15 +13,48 @@
   padding: 20px 20px 30px 20px;
   color: #222222;
   transition: 0.15s;
-  /* background-color: #000; */
-  margin: 2px;
+  height: 403px;
+  overflow: hidden;
 }
-
 
 
 .block:hover {
   box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.25);
+  position: absolute;
+  height: calc(100% + 60px);
+  background-color: #fff;
+  z-index: 10;
 }
+
+.button {
+  /* margin-left: 30px; */
+  margin-top: 30px;
+}
+
+
+.freeBlock {
+  /* position: absolute; */
+}
+
+
+/* .freeBlock::after {
+  content: '';
+  display: none;
+  transition: 0.15s;
+}
+
+.freeBlock:hover::after {
+  display: block;
+  position: absolute;
+  left: 0px;
+  bottom: -80px;
+  width: 100%;
+  height: 80px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  z-index: 1;
+} */
+
 
 .image {
   margin-bottom: 14px;

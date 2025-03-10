@@ -1,0 +1,21 @@
+.category {
+  padding: 0px 10px;
+  height: 36px;
+  background-color: #eeeeee;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 8px;
+  transition: 0.1s;
+}
+
+.category:hover {
+  background-color: #e4e4e4;
+}
+
+.active:hover {
+  background-color: #d2e3fd;
+}
+
+.active {
+  background-color: #DEEBFF;
+}

@@ -20,7 +20,10 @@ export const useCreateBasketProductMutation = (args: CreateBasketProductMutation
     mutationFn: async (data: TBasketProductCreate) => await createBasketProductApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['BasketProducts'],
+        queryKey: ['basketProducts'],
+      });
+      client.invalidateQueries({
+        queryKey: ['products'],
       });
       if (onSuccess) {
         onSuccess();

@@ -1,18 +1,17 @@
 'use client'
 
 export type TBasketProduct = {
-  id: number,
+  id: string,
   inOrder: boolean,
-  count: number,
-  productId: number,
-  personId: number,
+  count: string,
+  productId: string,
+  personId: string,
   createdAt: string,
   updatedAt: string,
 }
 
 export type TBasketProductCreate = {
-  inOrder: boolean,
-  count: number,
-  productId: number,
-  personId: number,
+  count: string,
+  productId: string,
+  personId: string,
 }

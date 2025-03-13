@@ -12,6 +12,7 @@ interface IProductProps extends TProduct {
   isInMainPage?: boolean,
   isFavorite?: boolean,
   count?: number,
+  isInFavorite?: boolean,
 }
 
 const Product = (props: IProductProps) => {
@@ -24,6 +25,7 @@ const Product = (props: IProductProps) => {
     discount,
     mainImage,
     isInMainPage = false,
+    isInFavorite = false,
     // isFavorite = false,
     // count = 0,
   } = props
@@ -49,7 +51,7 @@ const Product = (props: IProductProps) => {
           <p className={styles.price}>{price}  ₽</p>
         </div>
 
-        <FavoriteButton product={props} />
+        <FavoriteButton product={props} revalidate={isInFavorite} />
 
         <CartButton
           className={styles.button}

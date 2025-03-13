@@ -10,31 +10,49 @@ import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonCont
 import { useDeleteFavoriteProductByIdsMutation } from '@/hooks/favoriteProducts/useDeleteFavoriteProductByIdsMutation';
 import { TProduct } from '@/services/api/products/productType';
 import { useDebouncedCallback } from 'use-debounce';
+import { useCreateFavoriteProductNoRevalidateMutation } from '@/hooks/favoriteProducts/useCreateFavoriteProductNoRevalidateMutation';
+import { useDeleteFavoriteProductNoRevalidateMutation } from '@/hooks/favoriteProducts/useDeleteFavoriteProductNoRevalidateMutation';
 
 type FavoriteButtonProps = {
   onClick?: () => void,
-  product: TProduct
+  product: TProduct,
+  revalidate?: boolean,
 }
 
 const FavoriteButton = (props: FavoriteButtonProps) => {
-  const { product } = props;
+  const { product, revalidate } = props;
   const [isActivated, setIsActivated] = useState(!!product.favoriteProduct);
   const person = usePersonContext();
   const { createFavoriteProduct } = useCreateFavoriteProductMutation({});
   const { deleteFavoriteProductByIds } = useDeleteFavoriteProductByIdsMutation({});
+  const { createFavoriteProductNoRevalidate } = useCreateFavoriteProductNoRevalidateMutation({});
+  const { deleteFavoriteProductNoRevalidate } = useDeleteFavoriteProductNoRevalidateMutation({});
 
   const debounced = useDebouncedCallback(async (value: boolean) => {
-    if (!value) {
-      await createFavoriteProduct({
-        productId: product.id,
-        personId: person.id
-      });
+    console.log(product);
+    if (revalidate) {
+      if (!value) {
+        await createFavoriteProductNoRevalidate({
+          productId: product.id,
+          personId: person.id
+        });
+      } else {
+        await deleteFavoriteProductNoRevalidate(product.favoriteProduct!.id || '0');
+      }
     } else {
-      await deleteFavoriteProductByIds({
-        productId: product.id,
-        personId: person.id
-      });
+      if (!value) {
+        await createFavoriteProduct({
+          productId: product.id,
+          personId: person.id
+        });
+      } else {
+        await deleteFavoriteProductByIds({
+          productId: product.id,
+          personId: person.id
+        });
+      }
     }
+
   }, 500);
 
   const onClickButton = async () => {

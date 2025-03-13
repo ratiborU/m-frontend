@@ -1,3 +1,5 @@
+import { TPerson } from "../persons/personType"
+
 export type TLoginRequest = {
   email: string,
   password: string
@@ -7,7 +9,8 @@ export type TLoginResponse = {
   tokens: {
     accessToken: string,
     refreshToken: string
-  }
+  },
+  person: TPerson
 }
 
 export type TRegistrationRequest = {

@@ -57,10 +57,8 @@ const EditComment = (props: EditCommentProps) => {
 
   const onSubmitAnswer = async (data: TAnswerSchema) => {
     if (!answer) {
-      console.log('create');
       await createAnswer({ ...data, commentId: String(id), personId: '1' });
     } else {
-      console.log('update');
       await updateAnswer({ text: data.text, commentId: String(id), personId: '1', id: answer.id, createdAt, updatedAt, });
     }
   }

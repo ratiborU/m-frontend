@@ -5,7 +5,6 @@ import { TPagination } from "../../types/paginationType";
 import { revalidateTag } from "next/cache";
 
 export const createBasketProduct = async (data: TBasketProductCreate): Promise<TBasketProduct> => {
-  console.log(data);
   const response = await api('basketProducts', {
     type: 'POST',
     data: JSON.stringify(data)

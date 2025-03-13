@@ -18,7 +18,6 @@ const Catalog = (props: CatalogProps) => {
   const filter = useCatalogFilterContext();
   const sort = useCatalogSortContext()
 
-  console.log('render filter sort hola');
   const filteredProducts = products
     .filter(product => {
       if (!filter.categoryIds.includes(product.category.name) && filter.categoryIds.length > 0) {

@@ -13,7 +13,8 @@ type TApiProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSuccess?: (data?: any) => void,
   onError?: (error: Error) => void,
-  revalidate?: number,
+  revalidate?: string | null,
+  cache?: RequestCache,
   contentType?: string,
   next?: NextFetchRequestConfig | undefined,
   isRefresh?: boolean
@@ -28,7 +29,8 @@ export const api = async (link: string, props: TApiProps = {}) => {
     onSuccess = () => { return },
     onError = (error: Error) => { return error },
     // isRefresh = false,
-    // revalidate = type == "GET" ? 3600 : 0,
+    revalidate,
+    cache,
     contentType = 'application/json',
   } = props;
 
@@ -42,15 +44,18 @@ export const api = async (link: string, props: TApiProps = {}) => {
     headers['Content-type'] = 'application/json';
   }
 
+  console.log(type == "GET" ? link.split('/') : undefined);
+
   const response = await fetch(`http://localhost:5000/api/${link}`, {
     method: type,
     headers,
     next: { // сложно, нужно проверить
-      revalidate: 86400, // Обновлять через день автоматически
+      // revalidate: !cache ? 86400 : false, // Обновлять через день автоматически
       ...next,
       tags: type == "GET" ? link.split('/') : undefined,
     },
     // cache: "no-cache", // нельзя использовать с revalidate
+    cache,
     body: data
   })
     .then(response => {
@@ -62,7 +67,15 @@ export const api = async (link: string, props: TApiProps = {}) => {
     .then(async (data) => {
       onSuccess(data);
       if (type != "GET") {
-        revalidateTag(tags[0]);
+        if (revalidate === undefined) {
+          console.log('usualy');
+          revalidateTag(tags[0]);
+        } else if (revalidate !== null) {
+          console.log('render what i say');
+          revalidateTag(revalidate);
+        } else {
+          console.log('no revalidate');
+        }
       }
       return data;
     })

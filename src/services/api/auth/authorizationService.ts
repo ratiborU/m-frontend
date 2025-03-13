@@ -34,6 +34,7 @@ export const login = async (data: TLoginRequest) => {
     data: JSON.stringify(data),
     onSuccess: (data: TLoginResponse) => {
       setCookies(data.tokens);
+      cookies().set("personId", data.person.id);
     },
   });
   return response;

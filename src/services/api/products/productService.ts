@@ -26,7 +26,6 @@ export const getOneProduct = async (id: number | string): Promise<TProduct> => {
 }
 
 export const updateProduct = async (data: FormData): Promise<TProduct> => {
-  console.log(data.get('id'));
   // const response = await fetch(`http://localhost:5000/api/products/${93}`, {
   //   method: 'PUT',
   //   body: data,
@@ -42,8 +41,6 @@ export const updateProduct = async (data: FormData): Promise<TProduct> => {
     contentType: 'multipart/form-data'
   });
   return response;
-  // console.log(response);
-  // return response;
 }
 
 export const deleteProduct = async (id: number | string) => {

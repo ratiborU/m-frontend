@@ -12,9 +12,9 @@ const ClientHeader = () => {
         <Search />
       </div>
       <div className={styles.rightBlock}>
-        <Link className={styles.icon} href={'/authorization/login'}>Избраное</Link>
-        <Link className={styles.icon} href={'/admin/products'}>Корзина</Link>
-        <Link className={styles.icon} href={'/authorization/login'}>Профиль</Link>
+        <Link className={styles.icon} href={'/favorite'}>Избраное</Link>
+        <Link className={styles.icon} href={'/basket'}>Корзина</Link>
+        <Link className={styles.icon} href={'/profile'}>Профиль</Link>
       </div>
     </div>
   );

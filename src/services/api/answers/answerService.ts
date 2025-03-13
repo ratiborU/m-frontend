@@ -29,7 +29,6 @@ export const getOneAnswer = async (id: number | string): Promise<TAnswer> => {
 }
 
 export const updateAnswer = async (data: TAnswer): Promise<TAnswer> => {
-  console.log(data);
   const response = await api('answers', {
     type: 'PUT',
     data: JSON.stringify(data)

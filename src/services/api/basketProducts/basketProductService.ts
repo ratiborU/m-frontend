@@ -19,6 +19,12 @@ export const getAllBasketProducts = async (): Promise<TPagination<TBasketProduct
   return response;
 }
 
+export const getAllBasketProductsByPersonId = async (id: number | string): Promise<TPagination<TBasketProduct>> => {
+  // добавить пагинацию
+  const response = await api(`basketProducts/byPersonId/${id}`);
+  return response;
+}
+
 export const getOneBasketProduct = async (id: number | string): Promise<TBasketProduct> => {
   const response = await api(`basketProducts/${id}`);
   return response;

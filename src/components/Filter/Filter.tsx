@@ -4,7 +4,7 @@ import styles from './filter.module.css'
 // import ReactSlider from 'react-slider';
 // import styled from 'styled-components';
 import { StyledSlider, Thumb, Track } from './sltyles';
-import { useCatalogFilterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterContxt';
+// import { useCatalogFilterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterContxt';
 import { useCatalogFilterSetterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterSetterContext';
 import Input from '../UI/Input/Input';
 import Category from '../Category/Category';
@@ -15,7 +15,7 @@ import { ICatalogFilterContext } from '@/providers/CatalogFilterProvider/context
 type keySetNames = 'categoryIds' | 'material' | 'size' | 'shape';
 
 const Filter = () => {
-  const filter = useCatalogFilterContext();
+  // const filter = useCatalogFilterContext();
   const setFilter = useCatalogFilterSetterContext();
 
   const { data } = useGetCategoriesQuery();
@@ -25,7 +25,7 @@ const Filter = () => {
 
   const [filterState, setFilterState] = useState<ICatalogFilterContext>({
     startPrice: 0,
-    endPrice: 2000,
+    endPrice: 8000,
     categoryIds: [],
     material: [], // золото сталь
     size: [], // большой маленький средний
@@ -82,8 +82,8 @@ const Filter = () => {
       <p className={styles.title}>Цена</p>
       <StyledSlider
         className={styles.slider}
-        defaultValue={[0, 2000]}
-        max={2000}
+        defaultValue={[0, 8000]}
+        max={8000}
         min={0}
         value={[filterState.startPrice, filterState.endPrice]}
         onChange={(values) => onChange(values)}

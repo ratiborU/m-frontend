@@ -1,5 +1,7 @@
 'use client'
 
+import { TProduct } from "../products/productType"
+
 export type TBasketProduct = {
   id: string,
   inOrder: boolean,
@@ -8,6 +10,7 @@ export type TBasketProduct = {
   personId: string,
   createdAt: string,
   updatedAt: string,
+  product: TProduct,
 }
 
 export type TBasketProductCreate = {

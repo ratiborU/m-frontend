@@ -1,0 +1,14 @@
+.basket {
+  margin: 0 70px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.basketProducts {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1 0 auto
+}

@@ -11,7 +11,7 @@ export interface ICatalogFilterContext {
 
 export const CatalogFilterContext = createContext<ICatalogFilterContext>({
   startPrice: 0,
-  endPrice: 100,
+  endPrice: 8000,
   categoryIds: [],
   material: [], // золото сталь
   size: [], // большой маленький средний

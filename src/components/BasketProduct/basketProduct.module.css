@@ -1,0 +1,39 @@
+.block {
+  /* width: 800px; */
+  /* border: 1px solid #888888; */
+  display: flex;
+}
+
+.image {
+  margin-right: 32px;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 400;
+  font-size: 24px;
+  color: #222222;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-weight: 300;
+  font-size: 18px;
+  color: #222222;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-size: 20px;
+  color: #222222;
+  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+}
+
+.orderButtons {}
+
+.checkBox {}

@@ -44,8 +44,6 @@ export const api = async (link: string, props: TApiProps = {}) => {
     headers['Content-type'] = 'application/json';
   }
 
-  console.log(type == "GET" ? link.split('/') : undefined);
-
   const response = await fetch(`http://localhost:5000/api/${link}`, {
     method: type,
     headers,
@@ -66,15 +64,13 @@ export const api = async (link: string, props: TApiProps = {}) => {
     })
     .then(async (data) => {
       onSuccess(data);
+      // работает неоднозначно, особенности next js
       if (type != "GET") {
         if (revalidate === undefined) {
-          console.log('usualy');
           revalidateTag(tags[0]);
         } else if (revalidate !== null) {
-          console.log('render what i say');
           revalidateTag(revalidate);
         } else {
-          console.log('no revalidate');
         }
       }
       return data;

@@ -1,20 +1,20 @@
 import React, { InputHTMLAttributes } from 'react';
-import styles from "./checkBox.module.css";
+import styles from "./radioButton.module.css";
 
-type CheckBoxProps = {
+type RadioButtonProps = {
   inputProps?: InputHTMLAttributes<HTMLInputElement>,
-  label?: string | React.ReactNode,
+  label?: string,
   error?: string,
 }
 
 
-const CheckBox = (props: CheckBoxProps) => {
+const RadioButton = (props: RadioButtonProps) => {
   const { inputProps = {}, label = '' } = props;
   return (
     <div className={styles.field}>
       <input
         className={styles.input}
-        type="checkbox"
+        type="radio"
         {...inputProps}
       />
       <label className={styles.label} htmlFor={inputProps.id}>{label}</label>
@@ -22,4 +22,4 @@ const CheckBox = (props: CheckBoxProps) => {
   );
 };
 
-export default CheckBox;
+export default RadioButton;

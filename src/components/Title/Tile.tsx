@@ -3,12 +3,13 @@ import styles from './title.module.css'
 
 type TitleProps = {
   text: string,
+  className?: string,
 }
 
 const Title = (props: TitleProps) => {
-  const { text } = props
+  const { text, className = '' } = props
   return (
-    <div className={styles.title}>
+    <div className={`${styles.title} ${className}`}>
       {text}
     </div>
   );

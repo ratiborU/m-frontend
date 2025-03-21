@@ -23,7 +23,7 @@ const Textarea = (props: TextareaProps) => {
   // ибо ref использовать не могу так как он передается
   // в react-hook-form
   const linesCount = Number(String(inputProps?.defaultValue).match(/\n/g)?.length || 0)
-  const defaultHeight = 49 + linesCount * 18.715 + 'px';
+  const defaultHeight = inputProps?.style?.height ? inputProps?.style?.height : 49 + linesCount * 18.715 + 'px';
 
   return (
     <div className={styles.field}>

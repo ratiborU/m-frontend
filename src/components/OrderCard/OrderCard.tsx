@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './basketToOrderCard.module.css'
+import styles from './orderCard.module.css'
 import { TBasketProduct } from '@/services/api/basketProducts/basketProductType';
 import Button from '../UI/Button/Button';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ type BasketToOrderCardProps = {
   products: TBasketProduct[],
 }
 
-const BasketToOrderCard = (props: BasketToOrderCardProps) => {
+const OrderCard = (props: BasketToOrderCardProps) => {
   const { products } = props;
   const total = products.reduce((acc, cur) => acc + Number(cur.count) * Number(cur.product.price), 0)
   const totalWithDiscount = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
@@ -36,12 +36,16 @@ const BasketToOrderCard = (props: BasketToOrderCardProps) => {
         ))}
 
       </div>
-      <Link href={'/order'}>
-        <Button text={'Перейти к оформлению'} size={'l'} />
-      </Link>
+      <Button
+        text={'Перейти к покупке'}
+        size={'l'}
+        buttonProps={{
+          type: 'button'
+        }}
+      />
 
     </div>
   );
 };
 
-export default BasketToOrderCard;
+export default OrderCard;

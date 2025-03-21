@@ -1,0 +1,50 @@
+.map {
+  width: 100%;
+  max-width: 100vw;
+  height: 400px;
+  position: relative;
+}
+
+
+/* PlaceBody */
+.container {
+  /* border-radius: inherit;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0; */
+  height: 60px;
+}
+
+/* @media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+} */
+
+.content {
+  flex: 1;
+  /* padding: var(--ifm-pre-padding); */
+}
+
+.contentNoPadding {
+  flex: 1;
+}
+
+.contentNoPadding:nth-child(2) {
+  /* padding-left: var(--ifm-pre-padding); */
+}
+
+.links {
+  display: flex;
+}
+
+.price {
+  margin: var(--ifm-pre-padding) 0;
+}
+
+.title {
+  font-weight: normal;
+  font-size: 16px;
+  margin-bottom: 2px;
+}

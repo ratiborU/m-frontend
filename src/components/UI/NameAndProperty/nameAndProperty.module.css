@@ -1,0 +1,19 @@
+.block {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 18px;
+}
+
+.name {
+  color: #494949;
+}
+
+.dots {
+  border: 1px dashed #d9d9d9;
+  flex: 1 0 auto;
+  height: 1px;
+}
+
+/* .value {} */

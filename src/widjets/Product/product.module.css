@@ -1,0 +1,167 @@
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  /* gap: 60px; */
+
+  margin-top: 70px;
+  align-items: flex-start;
+  /* padding: 0 15px; */
+  /* border: 1px solid #000; */
+}
+
+.block {
+  flex: 1 0 auto;
+}
+
+.firstBlock {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 60px;
+  align-items: flex-start;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.miniImages {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* border: 1px solid #000; */
+}
+
+.info {
+  flex: 1 0 auto;
+}
+
+.characteristics {
+  margin-bottom: 60px;
+  max-width: 1000px;
+}
+
+.sameProducts {
+  margin-bottom: 60px;
+}
+
+.comments {
+  /* border: 1px solid #000; */
+  display: flex;
+  gap: 60px;
+}
+
+.card {
+  width: 400px;
+}
+
+.titleBlock {
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.title {
+  font-size: 36px;
+  color: #222222;
+  margin-bottom: 12px;
+
+}
+
+.infoBlock {
+  display: flex;
+  width: 100%;
+}
+
+.price {
+  font-size: 24px;
+  color: #222222;
+  margin-right: 32px;
+}
+
+.rateBlock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rate {
+  font-weight: 300;
+  font-size: 16px;
+  color: #222222;
+}
+
+.rateStars {}
+
+.commentsCount {
+  font-weight: 300;
+  font-size: 16px;
+  color: #222222;
+}
+
+.aboutblock {}
+
+.aboutTitle {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.aboutDescription {
+  font-weight: 300;
+  font-size: 18px;
+  color: #353535;
+  max-width: 540px;
+  /* word-wrap: normal; */
+  word-wrap: break-word;
+  margin-bottom: 12px;
+}
+
+.characteristics {}
+
+.characteristicsTitle {
+  font-size: 36px;
+  color: #222222;
+  margin-bottom: 60px;
+}
+
+.characteristicsCloumns {
+  display: flex;
+  gap: 40px;
+}
+
+.characteristicsList {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.simularProducts {
+  max-width: 100vw;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 20px; */
+  justify-content: space-between;
+}
+
+.commentsTitle {
+  font-size: 36px;
+  color: #222222;
+  margin-bottom: 60px;
+}
+
+.commentsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 600px;
+  /* border: 1px solid #000; */
+}
+
+.image {
+  cursor: pointer;
+}

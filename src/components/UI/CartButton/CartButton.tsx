@@ -81,13 +81,10 @@ const CartButton = (props: CartButtonProps) => {
 
   return (
     <>
-      {/* <div> */}
-      <div
-        className={`${styles.plusMinusButton} ${className} ${styles[size]} ${styles[type]}`}
-      // onClick={onClick}
-      >
+
+      <div className={`${styles.plusMinusButton} ${className} ${styles[size]} ${styles[type]}`}>
         <button
-          className={styles.iconButton}
+          className={size == 'l' ? styles.iconButtonLarge : styles.iconButton}
           onClick={onRemoveToCartClick}
         >
           <Image src={minus} alt={''} />
@@ -95,7 +92,7 @@ const CartButton = (props: CartButtonProps) => {
         {/* Сделать инпут */}
         {count}
         <button
-          className={styles.iconButton}
+          className={size == 'l' ? styles.iconButtonLarge : styles.iconButton}
           onClick={onAddToCartClick}
         >
           <Image src={plus} alt={''} />

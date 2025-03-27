@@ -4,7 +4,7 @@ import styles from "./editProduct.module.css";
 import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
 import { useForm } from 'react-hook-form';
-import { putProduct, postImage, deleteImage } from './action';
+// import { putProduct, postImage, deleteImage } from './action';
 import Image from 'next/image';
 import EditImage from '@/components/EditImage/EditImage';
 import { MainImageScheme, ImageScheme, EditProductProps } from './models';
@@ -18,7 +18,7 @@ import { useDeleteProductMutation } from '@/hooks/products/useDeleteProductMutat
 import { editProductSchema, TEditProductSchema } from './models';
 import { useGetCategoryOptionsQuery } from '@/hooks/categories/useGetCategoryOptions';
 import SelectInput from '@/components/UI/SelectInput/SelectInput';
-
+import { createImage, deleteImage } from '@/services/api/images/imageService';
 
 const EditProduct = (props: EditProductProps) => {
   const {
@@ -81,8 +81,8 @@ const EditProduct = (props: EditProductProps) => {
     formData.append('characteristics', data.characteristics);
     formData.append('price', data.price);
     formData.append('discount', data.discount);
-    formData.append('rate', '0');
-    formData.append('commentsCount', '0');
+    formData.append('rate', rate);
+    formData.append('commentsCount', commentsCount);
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
     await updateProduct(formData);
@@ -103,7 +103,7 @@ const EditProduct = (props: EditProductProps) => {
     const formData = new FormData();
     formData.append('productId', String(id));
     formData.append('img', data.img[0]);
-    await postImage(formData);
+    await createImage(formData);
   }
 
   return (

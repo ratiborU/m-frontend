@@ -5,7 +5,7 @@ import styles from './popularProducts.module.css'
 import Title from '@/components/Title/Tile';
 import { TPagination } from '@/services/types/paginationType';
 import { TProduct } from '@/services/api/products/productType';
-
+// import Title from '@/components/UI/Title/Title';
 type PopularProductsProps = {
   products: TPagination<TProduct>
 }
@@ -15,9 +15,9 @@ const PopularProducts = (props: PopularProductsProps) => {
   // const products = await getAllProducts();
   return (
     <>
-      <Title text='Популярные товары' />
+      <Title text='Популярные товары' margin={false} />
       <div className={styles.products}>
-        {...products.rows.sort((a, b) => Number(b.commentsCount) - Number(a.commentsCount)).slice(0, 5).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
+        {...products.rows.sort((a, b) => Number(b.commentsCount) - Number(a.commentsCount)).slice(0, 4).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
       </div>
     </>
 

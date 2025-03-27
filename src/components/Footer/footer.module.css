@@ -1,0 +1,66 @@
+.footer {
+  /* height: 400px; */
+  background-color: #f4f4f4;
+  padding-bottom: 40px;
+  margin-top: 200px;
+}
+
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  padding: 80px 0px;
+  gap: 80px;
+  justify-content: space-between;
+}
+
+
+.mainBlock {
+  width: 400px;
+}
+
+.columns {
+  display: flex;
+  gap: 60px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 240px;
+  min-width: 240px;
+}
+
+.columnTitle {
+  font-size: 24px;
+  margin-bottom: 8px;
+  /* margin-bottom: 24px; */
+}
+
+.columnText {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.footerLogo {
+  font-family: "Baskervville", serif;
+  font-size: 64px;
+  line-height: 76px;
+  margin-bottom: 24px;
+}
+
+.footerLogoText {
+  font-weight: 300;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.footerBottomText {
+  /* font-family: "Baskervville", serif; */
+  text-align: center;
+  margin-top: -40px;
+  font-size: 18px;
+  /* margin-bottom: 40px; */
+}

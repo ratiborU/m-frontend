@@ -37,7 +37,7 @@ const BasketToOrderCard = (props: BasketToOrderCardProps) => {
 
       </div>
       <Link href={'/order'}>
-        <Button text={'Перейти к оформлению'} size={'l'} />
+        <Button text={'Перейти к оформлению'} size={'l'} buttonProps={{}} />
       </Link>
 
     </div>

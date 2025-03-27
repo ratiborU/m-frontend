@@ -20,6 +20,13 @@ export const getAllImages = async (): Promise<TPagination<TImage>> => {
   return response;
 }
 
+export const getImagesByProductId = async (id: number | string): Promise<TImage[]> => {
+  // добавить пагинацию
+  // const response = await api(`products?limit=100&page=1`);
+  const response = await api(`images/getAllByProductId/${id}`);
+  return response;
+}
+
 export const getOneImage = async (id: number | string): Promise<TImage> => {
   const response = await api(`images/${id}`);
   return response;

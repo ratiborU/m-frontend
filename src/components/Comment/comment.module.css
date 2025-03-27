@@ -1,6 +1,6 @@
 .comment {
   /* width: 40%; */
-  width: 800px;
+  /* width: 800px; */
   color: #222222;
 }
 
@@ -9,11 +9,11 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 30px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .name {
-  font-size: 28px;
+  font-size: 22px;
 }
 
 .rate {
@@ -27,7 +27,7 @@
 }
 
 .commentText {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1.4;
 }

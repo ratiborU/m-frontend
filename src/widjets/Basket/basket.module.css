@@ -1,9 +1,20 @@
-.basket {
-  margin: 0 70px;
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto
+}
+
+.basketFlex {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 70px;
+}
+
+.basket {
+  /* display: flex;
   gap: 40px;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 
 .basketProducts {

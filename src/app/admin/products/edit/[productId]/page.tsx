@@ -2,6 +2,8 @@ import React from 'react';
 import EditProduct from '@/widjets/products/EditProduct/EditProduct';
 import { TProduct } from '@/services/api/products/productType';
 import { TPagination } from '@/services/types/paginationType';
+import { getOneProduct } from '@/services/api/products/productService';
+import { getImagesByProductId } from '@/services/api/images/imageService';
 
 export async function generateStaticParams() {
   const products: TPagination<TProduct> = await fetch(`http://localhost:5000/api/products`, {
@@ -16,21 +18,9 @@ export async function generateStaticParams() {
 
 const page = async ({ params }: { params: Promise<{ productId: string }> }) => {
   const { productId } = await params;
-  const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
-    next: {
-      tags: ['products', productId]
-    },
-    cache: 'no-cache'
-  });
-  const product: TProduct = await response.json();
 
-  const responseImages = await fetch(`http://localhost:5000/api/images/getAllByProductId/${productId}`, {
-    next: {
-      tags: ['images', productId]
-    },
-    cache: 'no-cache'
-  });
-  const images = await responseImages.json();
+  const product = await getOneProduct(productId)
+  const images = await getImagesByProductId(productId);
 
   return (
     <div>

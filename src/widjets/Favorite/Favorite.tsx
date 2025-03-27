@@ -2,6 +2,7 @@ import { TFavoriteProduct } from '@/services/api/favoriteProducts/favoriteProduc
 import React from 'react';
 import styles from './favorite.module.css'
 import Product from '@/components/Product/Product';
+import Title from '@/components/Title/Tile';
 
 type FavoriteProps = {
   favoriteProducts: TFavoriteProduct[];
@@ -11,16 +12,20 @@ const Favorite = (props: FavoriteProps) => {
   const { favoriteProducts } = props;
   return (
     <>
-      <div className={styles.favoriteProducts}>
-        {...favoriteProducts.map((x) => (
-          <Product
-            key={`favorite product key: ${x.id}`}
-            {...(x.product)}
-            favoriteProduct={x}
-            isInFavorite={true}
-          />
-        ))}
+      <div className={styles.wrapper}>
+        <Title text={'Избранное'} margin={false} />
+        <div className={styles.favoriteProducts}>
+          {...favoriteProducts.map((x) => (
+            <Product
+              key={`favorite product key: ${x.id}`}
+              {...(x.product)}
+              favoriteProduct={x}
+              isInFavorite={true}
+            />
+          ))}
+        </div>
       </div>
+
     </>
   );
 };

@@ -1,7 +1,12 @@
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 .favoriteProducts {
-  margin: 0 70px;
+  /* margin: 0 70px; */
   display: flex;
-  /* justify-content: space-between; */
-  gap: 30px;
+  justify-content: space-between;
+  /* gap: 30px; */
   flex-wrap: wrap;
 }

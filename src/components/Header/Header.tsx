@@ -24,7 +24,7 @@ const Header = () => {
 
         <Link className={isActive('statistics', pathName)} href={'/admin/statistics'}>Статистика</Link>
         <Link className={isActive('other', pathName)} href={'/admin/other'}>Другое</Link>
-        <Link className={styles.link} href={'/authorization/login'}>Сайт</Link>
+        <Link className={styles.link} href={'/catalog'}>Сайт</Link>
       </nav>
     </header>
   );

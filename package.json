@@ -33,6 +33,7 @@
     "react-toastify": "^11.0.3",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.15",
+    "swiper": "^11.2.6",
     "use-debounce": "^10.0.4",
     "zod": "^3.24.2"
   },

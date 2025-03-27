@@ -33,11 +33,11 @@ const Product = (props: IProductProps) => {
   return (
     <div className={styles.mainBlock}>
       <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
-        <Link href={`/catalog/${id}`}>
+        <Link href={`/product/${id}`}>
           <Image className={styles.image} src={`http://localhost:5000/${mainImage}`} alt='' width={248} height={248} />
         </Link>
 
-        <Link href={`/catalog/${id}`}>
+        <Link href={`/product/${id}`}>
           <p className={styles.title}>{name}</p>
         </Link>
         {/* если отзывов нет то не показывать */}

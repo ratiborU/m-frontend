@@ -22,9 +22,9 @@ const BasketProduct = (props: TBasketProduct) => {
             <OrderCartButton key={`order cart button key: ${product.id}`} {...props} />
           </div>
         </div>
-        <div className={styles.checkBox}>
+        {/* <div className={styles.checkBox}>
           <CheckBox key={`order cart button key: ${product.id}`} />
-        </div>
+        </div> */}
       </div>
     </>
   );

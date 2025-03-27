@@ -1,0 +1,18 @@
+.buttons {
+  display: flex;
+  /* gap: 2px; */
+}
+
+.button {
+  background-color: #fff;
+  padding: 4px;
+  transition: 0.15s;
+}
+
+.image {
+  transition: 0.15s;
+}
+
+.button:hover {
+  transform: scale(1.2);
+}

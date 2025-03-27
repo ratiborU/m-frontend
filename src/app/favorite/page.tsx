@@ -9,7 +9,6 @@ const page = async () => {
   return (
     <>
       <div >
-        <Title text={'Избранное'} />
         <Favorite favoriteProducts={favoriteProducts.rows} />
       </div>
 

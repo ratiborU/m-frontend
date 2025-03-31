@@ -8,18 +8,28 @@ import { useForm } from "react-hook-form";
 import { RegistrationScheme } from "./models";
 import { useRegistrationMutation } from "@/hooks/auth/useRegistrationMutation";
 import { useRouter } from "next/navigation";
+import { usePersonContext } from "@/providers/PersonProvider/hooks/usePersonContext";
+import { usePersonSetterContext } from "@/providers/PersonProvider/hooks/usePersonSetterContext";
+import { LocalStorageService } from "@/lib/helpers/localStorageService";
 
 export default function Registration() {
   const router = useRouter();
+  // добавить zod
   const { register, handleSubmit } = useForm<RegistrationScheme>();
+  const person = usePersonContext();
+  const setPerson = usePersonSetterContext()
 
-  const onSuccess = () => {
-    router.push('/admin/products')
+  const onSuccess = (data: any) => {
+    setPerson.setId(data.person.id);
+    setPerson.setFio(`${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`)
+    setPerson.setEmail(data.person.email)
+    LocalStorageService.save('id', data.person.id);
+    LocalStorageService.save('fio', `${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`);
+    LocalStorageService.save('email', data.person.email);
+    router.push('/');
   }
 
-  const onError = (error: Error) => {
-    alert('не получилось' + error.message,)
-  }
+  const onError = (error: Error) => { }
 
   const { registration } = useRegistrationMutation({ onSuccess, onError });
 
@@ -32,6 +42,8 @@ export default function Registration() {
       phoneNumber: data.phoneNumber,
       password: data.password,
     }
+
+    console.log(sendData);
     await registration(sendData);
   }
 
@@ -44,7 +56,8 @@ export default function Registration() {
           inputProps={{
             placeholder: 'Иванов Иван Иванович',
             id: 'registration-fio',
-            ...register('fio')
+            ...register('fio'),
+            defaultValue: person.fio
           }}
         />
         <Input
@@ -52,7 +65,8 @@ export default function Registration() {
           inputProps={{
             placeholder: 'Ваша почта...',
             id: 'registration-login',
-            ...register('email')
+            ...register('email'),
+            defaultValue: person.email
           }}
         />
         <Input
@@ -60,7 +74,8 @@ export default function Registration() {
           inputProps={{
             placeholder: 'Ваш телефон...',
             id: 'registration-phone',
-            ...register('phoneNumber')
+            ...register('phoneNumber'),
+            defaultValue: person.phone
           }}
         />
         <Input

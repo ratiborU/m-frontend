@@ -1,6 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { TPerson } from '@/services/api/persons/personType';
+import { TPersonUpdate } from '@/services/api/persons/personType';
 import { updatePerson as updatePersonApi } from '@/services/api/persons/personService';
 
 
@@ -18,7 +18,7 @@ export const useUpdatePersonMutation = (args: UpdatePersonMutationArgs) => {
     isError,
     mutateAsync: updatePerson,
   } = useMutation({
-    mutationFn: async (data: TPerson) => await updatePersonApi(data),
+    mutationFn: async (data: TPersonUpdate) => await updatePersonApi(data),
     onSuccess: () => {
       client.invalidateQueries({
         queryKey: ['persons'],

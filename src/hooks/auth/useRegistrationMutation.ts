@@ -5,7 +5,7 @@ import { registration as registrationApi } from '@/services/api/auth/authorizati
 // import { login } from '@/services/api/authorizationService';
 
 interface RegistrationMutationArgs {
-  onSuccess?: () => void;
+  onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
@@ -21,7 +21,6 @@ export const useRegistrationMutation = (args: RegistrationMutationArgs = {}) => 
       const response = await registrationApi(data)
       return response;
     },
-    // mutationFn: async (data: TRegistrationRequest) => alert('hola'),
     onSuccess,
     onError
   });

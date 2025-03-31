@@ -44,7 +44,7 @@ const CartButton = (props: CartButtonProps) => {
     if (Number(product.basketProduct?.count || 0) == 0 && value > 0) {
       await createBasketProduct({
         productId: product.id,
-        personId: person.id,
+        personId: person.id || '0',
         count: String(value)
       })
     } else if (Number(product.basketProduct?.count || 0) > 0 && value > 0 && product.basketProduct) {

@@ -19,6 +19,8 @@ import OrderCard from '@/components/OrderCard/OrderCard';
 import { useCreateOrderMutation } from '@/hooks/orders/useCreateOrderMutation';
 import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonContext';
 import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
+import { usePersonSetterContext } from '@/providers/PersonProvider/hooks/usePersonSetterContext';
+import { LocalStorageService } from '@/lib/helpers/localStorageService';
 
 const createPersonSchema = z.object({
   fio: z.string().min(1, 'мало'),
@@ -40,15 +42,16 @@ type OrderProps = {
 const Order = (props: OrderProps) => {
   const { products } = props;
   const order = useOrderContext();
-  const person = usePersonContext()
+  const person = usePersonContext();
+  const setPerson = usePersonSetterContext();
+  const finalPrice = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
 
   const { register, handleSubmit, formState: { errors } } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
 
-  const onSuccess = () => {
-    alert('заказ успешно принят');
-  }
+  const onSuccess = () => { }
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
+  const { updatePerson } = useUpdatePersonMutation({})
   // const { updatePerson } = useUpdatePersonMutation({})
   // обновить person?
 
@@ -61,13 +64,42 @@ const Order = (props: OrderProps) => {
     // comment: string,
     // status: string,
     // personId: string,
-    const price = '0';
-    const status = 'pending';
+    const price = String(finalPrice);
+    const status = 'В обработке';
     const deliveryDays = '7';
-    const delivery = 'cdek'
+    const delivery = 'cdek';
 
-    console.log({ ...data, price, status, deliveryDays, personId: person.id });
-    await createOrder({ ...data, price, status, delivery, deliveryDays, personId: person.id });
+    const fio = data.fio.split(' ');
+
+    if (!person.id) {
+      setPerson.setFio(data.fio);
+      setPerson.setPhone(data.phone);
+      setPerson.setEmail(data.email);
+      setPerson.setAddress(data.address);
+
+      LocalStorageService.save('fio', data.fio);
+      LocalStorageService.save('phone', data.phone);
+      LocalStorageService.save('email', data.email);
+      LocalStorageService.save('address', data.address);
+
+      await updatePerson({
+        id: '0',
+        firstName: fio[1],
+        secondName: fio[0],
+        fatherName: fio[2],
+        email: data.email,
+        phoneNumber: data.phone,
+      })
+    }
+
+    await createOrder({
+      ...data,
+      price,
+      status,
+      delivery,
+      deliveryDays,
+      personId: person.id
+    });
   }
 
   return (
@@ -84,7 +116,8 @@ const Order = (props: OrderProps) => {
                   inputProps={{
                     placeholder: '',
                     id: 'order-input-fio',
-                    ...register('fio')
+                    ...register('fio'),
+                    defaultValue: person.fio
                   }}
                   label={'ФИО'}
                 />
@@ -93,7 +126,8 @@ const Order = (props: OrderProps) => {
                   inputProps={{
                     placeholder: '',
                     id: 'order-input-phone',
-                    ...register('phone')
+                    ...register('phone'),
+                    defaultValue: person.phone
                   }}
                   label={'Номер телефона'}
                 />
@@ -101,7 +135,8 @@ const Order = (props: OrderProps) => {
                   inputProps={{
                     placeholder: '',
                     id: 'order-input-email',
-                    ...register('email')
+                    ...register('email'),
+                    defaultValue: person.email
                   }}
                   label={'Email'}
                 />
@@ -119,6 +154,7 @@ const Order = (props: OrderProps) => {
                   placeholder: 'г. Екатерибург, ул. Ленина, д. 1',
                   id: 'order-input-address',
                   ...register('address'),
+                  defaultValue: person.address,
                   style: {
                     height: 86,
                   },
@@ -144,21 +180,23 @@ const Order = (props: OrderProps) => {
                 </div>
               </div>
             </div>
+            {/* пока заккоментировал так как при большом количестве обновлений ломается */}
             {/* <OrderMap delivery='sdek' offices={cdekOffices} /> */}
           </div>
           <div className={styles.block2}>
             <OrderCard products={products} />
             <div className={styles.checkboxesUnderTheCard}>
-              <CheckBox
+              {/* <CheckBox
                 inputProps={{
                   id: 'order-checkbox-discount',
                 }}
                 label='Использовать купон'
-              />
+              /> */}
               <CheckBox
                 inputProps={{
                   id: 'order-checkbox-agreement',
                   ...register('agreement'),
+                  defaultChecked: true
                 }}
                 label={<>Я принимаю условия оферты а так же соглашаюсь с условиями обработки персональных данных</>}
               />

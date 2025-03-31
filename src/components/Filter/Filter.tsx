@@ -20,7 +20,8 @@ const Filter = () => {
 
   const { data } = useGetCategoriesQuery();
   const material = ['Золото', 'Сталь']
-  const size = ['Маленький', 'Средний', 'Большой']
+  // const size = ['Маленький', 'Средний', 'Большой']
+  const size = ['s', 'M', 'L']
   const shape = ['Завальцовка', 'Крапан', 'Без камня']
 
   const [filterState, setFilterState] = useState<ICatalogFilterContext>({
@@ -37,8 +38,8 @@ const Filter = () => {
     setFilter.setStartPrice(filterState.startPrice);
     setFilter.setEndPrice(filterState.endPrice);
     setFilter.setMaterial(filterState.material);
-    setFilter.setShape(filterState.size);
-    setFilter.setSize(filterState.shape);
+    setFilter.setShape(filterState.shape);
+    setFilter.setSize(filterState.size);
   }, 500)
 
   const onFilterCategoryClick = (array: string[], key: keySetNames, text: string) => {
@@ -156,7 +157,7 @@ const Filter = () => {
               key={`category filter size: ${x}`}
               text={x}
               values={filterState.size}
-              onClick={onFilterCategoryClick(filterState.material, 'size', x)}
+              onClick={onFilterCategoryClick(filterState.size, 'size', x)}
             />
           ))
         }

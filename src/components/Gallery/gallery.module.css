@@ -9,6 +9,7 @@
   height: 70vh;
   width: 70%;
   max-width: 100%;
+  z-index: 3;
 }
 
 .swiperSlide {
@@ -46,7 +47,7 @@
   top: 0;
   left: 0;
   background-color: #00000060;
-  /* z-index: 10; */
+  z-index: 2;
 }
 
 /* .swiper {

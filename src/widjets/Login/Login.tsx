@@ -26,12 +26,14 @@ export default function Login() {
     LocalStorageService.save('id', data.person.id);
     LocalStorageService.save('fio', `${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`);
     LocalStorageService.save('email', data.person.email);
-    router.push('/admin/products');
+    if (data.person.role == "ADMIN") {
+      router.push('/admin/products');
+    } else {
+      router.push('/');
+    }
   }
 
-  const onError = () => {
-    alert('не получилось')
-  }
+  const onError = () => { }
 
   const { login } = useLoginMutation({ onSuccess, onError });
 

@@ -8,6 +8,7 @@ import { CatalogSortContextProvider } from "@/providers/CatalogSortProvider/Cata
 import { PersonContextProvider } from "@/providers/PersonProvider/PersonContextProvider";
 import { OrderContextProvider } from "@/providers/OrderProvider/OrderContextProvider";
 import Footer from "@/components/Footer/Footer";
+import styles from './page.module.css'
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -42,9 +43,14 @@ export default function RootLayout({
             <CatalogSortContextProvider>
               <PersonContextProvider>
                 <OrderContextProvider>
-                  <ClientHeader />
-                  {children}
-                  <Footer />
+                  <div className={styles.block}>
+                    <ClientHeader />
+                    <div className={styles.middle}>
+                      {children}
+                    </div>
+
+                    <Footer />
+                  </div>
                 </OrderContextProvider>
               </PersonContextProvider>
             </CatalogSortContextProvider>

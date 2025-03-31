@@ -3,6 +3,8 @@ import styles from './orderCard.module.css'
 import { TBasketProduct } from '@/services/api/basketProducts/basketProductType';
 import Button from '../UI/Button/Button';
 import Link from 'next/link';
+import { useCreateOrderMutation } from '@/hooks/orders/useCreateOrderMutation';
+
 
 type BasketToOrderCardProps = {
   // total: number,
@@ -40,7 +42,7 @@ const OrderCard = (props: BasketToOrderCardProps) => {
         text={'Перейти к покупке'}
         size={'l'}
         buttonProps={{
-          type: 'button'
+          type: 'submit'
         }}
       />
 

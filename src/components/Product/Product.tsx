@@ -1,6 +1,6 @@
 'use client'
 import { TProduct } from '@/services/api/products/productType';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './product.module.css'
 import Image from 'next/image';
 import star from '../../../public/Star rate.svg'
@@ -30,22 +30,55 @@ const Product = (props: IProductProps) => {
     // count = 0,
   } = props
 
+  const [height, setHeight] = useState(403);
+
+
+  useEffect(() => {
+    const pElement = document.getElementById(`product card name id: ${id}`)?.clientHeight;
+    const rateElement = document.getElementById(`product rate id: ${id}`)?.clientHeight || 0;
+
+    if (!rateElement) {
+      setHeight(351 + Number(pElement) + Number(rateElement) - 8)
+    } else {
+      setHeight(351 + Number(pElement) + Number(rateElement))
+    }
+  }, [])
+
   return (
-    <div className={styles.mainBlock}>
-      <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
+    <div
+      className={styles.mainBlock}
+      style={{
+        height: height
+      }}
+    >
+      <div
+        className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}
+      // style={{
+      //   height: height
+      // }}
+      >
         <Link href={`/product/${id}`}>
           <Image className={styles.image} src={`http://localhost:5000/${mainImage}`} alt='' width={248} height={248} />
         </Link>
 
         <Link href={`/product/${id}`}>
-          <p className={styles.title}>{name}</p>
+          <p className={styles.title} id={`product card name id: ${id}`}>{name}</p>
         </Link>
         {/* если отзывов нет то не показывать */}
-        <div className={styles.rates}>
-          <Image src={star} alt='' width={24} height={24} />
-          <p className={styles.rate}>{rate}</p>
-          <p className={styles.comments}>{commentsCount} отзыва</p>
+        {/* <div className={styles.rates}> */}
+
+        <div id={`product rate id: ${id}`}>
+          {
+            !!commentsCount && <div className={styles.rates}>
+              <Image src={star} alt='' width={24} height={24} />
+              <p className={styles.rate}>{rate}</p>
+              <p className={styles.comments}>{commentsCount} отзыва</p>
+            </div>
+          }
+
         </div>
+
+        {/* </div> */}
         <div className={styles.prices}>
           <p className={styles.newPrice}>{Number(price) - Number(discount)} ₽</p>
           <p className={styles.price}>{price}  ₽</p>

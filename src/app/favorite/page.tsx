@@ -5,11 +5,12 @@ import { cookies } from 'next/headers';
 import Title from '@/components/Title/Tile';
 
 const page = async () => {
-  const favoriteProducts = await getAllFavoriteProductsByPersonId(cookies().get('personId')?.value || 1);
+  const favoriteProducts = await getAllFavoriteProductsByPersonId(cookies().get('personId')?.value || 0);
+  console.log(favoriteProducts);
   return (
     <>
       <div >
-        <Favorite favoriteProducts={favoriteProducts.rows} />
+        <Favorite favoriteProducts={favoriteProducts} />
       </div>
 
     </>

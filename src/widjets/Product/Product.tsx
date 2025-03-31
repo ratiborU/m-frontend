@@ -36,13 +36,13 @@ const ProductWidget = (props: ProductProps) => {
     e.preventDefault();
     setIsGalleryOpen(true);
     document.getElementById('dark-window')!.addEventListener("click", onGalleryClose);
-    document.body.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
   }
 
   const onGalleryClose = () => {
     setIsGalleryOpen(false);
     document.getElementById('dark-window')!.removeEventListener("click", onGalleryClose);
-    document.body.style.overflow = 'scroll'
+    // document.body.style.overflow = 'scroll'
   }
 
   return (

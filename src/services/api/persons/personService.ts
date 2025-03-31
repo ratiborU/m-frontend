@@ -1,7 +1,8 @@
 'use server'
 import { api } from "../api";
-import { TPerson, TPersonCreate } from "./personType";
+import { TPerson, TPersonCreate, TPersonUpdate } from "./personType";
 import { TPagination } from "../../types/paginationType";
+import { cookies } from "next/headers";
 
 export const createPerson = async (data: TPersonCreate): Promise<TPerson> => {
   const response = await api('persons', {
@@ -22,10 +23,13 @@ export const getOnePerson = async (id: number | string): Promise<TPerson> => {
   return response;
 }
 
-export const updatePerson = async (data: TPerson): Promise<TPerson> => {
+export const updatePerson = async (data: TPersonUpdate): Promise<TPerson> => {
   const response = await api('persons', {
     type: 'PUT',
-    data: JSON.stringify(data)
+    data: JSON.stringify({
+      ...data,
+      id: cookies().get('personId')?.value || 0
+    })
   });
   return response;
 }

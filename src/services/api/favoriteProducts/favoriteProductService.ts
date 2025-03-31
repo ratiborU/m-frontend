@@ -3,11 +3,15 @@ import { api } from "../api";
 import { TFavoriteProduct, TFavoriteProductCreate } from "./favoriteProductType";
 import { TPagination } from "../../types/paginationType";
 import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 
 export const createFavoriteProduct = async (data: TFavoriteProductCreate): Promise<TFavoriteProduct> => {
   const response = await api('favoriteProducts', {
     type: 'POST',
-    data: JSON.stringify(data)
+    data: JSON.stringify({
+      ...data,
+      personId: cookies().get('personId')?.value || 0
+    })
   });
   revalidateTag('products');
   return response;
@@ -31,7 +35,7 @@ export const getAllFavoriteProducts = async (): Promise<TPagination<TFavoritePro
   return response;
 }
 
-export const getAllFavoriteProductsByPersonId = async (id: number | string): Promise<TPagination<TFavoriteProduct>> => {
+export const getAllFavoriteProductsByPersonId = async (id: number | string): Promise<TFavoriteProduct[]> => {
   const response = await api(`favoriteProducts/byPersonId/${id}`, {
     cache: 'no-cache'
   });

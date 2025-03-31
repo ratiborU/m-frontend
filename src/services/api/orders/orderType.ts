@@ -1,5 +1,8 @@
 'use client'
 
+import { TOrderProduct } from "../orderProducts/orderProductType"
+import { TPerson } from "../persons/personType"
+
 export type TOrder = {
   id: string,
   price: string,
@@ -9,6 +12,8 @@ export type TOrder = {
   comment: string,
   status: string,
   personId: string,
+  person?: TPerson,
+  order_products?: TOrderProduct[],
   createdAt: string,
   updatedAt: string,
 }

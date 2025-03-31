@@ -69,3 +69,31 @@ export const refresh = async () => {
   });
   return response;
 }
+
+export const createEmptyPerson = async () => {
+  const response = api('persons/empty', {
+    type: "POST",
+    // onSuccess: (data: TRegistrationResponse) => {
+    //   setCookies(data.tokens);
+    // },
+  });
+  return response;
+}
+
+export const logout = async () => {
+  // const body = JSON.stringify(data);
+  const response = await api('persons/logout', {
+    type: "POST",
+    data: JSON.stringify({}),
+    onSuccess: () => {
+      cookies().delete('access');
+      cookies().delete('refresh');
+      cookies().delete('personId');
+      // setCookies(data.tokens);
+      // cookies().set("personId", data.person.id, {
+      //   expires: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
+      // });
+    },
+  });
+  return response;
+}

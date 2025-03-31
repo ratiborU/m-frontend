@@ -17,6 +17,7 @@ import { useCreateCommentMutation } from '@/hooks/comments/useCreateCommentMutat
 import { useUpdateCommentMutation } from '@/hooks/comments/useUpdateCommentMutation';
 import { useDeleteCommentMutation } from '@/hooks/comments/useDeleteCommentMutation';
 import { TComment } from '@/services/api/comments/commentType';
+import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonContext';
 
 type LeaveCommentProps = {
   product: TProduct,
@@ -32,6 +33,7 @@ type TCommentSchema = z.infer<typeof commentSchema>;
 const LeaveComment = (props: LeaveCommentProps) => {
   const { product, comment } = props;
   const [rate, setRate] = useState(Number(comment?.rate) || 0)
+  const person = usePersonContext();
 
   const { register, handleSubmit, formState: { errors } } = useForm<TCommentSchema>({ resolver: zodResolver(commentSchema) });
 
@@ -50,7 +52,7 @@ const LeaveComment = (props: LeaveCommentProps) => {
       await createComment({
         text: data.text,
         rate: String(rate),
-        personId: '1',
+        personId: person.id,
         productId: product.id,
       })
     }

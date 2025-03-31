@@ -1,0 +1,11 @@
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.layout {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 70px;
+}

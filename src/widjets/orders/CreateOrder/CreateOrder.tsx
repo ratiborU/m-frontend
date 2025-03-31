@@ -27,7 +27,6 @@ const CreateOrder = () => {
   const { createOrder, isPending } = useCreateOrderMutation({ onSuccess, onError });
 
   const onSubmit = async (data: TCreateOrderSchema) => {
-    alert('hola')
     await createOrder(data);
   }
 

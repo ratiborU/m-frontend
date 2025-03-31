@@ -6,7 +6,7 @@ export type TOrderProduct = {
   count: number,
   productId: number,
   orderId: number,
-  product: TProduct,
+  product?: TProduct,
   createdAt: string,
   updatedAt: string,
 }

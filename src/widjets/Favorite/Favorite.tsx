@@ -10,12 +10,13 @@ type FavoriteProps = {
 
 const Favorite = (props: FavoriteProps) => {
   const { favoriteProducts } = props;
+  console.log(favoriteProducts);
   return (
     <>
       <div className={styles.wrapper}>
         <Title text={'Избранное'} margin={false} />
         <div className={styles.favoriteProducts}>
-          {...favoriteProducts.map((x) => (
+          {...favoriteProducts?.map((x) => (
             <Product
               key={`favorite product key: ${x.id}`}
               {...(x.product)}

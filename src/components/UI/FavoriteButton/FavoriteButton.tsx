@@ -29,7 +29,6 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
   const { deleteFavoriteProductNoRevalidate } = useDeleteFavoriteProductNoRevalidateMutation({});
 
   const debounced = useDebouncedCallback(async (value: boolean) => {
-    console.log(product);
     if (revalidate) {
       if (!value) {
         await createFavoriteProductNoRevalidate({

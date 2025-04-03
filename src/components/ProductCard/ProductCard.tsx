@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './productCard.module.css'
-import { TBasketProduct } from '@/services/api/basketProducts/basketProductType';
-import Button from '../UI/Button/Button';
-import Link from 'next/link';
+// import { TBasketProduct } from '@/services/api/basketProducts/basketProductType';
+// import Button from '../UI/Button/Button';
+// import Link from 'next/link';
 import { TProduct } from '@/services/api/products/productType';
 import FavoriteButton from '../UI/FavoriteButton/FavoriteButton';
 import NameAndProperty from '../UI/NameAndProperty/NameAndProperty';
@@ -23,15 +23,18 @@ const ProductCard = (props: ProductCardProps) => {
   return (
     <div className={styles.productCard}>
       <div className={styles.title}>
-        <p className={styles.titleText}>{product.price} ₽</p>
+        <div className={styles.titleAndDiscount}>
+          <p className={styles.titleText}>{Number(product.price) - Number(product.discount)} ₽</p>
+          <p className={styles.titleTextDiscount}>{product.discount != '0' ? `${product.price} ₽` : ''}</p>
+        </div>
         <FavoriteButton product={product} />
       </div>
       <div className={styles.properties}>
-        <NameAndProperty name={'Камень'} value={'Гороскоп'} />
-        <NameAndProperty name={'Размер'} value={'Средний'} />
-        <NameAndProperty name={'Материал'} value={'Сталь'} />
-        <NameAndProperty name={'Крепление'} value={'Завальцованные'} />
-        <NameAndProperty name={'Количество'} value={'12 шт.'} />
+        <NameAndProperty name={'Камень'} value={product.stone} />
+        <NameAndProperty name={'Размер'} value={product.size} />
+        <NameAndProperty name={'Материал'} value={product.material} />
+        <NameAndProperty name={'Крепление'} value={product.fasteningType} />
+        <NameAndProperty name={'Количество'} value={product.amount} />
 
       </div>
       {/* <Link href={'/order'}> */}

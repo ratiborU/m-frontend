@@ -10,7 +10,7 @@ type FavoriteProps = {
 
 const Favorite = (props: FavoriteProps) => {
   const { favoriteProducts } = props;
-  console.log(favoriteProducts);
+
   return (
     <>
       <div className={styles.wrapper}>

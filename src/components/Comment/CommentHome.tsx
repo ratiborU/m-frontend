@@ -1,5 +1,4 @@
 'use client'
-import { TComment } from '@/services/api/comments/commentType';
 import React from 'react';
 import styles from './comment.module.css'
 import star from '../../../public/Star rate.svg'

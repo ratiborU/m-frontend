@@ -9,14 +9,17 @@ type TRequest = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 type TApiProps = {
   type?: TRequest,
-  data?: string | FormData | BodyInit | null | undefined
+  // data?: string | FormData | BodyInit | null | undefined
+  data?: string | FormData | null | undefined
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSuccess?: (data?: any) => void,
   onError?: (error: Error) => void,
   revalidate?: string | null,
-  cache?: RequestCache,
+  cache?: "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload",
   contentType?: string,
-  next?: NextFetchRequestConfig | undefined,
+  // next?: NextFetchRequestConfig | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  next?: any | undefined,
   isRefresh?: boolean
 }
 
@@ -37,7 +40,8 @@ export const api = async (link: string, props: TApiProps = {}) => {
   const token = cookies().get('access')?.value
   const tags = link.split('/');
   // const contentType = 'application/json'
-  const headers: HeadersInit = {
+  // eslint-disable-next-line
+  const headers: any = {
     'Authorization': `Bearer ${token}`,
   };
   if (contentType == 'application/json') {

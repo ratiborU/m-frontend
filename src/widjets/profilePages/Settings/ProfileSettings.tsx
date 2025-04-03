@@ -28,7 +28,7 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
   const { register: registerPassword, handleSubmit: handleSubmitPassword } = useForm<TChangePersonPasswordSchema>({ resolver: zodResolver(changePersonPasswordSchema) });
 
   const notify = () => toast.success("Пользователь успешно изменен!");
-  const notifyDelete = () => toast.success("Пользователь успешно удален!");
+  // const notifyDelete = () => toast.success("Пользователь успешно удален!");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
 
   const onSuccess = () => {
@@ -39,10 +39,9 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
     notifyError(error.message);
   }
 
-  const { updatePerson, isPending } = useUpdatePersonMutation({ onSuccess, onError });
+  const { updatePerson } = useUpdatePersonMutation({ onSuccess, onError });
 
   const onSubmit = async (data: TEditPersonProfileSchema) => {
-    console.log(data);
     const fioData = data.fio.split(' ');
     await updatePerson({
       ...person!,
@@ -53,10 +52,11 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
   }
 
   const onSubmitPassword = async (data: TChangePersonPasswordSchema) => {
-    console.log(data);
+
     await updatePerson({
       ...person!,
-      // newPassword: data.newPassword
+      // не проверял, написал от балды в 4:10 нужно проверить
+      password: data.newPassword
     });
   }
 

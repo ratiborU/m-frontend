@@ -7,7 +7,7 @@ type InputProps2 = {
   inputProps: InputHTMLAttributes<HTMLInputElement>,
   label: string,
   error?: string,
-  sizeInput?: 'small' | 'medium' | 'large',
+  sizeInput?: 'xsmall' | 'small' | 'medium' | 'large',
 }
 
 const Input = (props: InputProps2) => {

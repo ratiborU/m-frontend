@@ -7,9 +7,9 @@ import { cookies } from 'next/headers';
 const page = async () => {
   const person = await getOnePerson(cookies().get('personId')?.value || 0);
   const basketProducts = await getAllBasketProductsByPersonId(cookies().get('personId')?.value || 0);
+
   return (
     <>
-      {/* <Title text={'Оформление заказа'} /> */}
       <Order person={person} products={basketProducts.rows} />
     </>
   );

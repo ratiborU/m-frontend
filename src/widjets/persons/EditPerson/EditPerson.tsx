@@ -5,8 +5,6 @@ import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
 import { TPerson } from '@/services/api/persons/personType';
 import { useForm } from 'react-hook-form';
-import { postPerson } from './action';
-import { z } from 'zod';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';

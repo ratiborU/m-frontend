@@ -25,7 +25,7 @@ const OrderInfoCard = (props: OrderInfoCardProps) => {
         {
           order.order_products?.length != 0
             ? <>{...order.order_products!.map(x => (
-              <NameAndProperty name={x.product?.name || 'Товар'} value={`${x.count} шт`} size='l' />
+              <NameAndProperty key={`name and property for orderInfo cart: ${order.id} ${x.id}`} name={`${x.product?.name}` || 'Товар'} value={`${x.count} шт`} size='l' />
             ))}</>
             : <></>
         }

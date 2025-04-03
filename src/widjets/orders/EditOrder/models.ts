@@ -1,6 +1,6 @@
 import { TOrderProduct } from "@/services/api/orderProducts/orderProductType"
 import { TOrder } from "@/services/api/orders/orderType"
-import { TProduct } from "@/services/api/products/productType"
+// import { TProduct } from "@/services/api/products/productType"
 import { z } from "zod";
 
 

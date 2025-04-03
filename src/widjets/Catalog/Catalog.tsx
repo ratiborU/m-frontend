@@ -27,6 +27,15 @@ const Catalog = (props: CatalogProps) => {
         (Number(product.price) - Number(product.discount)) > filter.endPrice) {
         return false;
       }
+      if (!filter.material.includes(product.material || '') && filter.material.length > 0) {
+        return false
+      }
+      if (!filter.shape.includes(product.fasteningType || '') && filter.shape.length > 0) {
+        return false
+      }
+      if (!filter.size.includes(product.size || '') && filter.size.length > 0) {
+        return false
+      }
       // Добавить фильтрацию по 
       // материалу, форме и размеру
       return true

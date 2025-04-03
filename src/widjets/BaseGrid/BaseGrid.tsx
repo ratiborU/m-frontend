@@ -29,8 +29,8 @@ const BaseGrid = (props: BaseGridProps) => {
       }}
       sx={{
         "width": width,
-        "max-width": "100%",
-        "min-width": "40%",
+        "maxWidth": "100%",
+        "minWidth": "40%",
         margin: '0 auto',
         "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
           outline: "none !important",

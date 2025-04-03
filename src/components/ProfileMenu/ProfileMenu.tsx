@@ -2,7 +2,6 @@
 
 import React from 'react';
 import styles from './profileMenu.module.css'
-import Title from '../Title/Tile';
 import Link from 'next/link';
 import { logout } from '@/services/api/auth/authorizationService';
 import { LocalStorageService } from '@/lib/helpers/localStorageService';

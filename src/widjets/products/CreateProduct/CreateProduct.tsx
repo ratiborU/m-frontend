@@ -10,13 +10,41 @@ import { useCreateProductMutation } from '@/hooks/products/useCreateProductMutat
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createProductSchema, TCreateProductSchema } from './models';
+// import { createProductSchema, TCreateProductSchema } from './models';
+import SelectInput from '@/components/UI/SelectInput/SelectInput';
+import { useGetCategoryOptionsQuery } from '@/hooks/categories/useGetCategoryOptions';
+import { stoneOptions, sizeOptions, fasteningTypeOptions, materialOptions, amountOptions } from '@/services/api/products/productOtherOptions';
+import { z } from "zod";
 
+export const createProductSchema = z.object({
+  name: z.string().min(1, 'Минимальная длина 1 символ'),
+  description: z.string().min(1, 'Минимальная длина 1 символ'),
+  seoTitle: z.string().min(1, 'Минимальная длина 1 символ'),
+  seoDescription: z.string().min(1, 'Минимальная длина 1 символ'),
+  characteristics: z.string().min(1, 'Минимальная длина 1 символ'),
+  price: z.string().min(1, 'Минимальная длина 1 символ'),
+  discount: z.string().min(1, 'Минимальная длина 1 символ'),
+  categoryId: z.string().min(1, 'Минимальная длина 1 символ'),
+  productsCount: z.string().min(1, 'Минимальная длина 1 символ'),
+  stone: z.string().min(1, 'Минимальная длина 1 символ'),
+  size: z.string().min(1, 'Минимальная длина 1 символ'),
+  material: z.string().min(1, 'Минимальная длина 1 символ'),
+  fasteningType: z.string().min(1, 'Минимальная длина 1 символ'),
+  amount: z.string().min(1, 'Минимальная длина 1 символ'),
+  file: z
+    .instanceof(File, { message: 'Please upload a file.' })
+    .refine((f) => f.size < 100_000, 'Max 100Kb upload size.')
+    .array(),
+})
+
+export type TCreateProductSchema = z.infer<typeof createProductSchema>;
 
 const CreateProduct = () => {
   const notify = () => toast.success("Товар успешно создан");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
   const { register, handleSubmit, formState: { errors } } = useForm<TCreateProductSchema>({ resolver: zodResolver(createProductSchema) });
+
+  const { data: categoryOptions } = useGetCategoryOptionsQuery();
 
   const onSuccess = () => {
     notify();
@@ -97,7 +125,7 @@ const CreateProduct = () => {
             label='Характеристики'
             error={errors.characteristics?.message}
             inputProps={{
-              placeholder: "",
+              placeholder: "характеристика:  значение  enter",
               id: 'create-product-characteristics',
               autoComplete: 'new-passport',
               ...register('characteristics')
@@ -106,7 +134,7 @@ const CreateProduct = () => {
           <div className={styles.inputs}>
             <Input
               label='Цена'
-              sizeInput='small'
+              sizeInput='xsmall'
               error={errors.price?.message}
               inputProps={{
                 placeholder: '',
@@ -117,20 +145,19 @@ const CreateProduct = () => {
             />
             <Input
               label='Скидка'
-              sizeInput='small'
+              sizeInput='xsmall'
               error={errors.discount?.message}
               inputProps={{
                 placeholder: '',
                 id: 'create-product-discount',
                 autoComplete: 'new-passport',
-                ...register('discount')
+                ...register('discount'),
+                defaultValue: '0',
               }}
             />
-          </div>
-          <div className={styles.inputs}>
             <Input
-              label='В наличии'
-              sizeInput='small'
+              label='На складе'
+              sizeInput='xsmall'
               error={errors.productsCount?.message}
               inputProps={{
                 placeholder: '',
@@ -140,33 +167,107 @@ const CreateProduct = () => {
                 // disabled: true
               }}
             />
-            <Input
+          </div>
+
+          <div className={styles.inputs}>
+            <SelectInput
               label='Категория'
-              sizeInput='small'
+              sizeInput='xsmall'
               error={errors.categoryId?.message}
-              inputProps={{
-                placeholder: '',
-                id: 'create-product-categoryId',
-                autoComplete: 'new-passport',
-                ...register('categoryId')
+              selectProps={{
+                ...register('categoryId'),
+                defaultValue: 1,
               }}
+              options={categoryOptions || []}
+            />
+
+            <SelectInput
+              label='Камень'
+              sizeInput='xsmall'
+              error={errors.stone?.message}
+              selectProps={{
+                id: 'create-product-stone',
+                ...register('stone'),
+                defaultValue: 'Crystal',
+              }}
+
+              options={stoneOptions}
+            />
+            <SelectInput
+              label='Размер'
+              sizeInput='xsmall'
+              error={errors.size?.message}
+              selectProps={{
+                id: 'create-product-size',
+                ...register('size'),
+                defaultValue: 'Medium',
+              }}
+              options={sizeOptions}
             />
           </div>
 
-          <InputFile
-            inputProps={{
-              id: 'load-image',
-              ...register('file')
-            }}
-          />
-          <LoadingButton
-            loading={isPending}
-            type="submit"
-            size='large'
-            variant='contained'
-          >
-            Создать
-          </LoadingButton>
+          <div className={styles.inputs}>
+            <SelectInput
+              label='Материал'
+              sizeInput='xsmall'
+              error={errors.material?.message}
+              selectProps={{
+                id: 'create-product-material',
+                ...register('material'),
+                defaultValue: 'Gold',
+              }}
+              options={materialOptions}
+            />
+            <SelectInput
+              label='Крепление'
+              sizeInput='xsmall'
+              error={errors.fasteningType?.message}
+              selectProps={{
+                id: 'create-product-fastening-type',
+                defaultValue: 'Rolled',
+                ...register('fasteningType')
+                // disabled: true
+              }}
+              options={fasteningTypeOptions}
+            />
+            <SelectInput
+              label='В упаковке'
+              sizeInput='xsmall'
+              error={errors.amount?.message}
+              selectProps={{
+                id: 'create-product-amount',
+                ...register('amount'),
+                defaultValue: 12
+              }}
+              options={amountOptions}
+            />
+          </div>
+
+          <div className={styles.buttons}>
+            <InputFile
+              inputProps={{
+                id: 'load-image',
+                ...register('file'),
+              }}
+              buttonProps={{
+                style: {
+                  minWidth: 180
+                }
+              }}
+            />
+            <LoadingButton
+              loading={isPending}
+              type="submit"
+              size='large'
+              variant='contained'
+              style={{
+                minWidth: 180
+              }}
+            >
+              Создать
+            </LoadingButton>
+          </div>
+
         </div>
       </form>
       <ToastContainer

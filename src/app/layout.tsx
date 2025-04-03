@@ -1,32 +1,20 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
+import React from 'react';
 import "./globals.css";
 import ReactQueryProvider from "@/providers/QueryProvider/QueryProvider";
-import ClientHeader from "@/components/ClientHeader/ClientHeader";
+// import ClientHeader from "@/components/ClientHeader/ClientHeader";
 import { CatalogFilterContextProvider } from "@/providers/CatalogFilterProvider/CatalogFilterProvider";
 import { CatalogSortContextProvider } from "@/providers/CatalogSortProvider/CatalogSortProvider";
 import { PersonContextProvider } from "@/providers/PersonProvider/PersonContextProvider";
 import { OrderContextProvider } from "@/providers/OrderProvider/OrderContextProvider";
-import Footer from "@/components/Footer/Footer";
-import styles from './page.module.css'
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Mircos',
-    template: '%s - Mircos' // не обязательно
+    default: 'Серьги Медиинские для Прокола Ушей',
+    template: '%s - NINA'
   },
-  description: "Магазин косметики",
+  description: "Серьги для прокола ушей от Nina из медицинской стали, с камнями: гороскоп, кристалл, сапфир и др.",
 };
 
 export default function RootLayout({
@@ -43,14 +31,15 @@ export default function RootLayout({
             <CatalogSortContextProvider>
               <PersonContextProvider>
                 <OrderContextProvider>
-                  <div className={styles.block}>
+                  {children}
+                  {/* <div className={styles.block}>
                     <ClientHeader />
                     <div className={styles.middle}>
                       {children}
                     </div>
 
                     <Footer />
-                  </div>
+                  </div> */}
                 </OrderContextProvider>
               </PersonContextProvider>
             </CatalogSortContextProvider>

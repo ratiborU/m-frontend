@@ -3,12 +3,14 @@ import { TBasketProduct } from '@/services/api/basketProducts/basketProductType'
 import React from 'react';
 import styles from './basketProduct.module.css';
 import Image from 'next/image';
-import CheckBox from '../UI/CheckBox/CheckBox';
+// import CheckBox from '../UI/CheckBox/CheckBox';
 import OrderCartButton from '../UI/OrderCartButton/OrderCartButton';
+import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 
 
 const BasketProduct = (props: TBasketProduct) => {
   const { product } = props;
+  const order = useOrderContext();
 
   return (
     <>
@@ -17,7 +19,11 @@ const BasketProduct = (props: TBasketProduct) => {
         <div className={styles.information}>
           <p className={styles.name}>{product?.name}</p>
           <p className={styles.description}>{product?.description}</p>
-          <p className={styles.price}>{product?.price} ₽</p>
+          <div className={styles.prices}>
+            <p className={styles.price}>{Number(product.price) - Number(product.discount) - order.discountPerPackage} ₽</p>
+            <p className={styles.oldPrice}>{product.discount + order.discountPerPackage != '0' ? `${product.price} ₽` : ''}</p>
+          </div>
+
           <div className={styles.orderButtons}>
             <OrderCartButton key={`order cart button key: ${product.id}`} {...props} />
           </div>

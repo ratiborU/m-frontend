@@ -19,6 +19,15 @@
   font-weight: 300;
 }
 
+.inputAmount {
+  /* border: 1px solid #000; */
+  width: 80px;
+  height: 38px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+}
+
 .deleteProduct {
   margin-left: 24px;
 }

@@ -19,6 +19,9 @@ export default function Registration() {
   const person = usePersonContext();
   const setPerson = usePersonSetterContext()
 
+  // test142@example.com
+  // 89826556207
+  // eslint-disable-next-line
   const onSuccess = (data: any) => {
     setPerson.setId(data.person.id);
     setPerson.setFio(`${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`)
@@ -29,7 +32,7 @@ export default function Registration() {
     router.push('/');
   }
 
-  const onError = (error: Error) => { }
+  const onError = () => { }
 
   const { registration } = useRegistrationMutation({ onSuccess, onError });
 
@@ -43,7 +46,6 @@ export default function Registration() {
       password: data.password,
     }
 
-    console.log(sendData);
     await registration(sendData);
   }
 

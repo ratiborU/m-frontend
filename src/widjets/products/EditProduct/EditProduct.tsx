@@ -19,6 +19,8 @@ import { editProductSchema, TEditProductSchema } from './models';
 import { useGetCategoryOptionsQuery } from '@/hooks/categories/useGetCategoryOptions';
 import SelectInput from '@/components/UI/SelectInput/SelectInput';
 import { createImage, deleteImage } from '@/services/api/images/imageService';
+import { stoneOptions, sizeOptions, fasteningTypeOptions, materialOptions, amountOptions } from '@/services/api/products/productOtherOptions';
+
 
 const EditProduct = (props: EditProductProps) => {
   const {
@@ -35,7 +37,12 @@ const EditProduct = (props: EditProductProps) => {
     productsCount,
     categoryId,
     mainImage,
-    images
+    images,
+    stone,
+    size,
+    material,
+    fasteningType,
+    amount
     // createdAt,
     // updatedAt
   } = props;
@@ -85,6 +92,11 @@ const EditProduct = (props: EditProductProps) => {
     formData.append('commentsCount', commentsCount);
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
+    formData.append('stone', data.stone);
+    formData.append('size', data.size);
+    formData.append('material', data.material);
+    formData.append('fasteningType', data.fasteningType);
+    formData.append('amount', data.amount);
     await updateProduct(formData);
   }
 
@@ -168,7 +180,7 @@ const EditProduct = (props: EditProductProps) => {
                 ...register('characteristics')
               }}
             />
-            <div className={styles.inputs}>
+            {/* <div className={styles.inputs}>
               <Input
                 label='Цена'
                 sizeInput='small'
@@ -193,9 +205,8 @@ const EditProduct = (props: EditProductProps) => {
                   ...register('discount')
                 }}
               />
-            </div>
-            <div className={styles.inputs}>
-              {/* Пока не реализовано на сервере */}
+            </div> */}
+            {/* <div className={styles.inputs}>
               <Input
                 label='В наличии x'
                 sizeInput='small'
@@ -217,20 +228,8 @@ const EditProduct = (props: EditProductProps) => {
                 }}
                 options={categoryOptions || []}
               />
-              {/* <Input
-                label='Категория'
-                sizeInput='small'
-                error={errors.categoryId?.message}
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-category',
-                  autoComplete: 'new-passport',
-                  defaultValue: categoryId,
-                  ...register('categoryId')
-                }}
-              /> */}
-            </div>
-            <div className={styles.inputs}>
+            </div> */}
+            {/* <div className={styles.inputs}>
               <Input
                 label='Оценка'
                 sizeInput='small'
@@ -254,6 +253,118 @@ const EditProduct = (props: EditProductProps) => {
                   // ...register('commentsCount'),
                   disabled: true
                 }}
+              />
+            </div> */}
+            <div className={styles.inputs}>
+              <Input
+                label='Цена'
+                sizeInput='xsmall'
+                error={errors.price?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-product-price',
+                  autoComplete: 'new-passport',
+                  ...register('price'),
+                  defaultValue: price
+                }}
+              />
+              <Input
+                label='Скидка'
+                sizeInput='xsmall'
+                error={errors.discount?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-product-discount',
+                  autoComplete: 'new-passport',
+                  ...register('discount'),
+                  defaultValue: discount
+                }}
+              />
+              <Input
+                label='На складе'
+                sizeInput='xsmall'
+                error={errors.productsCount?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-product-have',
+                  autoComplete: 'new-passport',
+                  ...register('productsCount'),
+                  defaultValue: productsCount
+                  // disabled: true
+                }}
+              />
+            </div>
+            <div className={styles.inputs}>
+              <SelectInput
+                label='Категория'
+                sizeInput='xsmall'
+                error={errors.categoryId?.message}
+                selectProps={{
+                  ...register('categoryId'),
+                  defaultValue: categoryId,
+                }}
+                options={categoryOptions || []}
+              />
+
+              <SelectInput
+                label='Камень'
+                sizeInput='xsmall'
+                error={errors.stone?.message}
+                selectProps={{
+                  id: 'create-product-stone',
+                  ...register('stone'),
+                  defaultValue: stone,
+                }}
+
+                options={stoneOptions}
+              />
+              <SelectInput
+                label='Размер'
+                sizeInput='xsmall'
+                error={errors.size?.message}
+                selectProps={{
+                  id: 'create-product-size',
+                  ...register('size'),
+                  defaultValue: size,
+                }}
+                options={sizeOptions}
+              />
+            </div>
+
+            <div className={styles.inputs}>
+              <SelectInput
+                label='Материал'
+                sizeInput='xsmall'
+                error={errors.material?.message}
+                selectProps={{
+                  id: 'create-product-material',
+                  ...register('material'),
+                  defaultValue: material,
+                }}
+                options={materialOptions}
+              />
+              <SelectInput
+                label='Крепление'
+                sizeInput='xsmall'
+                error={errors.fasteningType?.message}
+                selectProps={{
+                  id: 'create-product-fastening-type',
+                  defaultValue: fasteningType,
+                  ...register('fasteningType')
+                  // disabled: true
+                }}
+                options={fasteningTypeOptions}
+              />
+              <SelectInput
+                label='В упаковке'
+                sizeInput='xsmall'
+                error={errors.amount?.message}
+                selectProps={{
+                  id: 'create-product-amount',
+                  ...register('amount'),
+                  defaultValue: amount
+                }}
+                options={amountOptions}
               />
             </div>
             <div className={styles.buttons}>

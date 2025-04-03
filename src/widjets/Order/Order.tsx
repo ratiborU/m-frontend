@@ -1,17 +1,17 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import styles from './order.module.css';
 import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
 import { TBasketProduct } from '@/services/api/basketProducts/basketProductType';
 import { TPerson } from '@/services/api/persons/personType';
-import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
+// import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
 import Title from '@/components/Title/Tile';
 import OrderMap from '@/components/OrderMap/OrderMap';
 import CheckBox from '@/components/UI/CheckBox/CheckBox';
 import RadioButton from '@/components/UI/RadioButton/RadioButton';
 import { cdekOffices } from '@/services/mock/mockTrueCdekOfficesInformation';
-import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
+// import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -41,12 +41,12 @@ type OrderProps = {
 
 const Order = (props: OrderProps) => {
   const { products } = props;
-  const order = useOrderContext();
+  // const order = useOrderContext();
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
   const finalPrice = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
 
-  const { register, handleSubmit, formState: { errors } } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
+  const { register, handleSubmit } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
 
   const onSuccess = () => { }
 
@@ -104,7 +104,7 @@ const Order = (props: OrderProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <Title className={styles.title} text={'Оформление заказа'} />
+      <Title className={styles.title} text={'Оформление заказа'} margin={false} />
       <form onSubmit={handleSubmit(onSubmit)}>
 
 
@@ -181,7 +181,7 @@ const Order = (props: OrderProps) => {
               </div>
             </div>
             {/* пока заккоментировал так как при большом количестве обновлений ломается */}
-            {/* <OrderMap delivery='sdek' offices={cdekOffices} /> */}
+            <OrderMap delivery='sdek' offices={cdekOffices} />
           </div>
           <div className={styles.block2}>
             <OrderCard products={products} />

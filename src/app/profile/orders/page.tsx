@@ -6,7 +6,6 @@ import { cookies } from 'next/headers';
 const page = async () => {
   const orders = await getAllOrdersByPersonId(cookies().get('personId')?.value || 0);
 
-
   return (
     <>
       <ProfileOrders orders={orders} />

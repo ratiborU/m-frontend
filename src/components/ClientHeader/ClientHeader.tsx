@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './clientHeader.module.css'
-import Search from '../Search/Search';
 import Link from 'next/link';
 import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonContext';
 // import { cookies } from 'next/headers';
@@ -16,7 +15,7 @@ const ClientHeader = () => {
   useEffect(() => {
     setIsLoggedIn(!!person.id);
     setPersonRole(person.id == '1' ? "ADMIN" : "PERSON")
-  }, []);
+  }, [person.id]);
 
   return (
     <div className={styles.header}>

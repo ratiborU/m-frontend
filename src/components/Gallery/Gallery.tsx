@@ -31,7 +31,7 @@ const Gallery = (props: GalleryProps) => {
         className={`mySwiper ${styles.swiper} ${!isVisible && styles.none}`}
       >
         {...images.map(x => (
-          <SwiperSlide className={styles.swiperSlide}>
+          <SwiperSlide key={`swiper slide gallery key: ${x}`} className={styles.swiperSlide}>
             <Image src={x} alt={''} width={1024} height={1024} />
           </SwiperSlide>
         ))}

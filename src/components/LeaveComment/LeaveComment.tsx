@@ -35,7 +35,7 @@ const LeaveComment = (props: LeaveCommentProps) => {
   const [rate, setRate] = useState(Number(comment?.rate) || 0)
   const person = usePersonContext();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<TCommentSchema>({ resolver: zodResolver(commentSchema) });
+  const { register, handleSubmit } = useForm<TCommentSchema>({ resolver: zodResolver(commentSchema) });
 
   const { createComment } = useCreateCommentMutation({});
   const { updateComment } = useUpdateCommentMutation({});

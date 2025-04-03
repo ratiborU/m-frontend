@@ -5,6 +5,7 @@ import { registration as registrationApi } from '@/services/api/auth/authorizati
 // import { login } from '@/services/api/authorizationService';
 
 interface RegistrationMutationArgs {
+  // eslint-disable-next-line
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }

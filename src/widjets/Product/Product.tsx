@@ -4,7 +4,7 @@ import { TProduct } from '@/services/api/products/productType';
 import React, { useState } from 'react';
 import styles from './product.module.css'
 import Image from 'next/image';
-import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
+// import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
 import star from '../../../public/Star rate.svg'
 import starGrey from '../../../public/Star rate gray filled.svg'
 import NameAndProperty from '@/components/UI/NameAndProperty/NameAndProperty';
@@ -64,6 +64,7 @@ const ProductWidget = (props: ProductProps) => {
                 {
                   ...images.slice(0, 4).map(x => (
                     <Image
+                      key={`product mini images key: ${x.id}`}
                       src={`http://localhost:5000/${x.path}`}
                       className={styles.image}
                       onClick={onGalleryOpen}
@@ -79,7 +80,8 @@ const ProductWidget = (props: ProductProps) => {
               <div className={styles.titleBlock}>
                 <h1 className={styles.title}>{product.name}</h1>
                 <div className={styles.infoBlock}>
-                  <p className={styles.price}>{product.price} ₽</p>
+                  <p className={styles.price}>{Number(product.price) - Number(product.discount)} ₽</p>
+                  <p className={styles.oldPrice}>{product.discount != '0' ? `${product.price} ₽` : ''}</p>
                   <div className={styles.rateBlock}>
                     <p className={styles.rate}>{product.rate}</p>
                     <div className={styles.rateStars}>

@@ -6,14 +6,12 @@ import styles from './inputRate.module.css'
 
 type InputRateButtonProps = {
   rate: number,
-  hoverRate: number,
   currentRate: number,
-  onHover: () => void,
   onClick: () => void
 }
 
 const InputRateButton = (props: InputRateButtonProps) => {
-  const { rate, hoverRate, currentRate, onClick, onHover } = props;
+  const { rate, currentRate, onClick } = props;
 
   return (
     <button

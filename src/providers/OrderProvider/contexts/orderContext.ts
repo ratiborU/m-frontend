@@ -5,6 +5,8 @@ export interface IOrderContext {
   fio: string,
   phone: string,
   email: string,
+  productsCartCount: number,
+  discountPerPackage: number
 }
 
 export const OrderContext = createContext<IOrderContext>({
@@ -12,4 +14,6 @@ export const OrderContext = createContext<IOrderContext>({
   fio: '',
   phone: '',
   email: '',
+  productsCartCount: 0,
+  discountPerPackage: 0
 });

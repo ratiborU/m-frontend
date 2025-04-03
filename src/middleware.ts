@@ -35,12 +35,8 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // console.log(request.cookies.get('access'));
-  // console.log(request.cookies.get('refresh'));
-  // console.log(request.cookies.get('personId'));
 
   if (!request.cookies.get('access') && !request.cookies.get('refresh') && !request.cookies.get('personId')) {
-    console.log('create empty person');
     const response = NextResponse.redirect(url)
     const responseFetch = await fetch('http://localhost:5000/api/persons/empty', {
       method: 'POST',

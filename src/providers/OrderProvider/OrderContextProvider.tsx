@@ -15,9 +15,12 @@ export const OrderContextProvider: FC<OrderContextProviderProps> = (props) => {
   const [fio, setFio] = useState(LocalStorageService.get('fio') || '');
   const [phone, setPhone] = useState(LocalStorageService.get('phone') || '');
   const [email, setEmail] = useState(LocalStorageService.get('email') || '');
+  const [productsCartCount, setProductsCartCount] = useState(0);
+  const [discountPerPackage, setDiscountPerPackage] = useState(0);
 
-  const value = useMemo(() => ({ address, fio, phone, email }), [address, fio, phone, email]);
-  const setterValue = { setAddress, setFio, setPhone, setEmail };
+  const value = useMemo(() => ({ address, fio, phone, email, productsCartCount, discountPerPackage }),
+    [address, fio, phone, email, productsCartCount, discountPerPackage]);
+  const setterValue = { setAddress, setFio, setPhone, setEmail, setProductsCartCount, setDiscountPerPackage };
 
   return (
     <OrderContext.Provider value={value}>

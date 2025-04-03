@@ -1,4 +1,4 @@
-const text = `
+export const text = `
 useCreateOrderProductMutation.ts
 useDeleteOrderProductMutation.ts
 useGetAllOrderProductsMutation.ts

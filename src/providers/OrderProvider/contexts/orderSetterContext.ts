@@ -5,6 +5,8 @@ export interface IOrderSetterContext {
   setFio: (value: string) => void,
   setPhone: (value: string) => void,
   setEmail: (value: string) => void,
+  setProductsCartCount: (value: number) => void,
+  setDiscountPerPackage: (value: number) => void
 }
 
 export const OrderSetterContext = createContext<IOrderSetterContext>({
@@ -12,4 +14,6 @@ export const OrderSetterContext = createContext<IOrderSetterContext>({
   setFio: () => { },
   setPhone: () => { },
   setEmail: () => { },
+  setProductsCartCount: () => { },
+  setDiscountPerPackage: () => { }
 });

@@ -74,12 +74,20 @@
 .infoBlock {
   display: flex;
   width: 100%;
+  align-items: flex-end;
 }
 
 .price {
   font-size: 24px;
   color: #222222;
-  margin-right: 32px;
+  margin-right: 12px;
+}
+
+.oldPrice {
+  font-size: 16px;
+  color: #494949;
+  margin-right: 24px;
+  text-decoration: line-through;
 }
 
 .rateBlock {
@@ -94,15 +102,11 @@
   color: #222222;
 }
 
-.rateStars {}
-
 .commentsCount {
   font-weight: 300;
   font-size: 16px;
   color: #222222;
 }
-
-.aboutblock {}
 
 .aboutTitle {
   font-size: 24px;
@@ -118,8 +122,6 @@
   word-wrap: break-word;
   margin-bottom: 12px;
 }
-
-.characteristics {}
 
 .characteristicsTitle {
   font-size: 36px;

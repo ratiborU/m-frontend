@@ -11,6 +11,7 @@ import { useDeleteBasketProductMutation } from '@/hooks/basketProducts/useDelete
 import { useUpdateBasketProductMutation } from '@/hooks/basketProducts/useUpdateBasketProductMutation';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonContext';
+import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 
 // нужно сделать прогрессивную скидку
 const OrderCartButton = (props: TBasketProduct) => {
@@ -18,13 +19,13 @@ const OrderCartButton = (props: TBasketProduct) => {
 
   const [countState, setCountState] = useState(Number(count));
   const person = usePersonContext()
+  const order = useOrderContext()
 
   const { createBasketProduct } = useCreateBasketProductMutation({});
   const { updateBasketProduct } = useUpdateBasketProductMutation({});
   const { deleteBasketProduct } = useDeleteBasketProductMutation({});
 
   const debounce = useDebouncedCallback(async (value: number) => {
-    console.log('\n');
     if (Number(count) == 0 && value > 0) {
       await createBasketProduct({
         productId: product.id,
@@ -39,7 +40,7 @@ const OrderCartButton = (props: TBasketProduct) => {
     } else if (Number(count) > 0 && value == 0) {
       await deleteBasketProduct(id)
     }
-  }, 500)
+  }, 200)
 
   const onAdd = () => {
     setCountState(countState + 1);
@@ -56,6 +57,11 @@ const OrderCartButton = (props: TBasketProduct) => {
     debounce(0);
   }
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCountState(Number(e.target.value))
+    debounce(Number(e.target.value));
+  }
+
   return (
     <>
       <div className={styles.block}>
@@ -66,7 +72,13 @@ const OrderCartButton = (props: TBasketProduct) => {
           >
             <Image src={minus} alt={''} width={20} height={20} />
           </button>
-          <p className={styles.amount}>{countState}</p>
+          <input
+            className={styles.inputAmount}
+            type="text"
+            value={countState}
+            onChange={onChange}
+          />
+          {/* <p className={styles.amount}>{countState}</p> */}
           <button
             className={styles.button}
             onClick={onAdd}
@@ -82,8 +94,7 @@ const OrderCartButton = (props: TBasketProduct) => {
             <Image src={cross} alt={''} width={20} height={20} />
           </button>
         </div>
-        {/* вот тут */}
-        <div className={styles.price}>{(Number(product?.price) - Number(product?.discount)) * countState} ₽</div>
+        <div className={styles.price}>{(Number(product?.price) - Number(product?.discount) - order.discountPerPackage) * countState} ₽</div>
       </div>
     </>
   );

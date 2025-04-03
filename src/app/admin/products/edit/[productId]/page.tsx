@@ -9,8 +9,6 @@ export async function generateStaticParams() {
   const products: TPagination<TProduct> = await fetch(`http://localhost:5000/api/products`, {
     next: { tags: ['products'] }
   }).then(response => response.json());
-  // при загрузке все равно отправляется запрос по id на бек
-  // наверное так и должно быть
   return products.rows.map((product: TProduct) => ({
     productId: String(product.id)
   }));

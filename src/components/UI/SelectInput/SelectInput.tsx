@@ -11,7 +11,7 @@ type SelectInputProps = {
   selectProps: SelectHTMLAttributes<HTMLSelectElement>,
   label: string,
   error?: string,
-  sizeInput?: 'small' | 'medium' | 'large',
+  sizeInput?: 'xsmall' | 'small' | 'medium' | 'large',
   options?: TOption[],
   text?: string,
   onChange?: (e?: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -24,7 +24,7 @@ const SelectInput = (props: SelectInputProps) => {
     sizeInput = 'medium',
     error = '',
     options = [],
-    text = 'Выберите вариант...',
+    text = props.sizeInput == 'xsmall' ? 'Выбрать' : 'Выберите вариант...',
     onChange = () => { },
   } = props;
 

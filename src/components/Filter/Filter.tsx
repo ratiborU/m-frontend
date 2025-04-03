@@ -20,9 +20,9 @@ const Filter = () => {
 
   const { data } = useGetCategoriesQuery();
   const material = ['Золото', 'Сталь']
-  // const size = ['Маленький', 'Средний', 'Большой']
-  const size = ['s', 'M', 'L']
-  const shape = ['Завальцовка', 'Крапан', 'Без камня']
+  const size = ['Маленький', 'Средний', 'Большой']
+  // const size = ['S', 'M', 'L']
+  const shape = ['Завальцованные', 'Крапан', 'Без камня']
 
   const [filterState, setFilterState] = useState<ICatalogFilterContext>({
     startPrice: 0,

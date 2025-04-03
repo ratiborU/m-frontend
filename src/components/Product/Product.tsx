@@ -42,7 +42,7 @@ const Product = (props: IProductProps) => {
     } else {
       setHeight(351 + Number(pElement) + Number(rateElement))
     }
-  }, [])
+  }, [id])
 
   return (
     <div
@@ -51,12 +51,7 @@ const Product = (props: IProductProps) => {
         height: height
       }}
     >
-      <div
-        className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}
-      // style={{
-      //   height: height
-      // }}
-      >
+      <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
         <Link href={`/product/${id}`}>
           <Image className={styles.image} src={`http://localhost:5000/${mainImage}`} alt='' width={248} height={248} />
         </Link>
@@ -64,8 +59,6 @@ const Product = (props: IProductProps) => {
         <Link href={`/product/${id}`}>
           <p className={styles.title} id={`product card name id: ${id}`}>{name}</p>
         </Link>
-        {/* если отзывов нет то не показывать */}
-        {/* <div className={styles.rates}> */}
 
         <div id={`product rate id: ${id}`}>
           {
@@ -78,10 +71,9 @@ const Product = (props: IProductProps) => {
 
         </div>
 
-        {/* </div> */}
         <div className={styles.prices}>
           <p className={styles.newPrice}>{Number(price) - Number(discount)} ₽</p>
-          <p className={styles.price}>{price}  ₽</p>
+          <p className={styles.price}>{discount != '0' ? `${price} ₽` : ''}</p>
         </div>
 
         <FavoriteButton product={props} revalidate={isInFavorite} />

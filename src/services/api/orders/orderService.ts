@@ -23,7 +23,7 @@ export const getAllOrders = async (): Promise<TPagination<TOrder>> => {
 
 export const getAllOrdersByPersonId = async (id: number | string): Promise<TOrder[]> => {
   // добавить пагинацию
-  const response = await api(`orders/byPersonId/${cookies().get('personId')?.value || 0}`);
+  const response = await api(`orders/byPersonId/${cookies().get('personId')?.value || id || 0}`);
   return response;
 }
 

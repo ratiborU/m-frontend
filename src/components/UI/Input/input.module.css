@@ -54,6 +54,10 @@
   opacity: 1;
 }
 
+.xsmall {
+  width: 120px;
+}
+
 .small {
   width: 190px;
 }

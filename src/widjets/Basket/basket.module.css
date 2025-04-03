@@ -10,13 +10,6 @@
   margin-top: 70px;
 }
 
-.basket {
-  /* display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  flex-wrap: wrap; */
-}
-
 .basketProducts {
   display: flex;
   flex-direction: column;

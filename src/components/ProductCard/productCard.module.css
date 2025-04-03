@@ -14,6 +14,17 @@
   margin-bottom: 24px;
 }
 
+.titleAndDiscount {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.titleTextDiscount {
+  font-size: 18px;
+  text-decoration: line-through;
+}
+
 .titleText {
   font-weight: 400;
   font-size: 28px;

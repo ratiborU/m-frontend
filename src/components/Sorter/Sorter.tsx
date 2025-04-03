@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import SelectInput from '../UI/SelectInput/SelectInput';
 import { TSort } from '@/providers/CatalogSortProvider/contexts/catalogSortContext';
 import { useDebouncedCallback } from 'use-debounce';
-import { useCatalogSortContext } from '@/providers/CatalogSortProvider/hooks/useCatalogSortContext';
 import { useCatalogSortSetterContext } from '@/providers/CatalogSortProvider/hooks/useCatalogSortSetterContext';
 
 const options = [
@@ -27,7 +26,7 @@ const options = [
 
 const Sorter = () => {
   const [sortState, setSortState] = useState<TSort>('');
-  const sort = useCatalogSortContext();
+  // const sort = useCatalogSortContext();
   const setSort = useCatalogSortSetterContext();
 
   const debounce = useDebouncedCallback(() => {

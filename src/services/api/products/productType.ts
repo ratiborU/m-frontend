@@ -21,7 +21,12 @@ export type TProduct = {
   updatedAt: string,
   category: TCategory,
   favoriteProduct?: TFavoriteProduct,
-  basketProduct?: TBasketProduct
+  basketProduct?: TBasketProduct,
+  stone?: string,
+  size?: string,
+  material?: string,
+  fasteningType?: string,
+  amount?: string,
 }
 
 export type TProductCreate = {
@@ -35,5 +40,10 @@ export type TProductCreate = {
   productsCount: string,
   categoryId: string,
   file: File, // ?
+  stone?: string,
+  size?: string,
+  material?: string,
+  fasteningType?: string,
+  amount?: string,
 }
 

@@ -48,7 +48,7 @@ export const api = async (link: string, props: TApiProps = {}) => {
     headers['Content-type'] = 'application/json';
   }
 
-  const response = await fetch(`http://localhost:5000/api/${link}`, {
+  const response = await fetch(`${process.env.BACKEND_URL}/${link}`, {
     method: type,
     headers,
     next: { // сложно, нужно проверить

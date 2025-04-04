@@ -6,7 +6,7 @@ import { getOneProduct } from '@/services/api/products/productService';
 import { getImagesByProductId } from '@/services/api/images/imageService';
 
 export async function generateStaticParams() {
-  const products: TPagination<TProduct> = await fetch(`http://localhost:5000/api/products`, {
+  const products: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`, {
     next: { tags: ['products'] }
   }).then(response => response.json());
   return products.rows.map((product: TProduct) => ({

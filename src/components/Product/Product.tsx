@@ -32,17 +32,15 @@ const Product = (props: IProductProps) => {
 
   const [height, setHeight] = useState(403);
 
-
   useEffect(() => {
     const pElement = document.getElementById(`product card name id: ${id}`)?.clientHeight;
     const rateElement = document.getElementById(`product rate id: ${id}`)?.clientHeight || 0;
-
     if (!rateElement) {
       setHeight(351 + Number(pElement) + Number(rateElement) - 8)
     } else {
       setHeight(351 + Number(pElement) + Number(rateElement))
     }
-  }, [id])
+  }, [id, process.env])
 
   return (
     <div
@@ -53,7 +51,7 @@ const Product = (props: IProductProps) => {
     >
       <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
         <Link href={`/product/${id}`}>
-          <Image className={styles.image} src={`http://localhost:5000/${mainImage}`} alt='' width={248} height={248} />
+          <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`} alt='' width={248} height={248} />
         </Link>
 
         <Link href={`/product/${id}`}>

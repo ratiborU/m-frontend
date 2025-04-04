@@ -390,7 +390,7 @@ const EditProduct = (props: EditProductProps) => {
 
         <div className={styles.imageBlock}>
           <Image
-            src={`http://localhost:5000/${mainImage}`}
+            src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`}
             alt={''}
             width={400}
             height={400}
@@ -415,7 +415,7 @@ const EditProduct = (props: EditProductProps) => {
             {...images?.map((x) =>
               <EditImage
                 key={x.id}
-                src={`http://localhost:5000/${x.path}`}
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`}
                 alt=''
                 width={90}
                 height={90}

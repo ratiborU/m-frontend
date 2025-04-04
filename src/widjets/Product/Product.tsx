@@ -29,7 +29,7 @@ const ProductWidget = (props: ProductProps) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   const characteristics = product.characteristics.split('\r\n').map(x => x.split(': '));
-  const galeryImages = [`http://localhost:5000/${product.mainImage}`, ...images.map(x => `http://localhost:5000/${x.path}`)]
+  const galeryImages = [`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product.mainImage}`, ...images.map(x => `${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`)]
 
   const onGalleryOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -52,7 +52,7 @@ const ProductWidget = (props: ProductProps) => {
           <div className={styles.firstBlock}>
             <div className={styles.images}>
               <Image
-                src={`http://localhost:5000/${product.mainImage}`}
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product.mainImage}`}
                 onClick={onGalleryOpen}
                 alt={''}
                 width={400}
@@ -65,7 +65,7 @@ const ProductWidget = (props: ProductProps) => {
                   ...images.slice(0, 4).map(x => (
                     <Image
                       key={`product mini images key: ${x.id}`}
-                      src={`http://localhost:5000/${x.path}`}
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`}
                       className={styles.image}
                       onClick={onGalleryOpen}
                       alt={''}

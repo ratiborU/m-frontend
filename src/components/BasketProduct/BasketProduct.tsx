@@ -15,7 +15,7 @@ const BasketProduct = (props: TBasketProduct) => {
   return (
     <>
       <div className={styles.block}>
-        <Image className={styles.image} src={`http://localhost:5000/${product?.mainImage}` || ''} alt={''} width={180} height={180} />
+        <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product?.mainImage}` || ''} alt={''} width={180} height={180} />
         <div className={styles.information}>
           <p className={styles.name}>{product?.name}</p>
           <p className={styles.description}>{product?.description}</p>

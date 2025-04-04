@@ -6,9 +6,12 @@ import type { NextRequest } from 'next/server'
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl
+
+  console.log(process.env.BACKEND_URL);
+
   if (!request.cookies.get('access') && !!request.cookies.get('refresh')) {
     const response = NextResponse.redirect(url)
-    const tokens = await fetch('http://localhost:5000/api/persons/refresh', {
+    const tokens = await fetch(`${process.env.BACKEND_URL}/persons/refresh`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -38,7 +41,7 @@ export async function middleware(request: NextRequest) {
 
   if (!request.cookies.get('access') && !request.cookies.get('refresh') && !request.cookies.get('personId')) {
     const response = NextResponse.redirect(url)
-    const responseFetch = await fetch('http://localhost:5000/api/persons/empty', {
+    const responseFetch = await fetch(`${process.env.BACKEND_URL}/persons/empty`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({})

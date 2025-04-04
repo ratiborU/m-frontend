@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const product: TProduct = await fetch(`http://localhost:5000/api/products/${params.productId}`)
+  const product: TProduct = await fetch(`${process.env.BACKEND_URL}/products/${params.productId}`)
     .then(data => data.json())
 
   return {
@@ -24,7 +24,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     openGraph: {
       images: [
         {
-          url: `http://localhost:5000/${product.mainImage}`
+          url: `${process.env.BACKEND_URL_IMAGE}/${product.mainImage}`
         }
       ]
     }
@@ -32,7 +32,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 }
 
 export async function generateStaticParams() {
-  const products: TPagination<TProduct> = await fetch(`http://localhost:5000/api/products`, {
+  const products: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`, {
     next: { tags: ['products'] }
   }).then(response => response.json());
   return products.rows.map((product: TProduct) => ({

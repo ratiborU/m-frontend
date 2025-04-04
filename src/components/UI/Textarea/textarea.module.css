@@ -12,6 +12,7 @@
   resize: none;
   overflow: hidden;
 }
+
 /* можно добавить еще один placeholder */
 .textarea::placeholder {
   color: #888888;
@@ -19,10 +20,12 @@
   opacity: 0;
   transition: 0.3s;
 }
+
 .field {
   position: relative;
   /* margin-bottom: 20px; */
 }
+
 .label {
   display: inline-block;
   padding: 0 3px;
@@ -36,22 +39,32 @@
   cursor: inherit;
   /* todo на область padding не действует */
 }
+
 .textarea:focus+.label {
   top: -7px;
   left: 12px;
   font-size: 12px;
   background-color: white;
 }
+
 .textarea:not(:placeholder-shown)+.label {
   top: -7px;
   left: 12px;
   font-size: 12px;
   background-color: white;
 }
+
 .textarea:focus::placeholder {
   opacity: 1;
 }
 
 .inputLarge {
   width: 400px;
+}
+
+.error {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 4px;
+  color: red;
 }

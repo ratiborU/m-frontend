@@ -1,9 +1,10 @@
+import CommentsTable from '@/widjets/comments/CommentsTable/CommentsTable';
 import React from 'react';
 
 const page = () => {
   return (
     <div>
-      Комментарии
+      <CommentsTable />
     </div>
   );
 };

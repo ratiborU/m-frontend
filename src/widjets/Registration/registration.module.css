@@ -12,6 +12,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .text {
   width: 100%;
   font-size: 16px;
@@ -19,7 +20,14 @@
   display: flex;
   justify-content: space-between;
 }
+
 .link {
   color: #2f77e7;
   text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }

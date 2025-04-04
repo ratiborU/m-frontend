@@ -1,0 +1,31 @@
+.filter {
+  width: 320px;
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 32px;
+}
+
+.title2 {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.slider {
+  margin-bottom: 24px;
+}
+
+.priceInputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}

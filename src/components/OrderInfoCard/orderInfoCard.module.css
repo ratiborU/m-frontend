@@ -1,0 +1,33 @@
+.orderCard {
+  width: 640px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 20px 32px;
+}
+
+.titleFlex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 24px;
+}
+
+.price {
+  font-size: 20px;
+}
+
+.deliveryInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

@@ -1,0 +1,55 @@
+.wrapper {
+  max-width: 1470px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.block {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin-left: 0;
+  margin-top: 40px;
+}
+
+.block1 {
+  display: flex;
+  gap: 60px;
+  flex-direction: column;
+}
+
+.blockInputs {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkBoxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* .block2 {} */
+
+.checkboxesUnderTheCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}

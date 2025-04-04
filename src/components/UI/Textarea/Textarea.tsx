@@ -7,11 +7,12 @@ import { TextareaHTMLAttributes } from 'react';
 interface TextareaProps {
   inputProps?: TextareaHTMLAttributes<HTMLTextAreaElement>,
   label?: string,
+  error?: string,
   sizeInput?: 'm' | 'l',
 }
 
 const Textarea = (props: TextareaProps) => {
-  const { inputProps, label, sizeInput = 'm' } = props;
+  const { inputProps, label, sizeInput = 'm', error } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = "0px";
@@ -22,7 +23,7 @@ const Textarea = (props: TextareaProps) => {
   // ибо ref использовать не могу так как он передается
   // в react-hook-form
   const linesCount = Number(String(inputProps?.defaultValue).match(/\n/g)?.length || 0)
-  const defaultHeight = 49 + linesCount * 18.715 + 'px';
+  const defaultHeight = inputProps?.style?.height ? inputProps?.style?.height : 49 + linesCount * 18.715 + 'px';
 
   return (
     <div className={styles.field}>
@@ -40,6 +41,7 @@ const Textarea = (props: TextareaProps) => {
         }}
       />
       <label className={styles.label} htmlFor={inputProps?.id}>{label}</label>
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

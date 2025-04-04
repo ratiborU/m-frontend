@@ -3,19 +3,51 @@ import React from 'react';
 import styles from "./editPerson.module.css";
 import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
-import { TPerson } from '@/services/types/personType';
+import { TPerson } from '@/services/api/persons/personType';
 import { useForm } from 'react-hook-form';
-import { postPerson } from './action';
-import { PersonScheme } from './models';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
+import { useDeletePersonMutation } from '@/hooks/persons/useDeletePersonMutation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { editPersonSchema, TEditPersonSchema } from './models';
 
 
 const EditPerson = (props: TPerson) => {
   const { firstName, secondName, fatherName, email, phoneNumber } = props;
 
-  const { register, handleSubmit } = useForm<PersonScheme>();
+  const notify = () => toast.success("Пользователь успешно изменен!");
+  const notifyDelete = () => toast.success("Пользователь успешно удален!");
+  const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
 
-  const onSubmit = async (data: PersonScheme) => {
-    await postPerson({ ...props, ...data });
+  const { register, handleSubmit } = useForm<TEditPersonSchema>({ resolver: zodResolver(editPersonSchema) });
+
+  const onSuccess = () => {
+    notify();
+  }
+
+  const onError = (error: Error) => {
+    notifyError(error.message);
+  }
+
+  const { updatePerson, isPending } = useUpdatePersonMutation({ onSuccess, onError });
+
+  const onSuccessDelete = () => {
+    notifyDelete();
+  }
+
+  const onErrorDelete = (error: Error) => {
+    notifyError(error.message);
+  }
+
+  const { deletePerson, isPending: isPendingDelete } = useDeletePersonMutation({ onSuccess: onSuccessDelete, onError: onErrorDelete });
+
+  const onSubmit = async (data: TEditPersonSchema) => {
+    await updatePerson({ ...props, ...data });
+  }
+
+  const onDelete = async () => {
+    await deletePerson(props.id);
   }
 
   return (
@@ -79,13 +111,31 @@ const EditPerson = (props: TPerson) => {
           />
 
           <div className={styles.buttons}>
-            <Button type="submit" size='large' variant='contained'>Сохранить</Button>
-            <Button size='large' variant='outlined'>Удалить</Button>
+            <Button
+              loading={isPending}
+              type="submit"
+              size='large'
+              variant='contained'
+            >
+              Сохранить
+            </Button>
+            <Button
+              loading={isPendingDelete}
+              onClick={onDelete}
+              size='large'
+              variant='outlined'
+            >
+              Удалить
+            </Button>
           </div>
         </div>
       </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={4}
+      />
     </>
-
   );
 };
 

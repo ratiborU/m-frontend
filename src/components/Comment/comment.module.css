@@ -1,0 +1,33 @@
+.comment {
+  /* width: 40%; */
+  /* width: 800px; */
+  color: #222222;
+}
+
+.commentInformation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 30px;
+  margin-bottom: 12px;
+}
+
+.name {
+  font-size: 22px;
+}
+
+.rate {
+  display: block;
+
+}
+
+.date {
+  color: #494949;
+  font-size: 16px;
+}
+
+.commentText {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+}

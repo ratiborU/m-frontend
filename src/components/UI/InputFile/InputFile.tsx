@@ -12,7 +12,7 @@ const InputFile = (props: InputFileProps) => {
   const [fileName, setFileName] = useState(text);
 
   return (
-    <Button variant='contained' component="label" {...buttonProps}>
+    <Button size='large' variant='contained' component="label" {...buttonProps}>
       {/* {getValues('file') ? getValues('file')[0]?.name : 'Загрузить изображение'} */}
       {fileName}
       <input

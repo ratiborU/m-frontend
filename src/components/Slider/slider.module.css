@@ -1,0 +1,43 @@
+.slider {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 100vw;
+  height: 15vw;
+  margin-bottom: 70px;
+}
+
+.slide {
+  overflow: hidden;
+  width: 100vw;
+  height: 15vw;
+  transition: 0.9s ease;
+}
+
+.image {
+  width: 100vw;
+  height: auto;
+}
+
+.back,
+.next {
+  position: absolute;
+  width: 4vw;
+  background-color: rgba(0, 0, 0, 0);
+  top: calc(7.5vw - 2vw);
+}
+
+.back {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.back img,
+.next img {
+  height: 4vw;
+  width: 4vw;
+}

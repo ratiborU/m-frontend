@@ -1,0 +1,49 @@
+.block {
+  display: flex;
+  align-items: center;
+  /* gap: 24px; */
+}
+
+.countBlock {
+  border: 1px solid #888888;
+  width: 160px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0px 10px; */
+}
+
+.amount {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.inputAmount {
+  /* border: 1px solid #000; */
+  width: 80px;
+  height: 38px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.deleteProduct {
+  margin-left: 24px;
+}
+
+.price {
+  margin-left: 32px;
+  font-size: 20px;
+}
+
+.button {
+  height: 38px;
+  width: 40px;
+  background-color: #00000000;
+  transition: 0.15s;
+}
+
+.button:hover {
+  background-color: #f4f4f4;
+}

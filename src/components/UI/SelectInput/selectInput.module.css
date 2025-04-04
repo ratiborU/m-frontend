@@ -1,0 +1,96 @@
+.input {
+  width: 360px;
+  height: 50px;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 5px;
+  padding-left: 20px;
+  border: 1px solid #d9d9d9;
+  font-size: 16px;
+  /* color: #888888; */
+  font-weight: 300;
+
+  display: block;
+  background-image: url('../../../../public/Arrow down.svg');
+  background-position: right 10px top 10px, 0 0;
+  background-repeat: no-repeat, no-repeat;
+  appearance: none;
+  cursor: pointer;
+  transition: 0.1s;
+  /* background-color: red; */
+}
+
+
+
+
+/* .input: {
+  background-color: red;
+} */
+
+/* можно добавить еще один placeholder */
+.input::placeholder {
+  color: #888888;
+  font-weight: 300;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.field {
+  position: relative;
+  /* margin-bottom: 20px; */
+}
+
+.label {
+  display: inline-block;
+  padding: 0 3px;
+  position: absolute;
+  font-size: 16px;
+  color: #888888;
+  font-weight: 300;
+  top: 17px;
+  left: 20px;
+  transition: 0.3s;
+  cursor: inherit;
+  /* todo на область padding не действует */
+}
+
+.input:focus+.label {
+  top: -7px;
+  left: 12px;
+  font-size: 12px;
+  background-color: white;
+}
+
+.input:not(:placeholder-shown)+.label {
+  top: -7px;
+  left: 12px;
+  font-size: 12px;
+  background-color: white;
+}
+
+.input:focus::placeholder {
+  opacity: 1;
+}
+
+.xsmall {
+  width: 120px;
+}
+
+.small {
+  width: 190px;
+}
+
+.medium {
+  width: 360px;
+}
+
+.large {
+  width: 400px;
+}
+
+.error {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 4px;
+  color: red;
+}

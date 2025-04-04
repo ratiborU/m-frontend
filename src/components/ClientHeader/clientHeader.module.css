@@ -1,0 +1,39 @@
+.header {
+  height: 80px;
+  min-height: 80px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 70px;
+  z-index: 2;
+  background-color: #fff;
+  /* position: fixed; */
+}
+
+.leftBlock {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+
+.rightBlock {
+  display: flex;
+  gap: 30px;
+}
+
+.logo {
+  font-weight: 400;
+  font-size: 32px;
+  color: #222222;
+}
+
+.text {
+  font-size: 22px;
+  color: #222222;
+}
+
+.icon {
+  color: #494949;
+  font-size: 18px;
+}

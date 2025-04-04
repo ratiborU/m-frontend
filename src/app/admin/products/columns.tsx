@@ -24,7 +24,7 @@ export const productColumns: GridColDef[] = [
     headerAlign: 'center'
   },
   {
-    field: 'title',
+    field: 'name',
     headerName: 'Заголовок',
     // width: 200,
     flex: 1,
@@ -37,16 +37,21 @@ export const productColumns: GridColDef[] = [
     flex: 2,
     minWidth: 100
   },
-  {
-    field: 'characteristics',
-    headerName: 'Характеристики',
-    // width: 50,
-    flex: 2,
-    minWidth: 100
-  },
+  // {
+  //   field: 'characteristics',
+  //   headerName: 'Характеристики',
+  //   // width: 50,
+  //   flex: 2,
+  //   minWidth: 100
+  // },
   {
     field: 'price',
     headerName: 'Цена',
+    width: 80,
+  },
+  {
+    field: 'discount',
+    headerName: 'Скидка',
     width: 80,
   },
   {

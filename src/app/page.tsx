@@ -9,6 +9,8 @@ import SpecialOfferProducts from "@/widjets/SpecialOfferProducts/SpecialOfferPro
 import Footer from "@/components/Footer/Footer";
 import SwiperHome from "@/widjets/SwiperHome/SwiperHome";
 import { Metadata } from "next";
+import { TProduct } from "@/services/api/products/productType";
+import { TPagination } from "@/services/types/paginationType";
 
 export const metadata: Metadata = {
   title: "Серьги Медиинские для Прокола Ушей - Nina",
@@ -20,7 +22,11 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const products = await getAllProducts();
+  // const products = await getAllProducts();
+
+  const products2: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`)
+    .then(data => data.json())
+
   return (
     <>
       <div className={styles.block}>
@@ -28,8 +34,8 @@ export default async function Home() {
         <div className={styles.middle}>
           <SwiperHome />
           <div className={styles.wrapper}>
-            <PopularProducts products={products} />
-            <SpecialOfferProducts products={products} />
+            <PopularProducts products={products2 || []} />
+            <SpecialOfferProducts products={products2 || []} />
             <HomeComments />
           </div>
         </div>

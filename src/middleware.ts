@@ -7,9 +7,10 @@ import type { NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl
 
-  console.log(process.env.BACKEND_URL);
+  console.log('middleware');
 
   if (!request.cookies.get('access') && !!request.cookies.get('refresh')) {
+    console.log('refresh token');
     const response = NextResponse.redirect(url)
     const tokens = await fetch(`${process.env.BACKEND_URL}/persons/refresh`, {
       method: 'POST',
@@ -40,10 +41,13 @@ export async function middleware(request: NextRequest) {
 
 
   if (!request.cookies.get('access') && !request.cookies.get('refresh') && !request.cookies.get('personId')) {
+    console.log('register empty person');
     const response = NextResponse.redirect(url)
     const responseFetch = await fetch(`${process.env.BACKEND_URL}/persons/empty`, {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: {
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({})
     })
       .then(response => response.json())

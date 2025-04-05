@@ -17,24 +17,28 @@ import { stoneOptions, sizeOptions, fasteningTypeOptions, materialOptions, amoun
 import { z } from "zod";
 
 export const createProductSchema = z.object({
-  name: z.string().min(1, 'Минимальная длина 1 символ'),
-  description: z.string().min(1, 'Минимальная длина 1 символ'),
-  seoTitle: z.string().min(1, 'Минимальная длина 1 символ'),
-  seoDescription: z.string().min(1, 'Минимальная длина 1 символ'),
-  characteristics: z.string().min(1, 'Минимальная длина 1 символ'),
-  price: z.string().min(1, 'Минимальная длина 1 символ'),
-  discount: z.string().min(1, 'Минимальная длина 1 символ'),
-  categoryId: z.string().min(1, 'Минимальная длина 1 символ'),
-  productsCount: z.string().min(1, 'Минимальная длина 1 символ'),
-  stone: z.string().min(1, 'Минимальная длина 1 символ'),
-  size: z.string().min(1, 'Минимальная длина 1 символ'),
-  material: z.string().min(1, 'Минимальная длина 1 символ'),
-  fasteningType: z.string().min(1, 'Минимальная длина 1 символ'),
-  amount: z.string().min(1, 'Минимальная длина 1 символ'),
-  file: z
-    .instanceof(File, { message: 'Please upload a file.' })
-    .refine((f) => f.size < 100_000, 'Max 100Kb upload size.')
-    .array(),
+  name: z.string().min(1, 'Это поле обязательно"'),
+  description: z.string().min(1, 'Это поле обязательно"'),
+  seoTitle: z.string().min(1, 'Это поле обязательно"'),
+  seoDescription: z.string().min(1, 'Это поле обязательно"'),
+  characteristics: z.string().min(1, 'Это поле обязательно"'),
+  price: z.string().min(1, 'Это поле обязательно"'),
+  discount: z.string().min(1, 'Это поле обязательно"'),
+  categoryId: z.string().min(1, 'Это поле обязательно"'),
+  productsCount: z.string().min(1, 'Это поле обязательно"'),
+  stone: z.string().min(1, 'Это поле обязательно"'),
+  size: z.string().min(1, 'Это поле обязательно"'),
+  material: z.string().min(1, 'Это поле обязательно"'),
+  fasteningType: z.string().min(1, 'Это поле обязательно"'),
+  amount: z.string().min(1, 'Это поле обязательно"'),
+  // file: z
+  //   .instanceof(File, { message: 'Please upload a file.' })
+  //   .refine((f) => f.size < 100_000, 'Max 100Kb upload size.')
+  //   .array(),
+  // file: z.instanceof(FileList, { message: 'Please upload a file.' }),
+  file: z.unknown().transform(value => {
+    return value as FileList
+  })
 })
 
 export type TCreateProductSchema = z.infer<typeof createProductSchema>;
@@ -176,7 +180,6 @@ const CreateProduct = () => {
               error={errors.categoryId?.message}
               selectProps={{
                 ...register('categoryId'),
-                defaultValue: 1,
               }}
               options={categoryOptions || []}
             />

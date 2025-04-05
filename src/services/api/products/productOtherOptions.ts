@@ -58,11 +58,11 @@ export const fasteningTypeOptions = [
 
 export const amountOptions = [
   {
-    value: '12 шт',
+    value: '12',
     text: '12 шт'
   },
   {
-    value: '1 шт',
+    value: '1',
     text: '1 шт'
   }
 ];

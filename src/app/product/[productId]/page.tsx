@@ -15,7 +15,9 @@ type Props = {
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const product: TProduct = await fetch(`${process.env.BACKEND_URL}/products/${params.productId}`)
+  const product: TProduct = await fetch(`${process.env.BACKEND_URL}/products/${params.productId}`, {
+    cache: 'no-cache'
+  })
     .then(data => data.json())
 
   return {
@@ -33,8 +35,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 export async function generateStaticParams() {
   const products: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`, {
-    next: { tags: ['products'] }
-  }).then(response => response.json());
+    cache: 'no-cache'
+  })
+    .then(response => response.json());
   return products.rows.map((product: TProduct) => ({
     productId: String(product.id)
   }));

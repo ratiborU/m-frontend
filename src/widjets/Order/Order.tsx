@@ -21,6 +21,7 @@ import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonCont
 import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
 import { usePersonSetterContext } from '@/providers/PersonProvider/hooks/usePersonSetterContext';
 import { LocalStorageService } from '@/lib/helpers/localStorageService';
+import { useRouter } from 'next/navigation';
 
 const createPersonSchema = z.object({
   fio: z.string().min(1, 'мало'),
@@ -41,6 +42,7 @@ type OrderProps = {
 
 const Order = (props: OrderProps) => {
   const { products } = props;
+  const router = useRouter();
   // const order = useOrderContext();
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
@@ -48,7 +50,9 @@ const Order = (props: OrderProps) => {
 
   const { register, handleSubmit } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
 
-  const onSuccess = () => { }
+  const onSuccess = () => {
+    router.push('order/completed');
+  }
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
   const { updatePerson } = useUpdatePersonMutation({})

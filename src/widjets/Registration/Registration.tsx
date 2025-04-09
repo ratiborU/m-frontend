@@ -26,9 +26,11 @@ export default function Registration() {
     setPerson.setId(data.person.id);
     setPerson.setFio(`${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`)
     setPerson.setEmail(data.person.email)
+    setPerson.setPhone(data.person.phoneNumber)
     LocalStorageService.save('id', data.person.id);
     LocalStorageService.save('fio', `${data.person.secondName} ${data.person.firstName} ${data.person.fatherName}`);
     LocalStorageService.save('email', data.person.email);
+    LocalStorageService.save('phone', data.person.phoneNumber);
     router.push('/');
   }
 

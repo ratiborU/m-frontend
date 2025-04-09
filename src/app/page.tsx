@@ -9,23 +9,25 @@ import SpecialOfferProducts from "@/widjets/SpecialOfferProducts/SpecialOfferPro
 import Footer from "@/components/Footer/Footer";
 import SwiperHome from "@/widjets/SwiperHome/SwiperHome";
 import { Metadata } from "next";
-import { TProduct } from "@/services/api/products/productType";
-import { TPagination } from "@/services/types/paginationType";
+// import { TProduct } from "@/services/api/products/productType";
+// import { TPagination } from "@/services/types/paginationType";
+import { getAllProducts } from "@/services/api/products/productService";
 
 export const metadata: Metadata = {
   title: "Серьги Медиинские для Прокола Ушей - Nina",
-  // title: "Серьги NINA для Прокола Ушей ",
-  description: "Серьги для прокола ушей от Nina из медицинской стали, с камнями: гороскоп, кристалл, сапфир и др.",
+  description: "Серьги для прокола ушей от Nina из медицинской стали, с камнями: гороскоп, кристалл, сапфир, голограмма и др.",
   twitter: {
     card: 'summary_large_image'
   },
 }
 
 export default async function Home() {
-  // const products = await getAllProducts();
+  const products = await getAllProducts();
 
-  const products2: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`)
-    .then(data => data.json())
+  // const products2: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`, {
+  //   cache: 'no-cache'
+  // })
+  //   .then(data => data.json())
 
   return (
     <>
@@ -34,8 +36,8 @@ export default async function Home() {
         <div className={styles.middle}>
           <SwiperHome />
           <div className={styles.wrapper}>
-            <PopularProducts products={products2 || []} />
-            <SpecialOfferProducts products={products2 || []} />
+            <PopularProducts products={products || []} />
+            <SpecialOfferProducts products={products || []} />
             <HomeComments />
           </div>
         </div>

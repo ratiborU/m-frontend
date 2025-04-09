@@ -9,7 +9,7 @@ const page = async () => {
   return (
     <>
       <div >
-        <Favorite favoriteProducts={favoriteProducts} />
+        <Favorite favoriteProducts={favoriteProducts || []} />
       </div>
 
     </>

@@ -53,3 +53,13 @@
   gap: 12px;
   margin-top: 20px;
 }
+
+.endBlock {
+  position: absolute;
+  width: 600px;
+  font-size: 28px;
+  line-height: 130%;
+  left: calc(50% - 300px);
+  top: 20%;
+  /* text-align: justify; */
+}

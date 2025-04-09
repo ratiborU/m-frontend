@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import React from 'react';
 import styles from './orderMap.module.css'
 import { YMaps, Map, Clusterer } from '@pbe/react-yandex-maps';

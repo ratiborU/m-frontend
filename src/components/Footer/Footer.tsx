@@ -18,8 +18,9 @@ const Footer = () => {
         <div className={styles.columns}>
           <div className={styles.column}>
             <p className={styles.columnTitle}>Контакты</p>
-            <p className={styles.columnText}>8 (555) 123-45-67</p>
-            <p className={styles.columnText}>mircos@mail.ru</p>
+            <p className={styles.columnText}>ООО Mircos</p>
+            <p className={styles.columnText}>+7 (902) 870-67-40</p>
+            <p className={styles.columnText}>info@niname.ru</p>
             <div>
               <p className={styles.columnText}>г. Екатеринбург,</p>
               <p className={styles.columnText}>ул. Ленина, д. 99</p>

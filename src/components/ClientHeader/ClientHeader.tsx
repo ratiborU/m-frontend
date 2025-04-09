@@ -10,7 +10,6 @@ const ClientHeader = () => {
   const person = usePersonContext();
   const [isLogedIn, setIsLoggedIn] = useState(false);
   const [personRole, setPersonRole] = useState("PERSON");
-  // const isLogedIn = !!person.id;
 
   useEffect(() => {
     setIsLoggedIn(!!person.id);
@@ -20,8 +19,9 @@ const ClientHeader = () => {
   return (
     <div className={styles.header}>
       <div className={styles.leftBlock}>
-        <Link className={styles.logo} href={'/'}>Mircos</Link>
+        <Link className={styles.logo} href={'/'}>Ninamed</Link>
         <Link className={styles.text} href={'/catalog'}>каталог</Link>
+        <Link className={styles.phoneText} href={'tel:+79028706740'}>+7 (902) 870-67-40</Link>
         {/* <Search /> */}
       </div>
       <div className={styles.rightBlock}>

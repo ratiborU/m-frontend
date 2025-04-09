@@ -60,6 +60,7 @@ const CreateProduct = () => {
 
   const { createProduct, isPending } = useCreateProductMutation({ onSuccess, onError });
 
+
   const onSubmit = async (data: TCreateProductSchema) => {
     const formData = new FormData();
     formData.append('name', data.name);
@@ -73,6 +74,11 @@ const CreateProduct = () => {
     formData.append('commentsCount', '0');
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
+    formData.append('stone', data.stone);
+    formData.append('size', data.size);
+    formData.append('material', data.material);
+    formData.append('fasteningType', data.fasteningType);
+    formData.append('amount', data.amount);
     formData.append('file', data.file[0]);
     await createProduct(formData);
   }

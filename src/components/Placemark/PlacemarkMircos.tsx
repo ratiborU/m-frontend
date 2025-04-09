@@ -14,6 +14,7 @@ const icon = renderToString(
     className={styles.icon}
     src={mircosIcon.src}
     width={20}
+    height={20}
     style={{
       position: 'absolute',
       top: -2,

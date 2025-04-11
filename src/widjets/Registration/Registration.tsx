@@ -5,17 +5,32 @@ import Title from "@/components/UI/Title/Title";
 import Button from "@/components/UI/Button/Button";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { RegistrationScheme } from "./models";
+// import { RegistrationScheme } from "./models";
 import { useRegistrationMutation } from "@/hooks/auth/useRegistrationMutation";
 import { useRouter } from "next/navigation";
 import { usePersonContext } from "@/providers/PersonProvider/hooks/usePersonContext";
 import { usePersonSetterContext } from "@/providers/PersonProvider/hooks/usePersonSetterContext";
 import { LocalStorageService } from "@/lib/helpers/localStorageService";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const createPersonSchema = z.object({
+  fio: z.string().min(1, 'Это обязательное поле'),
+  email: z.string().min(1, 'Это обязательное поле'),
+  phoneNumber: z.string().min(1, 'Это обязательное поле'),
+  password: z.string().min(1, 'Это обязательное поле'),
+  repeatPassword: z.string().min(1, 'Это обязательное поле'),
+  // delivery: z.string(),
+}).refine(data => data.password === data.repeatPassword, {
+  message: "Пароли должны совпадать",
+  path: ["repeatPassword"]
+});
+type RegistrationScheme = z.infer<typeof createPersonSchema>;
 
 export default function Registration() {
   const router = useRouter();
   // добавить zod
-  const { register, handleSubmit } = useForm<RegistrationScheme>();
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<RegistrationScheme>({ resolver: zodResolver(createPersonSchema) });
   const person = usePersonContext();
   const setPerson = usePersonSetterContext()
 
@@ -34,7 +49,16 @@ export default function Registration() {
     router.push('/');
   }
 
-  const onError = () => { }
+  const onError = () => {
+    setError('email', {
+      type: "server",
+      message: 'эта почта или телефон уже заняты'
+    });
+    setError('phoneNumber', {
+      type: "server",
+      message: 'эта почта или телефон уже заняты'
+    })
+  }
 
   const { registration } = useRegistrationMutation({ onSuccess, onError });
 
@@ -63,6 +87,7 @@ export default function Registration() {
             ...register('fio'),
             defaultValue: person.fio
           }}
+          error={errors.fio?.message}
         />
         <Input
           label='Логин'
@@ -72,6 +97,7 @@ export default function Registration() {
             ...register('email'),
             defaultValue: person.email
           }}
+          error={errors.email?.message}
         />
         <Input
           label='Телефон'
@@ -81,6 +107,7 @@ export default function Registration() {
             ...register('phoneNumber'),
             defaultValue: person.phone
           }}
+          error={errors.phoneNumber?.message}
         />
         <Input
           label='Пароль'
@@ -89,6 +116,7 @@ export default function Registration() {
             id: 'registration-password',
             ...register('password')
           }}
+          error={errors.password?.message}
         />
         <Input
           label='Повторите пароль'
@@ -97,6 +125,7 @@ export default function Registration() {
             id: 'registration-repeat-password',
             ...register('repeatPassword')
           }}
+          error={errors.repeatPassword?.message}
         />
         <Button
           text='Зарегистрироваться'

@@ -40,7 +40,7 @@ const Product = (props: IProductProps) => {
     } else {
       setHeight(351 + Number(pElement) + Number(rateElement))
     }
-  }, [id, process.env])
+  }, [id])
 
   return (
     <div

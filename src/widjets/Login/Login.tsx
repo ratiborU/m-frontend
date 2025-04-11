@@ -8,14 +8,23 @@ import Button from "@/components/UI/Button/Button";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { LoginScheme } from "./models";
+// import { LoginScheme } from "./models";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
 import { usePersonSetterContext } from "@/providers/PersonProvider/hooks/usePersonSetterContext";
 import { LocalStorageService } from "@/lib/helpers/localStorageService";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginSchema = z.object({
+  email: z.string().min(1, 'Это обязательное поле'),
+  password: z.string().min(1, 'Это обязательное поле'),
+})
+
+type TLoginScheme = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<LoginScheme>();
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<TLoginScheme>({ resolver: zodResolver(loginSchema) });
   const setPerson = usePersonSetterContext()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,11 +44,16 @@ export default function Login() {
     }
   }
 
-  const onError = () => { }
+  const onError = () => {
+    setError('email', {
+      type: "server",
+      message: 'Неверная почта или пароль'
+    });
+  }
 
   const { login } = useLoginMutation({ onSuccess, onError });
 
-  const onSubmit = async (data: LoginScheme) => {
+  const onSubmit = async (data: TLoginScheme) => {
     await login(data);
   }
 
@@ -56,6 +70,7 @@ export default function Login() {
             id: 'login-login',
             ...register('email')
           }}
+          error={errors.email?.message}
         />
         <Input
           label='Пароль'
@@ -64,6 +79,7 @@ export default function Login() {
             id: 'login-password',
             ...register('password')
           }}
+          error={errors.password?.message}
         />
         <Button text='Войти' size='l' />
       </form>

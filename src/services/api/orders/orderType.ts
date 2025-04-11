@@ -26,4 +26,5 @@ export type TOrderCreate = {
   comment: string,
   status: string,
   personId: string,
+  couponId?: string
 }

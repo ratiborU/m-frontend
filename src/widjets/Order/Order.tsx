@@ -22,14 +22,23 @@ import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation
 import { usePersonSetterContext } from '@/providers/PersonProvider/hooks/usePersonSetterContext';
 import { LocalStorageService } from '@/lib/helpers/localStorageService';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+// import { TCoupon } from '@/services/api/coupons/couponType';
+// import { checkOneCoupon } from '@/services/api/coupons/couponService';
+import { useGetCheckOneCouponQuery } from '@/hooks/coupons/useGetCheckCouponQuery';
+import { useQueryClient } from '@tanstack/react-query';
+// import { revalidateTag } from 'next/cache';
+import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 
 const createPersonSchema = z.object({
   fio: z.string().min(1, 'мало'),
   phone: z.string().min(1, 'мало'),
   email: z.string().min(1, 'мало'),
   comment: z.string(),
-  address: z.string().min(1, 'мало'),
+  address: z.string(),
   agreement: z.boolean(),
+  coupon: z.string(),
   // delivery: z.string(),
 })
 
@@ -47,8 +56,26 @@ const Order = (props: OrderProps) => {
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
   const finalPrice = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
+  const client = useQueryClient();
+  const order = useOrderContext();
+  const [isCoupon, setIsCoupon] = useState(false);
+  // const [coupon, setCoupon] = useState<TCoupon | null>(null);
+  // const sort = useCatalogSortContext();
 
-  const { register, handleSubmit } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
+  const debounce = useDebouncedCallback(async () => {
+    // setSort.setSort(sortState);
+    // alert(isCoupon);
+    // const isValid = await checkOneCoupon(getValues('coupon'))
+    // console.log(couponData);
+    client.invalidateQueries({
+      queryKey: ['coupons'],
+    });
+    // revalidateTag('check');
+    // const { data: couponData } = useGetCheckOneCouponQuery(getValues('coupon'));
+    console.log(couponData);
+  }, 500)
+
+  const { register, handleSubmit, getValues } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
 
   const onSuccess = () => {
     router.push('order/completed');
@@ -56,24 +83,27 @@ const Order = (props: OrderProps) => {
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
   const { updatePerson } = useUpdatePersonMutation({})
+  const { data: couponData } = useGetCheckOneCouponQuery(getValues('coupon'));
   // const { updatePerson } = useUpdatePersonMutation({})
   // обновить person?
 
   const onSubmit = async (data: TCreatePersonSchema) => {
-    // await createOrder(data);
-    // price: string,
-    // address: string,
-    // delivery: string,
-    // deliveryDays: string,
-    // comment: string,
-    // status: string,
-    // personId: string,
-    const price = String(finalPrice);
+    // const price = String(finalPrice);
+    const totalWithDiscount = !couponData
+      ? finalPrice
+      : couponData.discount.at(-1) !== '%'
+        ? finalPrice - Number(couponData.discount)
+        : finalPrice * (1 - Number(couponData.discount.slice(0, couponData.discount.length - 1)) / 100);
+    const totalWithProductsDiscount = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
     const status = 'В обработке';
     const deliveryDays = '7';
     const delivery = 'cdek';
 
     const fio = data.fio.split(' ');
+
+    console.log(totalWithProductsDiscount);
+
+    console.log(data);
 
     if (!person.id) {
       setPerson.setFio(data.fio);
@@ -98,11 +128,13 @@ const Order = (props: OrderProps) => {
 
     await createOrder({
       ...data,
-      price,
+      price: String(totalWithProductsDiscount),
       status,
       delivery,
       deliveryDays,
-      personId: person.id
+      personId: person.id,
+      couponId: couponData?.id,
+      address: data.address || order.address
     });
   }
 
@@ -188,14 +220,31 @@ const Order = (props: OrderProps) => {
             <OrderMap delivery='sdek' offices={cdekOffices} />
           </div>
           <div className={styles.block2}>
-            <OrderCard products={products} />
+            <OrderCard products={products} coupon={couponData} />
             <div className={styles.checkboxesUnderTheCard}>
-              {/* <CheckBox
+              {isCoupon && <Input
+                inputProps={{
+                  placeholder: '',
+                  id: 'order-input-email',
+                  ...register('coupon'),
+                }}
+                label={'Купон'}
+                onChange={() => {
+                  debounce()
+                }}
+              />}
+              {!isCoupon && <input {...register('coupon')} type='text' style={{
+                display: 'none'
+              }} />}
+              <CheckBox
                 inputProps={{
                   id: 'order-checkbox-discount',
+                  checked: isCoupon,
+                  onChange: (e) => setIsCoupon(e.target.checked)
                 }}
                 label='Использовать купон'
-              /> */}
+              />
+
               <CheckBox
                 inputProps={{
                   id: 'order-checkbox-agreement',

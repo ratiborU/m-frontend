@@ -8,15 +8,22 @@ type InputProps2 = {
   label: string,
   error?: string,
   sizeInput?: 'xsmall' | 'small' | 'medium' | 'large',
+  onChange?: (e?: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const Input = (props: InputProps2) => {
-  const { inputProps, label, sizeInput = 'medium', error = '' } = props;
+  const { inputProps, onChange = () => { }, label, sizeInput = 'medium', error = '' } = props;
   return (
     <div className={styles.field}>
       <input
         className={`${styles.input} ${styles[sizeInput]}`}
         {...inputProps}
+        onChange={(e) => {
+          if (inputProps.onChange) {
+            inputProps.onChange(e);
+          }
+          onChange(e)
+        }}
       />
       <label className={styles.label} htmlFor={inputProps.id}>{label}</label>
       {error && <p className={styles.error}>{error}</p>}

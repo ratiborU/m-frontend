@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./textarea.module.css";
 import { TextareaHTMLAttributes } from 'react';
 
@@ -13,7 +13,7 @@ interface TextareaProps {
 
 const Textarea = (props: TextareaProps) => {
   const { inputProps, label, sizeInput = 'm', error } = props;
-
+  const [defaultHeight, setDefaultHeight] = useState(50);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = "0px";
     e.target.style.height = e.target.scrollHeight + "px";
@@ -22,8 +22,14 @@ const Textarea = (props: TextareaProps) => {
   // Ужас ужасный но пока что как сделать иначе я не знаю
   // ибо ref использовать не могу так как он передается
   // в react-hook-form
-  const linesCount = Number(String(inputProps?.defaultValue).match(/\n/g)?.length || 0)
-  const defaultHeight = inputProps?.style?.height ? inputProps?.style?.height : 49 + linesCount * 18.715 + 'px';
+  // const linesCount = Number(String(inputProps?.defaultValue).match(/\n/g)?.length || 0)
+  // let defaultHeight = inputProps?.style?.height ? inputProps?.style?.height : 49 + linesCount * 18.715 + 'px';
+
+  useEffect(() => {
+    const textarea = document.getElementById(inputProps?.id || '');
+    console.log(textarea?.scrollHeight);
+    setDefaultHeight(Number(textarea?.scrollHeight));
+  }, [inputProps?.id])
 
   return (
     <div className={styles.field}>

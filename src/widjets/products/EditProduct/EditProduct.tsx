@@ -123,9 +123,9 @@ const EditProduct = (props: EditProductProps) => {
       <div className={styles.flex}>
         <form onSubmit={handleSubmit(onSubmitData)}>
           <div className={styles.block}>
-            <Input
+            <Textarea
               label='Название'
-              sizeInput='large'
+              // sizeInput='large'
               error={errors.name?.message}
               inputProps={{
                 placeholder: '',
@@ -146,9 +146,9 @@ const EditProduct = (props: EditProductProps) => {
                 ...register('description')
               }}
             />
-            <Input
-              label='Название'
-              sizeInput='large'
+            <Textarea
+              label='SEO title'
+              // sizeInput='large'
               error={errors.seoTitle?.message}
               inputProps={{
                 placeholder: '',
@@ -159,7 +159,7 @@ const EditProduct = (props: EditProductProps) => {
               }}
             />
             <Textarea
-              label='Описание'
+              label='SEO description'
               error={errors.seoDescription?.message}
               inputProps={{
                 placeholder: "",

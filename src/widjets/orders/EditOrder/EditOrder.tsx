@@ -12,6 +12,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUpdateOrderMutation } from '@/hooks/orders/useUpdateOrderMutation';
 import { useDeleteOrderMutation } from '@/hooks/orders/useDeleteOrderMutation';
+import SelectInput from '@/components/UI/SelectInput/SelectInput';
+import { useGetPersonOptionsQuery } from '@/hooks/persons/useGetPersonOptionsQuery';
+import { parseDate } from '@/lib/helpers/parseDate';
 
 const EditOrder = (props: EditOrderProps) => {
   const {
@@ -23,6 +26,7 @@ const EditOrder = (props: EditOrderProps) => {
     comment,
     status,
     personId,
+    // person,
     updatedAt,
     createdAt,
     orderProducts
@@ -41,6 +45,7 @@ const EditOrder = (props: EditOrderProps) => {
     notifyError(error.message);
   }
 
+  const { data: personOptions } = useGetPersonOptionsQuery();
   const { updateOrder, isPending } = useUpdateOrderMutation({ onSuccess, onError });
 
   const onSuccessDelete = () => {
@@ -68,7 +73,16 @@ const EditOrder = (props: EditOrderProps) => {
       <div className={styles.flex}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.block}>
-            <Input
+            <SelectInput
+              label='ФИО'
+              sizeInput='large'
+              selectProps={{
+                ...register('personId'),
+                defaultValue: personId
+              }}
+              options={personOptions || []}
+            />
+            {/* <Input
               label='ФИО'
               sizeInput='large'
               error={errors.personId?.message}
@@ -79,7 +93,7 @@ const EditOrder = (props: EditOrderProps) => {
                 defaultValue: personId,
                 ...register('personId')
               }}
-            />
+            /> */}
             <Input
               label='Сумма'
               sizeInput='large'
@@ -159,7 +173,8 @@ const EditOrder = (props: EditOrderProps) => {
                 placeholder: '',
                 id: 'create-person-password',
                 autoComplete: 'new-passport',
-                defaultValue: createdAt,
+                defaultValue: parseDate(createdAt),
+                disabled: true
               }}
             />
 

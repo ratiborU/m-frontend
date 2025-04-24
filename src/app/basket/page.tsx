@@ -7,11 +7,7 @@ const page = async () => {
   const basketProducts = await getAllBasketProductsByPersonId(cookies().get('personId')?.value || 1);
 
   return (
-    <>
-      <div >
-        <Basket products={basketProducts.rows} />
-      </div>
-    </>
+    <Basket products={basketProducts.rows} />
   );
 };
 

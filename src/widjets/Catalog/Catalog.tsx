@@ -7,6 +7,8 @@ import { TProduct } from '@/services/api/products/productType';
 import Product from '@/components/Product/Product';
 import { useCatalogFilterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterContxt';
 import { useCatalogSortContext } from '@/providers/CatalogSortProvider/hooks/useCatalogSortContext';
+import SorterMobile from '@/components/Sorter/SorterMobile';
+import FilterMobile from '@/components/Filter/FilterMobile';
 
 type CatalogProps = {
   products: TProduct[]
@@ -58,6 +60,10 @@ const Catalog = (props: CatalogProps) => {
       <Filter />
       <div className={styles.catalogBlock}>
         <Sorter />
+        <div className={styles.filterAndSort}>
+          <FilterMobile />
+          <SorterMobile />
+        </div>
         <div className={styles.products}>
           {...filteredProducts?.map(x => <Product key={`catalog product: ${x.id}`} {...x} />)}
         </div>

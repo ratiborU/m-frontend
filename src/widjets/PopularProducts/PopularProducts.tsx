@@ -17,7 +17,14 @@ const PopularProducts = (props: PopularProductsProps) => {
     <>
       <Title text='Популярные товары' margin={false} />
       <div className={styles.products}>
-        {...products.rows.sort((a, b) => Number(b.commentsCount) - Number(a.commentsCount)).slice(0, 4).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
+        {
+          ...products.rows
+            .sort((a, b) => Number(b.commentsCount) - Number(a.commentsCount))
+            .slice(0, 4)
+            .map(x => (
+              <Product key={`popular product ${x.id}`} {...x} />
+            ))
+        }
       </div>
     </>
 

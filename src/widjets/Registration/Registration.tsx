@@ -134,7 +134,7 @@ export default function Registration() {
       </form>
       <div className={styles.text}>
         <p>Уже есть аккаунт</p>
-        <Link href="/authorization/login" className={styles.link}>Войти</Link>
+        <Link href="/login" className={styles.link}>Войти</Link>
       </div>
     </div>
   );

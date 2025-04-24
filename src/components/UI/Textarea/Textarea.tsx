@@ -27,7 +27,6 @@ const Textarea = (props: TextareaProps) => {
 
   useEffect(() => {
     const textarea = document.getElementById(inputProps?.id || '');
-    console.log(textarea?.scrollHeight);
     setDefaultHeight(Number(textarea?.scrollHeight));
   }, [inputProps?.id])
 

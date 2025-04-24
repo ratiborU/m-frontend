@@ -4,6 +4,7 @@ import { TBasketProduct } from '@/services/api/basketProducts/basketProductType'
 import styles from './basket.module.css'
 import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
 import Title from '@/components/Title/Tile';
+import BasketToOrderTotal from '@/components/BasketToOrderCard/BasketToOrderTotal';
 
 type BasketProps = {
   products: TBasketProduct[];
@@ -27,6 +28,7 @@ const Basket = (props: BasketProps) => {
             </div>
           </div>
           <BasketToOrderCard products={products} />
+          <BasketToOrderTotal />
         </div>
 
       </div>

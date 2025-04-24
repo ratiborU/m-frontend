@@ -11,7 +11,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0px 10px; */
 }
 
 .amount {
@@ -20,7 +19,6 @@
 }
 
 .inputAmount {
-  /* border: 1px solid #000; */
   width: 80px;
   height: 38px;
   text-align: center;
@@ -46,4 +44,49 @@
 
 .button:hover {
   background-color: #f4f4f4;
+}
+
+@media (max-width: 780px) {
+  .countBlock {
+    border: 1px solid #888888;
+    width: 120px;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .amount {
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  .inputAmount {
+    width: 40px;
+    height: 34px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .deleteProduct {
+    margin-left: 12px;
+  }
+
+  .price {
+    margin-left: 32px;
+    font-size: 20px;
+    display: none;
+  }
+
+  .button {
+    height: 38px;
+    width: 40px;
+    background-color: #00000000;
+    transition: 0.15s;
+  }
+
+  .button:hover {
+    background-color: #ffffff00;
+  }
 }

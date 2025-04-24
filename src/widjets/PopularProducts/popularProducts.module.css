@@ -5,6 +5,22 @@
   flex-wrap: wrap;
   /* height: 410px;
   overflow: hidden; */
-  gap: 10px;
+  gap: 20px 0px;
   margin-bottom: 70px;
+  /* align-items: stretch; */
+}
+
+/* .products div:nth-child(4) {
+  display: none;
+} */
+
+@media (max-width: 780px) {
+  .products {
+    padding: 0px 10px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .products {}
 }

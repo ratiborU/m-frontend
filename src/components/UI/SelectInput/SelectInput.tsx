@@ -10,6 +10,7 @@ type TOption = {
 type SelectInputProps = {
   selectProps: SelectHTMLAttributes<HTMLSelectElement>,
   label: string,
+  classname?: string,
   error?: string,
   sizeInput?: 'xsmall' | 'small' | 'medium' | 'large',
   options?: TOption[],
@@ -26,10 +27,11 @@ const SelectInput = (props: SelectInputProps) => {
     options = [],
     text = props.sizeInput == 'xsmall' ? 'Выбрать' : 'Выберите вариант...',
     onChange = () => { },
+    classname = ''
   } = props;
 
   return (
-    <div className={styles.field}>
+    <div className={`${styles.field} ${classname}`}>
       <select
         className={`${styles.input} ${styles[sizeInput]}`}
         defaultValue={selectProps?.defaultValue || ''}

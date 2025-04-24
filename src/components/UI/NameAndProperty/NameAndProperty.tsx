@@ -21,7 +21,8 @@ const NameAndProperty = (props: NameAndPropertyProps) => {
       <p
         className={styles.name}
         style={{
-          minWidth: width == 0 ? undefined : width + 6
+          minWidth: width == 0 ? undefined : width + 6,
+          maxWidth: width == 0 ? undefined : width + 6
         }}
       >
         <span id={`span element for text: ${name}, ${value}`}>

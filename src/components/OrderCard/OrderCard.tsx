@@ -18,6 +18,7 @@ type BasketToOrderCardProps = {
 const OrderCard = (props: BasketToOrderCardProps) => {
   const { products, coupon } = props;
   const order = useOrderContext();
+
   const total = products.reduce((acc, cur) => acc + Number(cur.count) * Number(cur.product.price), 0)
   const totalProductsDiscount = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0);
   const totalWithDiscount = !coupon
@@ -26,7 +27,6 @@ const OrderCard = (props: BasketToOrderCardProps) => {
       ? totalProductsDiscount - Number(coupon.discount)
       : totalProductsDiscount * (1 - Number(coupon.discount.slice(0, coupon.discount.length - 1)) / 100)
   const totalCount = products.reduce((acc, cur) => acc + Number(cur.count), 0)
-
   const totalWithDiscountProducts = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
 
   return (

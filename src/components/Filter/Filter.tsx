@@ -68,13 +68,23 @@ const Filter = () => {
     if (typeof values == 'number') {
       setFilterState({ ...filterState, startPrice: values, endPrice: values });
       debounce();
-      // setFilter.setStartPrice(values);
-      // setFilter.setEndPrice(values);
     } else {
       setFilterState({ ...filterState, startPrice: values[0], endPrice: values[1] });
       debounce();
-      // setFilter.setStartPrice(values[0]);
-      // setFilter.setEndPrice(values[1]);
+    }
+  }
+
+  const onChangeInputStart = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!Number.isNaN(Number(e.target.value))) {
+      setFilterState({ ...filterState, startPrice: Math.min(8000, Math.max(0, Number(e.target.value))) })
+      debounce();
+    }
+  }
+
+  const onChangeInputEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!Number.isNaN(Number(e.target.value))) {
+      setFilterState({ ...filterState, endPrice: Math.min(8000, Math.max(0, Number(e.target.value))) })
+      debounce();
     }
   }
 
@@ -97,7 +107,7 @@ const Filter = () => {
         <Input
           inputProps={{
             value: filterState.startPrice,
-            onChange: () => { },
+            onChange: onChangeInputStart,
             style: { 'width': '120px' }
           }}
           label={'От'}
@@ -105,7 +115,7 @@ const Filter = () => {
         <Input
           inputProps={{
             value: filterState.endPrice,
-            onChange: () => { },
+            onChange: onChangeInputEnd,
             style: { 'width': '120px' }
           }}
           label={'До'}

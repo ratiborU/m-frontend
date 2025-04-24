@@ -5,7 +5,13 @@
   flex-wrap: wrap;
   gap: 50px 30px;
   margin-bottom: 70px;
-  max-width: 40%;
-  width: 40%;
   /* min-width: 380px; */
+}
+
+@media (max-width: 780px) {
+  .block {
+    padding: 0 15px;
+    margin-bottom: 0px;
+    gap: 32px;
+  }
 }

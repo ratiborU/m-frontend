@@ -18,14 +18,15 @@ const OrderInfoCard = (props: OrderInfoCardProps) => {
         <p className={styles.price}>{order.price} ₽</p>
       </div>
       <div className={styles.deliveryInfo}>
-        <NameAndProperty name={order.status} value={'Ожидаемая дата доставки'} size='s' />
-        <NameAndProperty name='Адрес' value={order.address} size='s' />
+        <NameAndProperty name={order.status} value={'Дата доставки'} size='s' />
+        {/* <NameAndProperty name='Адрес' value={order.address} size='s' /> */}
+        <p className={styles.addressInfo}>{order.address}</p>
       </div>
       <div className={styles.products}>
         {
           order.order_products?.length != 0
             ? <>{...order.order_products!.map(x => (
-              <NameAndProperty key={`name and property for orderInfo cart: ${order.id} ${x.id}`} name={`${x.product?.name}` || 'Товар'} value={`${x.count} шт`} size='l' />
+              <NameAndProperty key={`name and property for orderInfo cart: ${order.id} ${x.id}`} name={`${x.product?.name}` || 'Товар'} value={`${x.count} шт`} size='s' />
             ))}</>
             : <></>
         }

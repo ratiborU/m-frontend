@@ -29,7 +29,6 @@ export const getOneCoupon = async (id: number | string): Promise<TCoupon> => {
 }
 
 export const checkOneCoupon = async (value: string): Promise<TCoupon> => {
-  console.log(`\n\n${value}\n\n`);
   const response = await api(`coupons/check/?value=${value}`, {
     cache: 'no-cache'
   });

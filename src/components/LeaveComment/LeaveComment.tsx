@@ -93,7 +93,7 @@ const LeaveComment = (props: LeaveCommentProps) => {
         <div className={styles.buttons}>
           <Button
             text={'Сохранить'}
-            size={'s'}
+            size={'xs'}
             buttonProps={{
               style: {
                 maxWidth: 200
@@ -103,7 +103,7 @@ const LeaveComment = (props: LeaveCommentProps) => {
           {
             comment && <Button
               text={'Удалить'}
-              size={'s'}
+              size={'xs'}
               type='outlined'
               onClick={onDelete}
               buttonProps={{

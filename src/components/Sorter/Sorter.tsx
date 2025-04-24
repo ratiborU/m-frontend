@@ -4,6 +4,7 @@ import SelectInput from '../UI/SelectInput/SelectInput';
 import { TSort } from '@/providers/CatalogSortProvider/contexts/catalogSortContext';
 import { useDebouncedCallback } from 'use-debounce';
 import { useCatalogSortSetterContext } from '@/providers/CatalogSortProvider/hooks/useCatalogSortSetterContext';
+import styles from './sorter.module.css';
 
 const options = [
   {
@@ -36,6 +37,7 @@ const Sorter = () => {
   return (
     <div>
       <SelectInput
+        classname={styles.sorter}
         selectProps={{
           style: {
             'width': '240px'

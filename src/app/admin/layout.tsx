@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "@/components/Header/Header";
 import ReactQueryProvider from "@/providers/QueryProvider/QueryProvider";
+import styles from './layout.module.css'
 
 export default function RootLayout({
   children,
@@ -10,7 +11,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <div style={{ margin: '0 70px' }}>
+      <div className={styles.wrapper}>
         <ReactQueryProvider>
           {children}
         </ReactQueryProvider>

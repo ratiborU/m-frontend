@@ -62,7 +62,7 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
 
   return (
     <>
-      <div>
+      <div className={styles.block}>
         <h1 className={styles.title}>Личные данные</h1>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input

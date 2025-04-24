@@ -13,6 +13,7 @@ interface IProductProps extends TProduct {
   isFavorite?: boolean,
   count?: number,
   isInFavorite?: boolean,
+  classname?: string,
 }
 
 const Product = (props: IProductProps) => {
@@ -26,6 +27,7 @@ const Product = (props: IProductProps) => {
     mainImage,
     isInMainPage = false,
     isInFavorite = false,
+    classname = ''
     // isFavorite = false,
     // count = 0,
   } = props
@@ -43,39 +45,86 @@ const Product = (props: IProductProps) => {
   }, [id])
 
   return (
-    <div
-      className={styles.mainBlock}
-      style={{
-        height: height
-      }}
-    >
-      <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
-        <Link href={`/product/${id}`}>
-          <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`} alt='' width={248} height={248} />
-        </Link>
+    <>
+      <div
+        className={`${styles.mainBlock} ${classname}`}
+        style={{
+          height: height
+        }}
+      >
+        <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
+          <Link href={`/product/${id}`}>
+            <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`} alt='' width={248} height={248} />
+          </Link>
 
-        <Link href={`/product/${id}`}>
-          <p className={styles.title} id={`product card name id: ${id}`}>{name}</p>
-        </Link>
+          <Link href={`/product/${id}`}>
+            <p className={styles.title} id={`product card name id: ${id}`}>{name}</p>
+          </Link>
 
-        <div id={`product rate id: ${id}`}>
-          {
-            !!commentsCount && <div className={styles.rates}>
-              <Image src={star} alt='' width={24} height={24} />
-              <p className={styles.rate}>{rate}</p>
-              <p className={styles.comments}>{commentsCount} отзыва</p>
-            </div>
-          }
+          <div id={`product rate id: ${id}`}>
+            {
+              !!commentsCount && <div className={styles.rates}>
+                <Image src={star} alt='' width={24} height={24} />
+                <p className={styles.rate}>{rate}</p>
+                <p className={styles.comments}>{commentsCount} отзыва</p>
+              </div>
+            }
 
+          </div>
+
+          <div className={styles.prices}>
+            <p className={styles.newPrice}>{Number(price) - Number(discount)} ₽</p>
+            <p className={styles.price}>{discount != '0' ? `${price} ₽` : ''}</p>
+          </div>
+
+          <FavoriteButton product={props} revalidate={isInFavorite} />
+
+          <CartButton
+            className={styles.button}
+            text={'В корзину'}
+            size={'m'}
+            // innerCount={count}
+            product={props}
+          />
         </div>
 
-        <div className={styles.prices}>
-          <p className={styles.newPrice}>{Number(price) - Number(discount)} ₽</p>
-          <p className={styles.price}>{discount != '0' ? `${price} ₽` : ''}</p>
+      </div>
+
+      <div className={`${styles.mainMobileBlock} ${classname}`}>
+        <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
+          <Link href={`/product/${id}`}>
+            <Image
+              className={styles.image}
+              src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`}
+              alt=''
+              width={248}
+              height={248}
+            />
+          </Link>
+
+          <Link href={`/product/${id}`}>
+            <p className={styles.title} id={`product card name id: ${id}`}>{name}</p>
+          </Link>
+
+          <div id={`product rate id: ${id}`}>
+            {
+              !!commentsCount && <div className={styles.rates}>
+                <Image src={star} alt='' width={20} height={20} />
+                <p className={styles.rate}>{rate}</p>
+                <p className={styles.comments}>{commentsCount} отзыва</p>
+              </div>
+            }
+
+          </div>
+
+          <div className={styles.prices}>
+            <p className={styles.newPrice}>{Number(price) - Number(discount)} ₽</p>
+            <p className={styles.price}>{discount != '0' ? `${price} ₽` : ''}</p>
+          </div>
+
+          <FavoriteButton product={props} revalidate={isInFavorite} />
         </div>
-
-        <FavoriteButton product={props} revalidate={isInFavorite} />
-
+        <div></div>
         <CartButton
           className={styles.button}
           text={'В корзину'}
@@ -84,9 +133,7 @@ const Product = (props: IProductProps) => {
           product={props}
         />
       </div>
-
-    </div>
-
+    </>
   );
 };
 

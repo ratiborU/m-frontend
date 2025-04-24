@@ -3,6 +3,7 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from "@mui/x-data-grid";
 // import { TProduct } from '@/services/types/productType';
+import styles from './baseGrid.module.css'
 
 type BaseGridProps = {
   columns: GridColDef[],
@@ -21,7 +22,7 @@ const BaseGrid = (props: BaseGridProps) => {
       disableRowSelectionOnClick
       disableMultipleRowSelection
       pageSizeOptions={[10, 20, 100]}
-
+      className={styles.table}
       initialState={{
         pagination: {
           paginationModel: { pageSize: 10, page: 0 },

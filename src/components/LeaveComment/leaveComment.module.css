@@ -1,5 +1,4 @@
 .leaveComment {
-  /* border: 1px solid #000; */
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
@@ -34,5 +33,6 @@
 
 .buttons {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  max-width: calc(100vw - 16px);
 }

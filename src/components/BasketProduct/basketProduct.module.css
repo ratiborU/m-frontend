@@ -42,5 +42,43 @@
 .oldPrice {
   font-size: 16px;
   text-decoration: line-through;
+}
 
+@media (max-width: 780px) {
+  .image {
+    margin-right: 12px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    font-weight: 400;
+    font-size: 16px;
+    color: #222222;
+    margin-bottom: 6px;
+  }
+
+  .description {
+    font-weight: 300;
+    font-size: 14px;
+    color: #222222;
+    margin-bottom: 8px;
+  }
+
+  .prices {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-end;
+  }
+
+  .price {
+    font-size: 16px;
+    color: #222222;
+  }
+
+  .oldPrice {
+    font-size: 14px;
+    text-decoration: line-through;
+  }
 }

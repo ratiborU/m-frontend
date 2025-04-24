@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 70px;
+  flex-wrap: wrap;
 }
 
 .basketProducts {
@@ -15,4 +16,14 @@
   flex-direction: column;
   gap: 40px;
   flex: 1 0 auto
+}
+
+@media (max-width: 780px) {
+  .basketFlex {
+    margin-top: 0px;
+  }
+
+  .basketProducts {
+    gap: 24px;
+  }
 }

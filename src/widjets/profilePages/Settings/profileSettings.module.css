@@ -15,3 +15,23 @@
   gap: 20px;
   align-items: flex-start;
 }
+
+@media (max-width: 576px) {
+  .menu {
+    display: none;
+  }
+
+  .block {
+    padding: 0 8px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .title2 {
+    font-size: 20px;
+    margin-top: 32px;
+  }
+}

@@ -8,9 +8,6 @@
 .name {
   display: inline-block;
   color: #494949;
-  /* flex-shrink: 1; */
-  /* border: 1px solid #000; */
-  /* display: inline-flex; */
 }
 
 /* .name span {} */
@@ -19,6 +16,7 @@
   text-align: right;
   text-align: justify;
   margin-left: 4px;
+  text-wrap: nowrap;
 }
 
 .dots {
@@ -42,10 +40,8 @@
 
 .s .dots {
   color: #222222;
-  min-width: 60px;
 }
 
-/* .m {} */
 
 .l {
   font-weight: 300;
@@ -54,11 +50,9 @@
 
 .l p {
   color: #222222;
-  /* border: 1px solid #000; */
 }
 
 .l .value {
-  /* min-width: 60px; */
   text-align: right;
   white-space: nowrap;
 }

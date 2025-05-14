@@ -14,6 +14,7 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import Comment from '@/components/Comment/Comment';
 import LeaveComment from '@/components/LeaveComment/LeaveComment';
 import Gallery from '@/components/Gallery/Gallery';
+// import { useGetSimularProductsQuery } from '@/hooks/recommendations/useGetAllSimularProductsQuery';
 
 export interface ProductProps {
   product: TProduct,
@@ -30,6 +31,8 @@ const ProductWidget = (props: ProductProps) => {
 
   const characteristics = product.characteristics.split('\r\n').map(x => x.split(': '));
   const galeryImages = [`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product.mainImage}`, ...images.map(x => `${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`)]
+
+  // const { simularProductsData, isFetching, error } = useGetSimularProductsQuery(product.id);
 
   const onGalleryOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -135,7 +138,7 @@ const ProductWidget = (props: ProductProps) => {
             </div>
           </div>
 
-          {/* <div className={styles.comments}>
+          <div className={styles.comments}>
             <div>
               <h2 className={styles.commentsTitle}>Отзывы</h2>
               <div className={styles.commentsBlock}>
@@ -145,9 +148,9 @@ const ProductWidget = (props: ProductProps) => {
               </div>
             </div>
             <LeaveComment product={product} comment={comment} />
-          </div> */}
+          </div>
 
-          <div className={styles.commentsMobile}>
+          {/* <div className={styles.commentsMobile}>
             <h2 className={styles.commentsTitle}>Отзывы</h2>
             <LeaveComment product={product} comment={comment} />
             <div className={styles.commentsBlock}>
@@ -155,7 +158,7 @@ const ProductWidget = (props: ProductProps) => {
                 <Comment key={`comment for product: ${product.id} ${x.id}`} {...x} />
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

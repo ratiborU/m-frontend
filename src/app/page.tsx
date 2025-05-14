@@ -12,6 +12,7 @@ import { Metadata } from "next";
 // import { TProduct } from "@/services/api/products/productType";
 // import { TPagination } from "@/services/types/paginationType";
 import { getAllProducts } from "@/services/api/products/productService";
+import { getAllRecommendations } from "@/services/api/recomendations/recomendationService";
 
 export const metadata: Metadata = {
   title: "Серьги Медиинские для Прокола Ушей - Nina",
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const products = await getAllProducts();
+  const reccomendations = await getAllRecommendations();
 
   // const products2: TPagination<TProduct> = await fetch(`${process.env.BACKEND_URL}/products`, {
   //   cache: 'no-cache'
@@ -37,7 +39,7 @@ export default async function Home() {
           <SwiperHome />
           <div className={styles.wrapper}>
             <PopularProducts products={products || []} />
-            <SpecialOfferProducts products={products || []} />
+            <SpecialOfferProducts products={reccomendations.slice(0, 4) || []} />
             <HomeComments />
           </div>
         </div>

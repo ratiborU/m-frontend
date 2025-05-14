@@ -3,13 +3,14 @@ import styles from './category.module.css'
 
 type TCategoryProps = {
   text: string,
-  values: string[],
+  value: string,
+  currentValue: string,
   onClick?: () => void,
 }
 
 const Category = (props: TCategoryProps) => {
-  const { text, onClick, values } = props
-  const active = values.includes(text) ? styles.active : '';
+  const { text, onClick, value, currentValue } = props
+  const active = value == currentValue ? styles.active : '';
   return (
     <button
       className={`${styles.category} ${active}`}

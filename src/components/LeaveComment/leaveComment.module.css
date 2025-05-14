@@ -23,6 +23,7 @@
   font-weight: 400;
   font-size: 20px;
   color: #222222;
+  /* border: 1px solid #000; */
 }
 
 .form {
@@ -35,4 +36,12 @@
   display: flex;
   justify-content: space-between;
   max-width: calc(100vw - 16px);
+  width: 400px;
+  /* border: 1px solid #000; */
+}
+
+.text {
+  font-weight: 300;
+  font-size: 16px;
+  color: #222222;
 }

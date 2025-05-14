@@ -4,38 +4,72 @@
   flex-direction: column;
   gap: 32px;
 }
+
 .inputs {
   display: flex;
+  flex-wrap: wrap;
+  gap: 32px 0;
   justify-content: space-between;
 }
+
 .buttons {
   display: flex;
   justify-content: space-between;
 }
 
 .flex {
+  width: 1400px;
+  max-width: calc(100vw - 140px);
   display: flex;
   flex-wrap: wrap;
   gap: 72px;
   margin: 0 auto;
-  justify-content:center;
+  /* justify-content: center; */
+  border: 1px solid #000;
 }
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(100vw - 140px);
+  gap: 32px;
+}
+
 .imageBlock {
   width: 400px;
   display: flex;
   flex-direction: column;
   gap: 30px
 }
+
 .images {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .addImage {
   margin-bottom: 8px;
 }
+
 .formImageButtons {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.block1 {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border: 1px solid #000;
+}
+
+.block2 {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border: 1px solid #000;
 }

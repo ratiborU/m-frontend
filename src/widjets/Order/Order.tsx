@@ -31,6 +31,8 @@ import { useQueryClient } from '@tanstack/react-query';
 // import { revalidateTag } from 'next/cache';
 import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 import OrderCardMobile from '@/components/OrderCard/OrderCardMobile';
+import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
+import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
 
 const createPersonSchema = z.object({
   fio: z.string().min(1, 'мало'),
@@ -48,10 +50,11 @@ type TCreatePersonSchema = z.infer<typeof createPersonSchema>;
 type OrderProps = {
   person: TPerson,
   products: TBasketProduct[],
+  loyalty: TLoyalty,
 }
 
 const Order = (props: OrderProps) => {
-  const { products } = props;
+  const { products, loyalty } = props;
   const router = useRouter();
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
@@ -59,6 +62,7 @@ const Order = (props: OrderProps) => {
   const client = useQueryClient();
   const order = useOrderContext();
   const [isCoupon, setIsCoupon] = useState(false);
+  const [isLoyalty, setIsLoyalty] = useState(false);
 
   const debounce = useDebouncedCallback(async () => {
     client.invalidateQueries({
@@ -75,6 +79,7 @@ const Order = (props: OrderProps) => {
   const { createOrder } = useCreateOrderMutation({ onSuccess });
   const { updatePerson } = useUpdatePersonMutation({})
   const { data: couponData } = useGetCheckOneCouponQuery(getValues('coupon'));
+  const { data: loyaltyData } = useGetLoyaltyQuery();
   // const { updatePerson } = useUpdatePersonMutation({})
   // обновить person?
 
@@ -86,6 +91,9 @@ const Order = (props: OrderProps) => {
         ? finalPrice - Number(couponData.discount)
         : finalPrice * (1 - Number(couponData.discount.slice(0, couponData.discount.length - 1)) / 100);
     const totalWithProductsDiscount = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
+    const loyaltyPayCount = isLoyalty ? Math.min(Number(loyaltyData?.points), Math.floor(totalWithProductsDiscount * 0.3)) : 0;
+    const totalWithLoyalty = isLoyalty ? totalWithProductsDiscount - loyaltyPayCount : totalWithProductsDiscount;
+
     const status = 'В обработке';
     const deliveryDays = '7';
     const delivery = 'cdek';
@@ -118,16 +126,17 @@ const Order = (props: OrderProps) => {
       })
     }
     // пока несовсем правильно работает
-    // await createOrder({
-    //   ...data,
-    //   price: String(totalWithProductsDiscount),
-    //   status,
-    //   delivery,
-    //   deliveryDays,
-    //   personId: person.id,
-    //   couponId: couponData?.id,
-    //   address: input.value || order.address
-    // });
+    await createOrder({
+      ...data,
+      price: String(totalWithProductsDiscount),
+      status,
+      delivery,
+      deliveryDays,
+      personId: person.id,
+      couponId: couponData?.id,
+      address: input.value || order.address,
+      usePoints: isLoyalty
+    });
   }
 
   return (
@@ -215,9 +224,17 @@ const Order = (props: OrderProps) => {
             /> */}
           </div>
           <div className={styles.block2}>
-            <OrderCard products={products} coupon={couponData} />
+            <OrderCard products={products} coupon={couponData} isLoyalty={isLoyalty} />
             <OrderCardMobile products={products} coupon={couponData} />
             <div className={styles.checkboxesUnderTheCard}>
+              <CheckBox
+                inputProps={{
+                  id: 'order-checkbox-loyalty',
+                  checked: isLoyalty,
+                  onChange: (e) => setIsLoyalty(e.target.checked)
+                }}
+                label='Использовать баллы>'
+              />
               {isCoupon && <Input
                 inputProps={{
                   placeholder: '',

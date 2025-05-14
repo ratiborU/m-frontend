@@ -7,7 +7,7 @@ import { TPagination } from '@/services/types/paginationType';
 import { TProduct } from '@/services/api/products/productType';
 
 type PopularProductsProps = {
-  products: TPagination<TProduct>
+  products: TProduct[]
 }
 
 const SpecialOfferProducts = (props: PopularProductsProps) => {
@@ -17,7 +17,7 @@ const SpecialOfferProducts = (props: PopularProductsProps) => {
     <>
       <Title text='Специальные предложения для вас' margin={false} />
       <div className={styles.products}>
-        {...products.rows.slice(0, 4).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
+        {...products.slice(0, 4).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
       </div>
     </>
 

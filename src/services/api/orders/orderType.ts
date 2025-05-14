@@ -11,6 +11,7 @@ export type TOrder = {
   deliveryDays: string,
   comment: string,
   status: string,
+  usePoints?: boolean,
   personId: string,
   person?: TPerson,
   order_products?: TOrderProduct[],
@@ -26,5 +27,6 @@ export type TOrderCreate = {
   comment: string,
   status: string,
   personId: string,
-  couponId?: string
+  couponId?: string,
+  usePoints?: boolean,
 }

@@ -1,0 +1,33 @@
+.wrapper {
+  /* max-width: 1440px; */
+  margin: 0 auto;
+}
+
+.layout {
+  display: flex;
+  /* max-width: 1440px; */
+  margin: 0 auto;
+  /* margin-top: 70px; */
+}
+
+.wrapper {
+  /* max-width: 1440px; */
+  margin: 0 auto;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh + 402px);
+  justify-content: space-between;
+}
+
+.middle {
+  flex: 1 0 auto;
+}
+
+@media (max-width: 576px) {
+  .layout {
+    margin-top: 40px;
+  }
+}

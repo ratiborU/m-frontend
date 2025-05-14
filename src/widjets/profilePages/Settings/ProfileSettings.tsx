@@ -15,6 +15,8 @@ import { TPerson } from '@/services/api/persons/personType';
 import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
+import LoyalutyCart from '@/components/LoyalityCart/LoyalutyCart';
 
 type ProfileSettingsProps = {
   person?: TPerson,
@@ -39,6 +41,8 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
     notifyError(error.message);
   }
 
+
+  // console.log(loyalty);
   const { updatePerson } = useUpdatePersonMutation({ onSuccess, onError });
 
   const onSubmit = async (data: TEditPersonProfileSchema) => {
@@ -63,67 +67,74 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
   return (
     <>
       <div className={styles.block}>
-        <h1 className={styles.title}>Личные данные</h1>
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label={'ФИО'}
-            inputProps={{
-              ...register('fio'),
-              id: 'profile-settings-fio',
-              placeholder: '',
-              defaultValue: fio
-            }}
-          />
-          <Input
-            label={'Email'}
-            inputProps={{
-              ...register('email'),
-              id: 'profile-settings-email',
-              placeholder: 'example@gmail.com',
-              defaultValue: person?.email
-            }}
-          />
-          <Input
-            label={'Номер телефона'}
-            inputProps={{
-              ...register('phoneNumber'),
-              id: 'profile-settings-phone',
-              placeholder: '',
-              defaultValue: person?.phoneNumber
-            }}
-          />
-          <Button text={'Сохранить'} size={'s'} />
-        </form>
+        <div>
+          <h1 className={styles.title}>Личные данные</h1>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              label={'ФИО'}
+              inputProps={{
+                ...register('fio'),
+                id: 'profile-settings-fio',
+                placeholder: '',
+                defaultValue: fio
+              }}
+            />
+            <Input
+              label={'Email'}
+              inputProps={{
+                ...register('email'),
+                id: 'profile-settings-email',
+                placeholder: 'example@gmail.com',
+                defaultValue: person?.email
+              }}
+            />
+            <Input
+              label={'Номер телефона'}
+              inputProps={{
+                ...register('phoneNumber'),
+                id: 'profile-settings-phone',
+                placeholder: '',
+                defaultValue: person?.phoneNumber
+              }}
+            />
+            <Button text={'Сохранить'} size={'s'} />
+          </form>
 
-        <h1 className={styles.title2}>Изменить пароль</h1>
-        <form className={styles.form} onSubmit={handleSubmitPassword(onSubmitPassword)}>
-          <Input
-            label={'Старый пароль'}
-            inputProps={{
-              ...registerPassword('oldPassword'),
-              id: 'profile-settings-old-password',
-              placeholder: ''
-            }}
-          />
-          <Input
-            label={'Новый пароль'}
-            inputProps={{
-              ...registerPassword('newPassword'),
-              id: 'profile-settings-new-password',
-              placeholder: ''
-            }}
-          />
-          <Input
-            label={'Повторите пароль'}
-            inputProps={{
-              ...registerPassword('newPasswordAgain'),
-              id: 'profile-settings-new-password-repeat',
-              placeholder: ''
-            }}
-          />
-          <Button text={'Сохранить'} size={'s'} />
-        </form>
+          <h1 className={styles.title2}>Изменить пароль</h1>
+          <form className={styles.form} onSubmit={handleSubmitPassword(onSubmitPassword)}>
+            <Input
+              label={'Старый пароль'}
+              inputProps={{
+                ...registerPassword('oldPassword'),
+                id: 'profile-settings-old-password',
+                placeholder: ''
+              }}
+            />
+            <Input
+              label={'Новый пароль'}
+              inputProps={{
+                ...registerPassword('newPassword'),
+                id: 'profile-settings-new-password',
+                placeholder: ''
+              }}
+            />
+            <Input
+              label={'Повторите пароль'}
+              inputProps={{
+                ...registerPassword('newPasswordAgain'),
+                id: 'profile-settings-new-password-repeat',
+                placeholder: ''
+              }}
+            />
+            <Button text={'Сохранить'} size={'s'} />
+          </form>
+        </div>
 
+
+        <div>
+          <h1 className={styles.title2}>Программа лояльности</h1>
+          <LoyalutyCart />
+        </div>
       </div>
       <ToastContainer
         position="bottom-right"

@@ -15,7 +15,7 @@ export const createOrder = async (data: TOrderCreate): Promise<TOrder> => {
   return response;
 }
 
-export const getAllOrders = async (): Promise<TPagination<TOrder>> => {
+export const getAllOrders = async (): Promise<TOrder[]> => {
   // добавить пагинацию
   const response = await api('orders');
   return response;

@@ -7,6 +7,7 @@ import { getImagesByProductId } from '@/services/api/images/imageService';
 import { getCommentsByProductId, getOneCommentByPersonAndProductId } from '@/services/api/comments/commentService';
 import { cookies } from 'next/headers';
 import { Metadata } from 'next';
+import { getAllSimularsByProductId } from '@/services/api/recomendations/recomendationService';
 
 type Props = {
   params: {
@@ -18,7 +19,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   const product: TProduct = await fetch(`${process.env.BACKEND_URL}/products/${params.productId}`, {
     cache: 'no-cache'
   })
-    .then(data => data.json())
+    .then(data => data.json());
 
   return {
     title: product.seoTitle,
@@ -51,16 +52,17 @@ const page = async ({ params }: Props) => {
 
   const product = await getOneProduct(productId);
   const images = await getImagesByProductId(productId);
-  const simularProducts = await getAllProducts();
+  const simularProducts = await getAllSimularsByProductId(productId);
   const comments = await getCommentsByProductId(productId);
   const comment = await getOneCommentByPersonAndProductId(String(cookies().get('personId')?.value), product.id);
+
 
   return (
     <>
       <ProductWidget
         product={product}
         images={images}
-        simularProducts={simularProducts.rows.slice(0, 4)}
+        simularProducts={simularProducts.slice(0, 4)}
         comments={comments.rows}
         comment={comment}
       />

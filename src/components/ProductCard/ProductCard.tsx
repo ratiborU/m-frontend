@@ -32,12 +32,9 @@ const ProductCard = (props: ProductCardProps) => {
           <FavoriteButton product={product} />
         </div>
         <div className={styles.properties}>
-          <NameAndProperty name={'Камень'} value={product.stone} />
-          <NameAndProperty name={'Размер'} value={product.size} />
-          <NameAndProperty name={'Материал'} value={product.material} />
-          <NameAndProperty name={'Крепление'} value={product.fasteningType} />
-          <NameAndProperty name={'Количество'} value={product.amount} />
-
+          {...Object.entries(product.categoryCharacteristics).map(x => (<>
+            <NameAndProperty name={x[0]} value={x[1]} />
+          </>))}
         </div>
         <CartButton text={'Добавить в корзину'} size={'l'} product={product} />
       </div>

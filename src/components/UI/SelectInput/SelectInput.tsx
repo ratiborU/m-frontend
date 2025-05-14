@@ -14,6 +14,7 @@ type SelectInputProps = {
   error?: string,
   sizeInput?: 'xsmall' | 'small' | 'medium' | 'large',
   options?: TOption[],
+  optionsAr?: string[],
   text?: string,
   onChange?: (e?: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -25,6 +26,7 @@ const SelectInput = (props: SelectInputProps) => {
     sizeInput = 'medium',
     error = '',
     options = [],
+    optionsAr = [],
     text = props.sizeInput == 'xsmall' ? 'Выбрать' : 'Выберите вариант...',
     onChange = () => { },
     classname = ''
@@ -44,8 +46,11 @@ const SelectInput = (props: SelectInputProps) => {
         }}
       >
         <option disabled hidden value="">{text}</option>
-        {...options?.map((x) =>
+        {options.length != 0 && options?.map((x) =>
           <option key={`optionKey: ${x.value}`} value={x.value}>{x.text}</option>
+        )}
+        {options.length == 0 && optionsAr?.map((x) =>
+          <option key={`optionKey: ${x}`} value={x}>{x}</option>
         )}
       </select>
       {/* <input

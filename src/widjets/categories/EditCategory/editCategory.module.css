@@ -10,3 +10,15 @@
   display: flex;
   justify-content: space-between;
 }
+
+
+.parameterBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.parametersButtons {
+  display: flex;
+  justify-content: space-between;
+}

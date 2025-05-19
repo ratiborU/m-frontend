@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { TOrder } from '@/services/api/orders/orderType';
-import Line from '@/components/UI/Line/Line';
-import { getLast12Monts, getLast30DaysDates, monthsDictionary2, monthsDictionaryDays } from '@/lib/helpers/parseDate';
+// import { TOrder } from '@/services/api/orders/orderType';
+// import Line from '@/components/UI/Line/Line';
+import { getLast30DaysDates } from '@/lib/helpers/parseDate';
 import SelectInput from '@/components/UI/SelectInput/SelectInput';
 import TimeInput from '@/components/UI/TimeInput/TimeInput';
 import styles from './productsStatistics.module.css'
@@ -22,17 +22,23 @@ type DatasetType = {
 
 type GeneralStatisticsProps = {
   orderProducts?: TOrderProduct[];
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   productKeys?: any;
 }
 
 const ProductsStatistics = (props: GeneralStatisticsProps) => {
   const { orderProducts = [], productKeys = {} } = props;
-
-  const [interval, setInterval] = useState('days'); // days, months, yearss
-  const [startDate, setStartDate] = useState('2025-04-14');
-  const [endDate, setEndDate] = useState('2025-05-14');
+  const nowDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 11 ? '0' : ''}${(new Date()).getUTCMonth() + 1}-${(new Date()).getDate()}`;
+  const lastDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 10 ? '0' : ''}${(new Date()).getMonth()}-${(new Date()).getDate()}`;
+  // const [interval, setInterval] = useState('days'); // days, months, yearss
+  // console.log((new Date()).getUTCMonth());
+  // alert((new Date()).getUTCMonth());
+  const [startDate, setStartDate] = useState(lastDate);
+  const [endDate, setEndDate] = useState(nowDate);
   const [data, setData] = useState<DatasetType[]>([]);
   const [labels, setLabels] = useState([''])
+
+
 
   getLast30DaysDates();
 
@@ -50,6 +56,7 @@ const ProductsStatistics = (props: GeneralStatisticsProps) => {
       }
       return true
     })
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     const resultDataset: any = { ...productKeys };
     for (const orderProduct of filteredOrderProducts) {
       resultDataset[orderProduct.product.name] += orderProduct.count;
@@ -58,7 +65,7 @@ const ProductsStatistics = (props: GeneralStatisticsProps) => {
       label: 'Проданные товары',
       data: Object.values(resultDataset)
     }]);
-  }, [endDate, startDate]);
+  }, [endDate, startDate, orderProducts, productKeys]);
 
   return (
     <div >
@@ -71,7 +78,7 @@ const ProductsStatistics = (props: GeneralStatisticsProps) => {
           label={'Товары'}
           sizeInput='small'
           options={datesOptions}
-          onChange={(e) => setInterval(String(e?.target.value))}
+        // onChange={(e) => setInterval(String(e?.target.value))}
         />
         <TimeInput
           inputProps={{

@@ -34,7 +34,7 @@ const BasketToOrderCard = (props: BasketToOrderCardProps) => {
     setCurrentDiscountCount(productDiscounts.reduce((acc, cur) => order.productsCartCount >= cur[0] ? cur[0] : acc, 0));
     setTotalWithDiscount(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0))
     setLoyaltyCount(Math.floor(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0) * Number(loyalty.cashback) / 100));
-  }, [products, setOrder, order.discountPerPackage, order.productsCartCount]);
+  }, [products, setOrder, order.discountPerPackage, order.productsCartCount, loyalty.cashback]);
 
   return (
     <div className={styles.basketToOrderCard}>

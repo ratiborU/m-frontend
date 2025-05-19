@@ -2,7 +2,7 @@
 import { api } from "../api";
 // import { TComment, TCommentCreate } from "./commentType";
 import { TProduct } from "../products/productType";
-import { TPagination } from "../../types/paginationType";
+// import { TPagination } from "../../types/paginationType";
 import { cookies } from "next/headers";
 
 // export const createComment = async (data: TCommentCreate): Promise<TComment> => {

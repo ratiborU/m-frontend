@@ -2,7 +2,7 @@ import React from 'react';
 import ProductWidget from '@/widjets/Product/Product';
 import { TPagination } from '@/services/types/paginationType';
 import { TProduct } from '@/services/api/products/productType';
-import { getAllProducts, getOneProduct } from '@/services/api/products/productService';
+import { getOneProduct } from '@/services/api/products/productService';
 import { getImagesByProductId } from '@/services/api/images/imageService';
 import { getCommentsByProductId, getOneCommentByPersonAndProductId } from '@/services/api/comments/commentService';
 import { cookies } from 'next/headers';

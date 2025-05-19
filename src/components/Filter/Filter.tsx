@@ -4,8 +4,6 @@ import styles from './filter.module.css'
 // import ReactSlider from 'react-slider';
 // import styled from 'styled-components';
 import { StyledSlider, Thumb, Track } from './sltyles';
-import { useCatalogFilterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterContxt';
-import { useCatalogFilterSetterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterSetterContext';
 import Input from '../UI/Input/Input';
 import Category from '../Category/Category';
 import { useGetCategoriesQuery } from '@/hooks/categories/useGetAllCategoriesQuery';
@@ -49,7 +47,8 @@ const Filter = () => {
   const onCategoryClick = (id: string) => {
     return () => {
       const newParameters = data?.rows.find(x => x.id == id)?.parameters;
-      const newEmptyParameters = Object.keys(newParameters || {}).reduce((acc, cur) => {
+      // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+      const newEmptyParameters = Object.keys(newParameters || {}).reduce((acc: any, cur) => {
         acc[cur] = [];
         return acc
       }, {})
@@ -65,11 +64,14 @@ const Filter = () => {
   const onParameterClick = (name: string, parameterName: string) => {
     return () => {
       const newParameters = filterState.parameters;
+      // @ts-expect-error:next-line
       if (newParameters[name as keyof typeof newParameters].includes(parameterName)) {
+        // @ts-expect-error:next-line
         newParameters[name as keyof typeof newParameters] = newParameters[name as keyof typeof newParameters].filter(x => x != parameterName);
         // console.log(newParameters[name as keyof typeof newParameters])
         // console.log(parameterName);
       } else {
+        // @ts-expect-error:next-line
         newParameters[name as keyof typeof newParameters].push(parameterName);
       }
       setFilterState({ ...filterState, parameters: newParameters });
@@ -178,6 +180,7 @@ const Filter = () => {
         ...Object.keys(filter.parameters).map(name => <>
           <p className={styles.title2}>{name}</p>
           <div className={styles.categories}>
+            {/* @ts-expect-error:next-line */}
             {parametersState ? parametersState[name as keyof typeof parametersState]?.map((x: string) => (
               <Parameter
                 key={`category filter: ${x}`}

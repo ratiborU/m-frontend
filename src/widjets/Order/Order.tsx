@@ -50,11 +50,11 @@ type TCreatePersonSchema = z.infer<typeof createPersonSchema>;
 type OrderProps = {
   person: TPerson,
   products: TBasketProduct[],
-  loyalty: TLoyalty,
+  // loyalty: TLoyalty,
 }
 
 const Order = (props: OrderProps) => {
-  const { products, loyalty } = props;
+  const { products } = props;
   const router = useRouter();
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
@@ -65,9 +65,7 @@ const Order = (props: OrderProps) => {
   const [isLoyalty, setIsLoyalty] = useState(false);
 
   const debounce = useDebouncedCallback(async () => {
-    client.invalidateQueries({
-      queryKey: ['coupons'],
-    });
+    client.invalidateQueries({ queryKey: ['coupons'] });
   }, 500)
 
   const { register, handleSubmit, getValues } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
@@ -78,7 +76,8 @@ const Order = (props: OrderProps) => {
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
   const { updatePerson } = useUpdatePersonMutation({})
-  const { data: couponData } = useGetCheckOneCouponQuery(getValues('coupon'));
+  const { data: couponData } = useGetCheckOneCouponQuery(String(getValues('coupon')));
+
   const { data: loyaltyData } = useGetLoyaltyQuery();
   // const { updatePerson } = useUpdatePersonMutation({})
   // обновить person?
@@ -128,7 +127,7 @@ const Order = (props: OrderProps) => {
     // пока несовсем правильно работает
     await createOrder({
       ...data,
-      price: String(totalWithProductsDiscount),
+      price: String(totalWithLoyalty),
       status,
       delivery,
       deliveryDays,
@@ -218,10 +217,10 @@ const Order = (props: OrderProps) => {
               </div>
             </div>
             {/* пока заккоментировал так как при большом количестве обновлений ломается */}
-            {/* <OrderMap
+            <OrderMap
               longitude={person.longitude}
               latitude={person.latitude}
-            /> */}
+            />
           </div>
           <div className={styles.block2}>
             <OrderCard products={products} coupon={couponData} isLoyalty={isLoyalty} />

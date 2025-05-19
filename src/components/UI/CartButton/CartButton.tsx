@@ -58,8 +58,8 @@ const CartButton = (props: CartButtonProps) => {
   }, 500);
 
   const onAddToCartClick = () => {
-    setCount((previous) => previous + 1);
-    debounced(count + 1);
+    setCount((previous) => Math.min(Number(product.productsCount), previous + 1));
+    debounced(Math.min(Number(product.productsCount), count + 1));
   }
 
   const onRemoveToCartClick = () => {

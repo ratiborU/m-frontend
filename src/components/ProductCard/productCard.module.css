@@ -29,6 +29,10 @@
   color: #222222;
 }
 
+.productSoon {
+  font-size: 18px;
+}
+
 .beforeDiscount {
   margin-bottom: 24px;
   font-size: 18px;

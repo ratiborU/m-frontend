@@ -27,7 +27,8 @@ const Product = (props: IProductProps) => {
     mainImage,
     isInMainPage = false,
     isInFavorite = false,
-    classname = ''
+    classname = '',
+    productsCount,
     // isFavorite = false,
     // count = 0,
   } = props
@@ -36,12 +37,16 @@ const Product = (props: IProductProps) => {
 
   useEffect(() => {
     const pElement = document.getElementById(`product card name id: ${id}`)?.clientHeight;
-    const rateElement = document.getElementById(`product rate id: ${id}`)?.clientHeight || 0;
-    if (!rateElement) {
-      setHeight(351 + Number(pElement) + Number(rateElement) - 8)
-    } else {
-      setHeight(351 + Number(pElement) + Number(rateElement))
-    }
+    const rateElement = document.getElementById(`product rate id: ${id}`)?.clientHeight || -8;
+    const countElement = document.getElementById(`product count id: ${id}`)?.clientHeight || 0;
+    const buttonElement = document.getElementById(`product button id: ${id}`)?.clientHeight ? 70 : 60;
+    // console.log(countElement, buttonElement);
+    const height = 280 + Number(pElement) + Number(rateElement) + Number(countElement) + Number(buttonElement);
+    // if (id == '5') {
+    //   console.log(id, height);
+    //   console.log(pElement, rateElement, countElement, buttonElement);
+    // }
+    setHeight(height);
   }, [id])
 
   return (
@@ -52,7 +57,7 @@ const Product = (props: IProductProps) => {
           height: height
         }}
       >
-        <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''}`}>
+        <div className={`${styles.block} ${!isInMainPage ? styles.freeBlock : ''} ${!productsCount ? styles.blockNoButton : ''}`}>
           <Link href={`/product/${id}`}>
             <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`} alt='' width={248} height={248} />
           </Link>
@@ -69,7 +74,6 @@ const Product = (props: IProductProps) => {
                 <p className={styles.comments}>{commentsCount} отзыва</p>
               </div>
             }
-
           </div>
 
           <div className={styles.prices}>
@@ -77,17 +81,26 @@ const Product = (props: IProductProps) => {
             <p className={styles.price}>{discount != '0' ? `${price} ₽` : ''}</p>
           </div>
 
+          <div id={`product count id: ${id}`}>
+            {!productsCount && <p className={styles.count}>Скоро появится в продаже</p>}
+            {Number(productsCount) < 10 && Number(productsCount) > 0 && <p className={styles.count}>Осталось {productsCount} шт</p>}
+          </div>
+
+
+
           <FavoriteButton product={props} revalidate={isInFavorite} />
-
-          <CartButton
-            className={styles.button}
-            text={'В корзину'}
-            size={'m'}
-            // innerCount={count}
-            product={props}
-          />
+          <div id={`product button id: ${id}`}>
+            {
+              !!productsCount && <CartButton
+                className={styles.button}
+                text={'В корзину'}
+                size={'m'}
+                // innerCount={count}
+                product={props}
+              />
+            }
+          </div>
         </div>
-
       </div>
 
       <div className={`${styles.mainMobileBlock} ${classname}`}>

@@ -36,8 +36,10 @@ const ProductCard = (props: ProductCardProps) => {
             <NameAndProperty name={x[0]} value={x[1]} />
           </>))}
         </div>
-        <CartButton text={'Добавить в корзину'} size={'l'} product={product} />
+        {!!product.productsCount && <CartButton text={'Добавить в корзину'} size={'l'} product={product} />}
+        {!product.productsCount && <p className={styles.productSoon}>Скоро появится в продаже</p>}
       </div>
+
       <div className={styles.productCardMobile}>
         <div className={styles.favoriteButton}>
           <FavoriteButtonProductPage product={product} />

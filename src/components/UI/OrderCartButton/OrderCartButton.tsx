@@ -43,13 +43,13 @@ const OrderCartButton = (props: TBasketProduct) => {
   }, 200)
 
   const onAdd = () => {
-    setCountState(countState + 1);
-    debounce(countState + 1);
+    setCountState(Math.min(Number(product.productsCount), countState + 1));
+    debounce(Math.min(Number(product.productsCount), countState + 1));
   }
 
   const onRemove = () => {
-    setCountState(countState - 1);
-    debounce(countState - 1);
+    setCountState(Math.max(0, countState - 1));
+    debounce(Math.max(0, countState - 1));
   }
 
   const onDelete = () => {

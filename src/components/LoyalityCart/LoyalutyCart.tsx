@@ -8,10 +8,10 @@ const LoyalutyCart = () => {
   const { data: loyalty } = useGetLoyaltyQuery();
   return (
     <div className={styles.block}>
-      <p className={styles.title}>Серебрянный уровень</p>
+      <p className={styles.title}>{Number(loyalty?.cashback) == 5 ? 'Золотой уровень' : 'Серебрянный уровень'}</p>
       <NameAndProperty name='Ваши баллы' value={loyalty?.points} size='s' />
       <NameAndProperty name='Кэшбек с покупки' value={loyalty?.cashback} size='s' />
-      <NameAndProperty name='Прогресс' value={loyalty?.total} size='s' />
+      <NameAndProperty name='Прогресс' value={`${Math.min(Number(loyalty?.total) / 500, 100)}%`} size='s' />
     </div>
   );
 };

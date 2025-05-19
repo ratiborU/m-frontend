@@ -1,6 +1,5 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
-import { getAllSimularsByProductId } from "@/services/api/recomendations/recomendationService";
 import { getLoyalty } from "@/services/api/loyalty/loyaltyService";
 
 // хз как тут делать пагинацию

@@ -15,7 +15,7 @@ import { TPerson } from '@/services/api/persons/personType';
 import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
+// import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
 import LoyalutyCart from '@/components/LoyalityCart/LoyalutyCart';
 
 type ProfileSettingsProps = {

@@ -18,7 +18,7 @@ const BasketProduct = (props: TBasketProduct) => {
         <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product?.mainImage}` || ''} alt={''} width={180} height={180} />
         <div className={styles.information}>
           <p className={styles.name}>{product?.name}</p>
-          <p className={styles.description}>{product?.description}</p>
+          <p className={styles.description}>Продукта в наличии {product?.productsCount} шт.</p>
           <div className={styles.prices}>
             <p className={styles.price}>{Number(product.price) - Number(product.discount) - order.discountPerPackage} ₽</p>
             <p className={styles.oldPrice}>{product.discount + order.discountPerPackage != '0' ? `${product.price} ₽` : ''}</p>

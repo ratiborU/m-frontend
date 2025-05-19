@@ -1,26 +1,26 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createAnswer as createAnswerApi } from '@/services/api/answers/answerService';
-import { TAnswerCreate } from '@/services/api/answers/answerType';
+import { createCoupon as createCouponApi } from '@/services/api/coupons/couponService';
+import { TCouponCreate } from '@/services/api/coupons/couponType';
 
-interface CreateAnswerMutationArgs {
+interface CreateCouponMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useCreateAnswerMutation = (args: CreateAnswerMutationArgs) => {
+export const useCreateCouponMutation = (args: CreateCouponMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: createAnswer,
+    mutateAsync: createCoupon,
   } = useMutation({
-    mutationFn: async (data: TAnswerCreate) => await createAnswerApi(data),
+    mutationFn: async (data: TCouponCreate) => await createCouponApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['answers'],
+        queryKey: ['coupons'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +29,5 @@ export const useCreateAnswerMutation = (args: CreateAnswerMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, createAnswer };
+  return { isPending, isError, createCoupon };
 };

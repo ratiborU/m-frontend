@@ -3,6 +3,10 @@
   margin: 0 auto
 }
 
+.title {
+  margin-top: -70px;
+}
+
 .basketFlex {
   display: flex;
   justify-content: space-between;

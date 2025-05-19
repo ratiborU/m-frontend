@@ -1,7 +1,14 @@
 .block {
   display: flex;
-  width: 400;
+  width: 400px;
+  max-width: 400px;
   justify-content: space-between;
   font-size: 20px;
   font-weight: normal;
+}
+
+.name {
+  max-width: 320px;
+  word-break: break-all;
+  word-wrap: break-word;
 }

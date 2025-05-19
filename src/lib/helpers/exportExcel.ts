@@ -1,9 +1,9 @@
-import ExcelJS from 'exceljs';
-import { saveAs } from 'file-saver';
+// import ExcelJS from 'exceljs';
+// import { saveAs } from 'file-saver';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const exportExcel = async (data: any[], fileName: string) => {
-  console.log(data);
+  console.log(data, fileName);
   // 1. Create a new workbook
   // const workbook = new ExcelJS.Workbook();
   // const worksheet = workbook.addWorksheet('Data Report');

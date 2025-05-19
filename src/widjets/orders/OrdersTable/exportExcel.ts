@@ -51,6 +51,6 @@ export const exportExcel = async (data: TOrder[], fileName: string) => {
   // 5. Save the workbook as an Excel file
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  saveAs(blob, `${'Заказы'}.xlsx`);
+  saveAs(blob, `${fileName}.xlsx`);
   console.log('export 2');
 }

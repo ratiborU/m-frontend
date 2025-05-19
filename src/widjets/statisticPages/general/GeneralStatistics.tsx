@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { TOrder } from '@/services/api/orders/orderType';
 import Line from '@/components/UI/Line/Line';
-import { getLast12Monts, getLast30DaysDates, monthsDictionary2, monthsDictionaryDays } from '@/lib/helpers/parseDate';
+import { getLast12Monts, getLast30DaysDates, monthsDictionary2 } from '@/lib/helpers/parseDate';
 import SelectInput from '@/components/UI/SelectInput/SelectInput';
-import TimeInput from '@/components/UI/TimeInput/TimeInput';
+// import TimeInput from '@/components/UI/TimeInput/TimeInput';
 import styles from './generalStatistics.module.css'
 
 const datesOptions = [
@@ -26,17 +26,18 @@ const GeneralStatistics = (props: GeneralStatisticsProps) => {
   const { orders = [] } = props;
 
   const [interval, setInterval] = useState('days'); // days, months, yearss
-  const [dates, setDates] = useState(['', '']); // start, end
+  // const [dates, setDates] = useState(['', '']); // start, end
   const [data, setData] = useState<DatasetType[]>([]);
   const [labels, setLabels] = useState([...Array(12)].map((x, i) => monthsDictionary2[String(i + 1) as keyof typeof monthsDictionary2]))
 
   getLast30DaysDates();
 
   useEffect(() => {
-    const newOrders = orders;
+    // const newOrders = orders;
 
     const daysLabels = getLast30DaysDates();
     const monthsLabels = getLast12Monts();
+    const nowDate = (new Date()).getDate();
 
     if (interval == 'months') {
       setLabels([...Array(12)].map((x, i) => monthsDictionary2[String(i + 1) as keyof typeof monthsDictionary2]))
@@ -51,7 +52,8 @@ const GeneralStatistics = (props: GeneralStatisticsProps) => {
       setLabels(daysLabels);
       const dataDays = [...Array(daysLabels.length)].map(() => 0);
       for (let i = 0; i < orders.length; i++) {
-        dataDays[((new Date(orders[i].createdAt).getDate()) + (new Date()).getDate() + 1) % daysLabels.length] += Number(orders[i].price);
+        const productDate = (new Date(orders[i].createdAt)).getDate();
+        dataDays[(daysLabels.length + productDate - nowDate - 1) % daysLabels.length] += Number(orders[i].price);
       }
       setData([{ label: 'Общие продажи', data: dataDays }]);
     } else if (interval == 'years') {
@@ -62,7 +64,7 @@ const GeneralStatistics = (props: GeneralStatisticsProps) => {
       }
       setData([{ label: 'Общие продажи', data: dataDays }]);
     }
-  }, [interval]);
+  }, [interval, orders]);
 
   return (
     <div >

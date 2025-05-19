@@ -19,7 +19,10 @@ const Basket = (props: BasketProps) => {
       <div className={styles.wrapper}>
         <div className={styles.basketFlex}>
           <div className={styles.basket}>
-            <Title text={'Корзина'} margin={false} marginTop={false} />
+            <div className={styles.title}>
+              <Title text={'Корзина'} margin={false} marginTop={false} />
+            </div>
+
             <div className={styles.basketProducts}>
               {...products.map((x, i) => (
                 <BasketProduct

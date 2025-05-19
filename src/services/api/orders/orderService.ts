@@ -1,7 +1,7 @@
 'use server'
 import { api } from "../api";
 import { TOrder, TOrderCreate } from "./orderType";
-import { TPagination } from "../../types/paginationType";
+// import { TPagination } from "../../types/paginationType";
 import { cookies } from "next/headers";
 
 export const createOrder = async (data: TOrderCreate): Promise<TOrder> => {

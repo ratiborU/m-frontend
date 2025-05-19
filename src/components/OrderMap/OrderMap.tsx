@@ -58,7 +58,7 @@ const OrderMap = (props: OrderMapProps) => {
             }}
           >
             {
-              // ...cdekOffices.map(x => <PlacemarkComponent key={`placemark sdek: ${x.code}`} office={x} />)
+              ...cdekOffices.map(x => <PlacemarkComponent key={`placemark sdek: ${x.code}`} office={x} />)
             }
           </Clusterer>
         </Map>

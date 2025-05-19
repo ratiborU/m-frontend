@@ -1,26 +1,26 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateAnswer as updateAnswerApi } from '@/services/api/answers/answerService';
-import { TAnswer } from '@/services/api/answers/answerType';
+import { updateCoupon as updateCouponApi } from '@/services/api/coupons/couponService';
+import { TCoupon } from '@/services/api/coupons/couponType';
 
-interface UpdateAnswerMutationArgs {
+interface UpdateCouponMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useUpdateAnswerMutation = (args: UpdateAnswerMutationArgs) => {
+export const useUpdateCouponMutation = (args: UpdateCouponMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: updateAnswer,
+    mutateAsync: updateCoupon,
   } = useMutation({
-    mutationFn: async (data: TAnswer) => await updateAnswerApi(data),
+    mutationFn: async (data: TCoupon) => await updateCouponApi(data),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['answers'],
+        queryKey: ['coupons'],
       });
       if (onSuccess) {
         onSuccess();
@@ -29,5 +29,5 @@ export const useUpdateAnswerMutation = (args: UpdateAnswerMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, updateAnswer };
+  return { isPending, isError, updateCoupon };
 };

@@ -15,6 +15,8 @@ import { useDeleteOrderMutation } from '@/hooks/orders/useDeleteOrderMutation';
 import SelectInput from '@/components/UI/SelectInput/SelectInput';
 import { useGetPersonOptionsQuery } from '@/hooks/persons/useGetPersonOptionsQuery';
 import { parseDate } from '@/lib/helpers/parseDate';
+import { statusOptions } from './models';
+import Textarea from '@/components/UI/Textarea/Textarea';
 
 const EditOrder = (props: EditOrderProps) => {
   const {
@@ -73,42 +75,85 @@ const EditOrder = (props: EditOrderProps) => {
       <div className={styles.flex}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.block}>
-            <SelectInput
-              label='ФИО'
-              sizeInput='large'
-              selectProps={{
-                ...register('personId'),
-                defaultValue: personId
-              }}
-              options={personOptions || []}
-            />
-            {/* <Input
-              label='ФИО'
-              sizeInput='large'
-              error={errors.personId?.message}
-              inputProps={{
-                placeholder: '',
-                id: 'create-person-second-name',
-                autoComplete: 'new-passport',
-                defaultValue: personId,
-                ...register('personId')
-              }}
-            /> */}
-            <Input
-              label='Сумма'
-              sizeInput='large'
-              error={errors.price?.message}
-              inputProps={{
-                placeholder: '',
-                id: 'create-person-first-name',
-                autoComplete: 'new-passport',
-                defaultValue: price,
-                ...register('price')
-              }}
-            />
-            <Input
+            <div className={styles.inputs}>
+              <SelectInput
+                label='ФИО'
+                sizeInput='small'
+                selectProps={{
+                  ...register('personId'),
+                  defaultValue: personId
+                }}
+                options={personOptions || []}
+              />
+              <Input
+                label='Сумма'
+                sizeInput='small'
+                error={errors.price?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-person-first-name',
+                  autoComplete: 'new-passport',
+                  defaultValue: price,
+                  ...register('price')
+                }}
+              />
+            </div>
+
+
+
+            <div className={styles.inputs}>
+              <Input
+                label='Доставка'
+                sizeInput='small'
+                error={errors.delivery?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-person-father-name',
+                  autoComplete: 'new-passport',
+                  defaultValue: delivery,
+                  ...register('delivery')
+                }}
+              />
+              <Input
+                label='Дни'
+                sizeInput='small'
+                error={errors.deliveryDays?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-person-email',
+                  autoComplete: 'new-passport',
+                  defaultValue: deliveryDays,
+                  ...register('deliveryDays')
+                }}
+              />
+            </div>
+
+
+            <div className={styles.inputs}>
+              <SelectInput
+                label='ФИО'
+                sizeInput='small'
+                selectProps={{
+                  ...register('status'),
+                  defaultValue: status
+                }}
+                options={statusOptions || []}
+              />
+              <Input
+                label='Дата заказа'
+                sizeInput='small'
+                inputProps={{
+                  placeholder: '',
+                  id: 'edit-order-date',
+                  autoComplete: 'new-passport',
+                  defaultValue: parseDate(createdAt),
+                  disabled: true
+                }}
+              />
+            </div>
+            <Textarea
               label='Адрес'
-              sizeInput='large'
+              sizeInput='l'
               error={errors.address?.message}
               inputProps={{
                 placeholder: '',
@@ -116,30 +161,6 @@ const EditOrder = (props: EditOrderProps) => {
                 autoComplete: 'new-passport',
                 defaultValue: address,
                 ...register('address')
-              }}
-            />
-            <Input
-              label='Доставка'
-              sizeInput='large'
-              error={errors.delivery?.message}
-              inputProps={{
-                placeholder: '',
-                id: 'create-person-father-name',
-                autoComplete: 'new-passport',
-                defaultValue: delivery,
-                ...register('delivery')
-              }}
-            />
-            <Input
-              label='Дни'
-              sizeInput='large'
-              error={errors.deliveryDays?.message}
-              inputProps={{
-                placeholder: '',
-                id: 'create-person-email',
-                autoComplete: 'new-passport',
-                defaultValue: deliveryDays,
-                ...register('deliveryDays')
               }}
             />
             <Input
@@ -152,29 +173,6 @@ const EditOrder = (props: EditOrderProps) => {
                 autoComplete: 'new-passport',
                 defaultValue: comment,
                 ...register('comment')
-              }}
-            />
-            <Input
-              label='Статус'
-              sizeInput='large'
-              error={errors.status?.message}
-              inputProps={{
-                placeholder: '',
-                id: 'create-person-password',
-                autoComplete: 'new-passport',
-                defaultValue: status,
-                ...register('status')
-              }}
-            />
-            <Input
-              label='Дата заказа'
-              sizeInput='large'
-              inputProps={{
-                placeholder: '',
-                id: 'create-person-password',
-                autoComplete: 'new-passport',
-                defaultValue: parseDate(createdAt),
-                disabled: true
               }}
             />
 

@@ -4,7 +4,6 @@ import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 // import { IReviewResponse } from '../../../services/reviewsService';
 import styles from './line.module.css'
-import { useMemo } from 'react';
 
 
 type DatasetType = {

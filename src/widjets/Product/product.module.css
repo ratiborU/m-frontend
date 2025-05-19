@@ -116,7 +116,8 @@
   color: #353535;
   max-width: 540px;
   word-wrap: break-word;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  line-height: 24px
 }
 
 .characteristicsTitle {

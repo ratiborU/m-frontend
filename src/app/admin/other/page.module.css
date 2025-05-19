@@ -1,0 +1,12 @@
+.links {
+  font-size: 20px;
+  display: flex;
+  /* flex-direction: column; */
+  gap: 20px;
+  color: #222222;
+  font-weight: 300;
+}
+
+/* a {
+  color: #222222;
+} */

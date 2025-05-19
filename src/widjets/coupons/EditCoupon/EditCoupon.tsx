@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import styles from "./EditCoupon.module.css";
+import styles from "./editCoupon.module.css";
 import Input from '@/components/UI/Input/Input';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';

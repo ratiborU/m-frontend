@@ -31,7 +31,7 @@ import { useQueryClient } from '@tanstack/react-query';
 // import { revalidateTag } from 'next/cache';
 import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 import OrderCardMobile from '@/components/OrderCard/OrderCardMobile';
-import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
+// import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
 import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
 
 const createPersonSchema = z.object({

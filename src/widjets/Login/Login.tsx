@@ -60,38 +60,39 @@ export default function Login() {
 
 
   return (
-    <div className={styles.block}>
-      <Title text='Вход' size='l' />
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Input
-          label='Логин'
-          inputProps={{
-            placeholder: '',
-            id: 'login-login',
-            ...register('email')
-          }}
-          error={errors.email?.message}
-        />
-        <Input
-          label='Пароль'
-          inputProps={{
-            placeholder: '',
-            id: 'login-password',
-            ...register('password')
-          }}
-          error={errors.password?.message}
-        />
-        <Button text='Войти' size='l' />
-      </form>
+    <div className={styles.wrapper}>
+      <div className={styles.block}>
+        <Title text='Вход' size='l' />
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <Input
+            label='Логин'
+            inputProps={{
+              placeholder: '',
+              id: 'login-login',
+              ...register('email')
+            }}
+            error={errors.email?.message}
+          />
+          <Input
+            label='Пароль'
+            inputProps={{
+              placeholder: '',
+              id: 'login-password',
+              ...register('password')
+            }}
+            error={errors.password?.message}
+          />
+          <Button text='Войти' size='l' />
+        </form>
 
-
-      <div className={styles.text}>
-        <p>Еще нет аккаунта?</p>
-        <Link href="/signin" className={styles.link}>Зарегистрироваться</Link>
-      </div>
-      <div className={`${styles.text} ${styles.mt}`}>
-        <p>Забыли пароль?</p>
-        <Link href="/signin" className={styles.link}>Восстановить доступ</Link>
+        <div className={styles.text}>
+          <p>Еще нет аккаунта?</p>
+          <Link href="/signin" className={styles.link}>Зарегистрироваться</Link>
+        </div>
+        <div className={`${styles.text} ${styles.mt}`}>
+          <p>Забыли пароль?</p>
+          <Link href="/signin" className={styles.link}>Восстановить доступ</Link>
+        </div>
       </div>
     </div>
   );

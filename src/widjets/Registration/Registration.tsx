@@ -76,65 +76,67 @@ export default function Registration() {
   }
 
   return (
-    <div className={styles.block}>
-      <Title text='Регистрация' size='l' />
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Input
-          label='ФИО'
-          inputProps={{
-            placeholder: 'Иванов Иван Иванович',
-            id: 'registration-fio',
-            ...register('fio'),
-            defaultValue: person.fio
-          }}
-          error={errors.fio?.message}
-        />
-        <Input
-          label='Логин'
-          inputProps={{
-            placeholder: 'Ваша почта...',
-            id: 'registration-login',
-            ...register('email'),
-            defaultValue: person.email
-          }}
-          error={errors.email?.message}
-        />
-        <Input
-          label='Телефон'
-          inputProps={{
-            placeholder: 'Ваш телефон...',
-            id: 'registration-phone',
-            ...register('phoneNumber'),
-            defaultValue: person.phone
-          }}
-          error={errors.phoneNumber?.message}
-        />
-        <Input
-          label='Пароль'
-          inputProps={{
-            placeholder: '',
-            id: 'registration-password',
-            ...register('password')
-          }}
-          error={errors.password?.message}
-        />
-        <Input
-          label='Повторите пароль'
-          inputProps={{
-            placeholder: '',
-            id: 'registration-repeat-password',
-            ...register('repeatPassword')
-          }}
-          error={errors.repeatPassword?.message}
-        />
-        <Button
-          text='Зарегистрироваться'
-          size='l'
-        />
-      </form>
-      <div className={styles.text}>
-        <p>Уже есть аккаунт</p>
-        <Link href="/login" className={styles.link}>Войти</Link>
+    <div className={styles.wrapper}>
+      <div className={styles.block}>
+        <Title text='Регистрация' size='l' />
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <Input
+            label='ФИО'
+            inputProps={{
+              placeholder: 'Иванов Иван Иванович',
+              id: 'registration-fio',
+              ...register('fio'),
+              defaultValue: person.fio
+            }}
+            error={errors.fio?.message}
+          />
+          <Input
+            label='Логин'
+            inputProps={{
+              placeholder: 'Ваша почта...',
+              id: 'registration-login',
+              ...register('email'),
+              defaultValue: person.email
+            }}
+            error={errors.email?.message}
+          />
+          <Input
+            label='Телефон'
+            inputProps={{
+              placeholder: 'Ваш телефон...',
+              id: 'registration-phone',
+              ...register('phoneNumber'),
+              defaultValue: person.phone
+            }}
+            error={errors.phoneNumber?.message}
+          />
+          <Input
+            label='Пароль'
+            inputProps={{
+              placeholder: '',
+              id: 'registration-password',
+              ...register('password')
+            }}
+            error={errors.password?.message}
+          />
+          <Input
+            label='Повторите пароль'
+            inputProps={{
+              placeholder: '',
+              id: 'registration-repeat-password',
+              ...register('repeatPassword')
+            }}
+            error={errors.repeatPassword?.message}
+          />
+          <Button
+            text='Зарегистрироваться'
+            size='l'
+          />
+        </form>
+        <div className={styles.text}>
+          <p>Уже есть аккаунт</p>
+          <Link href="/login" className={styles.link}>Войти</Link>
+        </div>
       </div>
     </div>
   );

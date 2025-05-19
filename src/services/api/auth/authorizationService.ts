@@ -17,12 +17,12 @@ export const setCookies = (tokens: TTokens) => {
 
   cookies().set("access", tokens.accessToken, {
     httpOnly: true,
-    secure: true,
+    // secure: true,
     expires: accessExpiresAt,
   });
   cookies().set("refresh", tokens.refreshToken, {
     httpOnly: true,
-    secure: true,
+    // secure: true,
     expires: refreshExpiresAt,
   });
 }

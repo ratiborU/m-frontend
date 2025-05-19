@@ -23,9 +23,13 @@
 }
 
 @media (max-width: 780px) {
-  .basketFlex {
-    margin-top: 0px;
+  .wrapper {
+    height: calc(100vh - 180px)
   }
+
+  /* .basketFlex {
+    margin-top: 0px;
+  } */
 
   .basketProducts {
     gap: 24px;

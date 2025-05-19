@@ -3,30 +3,41 @@
   font-weight: 300;
   font-size: 16px;
   transition: 0.1s;
+  max-width: calc(100vw - 16px);
 }
 
 .l {
   height: 50px;
   width: 100%;
 }
+
 .m {
   height: 40px;
   width: 100%;
 }
+
 .s {
   height: 40px;
   padding: 0 50px;
 }
 
+.xs {
+  height: 40px;
+  padding: 0 30px;
+}
+
 .filled {
   background-color: #deebff;
 }
+
 .filled:hover {
   background-color: #e6f1ff;
 }
+
 .filled:active {
   background-color: #f1f7ff;
 }
+
 .outlined {
   font-weight: 300;
 }

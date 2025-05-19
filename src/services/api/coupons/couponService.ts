@@ -11,7 +11,7 @@ export const createCoupon = async (data: TCouponCreate): Promise<TCoupon> => {
   return response;
 }
 
-export const getAllCoupons = async (): Promise<TPagination<TCoupon>> => {
+export const getAllCoupons = async (): Promise<TCoupon[]> => {
   // добавить пагинацию
   const response = await api('coupons');
   return response;
@@ -24,12 +24,11 @@ export const getCouponsByPersonId = async (id: number | string): Promise<TPagina
 }
 
 export const getOneCoupon = async (id: number | string): Promise<TCoupon> => {
-  const response = await api(`coupons/${id}`);
+  const response = await api(`coupons/getOneById/${id}`);
   return response;
 }
 
 export const checkOneCoupon = async (value: string): Promise<TCoupon> => {
-  console.log(`\n\n${value}\n\n`);
   const response = await api(`coupons/check/?value=${value}`, {
     cache: 'no-cache'
   });

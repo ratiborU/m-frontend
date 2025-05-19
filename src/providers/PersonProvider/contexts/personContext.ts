@@ -6,6 +6,8 @@ export interface IPersonContext {
   email: string,
   phone: string,
   address: string,
+  longitude: number,
+  latitude: number
 }
 
 export const PersonContext = createContext<IPersonContext>({
@@ -14,4 +16,6 @@ export const PersonContext = createContext<IPersonContext>({
   email: '',
   phone: '',
   address: '',
+  longitude: 0,
+  latitude: 0
 });

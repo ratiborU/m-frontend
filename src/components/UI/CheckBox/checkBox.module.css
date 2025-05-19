@@ -1,21 +1,17 @@
 .field {
   width: 360px;
-  max-width: 360px;
+  max-width: calc(100vw - 16px);
   display: flex;
   align-items: center;
 }
 
 .label {
-  /* margin-left: 16px; */
   font-size: 16px;
   font-weight: 300;
   line-height: 110%;
   color: #494949;
-  /* border: 1px solid #000; */
   display: flex;
-  /* height: 22px; */
   margin-top: 3px;
-  /* align-items: center; */
 }
 
 .input[type=radio],

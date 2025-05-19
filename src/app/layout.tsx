@@ -8,6 +8,7 @@ import { CatalogFilterContextProvider } from "@/providers/CatalogFilterProvider/
 import { CatalogSortContextProvider } from "@/providers/CatalogSortProvider/CatalogSortProvider";
 import { PersonContextProvider } from "@/providers/PersonProvider/PersonContextProvider";
 import { OrderContextProvider } from "@/providers/OrderProvider/OrderContextProvider";
+import { FilterContextProvider } from "@/providers/NewFilterProvider/CatalogFilterProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -29,10 +30,11 @@ export default function RootLayout({
         <ReactQueryProvider>
           <CatalogFilterContextProvider>
             <CatalogSortContextProvider>
-              <PersonContextProvider>
-                <OrderContextProvider>
-                  {children}
-                  {/* <div className={styles.block}>
+              <FilterContextProvider>
+                <PersonContextProvider>
+                  <OrderContextProvider>
+                    {children}
+                    {/* <div className={styles.block}>
                     <ClientHeader />
                     <div className={styles.middle}>
                       {children}
@@ -40,8 +42,9 @@ export default function RootLayout({
 
                     <Footer />
                   </div> */}
-                </OrderContextProvider>
-              </PersonContextProvider>
+                  </OrderContextProvider>
+                </PersonContextProvider>
+              </FilterContextProvider>
             </CatalogSortContextProvider>
           </CatalogFilterContextProvider>
         </ReactQueryProvider>

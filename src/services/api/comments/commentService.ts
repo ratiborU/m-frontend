@@ -23,6 +23,12 @@ export const getCommentsByProductId = async (id: number | string): Promise<TPagi
   return response;
 }
 
+export const getCommentsByPersonId = async (id: number | string): Promise<TComment[]> => {
+  // добавить пагинацию
+  const response = await api(`comments/byPersonId/${id}`);
+  return response;
+}
+
 // byPersonAndProductId
 export const getOneCommentByPersonAndProductId = async (personId: number | string, productId: number | string): Promise<TComment> => {
   // добавить пагинацию

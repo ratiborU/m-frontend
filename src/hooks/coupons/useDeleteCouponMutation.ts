@@ -1,25 +1,25 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteAnswer as deleteAnswerApi } from '@/services/api/answers/answerService';
+import { deleteCoupon as deleteCouponApi } from '@/services/api/coupons/couponService';
 
-interface DeleteAnswerMutationArgs {
+interface DeleteCouponMutationArgs {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
 
-export const useDeleteAnswerMutation = (args: DeleteAnswerMutationArgs) => {
+export const useDeleteCouponMutation = (args: DeleteCouponMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: deleteAnswer,
+    mutateAsync: deleteCoupon,
   } = useMutation({
-    mutationFn: async (id: number | string) => await deleteAnswerApi(id),
+    mutationFn: async (id: number | string) => await deleteCouponApi(id),
     onSuccess: () => {
       client.invalidateQueries({
-        queryKey: ['answers'],
+        queryKey: ['coupons'],
       });
       if (onSuccess) {
         onSuccess();
@@ -28,5 +28,5 @@ export const useDeleteAnswerMutation = (args: DeleteAnswerMutationArgs) => {
     onError
   });
 
-  return { isPending, isError, deleteAnswer };
+  return { isPending, isError, deleteCoupon };
 };

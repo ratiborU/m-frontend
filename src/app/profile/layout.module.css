@@ -25,3 +25,9 @@
 .middle {
   flex: 1 0 auto;
 }
+
+@media (max-width: 576px) {
+  .layout {
+    margin-top: 40px;
+  }
+}

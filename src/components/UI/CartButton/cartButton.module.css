@@ -3,6 +3,7 @@
   font-weight: 300;
   font-size: 16px;
   transition: 0.1s;
+  max-width: calc(100vw - 16px);
 }
 
 .button:hover {
@@ -21,7 +22,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0 4px; */
   overflow: hidden;
 }
 
@@ -69,4 +69,23 @@
 
 .outlined {
   font-weight: 300;
+}
+
+@media (max-width: 760px) {
+  .m {
+    height: 36px;
+  }
+
+  .iconButton:hover,
+  .iconButtonLarge:hover {
+    background-color: #deebff;
+  }
+
+  /* .title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-left: 8px;
+    margin-right: 8px;
+  } */
 }

@@ -8,7 +8,7 @@ type InputFileProps = {
 }
 
 const InputFile = (props: InputFileProps) => {
-  const { text = 'Загрузить', inputProps, buttonProps } = props;
+  const { text = 'Загрузить файл', inputProps, buttonProps } = props;
   const [fileName, setFileName] = useState(text);
 
   return (

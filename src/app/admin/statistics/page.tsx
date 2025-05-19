@@ -1,9 +1,10 @@
 import React from 'react';
+import Statistics from '@/widjets/Statistics/Statistics';
 
 const page = () => {
   return (
     <div>
-      статистика, в разработке...
+      <Statistics />
     </div>
   );
 };

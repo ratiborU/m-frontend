@@ -12,7 +12,7 @@ const OrderProduct = (props: OrderProductProps) => {
   return (
     <div className={styles.block}>
       <div className={styles.name}>{product.name}</div>
-      <div className={styles.count}>{count}</div>
+      <div className={styles.count}>{count} шт</div>
     </div>
   );
 };

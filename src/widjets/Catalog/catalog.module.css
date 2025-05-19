@@ -12,9 +12,31 @@
 .products {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: stretch;
-  /* justify-content: space-between; */
   gap: 20px;
   margin-top: 40px;
+}
+
+.filterAndSort {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .catalog {
+    margin-top: 20px;
+    margin-right: 0px;
+    padding: 0px 10px;
+  }
+
+  .filterAndSort {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .catalogBlock {
+    margin-left: 0px;
+  }
+
+  .products {
+    margin-top: 20px;
+  }
 }

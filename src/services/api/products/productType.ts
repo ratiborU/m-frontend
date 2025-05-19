@@ -13,8 +13,11 @@ export type TProduct = {
   price: string,
   discount: string,
   rate: string,
-  commentsCount: string,
-  productsCount: string,
+  commentsCount: string, // колличество комментариев
+  productsCount: string, // колличество товара на складе
+  sellCount: number, // количество продаж
+  inOrdersCount: number, // количество заказов с этим товаром
+  categoryCharacteristics: object,
   categoryId: string,
   mainImage: string,
   createdAt: string,
@@ -22,11 +25,11 @@ export type TProduct = {
   category: TCategory,
   favoriteProduct?: TFavoriteProduct,
   basketProduct?: TBasketProduct,
-  stone?: string,
-  size?: string,
-  material?: string,
-  fasteningType?: string,
-  amount?: string,
+  // stone?: string,
+  // size?: string,
+  // material?: string,
+  // fasteningType?: string,
+  // amount?: string,
 }
 
 export type TProductCreate = {
@@ -40,10 +43,10 @@ export type TProductCreate = {
   productsCount: string,
   categoryId: string,
   file: File, // ?
-  stone?: string,
-  size?: string,
-  material?: string,
-  fasteningType?: string,
-  amount?: string,
+  // stone?: string,
+  // size?: string,
+  // material?: string,
+  // fasteningType?: string,
+  // amount?: string,
 }
 

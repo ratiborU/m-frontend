@@ -14,6 +14,7 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import Comment from '@/components/Comment/Comment';
 import LeaveComment from '@/components/LeaveComment/LeaveComment';
 import Gallery from '@/components/Gallery/Gallery';
+// import { useGetSimularProductsQuery } from '@/hooks/recommendations/useGetAllSimularProductsQuery';
 
 export interface ProductProps {
   product: TProduct,
@@ -30,6 +31,8 @@ const ProductWidget = (props: ProductProps) => {
 
   const characteristics = product.characteristics.split('\r\n').map(x => x.split(': '));
   const galeryImages = [`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product.mainImage}`, ...images.map(x => `${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`)]
+
+  // const { simularProductsData, isFetching, error } = useGetSimularProductsQuery(product.id);
 
   const onGalleryOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -66,7 +69,7 @@ const ProductWidget = (props: ProductProps) => {
                     <Image
                       key={`product mini images key: ${x.id}`}
                       src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`}
-                      className={styles.image}
+                      className={styles.imageMini}
                       onClick={onGalleryOpen}
                       alt={''}
                       width={90}
@@ -80,8 +83,10 @@ const ProductWidget = (props: ProductProps) => {
               <div className={styles.titleBlock}>
                 <h1 className={styles.title}>{product.name}</h1>
                 <div className={styles.infoBlock}>
-                  <p className={styles.price}>{Number(product.price) - Number(product.discount)} ₽</p>
-                  <p className={styles.oldPrice}>{product.discount != '0' ? `${product.price} ₽` : ''}</p>
+                  <div className={styles.priceBlock}>
+                    <p className={styles.price}>{Number(product.price) - Number(product.discount)} ₽</p>
+                    <p className={styles.oldPrice}>{product.discount != '0' ? `${product.price} ₽` : ''}</p>
+                  </div>
                   <div className={styles.rateBlock}>
                     <p className={styles.rate}>{product.rate}</p>
                     <div className={styles.rateStars}>
@@ -93,7 +98,7 @@ const ProductWidget = (props: ProductProps) => {
 
                 </div>
               </div>
-              <div className={styles.aboutblock}>
+              <div className={styles.aboutBlock}>
                 <h2 className={styles.aboutTitle}>О товаре</h2>
                 {product.description.split('\r\n').filter(x => x != '').map((x, i) => (
                   <p key={`description paragraph: ${i}`} className={styles.aboutDescription}>{x}</p>
@@ -117,6 +122,13 @@ const ProductWidget = (props: ProductProps) => {
                 ))}
               </div>
             </div>
+            <div className={styles.characteristicsCloumns2}>
+              <div className={styles.characteristicsList}>
+                {characteristics.map((x, i) => (
+                  <NameAndProperty key={`characteristic key: ${product.id} ${i}`} name={x[0]} value={x[1]} />
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className={styles.sameProducts}>
@@ -125,6 +137,7 @@ const ProductWidget = (props: ProductProps) => {
               {...simularProducts.map(x => <Product key={`simular product ${product.id}: ${x.id}`} {...x} />)}
             </div>
           </div>
+
           <div className={styles.comments}>
             <div>
               <h2 className={styles.commentsTitle}>Отзывы</h2>
@@ -135,8 +148,17 @@ const ProductWidget = (props: ProductProps) => {
               </div>
             </div>
             <LeaveComment product={product} comment={comment} />
-
           </div>
+
+          {/* <div className={styles.commentsMobile}>
+            <h2 className={styles.commentsTitle}>Отзывы</h2>
+            <LeaveComment product={product} comment={comment} />
+            <div className={styles.commentsBlock}>
+              {...comments!.map(x => (
+                <Comment key={`comment for product: ${product.id} ${x.id}`} {...x} />
+              ))}
+            </div>
+          </div> */}
         </div>
       </div>
 

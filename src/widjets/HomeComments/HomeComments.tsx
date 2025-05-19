@@ -14,8 +14,8 @@ const comments = [
     "personId": 1,
     "person": {
       "id": 1,
-      "firstName": "admin",
-      "secondName": "admin",
+      "firstName": "Иванов",
+      "secondName": "Иван",
       "fatherName": "",
     }
   },
@@ -29,8 +29,8 @@ const comments = [
     "personId": 1,
     "person": {
       "id": 1,
-      "firstName": "admin",
-      "secondName": "admin",
+      "firstName": "Макдалена",
+      "secondName": "Мария",
       "fatherName": "",
     }
   },
@@ -44,8 +44,8 @@ const comments = [
     "personId": 1,
     "person": {
       "id": 1,
-      "firstName": "admin",
-      "secondName": "admin",
+      "firstName": "Смитт",
+      "secondName": "Джон",
       "fatherName": "",
     }
   },
@@ -59,8 +59,8 @@ const comments = [
     "personId": 1,
     "person": {
       "id": 1,
-      "firstName": "admin",
-      "secondName": "admin",
+      "firstName": "Neo",
+      "secondName": "",
       "fatherName": "",
     }
   }

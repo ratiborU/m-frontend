@@ -6,8 +6,9 @@ import cdekIcon from '../../../public/sdek icon.svg'
 import styles from './placemark.module.css'
 import { renderToString } from 'react-dom/server';
 import { TCdekOffice } from '@/services/types/cdekTypes';
-import { useOrderSetterContext } from '@/providers/OrderProvider/hooks/useOrderSetterContext';
 import Image from 'next/image';
+import { usePersonSetterContext } from '@/providers/PersonProvider/hooks/usePersonSetterContext';
+import { LocalStorageService } from '@/lib/helpers/localStorageService';
 
 const icon = renderToString(
   <Image
@@ -32,7 +33,7 @@ type PlacemarkProps = {
 // CDEK
 const PlacemarkComponent = (props: PlacemarkProps) => {
   const { office } = props;
-  const setOrder = useOrderSetterContext();
+  const setPeron = usePersonSetterContext();
 
   return (
     <Placemark
@@ -41,7 +42,6 @@ const PlacemarkComponent = (props: PlacemarkProps) => {
       options={{
         preset: 'islands#stretchyIcon',
         iconColor: '#00843E',
-
       }}
       properties={{
         balloonContentBody: renderPlace(office),
@@ -50,7 +50,12 @@ const PlacemarkComponent = (props: PlacemarkProps) => {
         // hintContent: 'item.label',
       }}
       onClick={() => {
-        setOrder.setAddress(office.location.address_full || '')
+        setPeron.setAddress(office.location.address_full || '');
+        setPeron.setLongitude(office.location.longitude || 56.84);
+        setPeron.setLatitude(office.location.latitude || 60.63);
+        LocalStorageService.save('address', office.location.address_full || '');
+        LocalStorageService.save('longitude', office.location.longitude || 56.84);
+        LocalStorageService.save('latitude', office.location.latitude || 60.63);
         const input: HTMLInputElement | null = document.getElementById('order-input-address') as HTMLInputElement;
         input.value = office.location.address_full || ''
 

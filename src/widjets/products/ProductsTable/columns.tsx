@@ -16,44 +16,32 @@ export const productColumns: GridColDef[] = [
     filterable: false,
     disableColumnMenu: true,
   },
-  // {
-  //   field: 'id',
-  //   headerName: 'Id',
-  //   width: 80,
-  //   align: 'center',
-  //   headerAlign: 'center'
-  // },
   {
     field: 'name',
     headerName: 'Заголовок',
     // width: 200,
-    flex: 1,
+    flex: 2,
     minWidth: 160
   },
   {
-    field: 'description',
-    headerName: 'Описание',
+    field: 'category',
+    headerName: 'Категория',
+    renderCell: (props) => props.row.category.name,
     // width: 50,
-    flex: 2,
-    minWidth: 100
+    flex: 1,
+    minWidth: 120
   },
-  // {
-  //   field: 'characteristics',
-  //   headerName: 'Характеристики',
-  //   // width: 50,
-  //   flex: 2,
-  //   minWidth: 100
-  // },
   {
     field: 'price',
     headerName: 'Цена',
+    renderCell: (props) => Number(props.row.price - props.row.discount),
     width: 80,
   },
-  {
-    field: 'discount',
-    headerName: 'Скидка',
-    width: 80,
-  },
+  // {
+  //   field: 'discount',
+  //   headerName: 'Скидка',
+  //   width: 80,
+  // },
   {
     field: 'rate',
     headerName: 'Оценка',
@@ -62,6 +50,11 @@ export const productColumns: GridColDef[] = [
   {
     field: 'commentsCount',
     headerName: 'Комментарии',
+    width: 100,
+  },
+  {
+    field: 'productsCount',
+    headerName: 'На складе',
     width: 100,
   },
 ]

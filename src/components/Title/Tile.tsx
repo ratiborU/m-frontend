@@ -9,15 +9,15 @@ type TitleProps = {
 }
 
 const Title = (props: TitleProps) => {
-  const { text, className = '', margin = true, marginTop = true } = props
+  const { text, className = '' } = props
   return (
     <div
       className={`${styles.title} ${className}`}
-      style={{
-        marginLeft: margin ? '70px' : '0',
-        marginRight: margin ? '70px' : '0',
-        marginTop: marginTop ? '70px' : '0'
-      }}
+    // style={{
+    //   marginLeft: margin ? '70px' : '0',
+    //   marginRight: margin ? '70px' : '0',
+    //   marginTop: marginTop ? '70px' : '0'
+    // }}
     >
       {text}
     </div>

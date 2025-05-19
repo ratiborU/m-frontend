@@ -1,10 +1,13 @@
+import { getCommentsByPersonId } from '@/services/api/comments/commentService';
+import ProfileComments from '@/widjets/profilePages/Comments/ProfileComments';
+import { cookies } from 'next/headers';
 import React from 'react';
 
-const page = () => {
-  return (
-    <div>
+const page = async () => {
+  const comments = await getCommentsByPersonId(cookies().get('personId')?.value || 0)
 
-    </div>
+  return (
+    <ProfileComments comments={comments} />
   );
 };
 

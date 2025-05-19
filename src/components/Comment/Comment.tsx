@@ -7,7 +7,7 @@ import starGray from '../../../public/Star rate gray filled.svg'
 import Image from 'next/image';
 
 const Comment = (props: TComment) => {
-  const { id, text, rate, createdAt, person, } = props;
+  const { id, text, rate, createdAt, person, answer } = props;
   return (
     <div className={styles.comment}>
       <div className={styles.commentInformation}>
@@ -19,6 +19,16 @@ const Comment = (props: TComment) => {
         <p className={styles.date}>{createdAt.slice(0, 10)}</p>
       </div>
       <p className={styles.commentText}>{text}</p>
+      {
+        !!answer && <div className={styles.answer}>
+          <div className={styles.answerInformation}>
+            <p className={styles.answerName}>Администратор</p>
+            <p className={styles.date}>{answer.createdAt.slice(0, 10)}</p>
+          </div>
+          <p className={styles.answerText}>{answer.text}</p>
+        </div>
+      }
+
     </div>
   );
 };

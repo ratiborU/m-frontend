@@ -22,8 +22,8 @@ const Footer = () => {
             <p className={styles.columnText}>+7 (902) 870-67-40</p>
             <p className={styles.columnText}>info@niname.ru</p>
             <div>
-              <p className={styles.columnText}>г. Екатеринбург,</p>
-              <p className={styles.columnText}>ул. Ленина, д. 99</p>
+              <p className={styles.columnText}>г. Екатеринбург, ул. Ленина, д. 99</p>
+              {/* <p className={styles.columnText}>ул. Ленина, д. 99</p> */}
             </div>
           </div>
           <div className={styles.column}>

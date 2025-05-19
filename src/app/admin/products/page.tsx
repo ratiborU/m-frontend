@@ -1,5 +1,7 @@
 import React from 'react';
 import ProductsTable from '@/widjets/products/ProductsTable/ProductsTable';
+import { getAllProducts } from '@/services/api/products/productService';
+import { getAllOrderProducts } from '@/services/api/orderProducts/orderProductService';
 // import { getAllProducts } from '@/services/api/productService';
 // import { TProduct } from '@/services/types/productType';
 
@@ -10,8 +12,11 @@ import ProductsTable from '@/widjets/products/ProductsTable/ProductsTable';
 // }
 
 const page = async () => {
+  const products = await getAllProducts();
+  const orderProducts = await getAllOrderProducts();
+
   return (
-    <ProductsTable />
+    <ProductsTable products={products.rows} orderProducts={orderProducts.rows} />
   );
 };
 

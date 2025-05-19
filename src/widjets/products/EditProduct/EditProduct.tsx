@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./editProduct.module.css";
 import Input from '@/components/UI/Input/Input';
 import Textarea from '@/components/UI/Textarea/Textarea';
@@ -19,7 +19,8 @@ import { editProductSchema, TEditProductSchema } from './models';
 import { useGetCategoryOptionsQuery } from '@/hooks/categories/useGetCategoryOptions';
 import SelectInput from '@/components/UI/SelectInput/SelectInput';
 import { createImage, deleteImage } from '@/services/api/images/imageService';
-import { stoneOptions, sizeOptions, fasteningTypeOptions, materialOptions, amountOptions } from '@/services/api/products/productOtherOptions';
+import { useGetCategoriesQuery } from '@/hooks/categories/useGetAllCategoriesQuery';
+// import { stoneOptions, sizeOptions, fasteningTypeOptions, materialOptions, amountOptions } from '@/services/api/products/productOtherOptions';
 
 
 const EditProduct = (props: EditProductProps) => {
@@ -38,11 +39,12 @@ const EditProduct = (props: EditProductProps) => {
     categoryId,
     mainImage,
     images,
-    stone,
-    size,
-    material,
-    fasteningType,
-    amount
+    categoryCharacteristics
+    // stone,
+    // size,
+    // material,
+    // fasteningType,
+    // amount
     // createdAt,
     // updatedAt
   } = props;
@@ -50,8 +52,13 @@ const EditProduct = (props: EditProductProps) => {
   const notify = () => toast.success("Товар успешно изменен!");
   const notifyDelete = () => toast.success("Товар успешно удален!");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);
+  const [categoryIdState, setCategoryIdState] = useState(categoryId);
+  const [categoryParameters, setCategoryParameters] = useState({});
+  const [categoryParametersToSend, setCategoryParametersToSend] = useState({});
+
 
   const { data: categoryOptions } = useGetCategoryOptionsQuery();
+  const { data: categories } = useGetCategoriesQuery();
 
   // добавить мутации для загрузки изображений
   const { register, handleSubmit, formState: { errors } } = useForm<TEditProductSchema>({ resolver: zodResolver(editProductSchema) });
@@ -92,11 +99,12 @@ const EditProduct = (props: EditProductProps) => {
     formData.append('commentsCount', commentsCount);
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
-    formData.append('stone', data.stone);
-    formData.append('size', data.size);
-    formData.append('material', data.material);
-    formData.append('fasteningType', data.fasteningType);
-    formData.append('amount', data.amount);
+    formData.append('categoryCharacteristics', JSON.stringify(categoryParametersToSend));
+    // formData.append('stone', data.stone);
+    // formData.append('size', data.size);
+    // formData.append('material', data.material);
+    // formData.append('fasteningType', data.fasteningType);
+    // formData.append('amount', data.amount);
     await updateProduct(formData);
   }
 
@@ -118,11 +126,28 @@ const EditProduct = (props: EditProductProps) => {
     await createImage(formData);
   }
 
+  useEffect(() => {
+    if (categoryIdState && categories) {
+      const parameters = categories?.rows.find(x => x.id == categoryIdState)?.parameters;
+      setCategoryParameters(parameters as object);
+      // console.log(Object.entries(parameters as object).reduce((acc, cur) => {
+      //   acc[cur[0]] = cur[1][0];
+      //   return acc
+      // }, {}));
+      setCategoryParametersToSend(Object.entries(parameters as object).reduce((acc, cur) => {
+        acc[cur[0]] = cur[1][0];
+        return acc
+      }, {}));
+    }
+    // console.log(categories?.rows);
+  }, [categories, categories?.rows, categoryIdState])
+
   return (
     <>
       <div className={styles.flex}>
-        <form onSubmit={handleSubmit(onSubmitData)}>
-          <div className={styles.block}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmitData)}>
+          {/* <div className={styles.block}> */}
+          <div className={styles.block1}>
             <Textarea
               label='Название'
               // sizeInput='large'
@@ -180,85 +205,10 @@ const EditProduct = (props: EditProductProps) => {
                 ...register('characteristics')
               }}
             />
-            {/* <div className={styles.inputs}>
-              <Input
-                label='Цена'
-                sizeInput='small'
-                error={errors.price?.message}
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-price',
-                  autoComplete: 'new-passport',
-                  defaultValue: price,
-                  ...register('price')
-                }}
-              />
-              <Input
-                label='Скидка'
-                sizeInput='small'
-                error={errors.discount?.message}
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-discount',
-                  autoComplete: 'new-passport',
-                  defaultValue: discount,
-                  ...register('discount')
-                }}
-              />
-            </div> */}
-            {/* <div className={styles.inputs}>
-              <Input
-                label='В наличии x'
-                sizeInput='small'
-                error={errors.productsCount?.message}
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-have',
-                  autoComplete: 'new-passport',
-                  defaultValue: productsCount,
-                  ...register('productsCount')
-                }}
-              />
-              <SelectInput
-                label='Категория'
-                sizeInput='small'
-                selectProps={{
-                  ...register('categoryId'),
-                  defaultValue: categoryId,
-                }}
-                options={categoryOptions || []}
-              />
-            </div> */}
-            {/* <div className={styles.inputs}>
-              <Input
-                label='Оценка'
-                sizeInput='small'
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-rate',
-                  autoComplete: 'new-passport',
-                  defaultValue: rate,
-                  // ...register('rate'),
-                  disabled: true
-                }}
-              />
-              <Input
-                label='Комментариев'
-                sizeInput='small'
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-comments',
-                  autoComplete: 'new-passport',
-                  defaultValue: commentsCount,
-                  // ...register('commentsCount'),
-                  disabled: true
-                }}
-              />
-            </div> */}
             <div className={styles.inputs}>
               <Input
                 label='Цена'
-                sizeInput='xsmall'
+                sizeInput='small'
                 error={errors.price?.message}
                 inputProps={{
                   placeholder: '',
@@ -270,7 +220,7 @@ const EditProduct = (props: EditProductProps) => {
               />
               <Input
                 label='Скидка'
-                sizeInput='xsmall'
+                sizeInput='small'
                 error={errors.discount?.message}
                 inputProps={{
                   placeholder: '',
@@ -279,92 +229,6 @@ const EditProduct = (props: EditProductProps) => {
                   ...register('discount'),
                   defaultValue: discount
                 }}
-              />
-              <Input
-                label='На складе'
-                sizeInput='xsmall'
-                error={errors.productsCount?.message}
-                inputProps={{
-                  placeholder: '',
-                  id: 'create-product-have',
-                  autoComplete: 'new-passport',
-                  ...register('productsCount'),
-                  defaultValue: productsCount
-                  // disabled: true
-                }}
-              />
-            </div>
-            <div className={styles.inputs}>
-              <SelectInput
-                label='Категория'
-                sizeInput='xsmall'
-                error={errors.categoryId?.message}
-                selectProps={{
-                  ...register('categoryId'),
-                  defaultValue: categoryId,
-                }}
-                options={categoryOptions || []}
-              />
-
-              <SelectInput
-                label='Камень'
-                sizeInput='xsmall'
-                error={errors.stone?.message}
-                selectProps={{
-                  id: 'create-product-stone',
-                  ...register('stone'),
-                  defaultValue: stone,
-                }}
-
-                options={stoneOptions}
-              />
-              <SelectInput
-                label='Размер'
-                sizeInput='xsmall'
-                error={errors.size?.message}
-                selectProps={{
-                  id: 'create-product-size',
-                  ...register('size'),
-                  defaultValue: size,
-                }}
-                options={sizeOptions}
-              />
-            </div>
-
-            <div className={styles.inputs}>
-              <SelectInput
-                label='Материал'
-                sizeInput='xsmall'
-                error={errors.material?.message}
-                selectProps={{
-                  id: 'create-product-material',
-                  ...register('material'),
-                  defaultValue: material,
-                }}
-                options={materialOptions}
-              />
-              <SelectInput
-                label='Крепление'
-                sizeInput='xsmall'
-                error={errors.fasteningType?.message}
-                selectProps={{
-                  id: 'create-product-fastening-type',
-                  defaultValue: fasteningType,
-                  ...register('fasteningType')
-                  // disabled: true
-                }}
-                options={fasteningTypeOptions}
-              />
-              <SelectInput
-                label='В упаковке'
-                sizeInput='xsmall'
-                error={errors.amount?.message}
-                selectProps={{
-                  id: 'create-product-amount',
-                  ...register('amount'),
-                  defaultValue: amount
-                }}
-                options={amountOptions}
               />
             </div>
             <div className={styles.buttons}>
@@ -384,6 +248,61 @@ const EditProduct = (props: EditProductProps) => {
               >
                 Удалить
               </Button>
+            </div>
+          </div>
+
+          <div className={styles.block2}>
+            <div className={styles.inputs}>
+              <SelectInput
+                label='Категория'
+                sizeInput='small'
+                error={errors.categoryId?.message}
+                selectProps={{
+                  ...register('categoryId'),
+                  defaultValue: categoryId,
+                }}
+                onChange={(e) => {
+                  setCategoryIdState(String(e?.target.value))
+                }}
+                options={categoryOptions || []}
+              />
+              <Input
+                label='На складе'
+                sizeInput='small'
+                error={errors.productsCount?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-product-have',
+                  autoComplete: 'new-passport',
+                  ...register('productsCount'),
+                  defaultValue: productsCount
+                  // disabled: true
+                }}
+              />
+            </div>
+            <div className={styles.inputs}>
+              {Object.keys(categoryParameters).map(x => (
+                <SelectInput
+                  key={`category input option: ${x}`}
+                  label={x}
+                  sizeInput='small'
+                  error={errors.categoryId?.message}
+                  selectProps={{
+                    defaultValue: categoryCharacteristics ? categoryCharacteristics[x as keyof typeof categoryCharacteristics] || categoryParameters[x as keyof typeof categoryParameters][0] : ''
+                  }}
+                  // selectProps={{
+                  //   ...register('categoryId'),
+                  // }}
+                  onChange={(e) => {
+                    // setCategoryId(String(e?.target.value))
+                    const result: typeof categoryParametersToSend = { ...categoryParametersToSend };
+                    result[x as keyof typeof categoryParametersToSend] = e?.target.value;
+                    setCategoryParametersToSend({ ...result });
+                  }}
+                  optionsAr={categoryParameters[x as keyof typeof categoryParameters] || []}
+
+                />
+              ))}
             </div>
           </div>
         </form>

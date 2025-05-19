@@ -84,7 +84,7 @@ export const api = async (link: string, props: TApiProps = {}) => {
       // нужно лучше обрабатывать ошибки
       // возвращать то сообщение которое пришло с бека
       if (error.cause == 401) {
-        redirect('/authorization/login')
+        redirect('/login')
       }
       console.error(error.cause);
       return error

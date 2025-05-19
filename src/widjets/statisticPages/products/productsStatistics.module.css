@@ -1,0 +1,14 @@
+.title {
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+
+.buttons {
+  display: flex;
+  gap: 24px;
+}
+
+.graphics {
+  display: flex;
+  gap: 120px;
+}

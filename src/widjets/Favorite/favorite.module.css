@@ -6,7 +6,14 @@
 .favoriteProducts {
   /* margin: 0 70px; */
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   gap: 80px;
   flex-wrap: wrap;
+}
+
+@media (max-width: 780px) {
+  .favoriteProducts {
+    padding: 0px 10px;
+    gap: 20px;
+  }
 }

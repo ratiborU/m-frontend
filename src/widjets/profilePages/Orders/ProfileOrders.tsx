@@ -11,7 +11,7 @@ const ProfileOrders = (props: ProfileOrdersProps) => {
   const { orders } = props;
 
   return (
-    <div>
+    <div className={styles.block}>
       <h1 className={styles.title}>История заказов</h1>
       <div className={styles.orders}>
         {...orders.map(x => <OrderInfoCard key={`order info card: ${x.id}`} order={x} />)}

@@ -87,11 +87,11 @@ export default function Login() {
 
       <div className={styles.text}>
         <p>Еще нет аккаунта?</p>
-        <Link href="/authorization/registration" className={styles.link}>Зарегистрироваться</Link>
+        <Link href="/signin" className={styles.link}>Зарегистрироваться</Link>
       </div>
       <div className={`${styles.text} ${styles.mt}`}>
         <p>Забыли пароль?</p>
-        <Link href="/authorization/registration" className={styles.link}>Восстановить доступ</Link>
+        <Link href="/signin" className={styles.link}>Восстановить доступ</Link>
       </div>
     </div>
   );

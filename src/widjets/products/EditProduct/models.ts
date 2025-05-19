@@ -13,11 +13,11 @@ export const editProductSchema = z.object({
   discount: z.string().min(1, 'мало'),
   categoryId: z.string().min(1, 'мало'),
   productsCount: z.string().min(1, 'мало'),
-  stone: z.string().min(1, 'Минимальная длина 1 символ'),
-  size: z.string().min(1, 'Минимальная длина 1 символ'),
-  material: z.string().min(1, 'Минимальная длина 1 символ'),
-  fasteningType: z.string().min(1, 'Минимальная длина 1 символ'),
-  amount: z.string().min(1, 'Минимальная длина 1 символ'),
+  // stone: z.string().min(1, 'Минимальная длина 1 символ'),
+  // size: z.string().min(1, 'Минимальная длина 1 символ'),
+  // material: z.string().min(1, 'Минимальная длина 1 символ'),
+  // fasteningType: z.string().min(1, 'Минимальная длина 1 символ'),
+  // amount: z.string().min(1, 'Минимальная длина 1 символ'),
 })
 
 export type TEditProductSchema = z.infer<typeof editProductSchema>;
@@ -31,7 +31,8 @@ export type ImageScheme = {
 }
 
 export interface EditProductProps extends TProduct {
-  images: TImage[]
+  images: TImage[],
+  categoryCharacteristics: object
 }
 
 export const stoneOptions = [];

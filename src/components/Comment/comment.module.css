@@ -2,6 +2,7 @@
   /* width: 40%; */
   /* width: 800px; */
   color: #222222;
+  width: 550px;
 }
 
 .commentInformation {
@@ -9,7 +10,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 30px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .name {
@@ -30,4 +31,69 @@
   font-size: 18px;
   font-weight: 300;
   line-height: 1.4;
+}
+
+.answer {
+  margin-left: 40px;
+  margin-top: 30px;
+}
+
+.answerInformation {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.answerName {
+  font-size: 20px;
+}
+
+.answerText {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+@media (max-width: 780px) {
+  .comment {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .commentInformation {
+    gap: 8px 12px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .date {
+    font-size: 14px;
+  }
+
+  .commentText {
+    font-size: 16px;
+  }
+
+  .answer {
+    margin-left: 40px;
+    margin-top: 30px;
+  }
+
+  .answerInformation {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .answerName {
+    font-size: 20px;
+  }
+
+  .answerText {
+    font-size: 16px;
+    font-weight: 300;
+  }
 }

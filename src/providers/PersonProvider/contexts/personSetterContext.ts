@@ -6,6 +6,8 @@ export interface IPersonSetterContext {
   setEmail: (value: string) => void,
   setPhone: (value: string) => void,
   setAddress: (value: string) => void,
+  setLongitude: (value: number) => void,
+  setLatitude: (value: number) => void,
 }
 
 export const PersonSetterContext = createContext<IPersonSetterContext>({
@@ -14,4 +16,6 @@ export const PersonSetterContext = createContext<IPersonSetterContext>({
   setEmail: () => { },
   setPhone: () => { },
   setAddress: () => { },
+  setLongitude: () => { },
+  setLatitude: () => { },
 });

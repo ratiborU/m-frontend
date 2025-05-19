@@ -10,7 +10,7 @@ import Title from '@/components/Title/Tile';
 import OrderMap from '@/components/OrderMap/OrderMap';
 import CheckBox from '@/components/UI/CheckBox/CheckBox';
 import RadioButton from '@/components/UI/RadioButton/RadioButton';
-import { cdekOffices } from '@/services/mock/mockTrueCdekOfficesInformation';
+// import { cdekOffices } from '@/services/mock/mockTrueCdekOfficesInformation';
 // import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -30,6 +30,9 @@ import { useGetCheckOneCouponQuery } from '@/hooks/coupons/useGetCheckCouponQuer
 import { useQueryClient } from '@tanstack/react-query';
 // import { revalidateTag } from 'next/cache';
 import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
+import OrderCardMobile from '@/components/OrderCard/OrderCardMobile';
+import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
+import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
 
 const createPersonSchema = z.object({
   fio: z.string().min(1, 'мало'),
@@ -47,32 +50,22 @@ type TCreatePersonSchema = z.infer<typeof createPersonSchema>;
 type OrderProps = {
   person: TPerson,
   products: TBasketProduct[],
+  // loyalty: TLoyalty,
 }
 
 const Order = (props: OrderProps) => {
   const { products } = props;
   const router = useRouter();
-  // const order = useOrderContext();
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
   const finalPrice = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
   const client = useQueryClient();
   const order = useOrderContext();
   const [isCoupon, setIsCoupon] = useState(false);
-  // const [coupon, setCoupon] = useState<TCoupon | null>(null);
-  // const sort = useCatalogSortContext();
+  const [isLoyalty, setIsLoyalty] = useState(false);
 
   const debounce = useDebouncedCallback(async () => {
-    // setSort.setSort(sortState);
-    // alert(isCoupon);
-    // const isValid = await checkOneCoupon(getValues('coupon'))
-    // console.log(couponData);
-    client.invalidateQueries({
-      queryKey: ['coupons'],
-    });
-    // revalidateTag('check');
-    // const { data: couponData } = useGetCheckOneCouponQuery(getValues('coupon'));
-    console.log(couponData);
+    client.invalidateQueries({ queryKey: ['coupons'] });
   }, 500)
 
   const { register, handleSubmit, getValues } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
@@ -83,7 +76,9 @@ const Order = (props: OrderProps) => {
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
   const { updatePerson } = useUpdatePersonMutation({})
-  const { data: couponData } = useGetCheckOneCouponQuery(getValues('coupon'));
+  const { data: couponData } = useGetCheckOneCouponQuery(String(getValues('coupon')));
+
+  const { data: loyaltyData } = useGetLoyaltyQuery();
   // const { updatePerson } = useUpdatePersonMutation({})
   // обновить person?
 
@@ -95,26 +90,30 @@ const Order = (props: OrderProps) => {
         ? finalPrice - Number(couponData.discount)
         : finalPrice * (1 - Number(couponData.discount.slice(0, couponData.discount.length - 1)) / 100);
     const totalWithProductsDiscount = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
+    const loyaltyPayCount = isLoyalty ? Math.min(Number(loyaltyData?.points), Math.floor(totalWithProductsDiscount * 0.3)) : 0;
+    const totalWithLoyalty = isLoyalty ? totalWithProductsDiscount - loyaltyPayCount : totalWithProductsDiscount;
+
     const status = 'В обработке';
     const deliveryDays = '7';
     const delivery = 'cdek';
 
     const fio = data.fio.split(' ');
+    console.log(data.address);
+    console.log(person.address);
+    setPerson.setAddress(data.address);
+    LocalStorageService.save('address', person.address);
 
-    console.log(totalWithProductsDiscount);
+    const input: HTMLInputElement | null = document.getElementById('order-input-address') as HTMLInputElement;
 
-    console.log(data);
 
     if (!person.id) {
       setPerson.setFio(data.fio);
       setPerson.setPhone(data.phone);
       setPerson.setEmail(data.email);
-      setPerson.setAddress(data.address);
 
       LocalStorageService.save('fio', data.fio);
       LocalStorageService.save('phone', data.phone);
       LocalStorageService.save('email', data.email);
-      LocalStorageService.save('address', data.address);
 
       await updatePerson({
         id: '0',
@@ -125,16 +124,17 @@ const Order = (props: OrderProps) => {
         phoneNumber: data.phone,
       })
     }
-
+    // пока несовсем правильно работает
     await createOrder({
       ...data,
-      price: String(totalWithProductsDiscount),
+      price: String(totalWithLoyalty),
       status,
       delivery,
       deliveryDays,
       personId: person.id,
       couponId: couponData?.id,
-      address: data.address || order.address
+      address: input.value || order.address,
+      usePoints: isLoyalty
     });
   }
 
@@ -217,11 +217,23 @@ const Order = (props: OrderProps) => {
               </div>
             </div>
             {/* пока заккоментировал так как при большом количестве обновлений ломается */}
-            <OrderMap delivery='sdek' offices={cdekOffices} />
+            <OrderMap
+              longitude={person.longitude}
+              latitude={person.latitude}
+            />
           </div>
           <div className={styles.block2}>
-            <OrderCard products={products} coupon={couponData} />
+            <OrderCard products={products} coupon={couponData} isLoyalty={isLoyalty} />
+            <OrderCardMobile products={products} coupon={couponData} />
             <div className={styles.checkboxesUnderTheCard}>
+              <CheckBox
+                inputProps={{
+                  id: 'order-checkbox-loyalty',
+                  checked: isLoyalty,
+                  onChange: (e) => setIsLoyalty(e.target.checked)
+                }}
+                label='Использовать баллы>'
+              />
               {isCoupon && <Input
                 inputProps={{
                   placeholder: '',

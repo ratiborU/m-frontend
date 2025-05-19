@@ -3,7 +3,7 @@ import Order from '@/widjets/Order/Order';
 import { getOnePerson } from '@/services/api/persons/personService';
 import { getAllBasketProductsByPersonId } from '@/services/api/basketProducts/basketProductService';
 import { cookies } from 'next/headers';
-import { checkOneCoupon } from '@/services/api/coupons/couponService';
+// import { checkOneCoupon } from '@/services/api/coupons/couponService';
 
 const page = async () => {
   const person = await getOnePerson(cookies().get('personId')?.value || 0);

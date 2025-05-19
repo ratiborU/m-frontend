@@ -20,11 +20,16 @@ import catalog from '../../../public/mobile/Menu open.svg'
 import favorite from '../../../public/mobile/Favorite.svg'
 import cart from '../../../public/mobile/Shopping cart.svg'
 import profile from '../../../public/mobile/Person.svg'
+import login from '../../../public/mobile/Login.svg'
 import homeActive from '../../../public/mobile/Home active.svg'
 import catalogActive from '../../../public/mobile/Menu open active.svg'
 import favoriteActive from '../../../public/mobile/Favorite active.svg'
 import cartActive from '../../../public/mobile/Shopping cart active.svg'
 import profileActive from '../../../public/mobile/Person active.svg'
+import loginActivate from '../../../public/mobile/Login active.svg'
+import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation';
+import { LocalStorageService } from '@/lib/helpers/localStorageService';
+import { useRouter } from 'next/navigation';
 
 
 const ClientHeader = () => {
@@ -32,14 +37,31 @@ const ClientHeader = () => {
   const [isLogedIn, setIsLoggedIn] = useState(false);
   const [personRole, setPersonRole] = useState("PERSON");
   const [isMenu, setIsMenu] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoggedIn(!!person.id);
     setPersonRole(person.id == '1' ? "ADMIN" : "PERSON")
   }, [person]);
 
+  const onSuccess = () => {
+    router.push('/authorization/login');
+  }
+
+  const onError = () => {
+
+  }
+
+  const { logout } = useLogoutMutation({ onSuccess, onError });
+
   const onMenuClick = () => {
     setIsMenu(!isMenu);
+  }
+
+  const onExitClick = async () => {
+    setIsMenu(!isMenu);
+    await logout();
+    LocalStorageService.clear();
   }
 
   return (
@@ -84,6 +106,7 @@ const ClientHeader = () => {
         <MobileHeaderMenuElement icon={products} text='Купленные товары' to='/profile/products' onClick={onMenuClick} />
         <MobileHeaderMenuElement icon={comments} text='Ваши комментарии' to='/profile/comments' onClick={onMenuClick} />
         <MobileHeaderMenuElement icon={questions} text='Популярные вопросы' to='/profile/about' onClick={onMenuClick} />
+        <MobileHeaderMenuElement icon={questions} text='Выйти' to='/authorization/login' onClick={onExitClick} />
       </div>
 
       <div className={styles.mobileMenu}>
@@ -91,7 +114,8 @@ const ClientHeader = () => {
         <MobileMenuElement icon={catalog} activeIcon={catalogActive} text='Каталог' to='/catalog' />
         <MobileMenuElement icon={favorite} activeIcon={favoriteActive} text='Избранное' to='/favorite' />
         <MobileMenuElement icon={cart} activeIcon={cartActive} text='Корзина' to='/basket' />
-        <MobileMenuElement icon={profile} activeIcon={profileActive} text='Профиль' to='/profile/settings' />
+        {isLogedIn && <MobileMenuElement icon={profile} activeIcon={profileActive} text='Профиль' to='/profile/settings' />}
+        {!isLogedIn && <MobileMenuElement icon={login} activeIcon={loginActivate} text='Войти' to='/authorization/login' />}
       </div>
     </>
   );

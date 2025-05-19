@@ -6,62 +6,71 @@ import filterIcon from '../../../public/mobile/Filter list.svg'
 import crossIcon from '../../../public/mobile/Close.svg'
 import { StyledSlider, Thumb, Track } from './sltyles';
 import Input from '../UI/Input/Input';
-import { useCatalogFilterSetterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterSetterContext';
+// import { useCatalogFilterSetterContext } from '@/providers/CatalogFilterProvider/hooks/useCatalogFilterSetterContext';
 import { useGetCategoriesQuery } from '@/hooks/categories/useGetAllCategoriesQuery';
-import { ICatalogFilterContext } from '@/providers/CatalogFilterProvider/contexts/catalogFilterContext';
+// import { ICatalogFilterContext } from '@/providers/CatalogFilterProvider/contexts/catalogFilterContext';
 import { useDebouncedCallback } from 'use-debounce';
 import Category from '../Category/Category';
 import Button from '../UI/Button/Button';
+import { useFilterContext } from '@/providers/NewFilterProvider/hooks/useFilterContxt';
+import { useFilterSetterContext } from '@/providers/NewFilterProvider/hooks/useFilterSetterContext';
+import { IFilterContext } from '@/providers/NewFilterProvider/contexts/filterContext';
+import Parameter from '../Category/Parameter';
 
-type keySetNames = 'categoryIds' | 'material' | 'size' | 'shape';
+// type keySetNames = 'categoryIds' | 'material' | 'size' | 'shape';
 
 const FilterMobile = () => {
   const [isActive, setIsActive] = useState(false)
-  const setFilter = useCatalogFilterSetterContext();
+  const filter = useFilterContext();
+  const setFilter = useFilterSetterContext();
+  const [parametersState, setParametersState] = useState<object>(filter.parameters);
 
   const { data } = useGetCategoriesQuery();
-  const material = ['Золото', 'Сталь']
-  const size = ['Маленький', 'Средний', 'Большой']
-  // const size = ['S', 'M', 'L']
-  const shape = ['Завальцованные', 'Крапан', 'Без камня']
 
-  const [filterState, setFilterState] = useState<ICatalogFilterContext>({
+  const [filterState, setFilterState] = useState<IFilterContext>({
     startPrice: 0,
     endPrice: 8000,
-    categoryIds: [],
-    material: [], // золото сталь
-    size: [], // большой маленький средний
-    shape: [], // завальцовка крапан без камня
+    categoryId: '',
+    parameters: {}
   });
 
   const debounce = useDebouncedCallback(() => {
-    setFilter.setCategoryIds(filterState.categoryIds);
+    setFilter.setCategoryId(String(filterState.categoryId));
     setFilter.setStartPrice(filterState.startPrice);
     setFilter.setEndPrice(filterState.endPrice);
-    setFilter.setMaterial(filterState.material);
-    setFilter.setShape(filterState.shape);
-    setFilter.setSize(filterState.size);
+    setFilter.setParameters({ ...filterState.parameters });
+    console.log('hola');
+    console.log(filter.parameters);
   }, 500)
 
-  const onFilterCategoryClick = (array: string[], key: keySetNames, text: string) => {
+  const onCategoryClick = (id: string) => {
     return () => {
-      if (array.includes(text)) {
-        // setFilter[key](array.filter(x => x != text));
-        setFilterState(previous => {
-          const newFilter = { ...previous }
-          newFilter[key] = array.filter(x => x != text);
-          return newFilter;
-        })
-        debounce();
+      const newParameters = data?.rows.find(x => x.id == id)?.parameters;
+      // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+      const newEmptyParameters = Object.keys(newParameters || {}).reduce((acc: any, cur) => {
+        acc[cur] = [];
+        return acc
+      }, {})
+      console.log(newEmptyParameters);
+      setFilterState({ ...filterState, categoryId: id, parameters: newEmptyParameters });
+      setParametersState(newParameters || {})
+      debounce();
+    }
+  }
+
+  const onParameterClick = (name: string, parameterName: string) => {
+    return () => {
+      const newParameters = filterState.parameters;
+      // @ts-expect-error:next-line
+      if (newParameters[name as keyof typeof newParameters].includes(parameterName)) {
+        // @ts-expect-error:next-line
+        newParameters[name as keyof typeof newParameters] = newParameters[name as keyof typeof newParameters].filter(x => x != parameterName);
       } else {
-        // setFilter[key]([...array, text])
-        setFilterState(previous => {
-          const newFilter = { ...previous }
-          newFilter[key] = [...array, text];
-          return newFilter;
-        })
-        debounce();
+        // @ts-expect-error:next-line
+        newParameters[name as keyof typeof newParameters].push(parameterName);
       }
+      setFilterState({ ...filterState, parameters: newParameters });
+      debounce();
     }
   }
 
@@ -99,6 +108,7 @@ const FilterMobile = () => {
         Фильтр
         <Image className={isActive ? styles.imageActive : styles.image} src={filterIcon} alt={''} />
       </button>
+
       <div className={isActive ? styles.filerMobileBlock : styles.filerMobileBlockNone}>
         <p className={styles.title2}>Фильтры</p>
         <button className={styles.crossButton} onClick={() => setIsActive(!isActive)}>
@@ -109,7 +119,6 @@ const FilterMobile = () => {
           defaultValue={[0, 8000]}
           max={8000}
           min={0}
-          // value={[0, 8000]}
           value={[filterState.startPrice, filterState.endPrice]}
           onChange={(values) => onChange(values)}
           renderTrack={Track}
@@ -141,51 +150,30 @@ const FilterMobile = () => {
             <Category
               key={`category filter: ${x.id}`}
               text={x.name}
-              values={filterState.categoryIds}
-              onClick={onFilterCategoryClick(filterState.categoryIds, 'categoryIds', x.name)}
+              currentValue={filterState.categoryId}
+              value={x.id}
+              onClick={onCategoryClick(x.id)}
             />
           )) : <></>
           }
         </div>
-        <p className={styles.title2}>Материал</p>
-        <div className={styles.categories}>
-          {
-            ...material.map((x) => (
-              <Category
-                key={`category filter material: ${x}`}
-                text={x}
-                values={filterState.material}
-                onClick={onFilterCategoryClick(filterState.material, 'material', x)}
-              />
-            ))
-          }
-        </div>
-        <p className={styles.title2}>Форма</p>
-        <div className={styles.categories}>
-          {
-            ...shape.map((x) => (
-              <Category
-                key={`category filter shape: ${x}`}
-                text={x}
-                values={filterState.shape}
-                onClick={onFilterCategoryClick(filterState.shape, 'shape', x)}
-              />
-            ))
-          }
-        </div>
-        <p className={styles.title2}>Размер</p>
-        <div className={styles.categories}>
-          {
-            ...size.map((x) => (
-              <Category
-                key={`category filter size: ${x}`}
-                text={x}
-                values={filterState.size}
-                onClick={onFilterCategoryClick(filterState.size, 'size', x)}
-              />
-            ))
-          }
-        </div>
+        {
+          ...Object.keys(filter.parameters).map(name => <>
+            <p className={styles.title2}>{name}</p>
+            <div className={styles.categories}>
+              {/* @ts-expect-error:next-line */}
+              {parametersState ? parametersState[name as keyof typeof parametersState]?.map((x: string) => (
+                <Parameter
+                  key={`category filter: ${x}`}
+                  text={x}
+                  values={filterState.parameters[name as keyof typeof filterState.parameters]}
+                  onClick={onParameterClick(name, x)}
+                />
+              )) : <></>
+              }
+            </div>
+          </>)
+        }
         <Button
           text={'Применить'}
           size={'l'}

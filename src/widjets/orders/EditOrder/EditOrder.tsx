@@ -33,6 +33,7 @@ const EditOrder = (props: EditOrderProps) => {
     createdAt,
     orderProducts
   } = props;
+
   const notify = () => toast.success("Заказ успешно создан");
   const notifyDelete = () => toast.success("Заказ успешно удален");
   const notifyError = (text: string) => toast.error(`Произошла ошибка! ${text}`);

@@ -41,8 +41,6 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
     notifyError(error.message);
   }
 
-
-  // console.log(loyalty);
   const { updatePerson } = useUpdatePersonMutation({ onSuccess, onError });
 
   const onSubmit = async (data: TEditPersonProfileSchema) => {

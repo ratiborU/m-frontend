@@ -21,7 +21,6 @@ const ProductsTable = (props: ProductsTableProps) => {
 
   const lastMonth: TProduct[] = getSellsByProductsLastMonth(products, orderProducts);
   const thisMonth: TProduct[] = getSellsByProductsThisMonth(products, orderProducts);
-  console.log(products);
 
   return (
     <div>

@@ -29,7 +29,7 @@ const FilterMobile = () => {
 
   const [filterState, setFilterState] = useState<IFilterContext>({
     startPrice: 0,
-    endPrice: 8000,
+    endPrice: 4000,
     categoryId: '',
     parameters: {}
   });
@@ -39,8 +39,6 @@ const FilterMobile = () => {
     setFilter.setStartPrice(filterState.startPrice);
     setFilter.setEndPrice(filterState.endPrice);
     setFilter.setParameters({ ...filterState.parameters });
-    console.log('hola');
-    console.log(filter.parameters);
   }, 500)
 
   const onCategoryClick = (id: string) => {
@@ -51,7 +49,6 @@ const FilterMobile = () => {
         acc[cur] = [];
         return acc
       }, {})
-      console.log(newEmptyParameters);
       setFilterState({ ...filterState, categoryId: id, parameters: newEmptyParameters });
       setParametersState(newParameters || {})
       debounce();
@@ -86,14 +83,14 @@ const FilterMobile = () => {
 
   const onChangeInputStart = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!Number.isNaN(Number(e.target.value))) {
-      setFilterState({ ...filterState, startPrice: Math.min(8000, Math.max(0, Number(e.target.value))) })
+      setFilterState({ ...filterState, startPrice: Math.min(4000, Math.max(0, Number(e.target.value))) })
       debounce();
     }
   }
 
   const onChangeInputEnd = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!Number.isNaN(Number(e.target.value))) {
-      setFilterState({ ...filterState, endPrice: Math.min(8000, Math.max(0, Number(e.target.value))) })
+      setFilterState({ ...filterState, endPrice: Math.min(4000, Math.max(0, Number(e.target.value))) })
       debounce();
     }
   }
@@ -116,8 +113,8 @@ const FilterMobile = () => {
         </button>
         <StyledSlider
           className={styles.slider}
-          defaultValue={[0, 8000]}
-          max={8000}
+          defaultValue={[0, 4000]}
+          max={4000}
           min={0}
           value={[filterState.startPrice, filterState.endPrice]}
           onChange={(values) => onChange(values)}

@@ -8,8 +8,6 @@ export const getSellsByProductsLastMonth = (products: TProduct[], orderProducts:
     return acc;
   }, {});
 
-  console.log(productsByKeys);
-
   const nowDate = new Date();
 
   const orderProductsThisMonth = orderProducts.filter(x => {
@@ -32,8 +30,6 @@ export const getSellsByProductsThisMonth = (products: TProduct[], orderProducts:
     acc[cur.id] = { ...cur, sellCount: 0 };
     return acc;
   }, {});
-
-  console.log(productsByKeys);
 
   const nowDate = new Date();
 

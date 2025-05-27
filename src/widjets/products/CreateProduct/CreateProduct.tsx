@@ -68,7 +68,6 @@ const CreateProduct = () => {
 
   const onSubmit = async (data: TCreateProductSchema) => {
     const formData = new FormData();
-    console.log(categoryParametersToSend);
     formData.append('name', data.name);
     formData.append('description', data.description);
     formData.append('seoTitle', data.seoTitle);
@@ -80,14 +79,8 @@ const CreateProduct = () => {
     formData.append('commentsCount', '0');
     formData.append('productsCount', data.productsCount);
     formData.append('categoryId', data.categoryId);
-    // formData.append('stone', data.stone);
-    // formData.append('size', data.size);
-    // formData.append('material', data.material);
-    // formData.append('fasteningType', data.fasteningType);
-    // formData.append('amount', data.amount);
     formData.append('categoryCharacteristics', JSON.stringify(categoryParametersToSend));
     formData.append('file', data.file[0]);
-    // console.log(formData);
     await createProduct(formData);
   }
 
@@ -95,17 +88,12 @@ const CreateProduct = () => {
     if (categoryId) {
       const parameters = categories?.rows.find(x => x.id == categoryId)?.parameters;
       setCategoryParameters(parameters as object);
-      // console.log(Object.entries(parameters as object).reduce((acc, cur) => {
-      //   acc[cur[0]] = cur[1][0];
-      //   return acc
-      // }, {}));
       setCategoryParametersToSend(Object.entries(parameters as object).reduce((acc, cur) => {
         acc[cur[0]] = cur[1][0];
         return acc
       }, {}));
     }
 
-    // console.log(categories?.rows);
   }, [categories?.rows, categoryId])
 
 

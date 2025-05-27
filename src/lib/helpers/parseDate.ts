@@ -58,8 +58,6 @@ export const getLast30DaysDates = () => {
 export const getLast12Monts = () => {
   const date = new Date();
   const newDates = [...Array(date.getMonth())].map((x, i) => monthsDictionary2[String(i + 2) as keyof typeof monthsDictionary2]);
-  // console.log(newDates);
   const oldDates = [...Array(12 - date.getMonth())].map((x, i) => monthsDictionary2[String((date.getMonth() + i + 1) % 12 + 1) as keyof typeof monthsDictionary2]);
-  // console.log(oldDates);
   return [...oldDates, ...newDates]
 }

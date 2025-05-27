@@ -5,7 +5,6 @@ import { TOrder } from '@/services/api/orders/orderType';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const exportExcel = async (data: TOrder[], fileName: string) => {
-  console.log(data);
   // 1. Create a new workbook
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet('Data Report');
@@ -52,5 +51,4 @@ export const exportExcel = async (data: TOrder[], fileName: string) => {
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
   saveAs(blob, `${fileName}.xlsx`);
-  console.log('export 2');
 }

@@ -34,19 +34,31 @@ export interface EditOrderProps extends TOrder {
 
 export const statusOptions = [
   {
-    text: 'В обработке',
-    value: 'В обработке'
+    text: 'Ожидает оплаты',
+    value: 'Ожидает оплаты'
   },
   {
-    text: 'В доставке',
-    value: 'В доставке'
+    text: 'Подтвержден',
+    value: 'Подтвержден'
   },
   {
-    text: 'В пункте выдачи',
-    value: 'В пункте выдачи'
+    text: 'Собран',
+    value: 'Собран'
   },
   {
-    text: 'Получен',
-    value: 'Получен'
+    text: 'В пути',
+    value: 'В пути'
+  },
+  {
+    text: 'Доставлен',
+    value: 'Доставлен'
+  },
+  {
+    text: 'Возврат',
+    value: 'Возврат'
+  },
+  {
+    text: 'Отменен',
+    value: 'Отменен'
   }
 ]

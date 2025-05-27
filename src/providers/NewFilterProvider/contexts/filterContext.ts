@@ -9,7 +9,7 @@ export interface IFilterContext {
 
 export const FilterContext = createContext<IFilterContext>({
   startPrice: 0,
-  endPrice: 8000,
+  endPrice: 4000,
   categoryId: '',
   parameters: {}
 });

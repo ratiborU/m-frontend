@@ -30,9 +30,6 @@ const ProductsStatistics = (props: GeneralStatisticsProps) => {
   const { orderProducts = [], productKeys = {} } = props;
   const nowDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 11 ? '0' : ''}${(new Date()).getUTCMonth() + 1}-${(new Date()).getDate()}`;
   const lastDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 10 ? '0' : ''}${(new Date()).getMonth()}-${(new Date()).getDate()}`;
-  // const [interval, setInterval] = useState('days'); // days, months, yearss
-  // console.log((new Date()).getUTCMonth());
-  // alert((new Date()).getUTCMonth());
   const [startDate, setStartDate] = useState(lastDate);
   const [endDate, setEndDate] = useState(nowDate);
   const [data, setData] = useState<DatasetType[]>([]);
@@ -47,7 +44,6 @@ const ProductsStatistics = (props: GeneralStatisticsProps) => {
     setLabels(labelKeys);
     const filteredOrderProducts = orderProducts.filter(product => {
       const productDate = new Date(product.createdAt);
-      console.log((new Date(startDate)).getTime() - (new Date(endDate)).getTime());
       if (productDate.getTime() - (new Date(startDate)).getTime() < 0) {
         return false
       }

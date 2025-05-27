@@ -40,12 +40,7 @@ const Product = (props: IProductProps) => {
     const rateElement = document.getElementById(`product rate id: ${id}`)?.clientHeight || -8;
     const countElement = document.getElementById(`product count id: ${id}`)?.clientHeight || 0;
     const buttonElement = document.getElementById(`product button id: ${id}`)?.clientHeight ? 70 : 60;
-    // console.log(countElement, buttonElement);
     const height = 280 + Number(pElement) + Number(rateElement) + Number(countElement) + Number(buttonElement);
-    // if (id == '5') {
-    //   console.log(id, height);
-    //   console.log(pElement, rateElement, countElement, buttonElement);
-    // }
     setHeight(height);
   }, [id])
 

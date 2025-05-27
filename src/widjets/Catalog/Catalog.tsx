@@ -34,8 +34,8 @@ const Catalog = (props: CatalogProps) => {
 
       if (filter.parameters) {
         for (const parameterKey of Object.keys(filter.parameters)) {
+          // @ts-expect-error any
           if (filter.parameters[parameterKey] && product.categoryCharacteristics && filter.parameters[parameterKey].length != 0 && !filter.parameters[parameterKey].includes(product.categoryCharacteristics[parameterKey])) {
-            // console.log(parameterKey);
             return false;
           }
         }

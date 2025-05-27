@@ -11,7 +11,7 @@ interface CatalogFilterContextProviderProps {
 export const CatalogFilterContextProvider: FC<CatalogFilterContextProviderProps> = (props) => {
   const { children } = props;
   const [startPrice, setStartPrice] = useState(0);
-  const [endPrice, setEndPrice] = useState(8000);
+  const [endPrice, setEndPrice] = useState(4000);
   const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [material, setMaterial] = useState<string[]>([]);
   const [size, setSize] = useState<string[]>([]);

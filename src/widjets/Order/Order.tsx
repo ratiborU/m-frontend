@@ -21,7 +21,7 @@ import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonCont
 import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation';
 import { usePersonSetterContext } from '@/providers/PersonProvider/hooks/usePersonSetterContext';
 import { LocalStorageService } from '@/lib/helpers/localStorageService';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 // import { TCoupon } from '@/services/api/coupons/couponType';
@@ -33,6 +33,7 @@ import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext
 import OrderCardMobile from '@/components/OrderCard/OrderCardMobile';
 // import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
 import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
+import { useCreatePaymentMutation } from '@/hooks/youKassa/useCreatePaymentMutation';
 
 const createPersonSchema = z.object({
   fio: z.string().min(1, 'мало'),
@@ -55,7 +56,7 @@ type OrderProps = {
 
 const Order = (props: OrderProps) => {
   const { products } = props;
-  const router = useRouter();
+  // const router = useRouter();
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
   const finalPrice = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
@@ -70,11 +71,24 @@ const Order = (props: OrderProps) => {
 
   const { register, handleSubmit, getValues } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
 
-  const onSuccess = () => {
-    router.push('order/completed');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSuccess = async (data: any) => {
+    await createPayment({
+      value: data.price,
+      orderId: data.id,
+      personId: data.personId
+    });
+    // router.push('order/completed');
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSuccessPayment = (data: any) => {
+    window.location.href = data.confirmation.confirmation_url;
+    // router.push('order/completed');
   }
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
+  const { createPayment } = useCreatePaymentMutation({ onSuccess: onSuccessPayment });
   const { updatePerson } = useUpdatePersonMutation({})
   const { data: couponData } = useGetCheckOneCouponQuery(String(getValues('coupon')));
 
@@ -93,13 +107,11 @@ const Order = (props: OrderProps) => {
     const loyaltyPayCount = isLoyalty ? Math.min(Number(loyaltyData?.points), Math.floor(totalWithProductsDiscount * 0.3)) : 0;
     const totalWithLoyalty = isLoyalty ? totalWithProductsDiscount - loyaltyPayCount : totalWithProductsDiscount;
 
-    const status = 'В обработке';
+    const status = 'Ожидает оплаты';
     const deliveryDays = '7';
     const delivery = 'cdek';
 
     const fio = data.fio.split(' ');
-    console.log(data.address);
-    console.log(person.address);
     setPerson.setAddress(data.address);
     LocalStorageService.save('address', person.address);
 
@@ -136,6 +148,8 @@ const Order = (props: OrderProps) => {
       address: input.value || order.address,
       usePoints: isLoyalty
     });
+
+    alert('создание заказа');
   }
 
   return (

@@ -15,7 +15,6 @@ export const getOrdersLastMonth = (orders: TOrder[]) => {
 }
 
 export const getOrdersThisMonth = (orders: TOrder[]) => {
-  console.log(orders);
   const nowDate = new Date();
   const newOrders = orders.filter(x => {
     const orderDate = new Date(x.createdAt);
@@ -40,7 +39,6 @@ export const getProductsToSend = (orders: TOrder[]): TProduct[] => {
     }
     return acc;
   }, {})
-  console.log(Object.values(productsByKeys));
   return Object.values(productsByKeys);
 }
 

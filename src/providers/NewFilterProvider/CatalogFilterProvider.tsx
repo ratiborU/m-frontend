@@ -12,7 +12,7 @@ interface FilterContextProviderProps {
 export const FilterContextProvider: FC<FilterContextProviderProps> = (props) => {
   const { children } = props;
   const [startPrice, setStartPrice] = useState(0);
-  const [endPrice, setEndPrice] = useState(8000);
+  const [endPrice, setEndPrice] = useState(4000);
   const [categoryId, setCategoryId] = useState<string>('');
   const [parameters, setParameters] = useState<object>({});
 

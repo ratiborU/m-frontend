@@ -130,16 +130,12 @@ const EditProduct = (props: EditProductProps) => {
     if (categoryIdState && categories) {
       const parameters = categories?.rows.find(x => x.id == categoryIdState)?.parameters;
       setCategoryParameters(parameters as object);
-      // console.log(Object.entries(parameters as object).reduce((acc, cur) => {
-      //   acc[cur[0]] = cur[1][0];
-      //   return acc
-      // }, {}));
-      setCategoryParametersToSend(Object.entries(parameters as object).reduce((acc, cur) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setCategoryParametersToSend(Object.entries(parameters as object).reduce((acc: any, cur) => {
         acc[cur[0]] = cur[1][0];
         return acc
       }, {}));
     }
-    // console.log(categories?.rows);
   }, [categories, categories?.rows, categoryIdState])
 
   return (

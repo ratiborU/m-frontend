@@ -11,7 +11,7 @@ const page = async () => {
     acc[cur.name] = 0;
     return acc;
   }, {})
-  console.log(productKeys)
+
   return (
     <>
       <ProductsStatistics orderProducts={orderProducts.rows} productKeys={productKeys} />

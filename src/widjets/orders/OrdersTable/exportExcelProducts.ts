@@ -5,7 +5,6 @@ import { TProduct } from '@/services/api/products/productType';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const exportExcelProductsToSend = async (data: TProduct[], fileName: string) => {
-  console.log(data);
   // 1. Create a new workbook
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet('Data Report');
@@ -40,5 +39,4 @@ export const exportExcelProductsToSend = async (data: TProduct[], fileName: stri
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
   saveAs(blob, `${fileName}.xlsx`);
-  console.log('export 2');
 }

@@ -6,8 +6,8 @@
 .favoriteProducts {
   /* margin: 0 70px; */
   display: flex;
-  justify-content: space-between;
-  gap: 80px;
+  /* justify-content: space-between; */
+  gap: 94px;
   flex-wrap: wrap;
 }
 

@@ -9,6 +9,5 @@ export const getLoyalty = async (): Promise<TLoyalty> => {
   // добавить пагинацию
   const id = cookies().get('personId')?.value;
   const response = await api(`loyals/byPersonId/${id}`);
-  console.log(response);
   return response;
 }

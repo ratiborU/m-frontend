@@ -39,7 +39,6 @@ const CreateCategory = () => {
   const { createCategory, isPending } = useCreateCategoryMutation({ onSuccess, onError });
 
   const onSubmit = async (data: TCreateCategorySchema) => {
-    // console.log(parameters);
     const parametersToSend = parameters.reduce((acc, cur) => {
       acc[cur[0]] = cur[1].split('\n');
       return acc;
@@ -48,7 +47,6 @@ const CreateCategory = () => {
     await createCategory(data);
   }
 
-  // console.log([...Array(parametersCount)].map((x, i) => i));
 
   return (
     <>

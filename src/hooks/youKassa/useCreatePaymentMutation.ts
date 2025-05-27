@@ -1,34 +1,35 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createOrder as createOrderApi } from '@/services/api/orders/orderService';
-import { TOrderCreate } from '@/services/api/orders/orderType';
+import { createPayment as createPaymentApi } from '@/services/api/youKassa/youKassaService';
+import { youKassaSend } from '@/services/api/youKassa/youKassaType';
 
-interface CreateOrderMutationArgs {
+interface CreatePaymentMutationArgs {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
 }
 
-export const useCreateOrderMutation = (args: CreateOrderMutationArgs) => {
+export const useCreatePaymentMutation = (args: CreatePaymentMutationArgs) => {
   const { onSuccess, onError } = args;
   const client = useQueryClient();
 
   const {
     isPending,
     isError,
-    mutateAsync: createOrder,
+    mutateAsync: createPayment,
   } = useMutation({
-    mutationFn: async (data: TOrderCreate) => await createOrderApi(data),
+    mutationFn: async (data: youKassaSend) => await createPaymentApi(data),
     onSuccess: (data) => {
       client.invalidateQueries({
-        queryKey: ['orders'],
+        queryKey: ['payments'],
       });
       if (onSuccess) {
         onSuccess(data);
       }
     },
-    onError
+    onError,
+    retry: 2
   });
 
-  return { isPending, isError, createOrder };
+  return { isPending, isError, createPayment };
 };

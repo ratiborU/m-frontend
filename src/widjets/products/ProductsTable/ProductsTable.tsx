@@ -10,6 +10,7 @@ import styles from './productsTable.module.css'
 import { TOrderProduct } from '@/services/api/orderProducts/orderProductType';
 import { getSellsByProductsLastMonth, getSellsByProductsThisMonth } from './getProductsLastMonth';
 import { exportExcelMonth } from './exportExcelMonth';
+import { useCreateProductsFromApiMutation } from '@/hooks/moiSklad/useCreateProductsFromApiMutation';
 
 type ProductsTableProps = {
   products?: TProduct[];
@@ -21,6 +22,8 @@ const ProductsTable = (props: ProductsTableProps) => {
 
   const lastMonth: TProduct[] = getSellsByProductsLastMonth(products, orderProducts);
   const thisMonth: TProduct[] = getSellsByProductsThisMonth(products, orderProducts);
+
+  const { createProducts } = useCreateProductsFromApiMutation({});
 
   return (
     <div>
@@ -38,15 +41,29 @@ const ProductsTable = (props: ProductsTableProps) => {
           variant='contained'
           onClick={() => exportExcelMonth(lastMonth, 'Товары')}
         >
-          Скачать продажи по продуктам за прошлый месяц в Excel
+          Скачать продажи за прошлый месяц в Excel
         </Button>
         <Button
           size='large'
           variant='contained'
           onClick={() => exportExcelMonth(thisMonth, 'Товары')}
         >
-          Скачать продажи по продуктам за этот месяц в Excel
+          Скачать продажи за этот месяц в Excel
         </Button>
+        <Button
+          size='large'
+          variant='contained'
+          onClick={async () => await createProducts()}
+        >
+          Обновить товары
+        </Button>
+        {/* <Button
+          size='large'
+          variant='contained'
+          onClick={() => alert('обновить остатки')}
+        >
+          Обновить остатки
+        </Button> */}
       </div>
     </div>
   );

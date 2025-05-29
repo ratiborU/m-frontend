@@ -29,12 +29,12 @@ export async function middleware(request: NextRequest) {
 
     response.cookies.set("access", tokens.tokens.accessToken, {
       httpOnly: true,
-      // secure: true,
+      secure: true,
       expires: accessExpiresAt,
     });
     response.cookies.set("refresh", tokens.tokens.refreshToken, {
       httpOnly: true,
-      // secure: true,
+      secure: true,
       expires: refreshExpiresAt,
     });
     return response;
@@ -59,17 +59,17 @@ export async function middleware(request: NextRequest) {
 
     response.cookies.set("access", responseFetch.tokens.accessToken, {
       httpOnly: true,
-      // secure: true,
+      secure: true,
       expires: accessExpiresAt,
     });
     response.cookies.set("refresh", responseFetch.tokens.refreshToken, {
       httpOnly: true,
-      // secure: true,
+      secure: true,
       expires: refreshExpiresAt,
     });
     response.cookies.set("personId", responseFetch.person.id, {
       httpOnly: true,
-      // secure: true,
+      secure: true,
       expires: personIdExpiresAt,
     });
     return response;

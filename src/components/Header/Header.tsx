@@ -22,7 +22,7 @@ const Header = () => {
         <Link className={isActive('persons', pathName)} href={'/admin/persons'}>Пользователи</Link>
         <Link className={isActive('comments', pathName)} href={'/admin/comments'}>Комментарии</Link>
 
-        <Link className={isActive('statistics', pathName)} href={'/admin/statistics'}>Статистика</Link>
+        <Link className={isActive('statistics', pathName)} href={'/admin/statistics/general'}>Статистика</Link>
         <Link className={isActive('other', pathName)} href={'/admin/other'}>Другое</Link>
         <Link className={styles.link} href={'/catalog'}>Сайт</Link>
       </nav>

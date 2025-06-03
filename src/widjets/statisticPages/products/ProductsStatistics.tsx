@@ -28,8 +28,8 @@ type GeneralStatisticsProps = {
 
 const ProductsStatistics = (props: GeneralStatisticsProps) => {
   const { orderProducts = [], productKeys = {} } = props;
-  const nowDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 11 ? '0' : ''}${(new Date()).getUTCMonth() + 1}-${(new Date()).getDate()}`;
-  const lastDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 10 ? '0' : ''}${(new Date()).getMonth()}-${(new Date()).getDate()}`;
+  const nowDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 11 ? '0' : ''}${(new Date()).getUTCMonth() + 1}-${(new Date()).getDate() < 10 ? '0' : ''}${(new Date()).getDate() + 1}`;
+  const lastDate = `${(new Date()).getFullYear()}-${(new Date()).getUTCMonth() < 10 ? '0' : ''}${(new Date()).getMonth()}-${(new Date()).getDate() < 10 ? '0' : ''}${(new Date()).getDate()}`;
   const [startDate, setStartDate] = useState(lastDate);
   const [endDate, setEndDate] = useState(nowDate);
   const [data, setData] = useState<DatasetType[]>([]);

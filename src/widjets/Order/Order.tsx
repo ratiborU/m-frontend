@@ -149,7 +149,7 @@ const Order = (props: OrderProps) => {
       usePoints: isLoyalty
     });
 
-    alert('создание заказа');
+    // alert('создание заказа');
   }
 
   return (

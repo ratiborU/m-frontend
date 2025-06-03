@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   gap: 32px;
   margin: 0 auto;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
 }
 
 .inputs {

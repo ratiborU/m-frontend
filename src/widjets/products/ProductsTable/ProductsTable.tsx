@@ -20,6 +20,8 @@ type ProductsTableProps = {
 const ProductsTable = (props: ProductsTableProps) => {
   const { products = [], orderProducts = [] } = props;
 
+  console.log(orderProducts);
+
   const lastMonth: TProduct[] = getSellsByProductsLastMonth(products, orderProducts);
   const thisMonth: TProduct[] = getSellsByProductsThisMonth(products, orderProducts);
 

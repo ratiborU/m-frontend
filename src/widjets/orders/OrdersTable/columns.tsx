@@ -2,6 +2,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import EditButton from "@/components/EditButton/EditButton";
 import AddButton from "@/components/AddButton/AddButton";
+import { parseDate } from "@/lib/helpers/parseDate";
 
 export const orderColumns: GridColDef[] = [
   {
@@ -22,19 +23,21 @@ export const orderColumns: GridColDef[] = [
     // renderCell: (props) => <></>,
     headerName: 'ФИО',
     flex: 1,
-    minWidth: 160
+    minWidth: 240
+  },
+
+  {
+    field: 'address',
+    headerName: 'Адрес',
+    flex: 1,
+    width: 240,
   },
   {
     field: 'price',
     headerName: 'Сумма',
     // width: 50,
-    flex: 2,
-    minWidth: 100
-  },
-  {
-    field: 'address',
-    headerName: 'Адрес',
-    width: 80,
+    // flex: 2,
+    width: 120,
   },
   {
     field: 'delivery',
@@ -42,18 +45,24 @@ export const orderColumns: GridColDef[] = [
     width: 80,
   },
   {
-    field: 'deliveryDays',
-    headerName: 'доставка в днях',
-    width: 80,
+    field: 'createdAt',
+    headerName: 'Дата заказа',
+    renderCell: (props) => <>{parseDate(props.row.createdAt)}</>,
+    width: 120,
   },
-  {
-    field: 'comment',
-    headerName: 'Комментарии',
-    width: 100,
-  },
+  // {
+  //   field: 'deliveryDays',
+  //   headerName: 'доставка в днях',
+  //   width: 80,
+  // },
+  // {
+  //   field: 'comment',
+  //   headerName: 'Комментарии',
+  //   width: 100,
+  // },
   {
     field: 'status',
-    headerName: 'статус',
-    width: 100,
+    headerName: 'Статус',
+    width: 120,
   },
 ]

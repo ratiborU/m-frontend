@@ -6,6 +6,7 @@ import Image from 'next/image';
 // import CheckBox from '../UI/CheckBox/CheckBox';
 import OrderCartButton from '../UI/OrderCartButton/OrderCartButton';
 import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
+import Link from 'next/link';
 
 
 const BasketProduct = (props: TBasketProduct) => {
@@ -15,9 +16,15 @@ const BasketProduct = (props: TBasketProduct) => {
   return (
     <>
       <div className={styles.block}>
-        <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product?.mainImage}` || ''} alt={''} width={180} height={180} />
+        <Link href={`/product/${product.id}`}>
+          <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product?.mainImage}` || ''} alt={''} width={180} height={180} />
+        </Link>
+        {/* <Image className={styles.image} src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product?.mainImage}` || ''} alt={''} width={180} height={180} /> */}
         <div className={styles.information}>
-          <p className={styles.name}>{product?.name}</p>
+          <Link href={`/product/${product.id}`}>
+            <p className={styles.name}>{product?.name}</p>
+          </Link>
+
           <p className={styles.description}>Продукта в наличии {product?.productsCount} шт.</p>
           <div className={styles.prices}>
             <p className={styles.price}>{Number(product.price) - Number(product.discount) - order.discountPerPackage} ₽</p>

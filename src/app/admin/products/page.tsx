@@ -16,7 +16,9 @@ const page = async () => {
   const orderProducts = await getAllOrderProducts();
 
   return (
-    <ProductsTable products={products.rows} orderProducts={orderProducts.rows} />
+    <>
+      <ProductsTable products={products.rows} orderProducts={orderProducts.rows} />
+    </>
   );
 };
 

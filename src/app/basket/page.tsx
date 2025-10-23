@@ -8,12 +8,12 @@ import { getAllRecommendations } from '@/services/api/recomendations/recomendati
 
 const page = async () => {
   const basketProducts = await getAllBasketProductsByPersonId(cookies().get('personId')?.value || 1);
-  const loyalty = await getLoyalty();
+  // const loyalty = await getLoyalty();
   const reccomendations = await getAllRecommendations();
 
   return (
     <>
-      <Basket products={basketProducts.rows} loyalty={loyalty} />
+      <Basket products={basketProducts.rows} />
       <SpecialOfferProducts products={reccomendations || []} />
     </>
 

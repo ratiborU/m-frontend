@@ -6,7 +6,7 @@ import Textarea from '@/components/UI/Textarea/Textarea';
 import { TBasketProduct } from '@/services/api/basketProducts/basketProductType';
 import { TPerson } from '@/services/api/persons/personType';
 // import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
-import Title from '@/components/Title/Tile';
+// import Title from '@/components/Title/Tile';
 import OrderMap from '@/components/OrderMap/OrderMap';
 import CheckBox from '@/components/UI/CheckBox/CheckBox';
 import RadioButton from '@/components/UI/RadioButton/RadioButton';
@@ -22,17 +22,17 @@ import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation
 import { usePersonSetterContext } from '@/providers/PersonProvider/hooks/usePersonSetterContext';
 import { LocalStorageService } from '@/lib/helpers/localStorageService';
 // import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
+// import { useState } from 'react';
+// import { useDebouncedCallback } from 'use-debounce';
 // import { TCoupon } from '@/services/api/coupons/couponType';
 // import { checkOneCoupon } from '@/services/api/coupons/couponService';
-import { useGetCheckOneCouponQuery } from '@/hooks/coupons/useGetCheckCouponQuery';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useGetCheckOneCouponQuery } from '@/hooks/coupons/useGetCheckCouponQuery';
+// import { useQueryClient } from '@tanstack/react-query';
 // import { revalidateTag } from 'next/cache';
 import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 import OrderCardMobile from '@/components/OrderCard/OrderCardMobile';
 // import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
-import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
+// import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
 import { useCreatePaymentMutation } from '@/hooks/youKassa/useCreatePaymentMutation';
 
 const createPersonSchema = z.object({
@@ -42,7 +42,7 @@ const createPersonSchema = z.object({
   comment: z.string(),
   address: z.string(),
   agreement: z.boolean(),
-  coupon: z.string(),
+  // coupon: z.string(),
   // delivery: z.string(),
 })
 
@@ -60,16 +60,16 @@ const Order = (props: OrderProps) => {
   const person = usePersonContext();
   const setPerson = usePersonSetterContext();
   const finalPrice = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount)), 0)
-  const client = useQueryClient();
+  // const client = useQueryClient();
   const order = useOrderContext();
-  const [isCoupon, setIsCoupon] = useState(false);
-  const [isLoyalty, setIsLoyalty] = useState(false);
+  // const [isCoupon, setIsCoupon] = useState(false);
+  // const [isLoyalty] = useState(false);
 
-  const debounce = useDebouncedCallback(async () => {
-    client.invalidateQueries({ queryKey: ['coupons'] });
-  }, 500)
+  // const debounce = useDebouncedCallback(async () => {
+  //   client.invalidateQueries({ queryKey: ['coupons'] });
+  // }, 500)
 
-  const { register, handleSubmit, getValues } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
+  const { register, handleSubmit } = useForm<TCreatePersonSchema>({ resolver: zodResolver(createPersonSchema) });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSuccess = async (data: any) => {
@@ -83,29 +83,31 @@ const Order = (props: OrderProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSuccessPayment = (data: any) => {
+    console.log(data.confirmation.confirmation_url);
     window.location.href = data.confirmation.confirmation_url;
     // router.push('order/completed');
   }
 
   const { createOrder } = useCreateOrderMutation({ onSuccess });
   const { createPayment } = useCreatePaymentMutation({ onSuccess: onSuccessPayment });
-  const { updatePerson } = useUpdatePersonMutation({})
-  const { data: couponData } = useGetCheckOneCouponQuery(String(getValues('coupon')));
+  const { updatePerson } = useUpdatePersonMutation({});
+  // const { data: couponData } = useGetCheckOneCouponQuery(String(getValues('coupon')));
 
-  const { data: loyaltyData } = useGetLoyaltyQuery();
+  // const { data: loyaltyData } = useGetLoyaltyQuery();
   // const { updatePerson } = useUpdatePersonMutation({})
   // обновить person?
 
   const onSubmit = async (data: TCreatePersonSchema) => {
+
     // const price = String(finalPrice);
-    const totalWithDiscount = !couponData
-      ? finalPrice
-      : couponData.discount.at(-1) !== '%'
-        ? finalPrice - Number(couponData.discount)
-        : finalPrice * (1 - Number(couponData.discount.slice(0, couponData.discount.length - 1)) / 100);
-    const totalWithProductsDiscount = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
-    const loyaltyPayCount = isLoyalty ? Math.min(Number(loyaltyData?.points), Math.floor(totalWithProductsDiscount * 0.3)) : 0;
-    const totalWithLoyalty = isLoyalty ? totalWithProductsDiscount - loyaltyPayCount : totalWithProductsDiscount;
+    // const totalWithDiscount = !couponData
+    //   ? finalPrice
+    //   : couponData.discount.at(-1) !== '%'
+    //     ? finalPrice - Number(couponData.discount)
+    //     : finalPrice * (1 - Number(couponData.discount.slice(0, couponData.discount.length - 1)) / 100);
+    // const totalWithProductsDiscount = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
+    // const loyaltyPayCount = isLoyalty ? Math.min(Number(loyaltyData?.points), Math.floor(totalWithProductsDiscount * 0.3)) : 0;
+    // const totalWithLoyalty = isLoyalty ? totalWithProductsDiscount - loyaltyPayCount : totalWithProductsDiscount;
 
     const status = 'Ожидает оплаты';
     const deliveryDays = '7';
@@ -137,27 +139,39 @@ const Order = (props: OrderProps) => {
       })
     }
     // пока несовсем правильно работает
-    await createOrder({
+
+    console.log({
       ...data,
-      price: String(totalWithLoyalty),
+      price: String(finalPrice),
       status,
       delivery,
       deliveryDays,
       personId: person.id,
-      couponId: couponData?.id,
+      couponId: '1',
       address: input.value || order.address,
-      usePoints: isLoyalty
+      usePoints: false
+    })
+
+    await createOrder({
+      ...data,
+      price: String(finalPrice),
+      status,
+      delivery,
+      deliveryDays,
+      personId: person.id,
+      couponId: '1',
+      address: input.value || order.address,
+      usePoints: false
     });
 
-    // alert('создание заказа');
+    alert('создание заказа');
   }
 
   return (
     <div className={styles.wrapper}>
-      <Title className={styles.title} text={'Оформление заказа'} margin={false} />
-      <form onSubmit={handleSubmit(onSubmit)}>
-
-
+      {/* <Title className={styles.title} text={'Оформление заказа'} margin={false} /> */}
+      {/* <Title className={styles.title} text={''} margin={false} /> */}
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.block}>
           <div className={styles.block1}>
             <div className={styles.blockInputs}>
@@ -237,10 +251,10 @@ const Order = (props: OrderProps) => {
             />
           </div>
           <div className={styles.block2}>
-            <OrderCard products={products} coupon={couponData} isLoyalty={isLoyalty} />
-            <OrderCardMobile products={products} coupon={couponData} />
+            <OrderCard products={products} />
+            <OrderCardMobile products={products} />
             <div className={styles.checkboxesUnderTheCard}>
-              <CheckBox
+              {/* <CheckBox
                 inputProps={{
                   id: 'order-checkbox-loyalty',
                   checked: isLoyalty,
@@ -261,15 +275,15 @@ const Order = (props: OrderProps) => {
               />}
               {!isCoupon && <input {...register('coupon')} type='text' style={{
                 display: 'none'
-              }} />}
-              <CheckBox
+              }} />} */}
+              {/* <CheckBox
                 inputProps={{
                   id: 'order-checkbox-discount',
                   checked: isCoupon,
                   onChange: (e) => setIsCoupon(e.target.checked)
                 }}
                 label='Использовать купон'
-              />
+              /> */}
 
               <CheckBox
                 inputProps={{

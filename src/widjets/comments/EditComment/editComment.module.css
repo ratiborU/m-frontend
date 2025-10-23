@@ -11,3 +11,11 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media (max-width: 576px) {
+  .block {
+    gap: 16px;
+    max-width: calc(100vw - 16px);
+    margin-bottom: 24px;
+  }
+}

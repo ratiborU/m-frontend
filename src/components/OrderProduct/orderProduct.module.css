@@ -2,13 +2,15 @@
   display: flex;
   width: 400px;
   max-width: 400px;
+  max-width: calc(100vw - 16px);
   justify-content: space-between;
   font-size: 20px;
   font-weight: normal;
 }
 
 .name {
-  max-width: 320px;
+  width: 320px;
+  max-width: calc(100vw - 80px);
   word-break: break-all;
   word-wrap: break-word;
 }

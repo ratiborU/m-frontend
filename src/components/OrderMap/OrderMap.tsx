@@ -46,10 +46,10 @@ const OrderMap = (props: OrderMapProps) => {
           // eslint-disable-next-line
           options={{ balloonPanelMaxMapArea: Number.POSITIVE_INFINITY, balloonBody: '' } as any}
           width={'100%'}
-          height={400}
+          height={460}
         >
           <PlacemarkMircosComponent />
-          <Clusterer
+          {/* <Clusterer
             options={{
               preset: 'islands#darkGreenClusterIcons',
               iconColor: '#000000',
@@ -60,7 +60,7 @@ const OrderMap = (props: OrderMapProps) => {
             {
               ...cdekOffices.map(x => <PlacemarkComponent key={`placemark sdek: ${x.code}`} office={x} />)
             }
-          </Clusterer>
+          </Clusterer> */}
         </Map>
       </div>
     </YMaps>

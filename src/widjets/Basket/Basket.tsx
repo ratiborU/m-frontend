@@ -13,7 +13,7 @@ type BasketProps = {
 }
 
 const Basket = (props: BasketProps) => {
-  const { products, loyalty } = props;
+  const { products } = props;
   return (
     <>
       <div className={styles.wrapper}>
@@ -32,8 +32,8 @@ const Basket = (props: BasketProps) => {
               ))}
             </div>
           </div>
-          <BasketToOrderCard products={products} loyalty={loyalty} />
-          <BasketToOrderTotal />
+          <BasketToOrderCard products={products} />
+          <BasketToOrderTotal products={products} />
         </div>
 
       </div>

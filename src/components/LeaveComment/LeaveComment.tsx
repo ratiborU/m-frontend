@@ -116,7 +116,7 @@ const LeaveComment = (props: LeaveCommentProps) => {
           }
         </div>
       </form>
-      <p className={styles.text}>Получите от 20 до 50 баллов за отзыв!</p>
+      {/* <p className={styles.text}>Получите от 20 до 50 баллов за отзыв!</p> */}
     </div>
   );
 };

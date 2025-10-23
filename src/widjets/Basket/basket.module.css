@@ -4,7 +4,7 @@
 }
 
 .title {
-  margin-top: -70px;
+  margin-top: -90px;
 }
 
 .basketFlex {
@@ -24,12 +24,13 @@
 
 @media (max-width: 780px) {
   .wrapper {
-    height: calc(100vh - 180px)
+    min-height: calc(100vh - 480px)
   }
 
-  /* .basketFlex {
-    margin-top: 0px;
-  } */
+  .basketFlex {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 
   .basketProducts {
     gap: 24px;

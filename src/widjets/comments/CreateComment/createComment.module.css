@@ -1,5 +1,6 @@
 .block {
   width: 400px;
+  max-width: calc(100vw - 16px);
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -9,4 +10,11 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 576px) {
+  .block {
+    gap: 16px;
+    max-width: calc(100vw - 16px);
+  }
 }

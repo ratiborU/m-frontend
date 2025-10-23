@@ -94,3 +94,17 @@
   margin-left: 4px;
   color: red;
 }
+
+@media (max-width: 576px) {
+  .small {
+    max-width: calc(50vw - 16px);
+  }
+
+  .medium {
+    max-width: calc(100vw - 16px);
+  }
+
+  .large {
+    max-width: calc(100vw - 16px);
+  }
+}

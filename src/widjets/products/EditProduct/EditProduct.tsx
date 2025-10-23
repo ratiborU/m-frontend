@@ -307,6 +307,7 @@ const EditProduct = (props: EditProductProps) => {
           <Image
             src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${mainImage}`}
             alt={''}
+            className={styles.image}
             width={400}
             height={400}
           />

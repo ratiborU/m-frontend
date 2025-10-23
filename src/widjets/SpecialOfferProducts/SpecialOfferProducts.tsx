@@ -15,7 +15,7 @@ const SpecialOfferProducts = (props: PopularProductsProps) => {
   // const products = await getAllProducts();
   return (
     <div className={styles.wrapper}>
-      <Title text='Реккомендуем для вас' margin={false} />
+      <Title text='Вам может понравится' margin={false} />
       <div className={styles.products}>
         {...products.slice(0, 4).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
       </div>

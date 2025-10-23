@@ -1,6 +1,6 @@
 .textarea {
-  width: 400px;
-  max-width: calc(100vw - 16px);
+  /* width: 400px; */
+  max-width: calc(100vw - 32px);
   height: 50px;
   font-size: 16px;
   border-radius: 5px;
@@ -73,6 +73,19 @@
 
 @media (max-width: 780px) {
   .textarea {
-    width: 360px;
+    width: 560px;
+    max-width: calc(100vw - 16px);
   }
+
+  /* .small {
+    max-width: calc(50vw - 16px);
+  }
+
+  .medium {
+    max-width: calc(100vw - 16px);
+  }
+
+  .large {
+    max-width: calc(100vw - 16px);
+  } */
 }

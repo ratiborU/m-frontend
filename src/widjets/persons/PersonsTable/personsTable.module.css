@@ -1,6 +1,7 @@
 .block {
+  /* padding: 0 8px; */
+  margin: 0 8px;
   max-width: calc(100vw - 16px);
-  margin: 0 auto;
 }
 
 .inputs {

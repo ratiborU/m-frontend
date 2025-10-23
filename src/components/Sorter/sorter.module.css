@@ -17,7 +17,7 @@
 
   .sortBlockMobile {
     position: fixed;
-    bottom: 75px;
+    bottom: 50px;
     border-radius: 5px;
     left: 0;
     transition: 0.4s;
@@ -28,6 +28,8 @@
     transition: 0.4s;
     padding-top: 12px;
   }
+
+
 
   .sortBlockMobileNone {
     position: fixed;

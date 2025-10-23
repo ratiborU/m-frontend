@@ -1,6 +1,7 @@
 .filter {
   width: 320px;
   padding: 0 16px;
+  /* border: 10px solid #000; */
 }
 
 .title {
@@ -51,12 +52,19 @@
     top: 56px;
     left: 0;
     width: 100%;
-    min-height: calc(100vh - 131px);
+    min-height: calc(100vh - 106px);
     z-index: 11;
     background-color: #fff;
     transition: 0.4s ease;
     padding: 0 8px;
     padding-top: 16px;
+    /* border: 10px solid #000; */
+    position: fixed;
+    top: 56px;
+    right: 0;
+    bottom: 56px;
+    left: 0;
+    overflow: auto;
   }
 
   .filerMobileBlockNone {
@@ -64,11 +72,12 @@
     top: 56px;
     left: -100%;
     width: 100%;
-    height: calc(100vh - 131px);
+    height: calc(100vh - 106px);
     z-index: 11;
     background-color: #fff;
     transition: 0.4s ease;
     padding-top: 16px;
+    overflow: visible;
   }
 
   .filterTop {

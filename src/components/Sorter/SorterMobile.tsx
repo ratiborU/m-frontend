@@ -19,13 +19,21 @@ const SorterMobile = () => {
   const onClose = () => {
     setIsActive(false);
     document.getElementById('dark-window-sort-mobile')?.removeEventListener('click', onClose)
+    document.body.style.position = '';
+    document.body.style.overflow = 'scroll'
+    // document.body.style.marginRight = '0px';
+    // document.body.style.top = '';
   }
 
-
+  // document.body.style.position = 'fixed';
   const onClickButton = () => {
     setIsActive(!isActive);
     document.getElementById('dark-window-sort-mobile')
-      ?.addEventListener('click', onClose)
+      ?.addEventListener('click', onClose);
+    document.body.style.position = 'fixed';
+    document.body.style.overflow = 'hidden';
+    // document.body.style.marginRight = '0px';
+    // document.body.style.top = `-${window.scrollY}px`;
   }
 
   const onClickOption = (value: '' | 'popular' | 'rate' | 'rasePrice' | 'decreasePrice') => {
@@ -53,6 +61,7 @@ const SorterMobile = () => {
             : styles.darkWindowNone
         }
       ></div>
+
       <div className={isActive ? styles.sortBlockMobile : styles.sortBlockMobileNone}>
         <RadioButtonSF
           label='По популярности'

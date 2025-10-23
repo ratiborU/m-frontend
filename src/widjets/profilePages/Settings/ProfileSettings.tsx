@@ -16,7 +16,7 @@ import { useUpdatePersonMutation } from '@/hooks/persons/useUpdatePersonMutation
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 // import { useGetLoyaltyQuery } from '@/hooks/loyalty/useGetLoyaltyQuery';
-import LoyalutyCart from '@/components/LoyalityCart/LoyalutyCart';
+// import LoyalutyCart from '@/components/LoyalityCart/LoyalutyCart';
 
 type ProfileSettingsProps = {
   person?: TPerson,
@@ -129,10 +129,10 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
         </div>
 
 
-        <div>
+        {/* <div>
           <h1 className={styles.title2}>Программа лояльности</h1>
           <LoyalutyCart />
-        </div>
+        </div> */}
       </div>
       <ToastContainer
         position="bottom-right"

@@ -48,11 +48,24 @@
   display: none;
 }
 
+.totalBlock {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.totalWithoutDiscount {
+  font-size: 16px;
+  color: #494949;
+  font-weight: 300;
+  text-decoration: line-through;
+}
+
 @media (max-width: 780px) {
   .basketTotalMobile {
     display: block;
     position: fixed;
-    bottom: 75px;
+    bottom: 50px;
     left: 0px;
     width: 100%;
     background-color: #ffffff;
@@ -60,6 +73,7 @@
     padding: 8px;
     padding-top: 12px;
     box-shadow: 0 0 4px 0 #00000033;
+    z-index: 10;
   }
 
 

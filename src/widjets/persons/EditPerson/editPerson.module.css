@@ -5,7 +5,19 @@
   gap: 32px;
   margin: 0 auto;
 }
+
 .buttons {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 576px) {
+  .block {
+    width: 400px;
+    max-width: calc(100vw - 16px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 auto;
+  }
 }

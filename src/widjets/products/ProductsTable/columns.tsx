@@ -53,6 +53,11 @@ export const productColumns: GridColDef[] = [
     width: 100,
   },
   {
+    field: 'orderProductsCount',
+    headerName: 'Заказано',
+    width: 100,
+  },
+  {
     field: 'productsCount',
     headerName: 'На складе',
     width: 100,

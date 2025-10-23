@@ -8,22 +8,22 @@ import NameAndProperty from '../UI/NameAndProperty/NameAndProperty';
 import { productDiscounts } from '@/services/api/products/productDiscountSistem';
 import { useOrderContext } from '@/providers/OrderProvider/hooks/useOrderContext';
 import { useOrderSetterContext } from '@/providers/OrderProvider/hooks/useOrderSetterContext';
-import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
+// import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
 
 type BasketToOrderCardProps = {
   // total: number,
   // discount: number,
   products: TBasketProduct[],
-  loyalty: TLoyalty,
+  // loyalty: TLoyalty,
 }
 
 const BasketToOrderCard = (props: BasketToOrderCardProps) => {
-  const { products, loyalty } = props;
+  const { products } = props;
 
   const total = products.reduce((acc, cur) => acc + Number(cur.count) * Number(cur.product.price), 0)
   const [curentDiscountCount, setCurrentDiscountCount] = useState(0);
   const [totalWithDiscount, setTotalWithDiscount] = useState(0);
-  const [loyaltyCount, setLoyaltyCount] = useState(0);
+  // const [loyaltyCount, setLoyaltyCount] = useState(0);
 
   const order = useOrderContext();
   const setOrder = useOrderSetterContext();
@@ -33,8 +33,8 @@ const BasketToOrderCard = (props: BasketToOrderCardProps) => {
     setOrder.setDiscountPerPackage(productDiscounts.reduce((acc, cur) => order.productsCartCount >= cur[0] ? cur[1] : acc, 0));
     setCurrentDiscountCount(productDiscounts.reduce((acc, cur) => order.productsCartCount >= cur[0] ? cur[0] : acc, 0));
     setTotalWithDiscount(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0))
-    setLoyaltyCount(Math.floor(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0) * Number(loyalty.cashback) / 100));
-  }, [products, setOrder, order.discountPerPackage, order.productsCartCount, loyalty.cashback]);
+    // setLoyaltyCount(Math.floor(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0) * Number(loyalty.cashback) / 100));
+  }, [products, setOrder, order.discountPerPackage, order.productsCartCount]);
 
   return (
     <div className={styles.basketToOrderCard}>
@@ -44,7 +44,7 @@ const BasketToOrderCard = (props: BasketToOrderCardProps) => {
       </div>
       <p className={styles.beforeDiscount}>{total != totalWithDiscount ? `${total} ₽` : ''}</p>
       <div className={styles.products}>
-        <NameAndProperty name={`Вам начислится`} value={`${loyaltyCount} б`} size='l' />
+        {/* <NameAndProperty name={`Вам начислится`} value={`${loyaltyCount} б`} size='l' /> */}
         <NameAndProperty name={`Скидка на 1 от ${curentDiscountCount || '___'} шт.`} value={`${order.discountPerPackage} ₽`} size='l' />
         <NameAndProperty name='Товаров' value={`${order.productsCartCount} шт.`} size='l' />
         {...products.map(x => (

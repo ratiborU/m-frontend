@@ -27,7 +27,7 @@ const MobileMenuElement = (props: MobileMenuElementProps) => {
     <Link className={styles.button} href={to}>
       {!isActive && <Image className={styles.image} src={icon} alt={''} width={32} height={32} />}
       {isActive && <Image className={styles.image} src={activeIcon} alt={''} width={32} height={32} />}
-      <p className={isActive ? styles.textActive : styles.text}>{text}</p>
+      {/* <p className={isActive ? styles.textActive : styles.text}>{text}</p> */}
     </Link>
   );
 };

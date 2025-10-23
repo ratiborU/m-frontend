@@ -95,12 +95,30 @@ const FilterMobile = () => {
     }
   }
 
+  const onClose = () => {
+    setIsActive(false);
+    document.getElementById('dark-window-sort-mobile')?.removeEventListener('click', onClose)
+    document.body.style.position = '';
+    document.body.style.overflow = 'scroll'
+  }
+
+  // document.body.style.position = 'fixed';
+  const onClickButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setIsActive(!isActive);
+    e.stopPropagation();
+    e.preventDefault();
+    document.body.style.overflow = 'hidden';
+    document.getElementById('dark-window-sort-mobile')
+      ?.addEventListener('click', onClose);
+    document.body.style.position = 'fixed';
+  }
+
   return (
     <>
       <button
         className={styles.sortButtonMobile}
         type='button'
-        onClick={() => setIsActive(!isActive)}
+        onClick={onClickButton}
       >
         Фильтр
         <Image className={isActive ? styles.imageActive : styles.image} src={filterIcon} alt={''} />
@@ -108,7 +126,7 @@ const FilterMobile = () => {
 
       <div className={isActive ? styles.filerMobileBlock : styles.filerMobileBlockNone}>
         <p className={styles.title2}>Фильтры</p>
-        <button className={styles.crossButton} onClick={() => setIsActive(!isActive)}>
+        <button className={styles.crossButton} onClick={onClose}>
           <Image src={crossIcon} alt={''} />
         </button>
         <StyledSlider
@@ -174,7 +192,7 @@ const FilterMobile = () => {
         <Button
           text={'Применить'}
           size={'l'}
-          onClick={() => setIsActive(!isActive)}
+          onClick={onClose}
         />
       </div >
     </>

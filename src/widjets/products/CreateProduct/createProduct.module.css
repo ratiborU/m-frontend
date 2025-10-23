@@ -14,6 +14,7 @@
   flex-wrap: wrap;
   gap: 32px 0;
   justify-content: space-between;
+  /* border: 1px solid #000; */
 }
 
 .buttons {
@@ -33,4 +34,24 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+@media (max-width: 780px) {
+  .block {
+    margin: 0;
+    padding: 0 8px;
+    gap: 16px
+  }
+
+  .inputs {
+    gap: 16px 0;
+  }
+
+  .block1 {
+    gap: 16px;
+  }
+
+  .block2 {
+    gap: 16px;
+  }
 }

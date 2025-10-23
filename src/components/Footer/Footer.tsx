@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './footer.module.css'
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -28,19 +29,19 @@ const Footer = () => {
           </div>
           <div className={styles.column}>
             <p className={styles.columnTitle}>Помощь</p>
-            <p className={styles.columnText}>Как заказать товар</p>
-            <p className={styles.columnText}>Способы оплаты</p>
-            <p className={styles.columnText}>Доставка и оплата</p>
-            <p className={styles.columnText}>Возврат товара</p>
-            <p className={styles.columnText}>Возврат денежных средств</p>
+            <Link href='/profile/about' className={styles.columnText}>Как заказать товар</Link>
+            <Link href='/profile/about' className={styles.columnText}>Способы оплаты</Link>
+            <Link href='/profile/about' className={styles.columnText}>Доставка и оплата</Link>
+            <Link href='/profile/about' className={styles.columnText}>Возврат товара</Link>
+            <Link href='/profile/about' className={styles.columnText}>Возврат денежных средств</Link>
           </div>
           <div className={styles.column}>
             <p className={styles.columnTitle}>Информация</p>
-            <p className={styles.columnText}>О нас</p>
-            <p className={styles.columnText}>О серьгах Nina</p>
-            <p className={styles.columnText}>Политика конфиденциальности</p>
-            <p className={styles.columnText}>Политика обработки персональных данных</p>
-            <p className={styles.columnText}>Карта сайта</p>
+            <Link href='/profile/about' className={styles.columnText}>О нас</Link>
+            <Link href='/profile/about' className={styles.columnText}>О серьгах Nina</Link>
+            <Link href='/profile/about' className={styles.columnText}>Политика конфиденциальности</Link>
+            <Link href='/profile/about' className={styles.columnText}>Политика обработки персональных данных</Link>
+            <Link href='/profile/about' className={styles.columnText}>Карта сайта</Link>
           </div>
         </div>
 

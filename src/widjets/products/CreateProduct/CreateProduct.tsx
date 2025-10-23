@@ -102,9 +102,9 @@ const CreateProduct = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.block}>
           <div className={styles.block1}>
-            <Input
+            <Textarea
               label='Название'
-              sizeInput='large'
+              // sizeInput='large'
               error={errors.name?.message}
               inputProps={{
                 placeholder: '',
@@ -124,9 +124,9 @@ const CreateProduct = () => {
                 ...register('description')
               }}
             />
-            <Input
+            <Textarea
               label='Seo Title'
-              sizeInput='large'
+              // sizeInput='large'
               error={errors.seoTitle?.message}
               inputProps={{
                 placeholder: '',

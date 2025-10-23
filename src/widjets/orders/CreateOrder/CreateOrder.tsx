@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCreateOrderMutation } from '@/hooks/orders/useCreateOrderMutation';
-
+import Textarea from '@/components/UI/Textarea/Textarea';
 
 const CreateOrder = () => {
   const notify = () => toast.success("Заказ успешно создан");
@@ -40,7 +40,7 @@ const CreateOrder = () => {
             error={errors.personId?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-second-name',
+              id: 'create-order-fio',
               autoComplete: 'new-passport',
               ...register('personId')
             }}
@@ -51,18 +51,18 @@ const CreateOrder = () => {
             error={errors.price?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-first-name',
+              id: 'create-order-price',
               autoComplete: 'new-passport',
               ...register('price')
             }}
           />
-          <Input
+          <Textarea
             label='Адрес'
-            sizeInput='large'
+            // sizeInput='large'
             error={errors.address?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-first-name',
+              id: 'create-order-address',
               autoComplete: 'new-passport',
               ...register('address')
             }}
@@ -73,7 +73,7 @@ const CreateOrder = () => {
             error={errors.delivery?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-father-name',
+              id: 'create-order-delivery',
               autoComplete: 'new-passport',
               ...register('delivery')
             }}
@@ -84,7 +84,7 @@ const CreateOrder = () => {
             error={errors.deliveryDays?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-email',
+              id: 'create-order-days',
               autoComplete: 'new-passport',
               ...register('deliveryDays')
             }}
@@ -95,7 +95,7 @@ const CreateOrder = () => {
             error={errors.comment?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-phone',
+              id: 'create-order-comment',
               autoComplete: 'new-passport',
               ...register('comment')
             }}
@@ -106,7 +106,7 @@ const CreateOrder = () => {
             error={errors.status?.message}
             inputProps={{
               placeholder: '',
-              id: 'create-person-password',
+              id: 'create-order-status',
               autoComplete: 'new-passport',
               ...register('status')
             }}

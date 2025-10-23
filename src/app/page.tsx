@@ -7,7 +7,7 @@ import HomeComments from "@/widjets/HomeComments/HomeComments";
 import PopularProducts from "@/widjets/PopularProducts/PopularProducts";
 import SpecialOfferProducts from "@/widjets/SpecialOfferProducts/SpecialOfferProducts";
 import Footer from "@/components/Footer/Footer";
-import SwiperHome from "@/widjets/SwiperHome/SwiperHome";
+// import SwiperHome from "@/widjets/SwiperHome/SwiperHome";
 import { Metadata } from "next";
 // import { TProduct } from "@/services/api/products/productType";
 // import { TPagination } from "@/services/types/paginationType";
@@ -36,7 +36,7 @@ export default async function Home() {
       <div className={styles.block}>
         <ClientHeader />
         <div className={styles.middle}>
-          <SwiperHome />
+          {/* <SwiperHome /> */}
           <div className={styles.wrapper}>
             <PopularProducts products={products || []} />
             <SpecialOfferProducts products={reccomendations.slice(0, 4) || []} />

@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  /* border: 1px solid #000; */
 }
 
 .inputs {
@@ -23,9 +24,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 72px;
-  margin: 0 auto;
+  /* margin: 0 8px; */
+  padding: 0px 8px;
   /* justify-content: center; */
   /* border: 1px solid #000; */
+  /* border: 5px solid #000; */
 }
 
 .form {
@@ -37,9 +40,16 @@
 
 .imageBlock {
   width: 400px;
+  max-width: calc(100vw - 16px);
   display: flex;
   flex-direction: column;
   gap: 30px
+}
+
+.image {
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vw - 16px);
+  border: 1px solid #000;
 }
 
 .images {
@@ -72,4 +82,28 @@
   flex-direction: column;
   gap: 32px;
   /* border: 1px solid #000; */
+}
+
+@media (max-width: 576px) {
+  .flex {
+    max-width: calc(100vw - 0px);
+  }
+
+  .inputs {
+    /* border: 1px solid #000; */
+    gap: 0px;
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 16px 0px;
+    justify-content: space-between;
+    width: calc(100vw - 16px);
+  }
+
+  .block1 {
+    gap: 16px;
+  }
+
+  .block2 {
+    gap: 16px;
+  }
 }

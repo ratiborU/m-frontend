@@ -14,6 +14,7 @@ const isActive = (path: string, currentPath: string) => {
 
 const Header = () => {
   const pathName = usePathname();
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -23,7 +24,8 @@ const Header = () => {
         <Link className={isActive('comments', pathName)} href={'/admin/comments'}>Комментарии</Link>
 
         <Link className={isActive('statistics', pathName)} href={'/admin/statistics/general'}>Статистика</Link>
-        <Link className={isActive('other', pathName)} href={'/admin/other'}>Другое</Link>
+        {/* <Link className={isActive('other', pathName)} href={'/admin/other.сфеупщкшуы'}>Категории</Link> */}
+        {/* <Link className={isActive('other', pathName)} href={'/admin/other'}>Другое</Link> */}
         <Link className={styles.link} href={'/catalog'}>Сайт</Link>
       </nav>
     </header>

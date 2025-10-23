@@ -1,10 +1,12 @@
+import { getAllComments } from '@/services/api/comments/commentService';
 import CommentsTable from '@/widjets/comments/CommentsTable/CommentsTable';
 import React from 'react';
 
-const page = () => {
+const page = async () => {
+  const comments = await getAllComments();
   return (
     <div>
-      <CommentsTable />
+      <CommentsTable comments={comments.rows} />
     </div>
   );
 };

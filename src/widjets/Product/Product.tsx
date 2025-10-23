@@ -62,7 +62,6 @@ const ProductWidget = (props: ProductProps) => {
                 height={400}
                 className={styles.image}
               />
-
               <div className={styles.miniImages}>
                 {
                   ...images.slice(0, 4).map(x => (
@@ -79,6 +78,7 @@ const ProductWidget = (props: ProductProps) => {
                 }
               </div>
             </div>
+
             <div className={styles.info}>
               <div className={styles.titleBlock}>
                 <h1 className={styles.title}>{product.name}</h1>
@@ -139,8 +139,9 @@ const ProductWidget = (props: ProductProps) => {
           </div>
 
           <div className={styles.comments}>
-            <div>
+            <div className={styles.commentsList}>
               <h2 className={styles.commentsTitle}>Отзывы</h2>
+              {comments?.length == 0 && <p className={styles.fillerCommentText}>Оставьте отзыв первым!</p>}
               <div className={styles.commentsBlock}>
                 {...comments!.map(x => (
                   <Comment key={`comment for product: ${product.id} ${x.id}`} {...x} />

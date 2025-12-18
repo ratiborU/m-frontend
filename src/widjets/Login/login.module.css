@@ -27,10 +27,18 @@
 }
 
 .text {
+  max-width: calc(100vw - 16px);
   width: 100%;
   font-size: 16px;
   font-weight: 300;
   display: flex;
+  justify-content: space-between;
+}
+
+.texts {
+  width: 100%;
+  flex-direction: column;
+  gap: 30px;
   justify-content: space-between;
 }
 

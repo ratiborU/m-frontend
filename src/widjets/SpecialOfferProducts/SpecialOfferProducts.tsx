@@ -5,6 +5,7 @@ import styles from './specialOfferProducts.module.css'
 import Title from '@/components/Title/Tile';
 // import { TPagination } from '@/services/types/paginationType';
 import { TProduct } from '@/services/api/products/productType';
+import ProductNew from '@/components/Product/ProductNew';
 
 type PopularProductsProps = {
   products: TProduct[]
@@ -17,7 +18,7 @@ const SpecialOfferProducts = (props: PopularProductsProps) => {
     <div className={styles.wrapper}>
       <Title text='Вам может понравится' margin={false} />
       <div className={styles.products}>
-        {...products.slice(0, 4).map(x => <Product key={`popular product ${x.id}`} {...x} />)}
+        {...products.slice(0, 4).map(x => <ProductNew key={`popular product ${x.id}`} {...x} />)}
       </div>
     </div>
 

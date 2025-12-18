@@ -154,7 +154,7 @@ const EditOrder = (props: EditOrderProps) => {
             </div>
             <Textarea
               label='Адрес'
-              sizeInput='l'
+              sizeInput='medium'
               error={errors.address?.message}
               inputProps={{
                 placeholder: '',

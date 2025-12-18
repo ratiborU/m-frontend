@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './favorite.module.css'
 import Product from '@/components/Product/Product';
 import Title from '@/components/Title/Tile';
+import ProductNew from '@/components/Product/ProductNew';
 
 type FavoriteProps = {
   favoriteProducts: TFavoriteProduct[];
@@ -17,7 +18,7 @@ const Favorite = (props: FavoriteProps) => {
         <Title text={'Избранное'} margin={false} />
         <div className={styles.favoriteProducts}>
           {...favoriteProducts?.map((x) => (
-            <Product
+            <ProductNew
               key={`favorite product key: ${x.id}`}
               {...(x.product)}
               favoriteProduct={x}

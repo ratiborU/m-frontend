@@ -12,6 +12,7 @@
 
 .input {
   max-width: 300px;
+  /* max-width: 70vw; */
   width: 300px;
   height: 40px;
   font-size: 16px;

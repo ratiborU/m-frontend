@@ -2,7 +2,8 @@
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
+  border: 1px solid #000;
 }
 
 .rateBlock {
@@ -23,13 +24,13 @@
   font-weight: 400;
   font-size: 20px;
   color: #222222;
-  /* border: 1px solid #000; */
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  max-width: 400px;
 }
 
 .buttons {
@@ -37,11 +38,22 @@
   justify-content: space-between;
   max-width: calc(100vw - 16px);
   width: 400px;
-  /* border: 1px solid #000; */
+}
+
+.title {
+  font-size: 24px;
 }
 
 .text {
   font-weight: 300;
   font-size: 16px;
   color: #222222;
+}
+
+@media (max-width: 576px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 }

@@ -47,9 +47,11 @@
   display: none;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 768px) {
   .orderCardMobile {
+    border: 1px solid #000;
     display: block;
+    min-width: calc(100vw - 16px);
   }
 
   .orderCardMobileTitleBlock {

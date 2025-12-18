@@ -42,16 +42,16 @@ export const productColumns: GridColDef[] = [
   //   headerName: 'Скидка',
   //   width: 80,
   // },
-  {
-    field: 'rate',
-    headerName: 'Оценка',
-    width: 80,
-  },
-  {
-    field: 'commentsCount',
-    headerName: 'Комментарии',
-    width: 100,
-  },
+  // {
+  //   field: 'rate',
+  //   headerName: 'Оценка',
+  //   width: 80,
+  // },
+  // {
+  //   field: 'commentsCount',
+  //   headerName: 'Комментарии',
+  //   width: 100,
+  // },
   {
     field: 'orderProductsCount',
     headerName: 'Заказано',

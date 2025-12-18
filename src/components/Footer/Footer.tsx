@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
+    <>
     <footer className={styles.footer}>
       <div className={styles.wrapper}>
         <div className={styles.mainBlock}>
@@ -24,7 +25,6 @@ const Footer = () => {
             <p className={styles.columnText}>info@niname.ru</p>
             <div>
               <p className={styles.columnText}>г. Екатеринбург, ул. Ленина, д. 99</p>
-              {/* <p className={styles.columnText}>ул. Ленина, д. 99</p> */}
             </div>
           </div>
           <div className={styles.column}>
@@ -48,6 +48,7 @@ const Footer = () => {
       </div>
       <p className={styles.footerBottomText}>© 2018 - 2025 Mircos</p>
     </footer>
+    </>
   );
 };
 

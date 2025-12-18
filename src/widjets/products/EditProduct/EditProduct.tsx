@@ -167,7 +167,7 @@ const EditProduct = (props: EditProductProps) => {
                 ...register('description')
               }}
             />
-            <Textarea
+            {/* <Textarea
               label='SEO title'
               // sizeInput='large'
               error={errors.seoTitle?.message}
@@ -189,7 +189,7 @@ const EditProduct = (props: EditProductProps) => {
                 defaultValue: seoDescription,
                 ...register('seoDescription')
               }}
-            />
+            /> */}
             <Textarea
               label='Характеристики'
               error={errors.characteristics?.message}
@@ -199,6 +199,76 @@ const EditProduct = (props: EditProductProps) => {
                 autoComplete: 'new-passport',
                 defaultValue: characteristics,
                 ...register('characteristics')
+              }}
+            />
+            {/* <div className={styles.inputs}>
+              <Input
+                label='Цена'
+                sizeInput='small'
+                error={errors.price?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-product-price',
+                  autoComplete: 'new-passport',
+                  ...register('price'),
+                  defaultValue: price
+                }}
+              />
+              <Input
+                label='Скидка'
+                sizeInput='small'
+                error={errors.discount?.message}
+                inputProps={{
+                  placeholder: '',
+                  id: 'create-product-discount',
+                  autoComplete: 'new-passport',
+                  ...register('discount'),
+                  defaultValue: discount
+                }}
+              />
+            </div> */}
+            <div className={styles.buttons}>
+              <Button
+                loading={isPending}
+                type="submit"
+                size='large'
+                variant='contained'
+              >
+                Сохранить
+              </Button>
+              <Button
+                loading={isPendingDelete}
+                size='large'
+                variant='outlined'
+                onClick={onDelete}
+              >
+                Удалить
+              </Button>
+            </div>
+          </div>
+
+          <div className={styles.block2}>
+            <Textarea
+              label='SEO title'
+              // sizeInput='large'
+              error={errors.seoTitle?.message}
+              inputProps={{
+                placeholder: '',
+                id: 'edit-product-seo-title',
+                autoComplete: 'new-passport',
+                defaultValue: seoTitle,
+                ...register('seoTitle'),
+              }}
+            />
+            <Textarea
+              label='SEO description'
+              error={errors.seoDescription?.message}
+              inputProps={{
+                placeholder: "",
+                id: 'create-product-seo-description',
+                autoComplete: 'new-passport',
+                defaultValue: seoDescription,
+                ...register('seoDescription')
               }}
             />
             <div className={styles.inputs}>
@@ -226,28 +296,7 @@ const EditProduct = (props: EditProductProps) => {
                   defaultValue: discount
                 }}
               />
-            </div>
-            <div className={styles.buttons}>
-              <Button
-                loading={isPending}
-                type="submit"
-                size='large'
-                variant='contained'
-              >
-                Сохранить
-              </Button>
-              <Button
-                loading={isPendingDelete}
-                size='large'
-                variant='outlined'
-                onClick={onDelete}
-              >
-                Удалить
-              </Button>
-            </div>
-          </div>
-
-          <div className={styles.block2}>
+            </div>  
             <div className={styles.inputs}>
               <SelectInput
                 label='Категория'

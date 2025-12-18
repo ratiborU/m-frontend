@@ -8,7 +8,7 @@ const page = async () => {
   const persons = await getAllPersons();
 
   return (
-    <PersonsTable persons={persons} />
+    <PersonsTable persons={persons.rows.filter(x => x.firstName != '')} />
     // <BaseGrid columns={productColumns} data={persons.rows.filter(x => x.firstName != '')} />
   );
 };

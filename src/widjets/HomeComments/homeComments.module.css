@@ -1,11 +1,12 @@
 .block {
-  /* margin: 0 70px; */
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 50px 30px;
   margin-bottom: 70px;
   /* min-width: 380px; */
+  max-width: 1280px;
 }
 
 @media (max-width: 780px) {

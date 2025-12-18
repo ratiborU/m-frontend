@@ -29,12 +29,12 @@ export const orderColumns: GridColDef[] = [
   {
     field: 'address',
     headerName: 'Адрес',
-    flex: 1,
-    width: 240,
+    flex: 3,
+    minWidth: 240,
   },
   {
     field: 'price',
-    headerName: 'Сумма',
+    headerName: 'Сумма ₽',
     // width: 50,
     // flex: 2,
     width: 120,

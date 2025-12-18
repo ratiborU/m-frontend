@@ -32,7 +32,7 @@
   transition: 0.15s;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .favorite {
     top: 4px;
     right: 4px;
@@ -40,3 +40,12 @@
     height: 40px;
   }
 }
+
+/* @media (max-width: 768px) {
+  .favorite {
+    top: 4px;
+    right: 4px;
+    width: 40px;
+    height: 40px;
+  }
+} */

@@ -14,7 +14,11 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import Comment from '@/components/Comment/Comment';
 import LeaveComment from '@/components/LeaveComment/LeaveComment';
 import Gallery from '@/components/Gallery/Gallery';
+import RateBlock from '@/components/LeaveComment/RateBlock';
+import ProductCardSecond from '@/components/ProductCard/ProductCardSecond';
 // import { useGetSimularProductsQuery } from '@/hooks/recommendations/useGetAllSimularProductsQuery';
+import ProductNew from '@/components/Product/ProductNew';
+import FourProductsBlock from '../FourProductsBlock/FourProductsBlock';
 
 export interface ProductProps {
   product: TProduct,
@@ -79,6 +83,32 @@ const ProductWidget = (props: ProductProps) => {
               </div>
             </div>
 
+            <div className={styles.imagesMobile}>
+              <div className={styles.miniImagesMobile}>
+                {
+                  ...images.slice(0, 4).map(x => (
+                    <Image
+                      key={`product mini images key: ${x.id}`}
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${x.path}`}
+                      className={styles.imageMiniMobile}
+                      onClick={onGalleryOpen}
+                      alt={''}
+                      width={90}
+                      height={90}
+                    />
+                  ))
+                }
+              </div>
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE}/${product.mainImage}`}
+                onClick={onGalleryOpen}
+                alt={''}
+                width={400}
+                height={400}
+                className={styles.imageMobile}
+              />
+            </div>
+
             <div className={styles.info}>
               <div className={styles.titleBlock}>
                 <h1 className={styles.title}>{product.name}</h1>
@@ -98,6 +128,11 @@ const ProductWidget = (props: ProductProps) => {
 
                 </div>
               </div>
+
+              <div className={styles.productCardSecond}>
+                <ProductCardSecond product={product} />
+              </div>
+              
               <div className={styles.aboutBlock}>
                 <h2 className={styles.aboutTitle}>О товаре</h2>
                 {product.description.split('\r\n').filter(x => x != '').map((x, i) => (
@@ -105,7 +140,9 @@ const ProductWidget = (props: ProductProps) => {
                 ))}
               </div>
             </div>
-            <ProductCard product={product} />
+            <div className={styles.productCardFirst}>
+              <ProductCard product={product} />
+            </div>
           </div>
 
           <div className={styles.characteristics}>
@@ -130,17 +167,20 @@ const ProductWidget = (props: ProductProps) => {
               </div>
             </div>
           </div>
+          
+          <FourProductsBlock title={'Похожие товары'} products={simularProducts}/>
 
-          <div className={styles.sameProducts}>
+          {/* <div className={styles.sameProducts}>
             <h2 className={styles.characteristicsTitle}>Похожие товары</h2>
             <div className={styles.simularProducts}>
-              {...simularProducts.map(x => <Product key={`simular product ${product.id}: ${x.id}`} {...x} />)}
+              {...simularProducts.map(x => <ProductNew key={`simular product ${product.id}: ${x.id}`} {...x} />)}
             </div>
-          </div>
+          </div> */}
 
           <div className={styles.comments}>
             <div className={styles.commentsList}>
               <h2 className={styles.commentsTitle}>Отзывы</h2>
+              <RateBlock product={product}/>
               {comments?.length == 0 && <p className={styles.fillerCommentText}>Оставьте отзыв первым!</p>}
               <div className={styles.commentsBlock}>
                 {...comments!.map(x => (
@@ -148,18 +188,12 @@ const ProductWidget = (props: ProductProps) => {
                 ))}
               </div>
             </div>
-            <LeaveComment product={product} comment={comment} />
+            <div>
+              <LeaveComment product={product} comment={comment} />
+            </div>
           </div>
 
-          {/* <div className={styles.commentsMobile}>
-            <h2 className={styles.commentsTitle}>Отзывы</h2>
-            <LeaveComment product={product} comment={comment} />
-            <div className={styles.commentsBlock}>
-              {...comments!.map(x => (
-                <Comment key={`comment for product: ${product.id} ${x.id}`} {...x} />
-              ))}
-            </div>
-          </div> */}
+          
         </div>
       </div>
 

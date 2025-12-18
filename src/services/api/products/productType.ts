@@ -17,6 +17,7 @@ export type TProduct = {
   productsCount: string, // колличество товара на складе
   sellCount: number, // количество продаж
   inOrdersCount: number, // количество заказов с этим товаром
+  orderProductsCount: number, // сколько нужно подготовить к заказу
   categoryCharacteristics: object,
   categoryId: string,
   mainImage: string,

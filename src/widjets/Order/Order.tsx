@@ -36,9 +36,12 @@ import OrderCardMobile from '@/components/OrderCard/OrderCardMobile';
 import { useCreatePaymentMutation } from '@/hooks/youKassa/useCreatePaymentMutation';
 
 const createPersonSchema = z.object({
-  fio: z.string().min(1, 'мало'),
-  phone: z.string().min(1, 'мало'),
-  email: z.string().min(1, 'мало'),
+  // fio: z.string().min(1, 'мало'),
+  // phone: z.string().min(1, 'мало'),
+  // email: z.string().min(1, 'мало'),
+  fio: z.string(),
+  phone: z.string(),
+  email: z.string(),
   comment: z.string(),
   address: z.string(),
   agreement: z.boolean(),
@@ -176,6 +179,7 @@ const Order = (props: OrderProps) => {
           <div className={styles.block1}>
             <div className={styles.blockInputs}>
               <div className={styles.information}>
+                <div className={styles.informationFlex}>
                 <Input
                   inputProps={{
                     placeholder: '',
@@ -183,6 +187,7 @@ const Order = (props: OrderProps) => {
                     ...register('fio'),
                     defaultValue: person.fio
                   }}
+                  sizeInput='large'
                   label={'ФИО'}
                 />
                 {/* phone mask? */}
@@ -193,6 +198,7 @@ const Order = (props: OrderProps) => {
                     ...register('phone'),
                     defaultValue: person.phone
                   }}
+                  sizeInput='large'
                   label={'Номер телефона'}
                 />
                 <Input
@@ -202,6 +208,7 @@ const Order = (props: OrderProps) => {
                     ...register('email'),
                     defaultValue: person.email
                   }}
+                  sizeInput='large'
                   label={'Email'}
                 />
                 <Input
@@ -210,10 +217,12 @@ const Order = (props: OrderProps) => {
                     id: 'order-input-comment',
                     ...register('comment')
                   }}
+                  sizeInput='large'
                   label={'Комментарий к заказу'}
                 />
-              </div>
-              <div className={styles.address}>
+                </div>
+                <div className={styles.informationFlex}>
+                
                 <Textarea inputProps={{
                   placeholder: 'г. Екатерибург, ул. Ленина, д. 1',
                   id: 'order-input-address',
@@ -242,6 +251,22 @@ const Order = (props: OrderProps) => {
                     label='Самовывоз г. Екатеринбург, ул. Ленина, д. 99'
                   />
                 </div>
+                </div>
+                
+                
+              </div>
+              <div className={styles.address}>
+                <OrderCard products={products} />
+                <div className={styles.orderCardCheckBox}>
+                  <CheckBox
+                    inputProps={{
+                      id: 'order-checkbox-agreement',
+                      ...register('agreement'),
+                      defaultChecked: true
+                    }}
+                    label={<>Я принимаю условия оферты а так же соглашаюсь с условиями обработки персональных данных</>}
+                  />
+                </div>
               </div>
             </div>
             {/* пока заккоментировал так как при большом количестве обновлений ломается */}
@@ -251,48 +276,20 @@ const Order = (props: OrderProps) => {
             />
           </div>
           <div className={styles.block2}>
-            <OrderCard products={products} />
+            {/* <OrderCard products={products} /> */}
             <OrderCardMobile products={products} />
             <div className={styles.checkboxesUnderTheCard}>
-              {/* <CheckBox
-                inputProps={{
-                  id: 'order-checkbox-loyalty',
-                  checked: isLoyalty,
-                  onChange: (e) => setIsLoyalty(e.target.checked)
-                }}
-                label='Использовать баллы>'
-              />
-              {isCoupon && <Input
-                inputProps={{
-                  placeholder: '',
-                  id: 'order-input-email',
-                  ...register('coupon'),
-                }}
-                label={'Купон'}
-                onChange={() => {
-                  debounce()
-                }}
-              />}
-              {!isCoupon && <input {...register('coupon')} type='text' style={{
-                display: 'none'
-              }} />} */}
-              {/* <CheckBox
-                inputProps={{
-                  id: 'order-checkbox-discount',
-                  checked: isCoupon,
-                  onChange: (e) => setIsCoupon(e.target.checked)
-                }}
-                label='Использовать купон'
-              /> */}
-
-              <CheckBox
-                inputProps={{
-                  id: 'order-checkbox-agreement',
-                  ...register('agreement'),
-                  defaultChecked: true
-                }}
-                label={<>Я принимаю условия оферты а так же соглашаюсь с условиями обработки персональных данных</>}
-              />
+              {/* <div className={styles.orderCardMobileCheckBox}>
+                <CheckBox
+                  inputProps={{
+                    id: 'order-checkbox-agreement',
+                    ...register('agreement'),
+                    defaultChecked: true
+                  }}
+                  label={<>Я принимаю условия оферты а так же соглашаюсь с условиями обработки персональных данных</>}
+                />
+              </div> */}
+              
             </div>
           </div>
         </div>

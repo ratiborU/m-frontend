@@ -68,17 +68,15 @@ const ClientHeader = () => {
     <>
       <div className={styles.header}>
         <div className={styles.leftBlock}>
-          <Link className={styles.logo} href={'/'}>NINA</Link>
+          <Link className={styles.logo} href={'/'}>Mircos</Link>
           <Link className={styles.text} href={'/catalog'}>каталог</Link>
           <Link className={styles.phoneText} href={'tel:+79028706740'}>+7 (902) 870-67-40</Link>
-          {/* <Search /> */}
         </div>
         <div className={styles.rightBlock}>
           <Link className={styles.icon} href={'/favorite'}>Избраное</Link>
           <Link className={styles.icon} href={'/basket'}>Корзина</Link>
           {isLogedIn && <Link className={styles.icon} href={'/profile/settings'}>Профиль</Link>}
           {!isLogedIn && <Link className={styles.icon} href={'/signin'}>Войти</Link>}
-          {personRole == 'ADMIN' && <Link className={styles.icon} href={'/admin/products'}>Панель</Link>}
         </div>
       </div>
 

@@ -10,8 +10,6 @@
 .block {
   display: flex;
   gap: 60px;
-  /* flex-wrap: wrap; */
-  /* border: 1px solid #000; */
 }
 
 .title {
@@ -29,11 +27,21 @@
 .blockInputs {
   display: flex;
   gap: 60px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: calc(100vw - 16px);
 }
 
 .information {
   display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: calc(100vw - 16px);
+}
+
+.informationFlex {
+  display: flex;
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
   flex-direction: column;
   gap: 20px;
 }
@@ -60,11 +68,9 @@
   gap: 12px;
   margin-top: 20px;
   max-width: calc(100vw - 16px);
-  /* border: 1px solid red; */
 }
 
 .endBlock {
-  /* border: 1px solid red; */
   position: absolute;
   width: 600px;
   font-size: 28px;
@@ -72,6 +78,64 @@
   left: calc(50% - 300px);
   top: 20%;
   /* text-align: justify; */
+}
+.orderCardMobileCheckBox {
+    display: none;
+  }
+
+  .orderCardCheckBox {
+    display: block;
+  }
+
+@media (max-width: 768px) {
+  .blockInputs {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100vw;
+  }
+
+  .orderCardMobileCheckBox {
+    display: block;
+  }
+
+  .orderCardCheckBox {
+    display: none;
+  }
+
+  .block {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .information {
+    padding: 0 8px;
+    /* max-width: 50%; */
+  }
+
+  .block {
+    gap: 20px;
+  }
+
+  .block1 {
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  .block2 {
+    padding: 0 8px;
+  }
+
+  .address {
+    padding: 0 8px;
+    /* max-width: 40%; */
+  }
+
+  .blockInputs {
+    gap: 20px;
+  }
+  .form {
+    margin-top: 40px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -93,9 +157,25 @@
   .form {
     margin-top: 20px;
   }
+  .information {
+    /* max-width: 100%; */
+  }
 }
 
-@media (max-width: 780px) {
+
+
+@media (max-width: 1024px) {
+.blockInputs {
+    display: flex;
+    /* flex-wrap: wrap; */
+    max-width: 100vw;
+  }
+
+  .block {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .information {
     padding: 0 8px;
   }
@@ -105,7 +185,8 @@
   }
 
   .block1 {
-    gap: 30px;
+    gap: 12px;
+    margin-bottom: 60px;
   }
 
   .block2 {
@@ -118,5 +199,8 @@
 
   .blockInputs {
     gap: 20px;
+  }
+  .form {
+    margin-top: 40px;
   }
 }

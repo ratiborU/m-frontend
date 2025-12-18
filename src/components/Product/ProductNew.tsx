@@ -16,7 +16,7 @@ interface IProductProps extends TProduct {
   classname?: string,
 }
 
-const Product = (props: IProductProps) => {
+const ProductNew = (props: IProductProps) => {
   const {
     id,
     name,
@@ -29,8 +29,6 @@ const Product = (props: IProductProps) => {
     isInFavorite = false,
     classname = '',
     productsCount,
-    // isFavorite = false,
-    // count = 0,
   } = props
 
   const [height, setHeight] = useState(403);
@@ -45,7 +43,7 @@ const Product = (props: IProductProps) => {
   }, [id])
 
   return (
-    <>
+    <main className={styles.wrapperblock}>
       <div
         className={`${styles.mainBlock} ${classname}`}
         style={{
@@ -124,8 +122,6 @@ const Product = (props: IProductProps) => {
 
           </div>
 
-          {/* <p>price</p> */}
-          {/* <p>s</p> */}
           <div className={styles.prices}>
             <p className={styles.newPrice}>{Number(price) - Number(discount)} ₽</p>
             <p className={styles.price}>{discount != '0' ? `${price} ₽` : ''}</p>
@@ -138,12 +134,11 @@ const Product = (props: IProductProps) => {
           className={styles.button}
           text={'В корзину'}
           size={'m'}
-          // innerCount={count}
           product={props}
         />
       </div>
-    </>
+    </main>
   );
 };
 
-export default Product;
+export default ProductNew;

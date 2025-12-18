@@ -6,11 +6,15 @@
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  /* max-width: calc(100vw - 140px); */
 }
 
 .nav {
   display: flex;
-  gap: 40px;
+  width: 800px;
+  max-width: calc(100vw - 140px);
+  justify-content: space-between;
+  /* gap: 40px; */
 }
 
 .activeLink {
@@ -34,6 +38,7 @@
   padding: 0px 70px;
   z-index: 2;
   background-color: #fff;
+  /* max-width: calc(100vw - 140px); */
   /* position: fixed; */
 }
 
@@ -129,7 +134,7 @@
   /* font-weight: 500; */
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .header {
     display: none;
   }
@@ -182,4 +187,18 @@
   .header {
     display: none;
   }
+}
+
+@media (max-width: 1024px) {
+  .header{ 
+    padding: 0 40px;
+  }
+
+  .nav {
+  display: flex;
+  width: 800px;
+  max-width: calc(100vw - 60px);
+  justify-content: space-between;
+  /* gap: 40px; */
+}
 }

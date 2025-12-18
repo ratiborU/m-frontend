@@ -2,6 +2,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import EditButton from "@/components/EditButton/EditButton";
 import AddButton from "@/components/AddButton/AddButton";
+import { parseDate } from "@/lib/helpers/parseDate";
 
 export const productColumns: GridColDef[] = [
   {
@@ -19,31 +20,39 @@ export const productColumns: GridColDef[] = [
   {
     field: 'id',
     headerName: 'Id',
-    width: 80,
+    width: 40,
     align: 'center',
     headerAlign: 'center'
   },
   {
     field: 'secondName',
-    headerName: 'Фамилия',
+    headerName: 'ФИО',
+    renderCell: (props) => `${props.row.secondName} ${props.row.firstName} ${props.row.fatherName}`,
     // width: 200,
     flex: 1,
-    minWidth: 100
+    minWidth: 160
   },
-  {
-    field: 'firstName',
-    headerName: 'Имя',
-    // width: 50,
-    flex: 1,
-    minWidth: 100
-  },
-  {
-    field: 'fatherName',
-    headerName: 'Отчество',
-    // width: 50,
-    flex: 1,
-    minWidth: 100
-  },
+  // {
+  //   field: 'secondName',
+  //   headerName: 'Фамилия',
+  //   // width: 200,
+  //   flex: 1,
+  //   minWidth: 100
+  // },
+  // {
+  //   field: 'firstName',
+  //   headerName: 'Имя',
+  //   // width: 50,
+  //   flex: 1,
+  //   minWidth: 100
+  // },
+  // {
+  //   field: 'fatherName',
+  //   headerName: 'Отчество',
+  //   // width: 50,
+  //   flex: 1,
+  //   minWidth: 100
+  // },
   {
     field: 'email',
     headerName: 'Почта',
@@ -53,19 +62,21 @@ export const productColumns: GridColDef[] = [
   {
     field: 'phoneNumber',
     headerName: 'Телефон',
-    flex: 1,
-    minWidth: 120,
+    // flex: 1,
+    width: 100,
+    minWidth: 100,
   },
   {
     field: 'role',
     headerName: 'Роль',
-    flex: 1,
+    // flex: 1,
+    width: 80,
     minWidth: 80,
   },
   {
     field: 'createdAt',
     headerName: 'Создан',
-    minWidth: 120,
-    renderCell: (props) => props.row.createdAt.slice(0, 10),
+    minWidth: 130,
+    renderCell: (props) => parseDate(props.row.createdAt),
   },
 ]

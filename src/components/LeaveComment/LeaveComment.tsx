@@ -66,19 +66,20 @@ const LeaveComment = (props: LeaveCommentProps) => {
 
   return (
     <div className={styles.leaveComment}>
-      <div className={styles.rateBlock}>
+      {/* <div className={styles.rateBlock}>
         <p className={styles.rate}>{product.rate}</p>
         <div className={styles.rateStars}>
           {[...Array(Number(Math.round(Number(product.rate))))].map((_x, i) => <Image key={`comment home: ${product.id} ${i}`} src={star} alt='' width={24} height={24} />)}
           {[...Array(5 - Number(Math.round(Number(product.rate))))].map((_x, i) => <Image key={`comment home: ${product.id} ${i + product.rate}`} src={starGrey} alt='' width={24} height={24} />)}
         </div>
         <p className={styles.commentsCount}>{product.commentsCount} отзывов</p>
-      </div>
-
+      </div> */}
+      <h2 className={styles.title}>Оставьте свой отзыв!</h2>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <InputRate rate={rate} setRate={(value: number) => setRate(value)} />
         <Textarea
           label='Ваш комментарий'
+          sizeInput='medium'
           inputProps={{
             ...register('text'),
             placeholder: '',
@@ -87,6 +88,7 @@ const LeaveComment = (props: LeaveCommentProps) => {
             style: {
               height: 120,
               minHeight: 120,
+              maxWidth: 400
             }
           }}
         />
@@ -116,7 +118,6 @@ const LeaveComment = (props: LeaveCommentProps) => {
           }
         </div>
       </form>
-      {/* <p className={styles.text}>Получите от 20 до 50 баллов за отзыв!</p> */}
     </div>
   );
 };

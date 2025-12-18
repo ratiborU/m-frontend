@@ -1,27 +1,28 @@
 'use client'
 import React from 'react';
 import Product from '@/components/Product/Product';
-import styles from './popularProducts.module.css'
+import styles from './fourProductsBlock.module.css'
 import Title from '@/components/Title/Tile';
 import { TPagination } from '@/services/types/paginationType';
 import { TProduct } from '@/services/api/products/productType';
 // import Title from '@/components/UI/Title/Title';
 import ProductNew from '@/components/Product/ProductNew';
 
-type PopularProductsProps = {
-  products: TPagination<TProduct>
+type FourProductsBlockProps = {
+  title: string,
+  products: TProduct[]
 }
 
-const PopularProducts = (props: PopularProductsProps) => {
-  const { products } = props
-  // const products = await getAllProducts();
+const FourProductsBlock = (props: FourProductsBlockProps) => {
+  const { title, products } = props
+  
   return (
     <>
-      <Title text='Популярные товары' margin={false} />
+      {/* <Title text={title} margin={false} /> */}
+      <h2 className={styles.title}>{title}</h2>
       <div className={styles.products}>
         {
-          ...products.rows
-            .sort((a, b) => Number(b.commentsCount) - Number(a.commentsCount))
+          ...products
             .slice(0, 4)
             .map(x => (
               <ProductNew key={`popular product ${x.id}`} {...x} />
@@ -33,4 +34,4 @@ const PopularProducts = (props: PopularProductsProps) => {
   );
 };
 
-export default PopularProducts;
+export default FourProductsBlock;

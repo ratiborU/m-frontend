@@ -1,22 +1,31 @@
 .products {
-  /* margin: 0 70px; */
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* height: 410px;
-  overflow: hidden; */
-  gap: 20px 0px;
+  gap: 20px 8px;
   margin-bottom: 70px;
-  /* align-items: stretch; */
+  max-width: 1280px;
 }
 
-/* .products div:nth-child(4) {
-  display: none;
-} */
 
-@media (max-width: 780px) {
+
+@media (max-width: 768px) {
   .products {
     padding: 0px 10px;
     margin-bottom: 40px;
+  }
+}
+
+/* 8 из-за того что в продукте содержатся сразу мобильная и десктопная версии, нужно исправить */
+@media (min-width: 576px) {
+  .products div:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .products div:nth-child(4) {
+    display: inline-flex;
   }
 }

@@ -8,11 +8,11 @@ interface TextareaProps {
   inputProps?: TextareaHTMLAttributes<HTMLTextAreaElement>,
   label?: string,
   error?: string,
-  sizeInput?: 'm' | 'l',
+  sizeInput?: 'xsmall' | 'small' | 'medium' | 'large',
 }
 
 const Textarea = (props: TextareaProps) => {
-  const { inputProps, label, sizeInput = 'm', error } = props;
+  const { inputProps, label, sizeInput = 'medium', error } = props;
   const [defaultHeight, setDefaultHeight] = useState(50);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = "0px";
@@ -33,7 +33,7 @@ const Textarea = (props: TextareaProps) => {
   return (
     <div className={styles.field}>
       <textarea
-        className={`${styles.textarea} ${sizeInput == 'l' ? styles.inputLarge : ''}`}
+        className={`${styles.textarea} ${styles[sizeInput]}`}
         {...inputProps}
         style={{
           height: defaultHeight

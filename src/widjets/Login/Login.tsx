@@ -84,15 +84,18 @@ export default function Login() {
           />
           <Button text='Войти' size='l' />
         </form>
+        {/* <div className={styles.texts}> */}
+          <div className={styles.text}>
+            <p>Еще нет аккаунта?</p>
+            <Link href="/signin" className={styles.link}>Зарегистрироваться</Link>
+          </div>
 
-        <div className={styles.text}>
-          <p>Еще нет аккаунта?</p>
-          <Link href="/signin" className={styles.link}>Зарегистрироваться</Link>
-        </div>
-        <div className={`${styles.text} ${styles.mt}`}>
-          <p>Забыли пароль?</p>
-          <Link href="/signin" className={styles.link}>Восстановить доступ</Link>
-        </div>
+          <div className={`${styles.text} ${styles.mt}`}>
+            <p>Забыли пароль?</p>
+            <Link href="/signin" className={styles.link}>Восстановить доступ</Link>
+          </div>
+        {/* </div> */}
+        
       </div>
     </div>
   );

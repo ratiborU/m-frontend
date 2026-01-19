@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   // export async function middleware() {
   const url = request.nextUrl
 
-  console.log('middleware');
+  // console.log('middleware');
 
   if (!request.cookies.get('access') && !!request.cookies.get('refresh')) {
     console.log('refresh token');
@@ -40,8 +40,11 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+  console.log(request.method)
 
-  if (!request.cookies.get('access') && !request.cookies.get('refresh') && !request.cookies.get('personId')) {
+  // ломается при реккомендации продуктов
+  // && request.method != 'GET'
+  if (!request.cookies.get('access') && !request.cookies.get('refresh') && !request.cookies.get('personId') && request.method != 'GET') {
     console.log('register empty person');
     const response = NextResponse.redirect(url)
     const responseFetch = await fetch(`${process.env.BACKEND_URL}/persons/empty`, {

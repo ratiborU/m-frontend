@@ -4,7 +4,7 @@ import MobileHeaderMenuElement from '../MobileHeaderMenuElement/MobileHeaderMenu
 import styles from './header.module.css'
 import React, { useEffect, useState } from 'react';
 // import styles from './clientHeader.module.css'
-import Link from 'next/link';
+// import Link from 'next/link';
 import { usePersonContext } from '@/providers/PersonProvider/hooks/usePersonContext';
 import menuIcon from '../../../public/mobile/Menu.svg'
 import Image from 'next/image';
@@ -15,34 +15,34 @@ import orders from '../../../public/mobile/History.svg'
 import products from '../../../public/mobile/Attach money.svg'
 import comments from '../../../public/mobile/Question answer.svg'
 import questions from '../../../public/mobile/Info.svg'
-import SerachMobile from '../Search/SerachMobile';
-import MobileMenuElement from '../MobileMenuElement/MobileMenuElement';
-import home from '../../../public/mobile/Home.svg'
-import catalog from '../../../public/mobile/Menu open.svg'
-import favorite from '../../../public/mobile/Favorite.svg'
-import cart from '../../../public/mobile/Shopping cart.svg'
-import profile from '../../../public/mobile/Person.svg'
-import login from '../../../public/mobile/Login.svg'
-import homeActive from '../../../public/mobile/Home active.svg'
-import catalogActive from '../../../public/mobile/Menu open active.svg'
-import favoriteActive from '../../../public/mobile/Favorite active.svg'
-import cartActive from '../../../public/mobile/Shopping cart active.svg'
-import profileActive from '../../../public/mobile/Person active.svg'
-import loginActivate from '../../../public/mobile/Login active.svg'
+// import SerachMobile from '../Search/SerachMobile';
+// import MobileMenuElement from '../MobileMenuElement/MobileMenuElement';
+// import home from '../../../public/mobile/Home.svg'
+// import catalog from '../../../public/mobile/Menu open.svg'
+// import favorite from '../../../public/mobile/Favorite.svg'
+// import cart from '../../../public/mobile/Shopping cart.svg'
+// import profile from '../../../public/mobile/Person.svg'
+// import login from '../../../public/mobile/Login.svg'
+// import homeActive from '../../../public/mobile/Home active.svg'
+// import catalogActive from '../../../public/mobile/Menu open active.svg'
+// import favoriteActive from '../../../public/mobile/Favorite active.svg'
+// import cartActive from '../../../public/mobile/Shopping cart active.svg'
+// import profileActive from '../../../public/mobile/Person active.svg'
+// import loginActivate from '../../../public/mobile/Login active.svg'
 import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation';
 import { LocalStorageService } from '@/lib/helpers/localStorageService';
 import { useRouter } from 'next/navigation';
 
 const MobileHeaderAdmin = () => {
   const person = usePersonContext();
-  const [isLogedIn, setIsLoggedIn] = useState(false);
-  const [personRole, setPersonRole] = useState("PERSON");
+  // const [isLogedIn, setIsLoggedIn] = useState(false);
+  // const [personRole, setPersonRole] = useState("PERSON");
   const [isMenu, setIsMenu] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    setIsLoggedIn(!!person.id);
-    setPersonRole(person.id == '1' ? "ADMIN" : "PERSON")
+    // setIsLoggedIn(!!person.id);
+    // setPersonRole(person.id == '1' ? "ADMIN" : "PERSON")
   }, [person]);
 
   const onSuccess = () => {

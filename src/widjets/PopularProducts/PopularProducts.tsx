@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import Product from '@/components/Product/Product';
+// import Product from '@/components/Product/Product';
 import styles from './popularProducts.module.css'
 import Title from '@/components/Title/Tile';
 import { TPagination } from '@/services/types/paginationType';

@@ -4,7 +4,7 @@ import Filter from '@/components/Filter/Filter';
 import Sorter from '@/components/Sorter/Sorter';
 import styles from './catalog.module.css'
 import { TProduct } from '@/services/api/products/productType';
-import Product from '@/components/Product/Product';
+// import Product from '@/components/Product/Product';
 import ProductNew from '@/components/Product/ProductNew';
 import { useCatalogSortContext } from '@/providers/CatalogSortProvider/hooks/useCatalogSortContext';
 import SorterMobile from '@/components/Sorter/SorterMobile';

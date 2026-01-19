@@ -1,7 +1,7 @@
 import { TFavoriteProduct } from '@/services/api/favoriteProducts/favoriteProductType';
 import React from 'react';
 import styles from './favorite.module.css'
-import Product from '@/components/Product/Product';
+// import Product from '@/components/Product/Product';
 import Title from '@/components/Title/Tile';
 import ProductNew from '@/components/Product/ProductNew';
 

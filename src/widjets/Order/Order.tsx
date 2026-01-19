@@ -87,7 +87,8 @@ const Order = (props: OrderProps) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSuccessPayment = (data: any) => {
     console.log(data.confirmation.confirmation_url);
-    window.location.href = data.confirmation.confirmation_url;
+    // window.location.href = data.confirmation.confirmation_url;
+    window.open(data.confirmation.confirmation_url);
     // router.push('order/completed');
   }
 
@@ -109,10 +110,11 @@ const Order = (props: OrderProps) => {
     //     ? finalPrice - Number(couponData.discount)
     //     : finalPrice * (1 - Number(couponData.discount.slice(0, couponData.discount.length - 1)) / 100);
     // const totalWithProductsDiscount = totalWithDiscount - order.discountPerPackage * order.productsCartCount;
-    // const loyaltyPayCount = isLoyalty ? Math.min(Number(loyaltyData?.points), Math.floor(totalWithProductsDiscount * 0.3)) : 0;
-    // const totalWithLoyalty = isLoyalty ? totalWithProductsDiscount - loyaltyPayCount : totalWithProductsDiscount;
 
-    const status = 'Ожидает оплаты';
+    // const finalPriceToSend = 
+    // const totalProductsDiscount = products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0);
+
+    const status = 'Подтвержден';
     const deliveryDays = '7';
     const delivery = 'cdek';
 
@@ -141,19 +143,6 @@ const Order = (props: OrderProps) => {
         phoneNumber: data.phone,
       })
     }
-    // пока несовсем правильно работает
-
-    console.log({
-      ...data,
-      price: String(finalPrice),
-      status,
-      delivery,
-      deliveryDays,
-      personId: person.id,
-      couponId: '1',
-      address: input.value || order.address,
-      usePoints: false
-    })
 
     await createOrder({
       ...data,
@@ -167,7 +156,7 @@ const Order = (props: OrderProps) => {
       usePoints: false
     });
 
-    alert('создание заказа');
+    // alert('создание заказа');
   }
 
   return (

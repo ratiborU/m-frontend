@@ -9,7 +9,7 @@ import star from '../../../public/Star rate.svg'
 import starGrey from '../../../public/Star rate gray filled.svg'
 import NameAndProperty from '@/components/UI/NameAndProperty/NameAndProperty';
 import { TComment } from '@/services/api/comments/commentType';
-import Product from '@/components/Product/Product';
+// import Product from '@/components/Product/Product';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import Comment from '@/components/Comment/Comment';
 import LeaveComment from '@/components/LeaveComment/LeaveComment';
@@ -17,7 +17,7 @@ import Gallery from '@/components/Gallery/Gallery';
 import RateBlock from '@/components/LeaveComment/RateBlock';
 import ProductCardSecond from '@/components/ProductCard/ProductCardSecond';
 // import { useGetSimularProductsQuery } from '@/hooks/recommendations/useGetAllSimularProductsQuery';
-import ProductNew from '@/components/Product/ProductNew';
+// import ProductNew from '@/components/Product/ProductNew';
 import FourProductsBlock from '../FourProductsBlock/FourProductsBlock';
 
 export interface ProductProps {

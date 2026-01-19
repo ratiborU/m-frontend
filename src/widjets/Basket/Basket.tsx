@@ -5,11 +5,9 @@ import styles from './basket.module.css'
 import BasketToOrderCard from '@/components/BasketToOrderCard/BasketToOrderCard';
 import Title from '@/components/Title/Tile';
 import BasketToOrderTotal from '@/components/BasketToOrderCard/BasketToOrderTotal';
-import { TLoyalty } from '@/services/api/loyalty/loyaltyType';
 
 type BasketProps = {
   products: TBasketProduct[];
-  loyalty: TLoyalty;
 }
 
 const Basket = (props: BasketProps) => {

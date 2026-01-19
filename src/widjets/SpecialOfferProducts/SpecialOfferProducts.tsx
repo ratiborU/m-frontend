@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import Product from '@/components/Product/Product';
+// import Product from '@/components/Product/Product';
 import styles from './specialOfferProducts.module.css'
 import Title from '@/components/Title/Tile';
 // import { TPagination } from '@/services/types/paginationType';
@@ -12,7 +12,7 @@ type PopularProductsProps = {
 }
 
 const SpecialOfferProducts = (props: PopularProductsProps) => {
-  const { products } = props
+  const { products = [] } = props
   // const products = await getAllProducts();
   return (
     <div className={styles.wrapper}>

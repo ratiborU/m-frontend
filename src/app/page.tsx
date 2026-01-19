@@ -30,7 +30,7 @@ export default async function Home() {
   //   cache: 'no-cache'
   // })
   //   .then(data => data.json())
-
+  console.log(reccomendations);
   return (
     <>
       <div className={styles.block}>
@@ -39,6 +39,7 @@ export default async function Home() {
           {/* <SwiperHome /> */}
           <div className={styles.wrapper}>
             <PopularProducts products={products || []} />
+            {/* <SpecialOfferProducts products={[]} /> */}
             <SpecialOfferProducts products={reccomendations.slice(0, 4) || []} />
             <HomeComments />
           </div>

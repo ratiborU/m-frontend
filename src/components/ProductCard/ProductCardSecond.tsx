@@ -4,7 +4,7 @@ import styles from './productCardSecond.module.css'
 // import Button from '../UI/Button/Button';
 // import Link from 'next/link';
 import { TProduct } from '@/services/api/products/productType';
-import FavoriteButton from '../UI/FavoriteButton/FavoriteButton';
+// import FavoriteButton from '../UI/FavoriteButton/FavoriteButton';
 import NameAndProperty from '../UI/NameAndProperty/NameAndProperty';
 import CartButton from '../UI/CartButton/CartButton';
 import FavoriteButtonProductPage from '../UI/FavoriteButton/FavoriteButtonProductPage';

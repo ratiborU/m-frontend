@@ -19,7 +19,7 @@ const BasketToOrderTotal = (props: BasketToOrderCardProps) => {
   const { products } = props;
 
   const total = products.reduce((acc, cur) => acc + Number(cur.count) * Number(cur.product.price), 0)
-  const [curentDiscountCount, setCurrentDiscountCount] = useState(0);
+  // const [curentDiscountCount, setCurrentDiscountCount] = useState(0);
   const [totalWithDiscount, setTotalWithDiscount] = useState(0);
   // const [loyaltyCount, setLoyaltyCount] = useState(0);
 
@@ -30,7 +30,7 @@ const BasketToOrderTotal = (props: BasketToOrderCardProps) => {
     console.log(products);
     setOrder.setProductsCartCount(products.reduce((acc, cur) => acc + Number(cur.count), 0));
     setOrder.setDiscountPerPackage(productDiscounts.reduce((acc, cur) => order.productsCartCount >= cur[0] ? cur[1] : acc, 0));
-    setCurrentDiscountCount(productDiscounts.reduce((acc, cur) => order.productsCartCount >= cur[0] ? cur[0] : acc, 0));
+    // setCurrentDiscountCount(productDiscounts.reduce((acc, cur) => order.productsCartCount >= cur[0] ? cur[0] : acc, 0));
     setTotalWithDiscount(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0))
     // setLoyaltyCount(Math.floor(products.reduce((acc, cur) => acc + Number(cur.count) * (Number(cur.product.price) - Number(cur.product.discount) - order.discountPerPackage), 0) * Number(loyalty.cashback) / 100));
   }, [products, setOrder, order.discountPerPackage, order.productsCartCount]);

@@ -35,13 +35,13 @@ import { useRouter } from 'next/navigation';
 const ClientHeader = () => {
   const person = usePersonContext();
   const [isLogedIn, setIsLoggedIn] = useState(false);
-  const [personRole, setPersonRole] = useState("PERSON");
+  // const [personRole, setPersonRole] = useState("PERSON");
   const [isMenu, setIsMenu] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     setIsLoggedIn(!!person.id);
-    setPersonRole(person.id == '1' ? "ADMIN" : "PERSON")
+    // setPersonRole(person.id == '1' ? "ADMIN" : "PERSON")
   }, [person]);
 
   const onSuccess = () => {

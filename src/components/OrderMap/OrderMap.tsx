@@ -49,7 +49,7 @@ const OrderMap = (props: OrderMapProps) => {
           height={460}
         >
           <PlacemarkMircosComponent />
-          {/* <Clusterer
+          <Clusterer
             options={{
               preset: 'islands#darkGreenClusterIcons',
               iconColor: '#000000',
@@ -60,7 +60,7 @@ const OrderMap = (props: OrderMapProps) => {
             {
               ...cdekOffices.map(x => <PlacemarkComponent key={`placemark sdek: ${x.code}`} office={x} />)
             }
-          </Clusterer> */}
+          </Clusterer>
         </Map>
       </div>
     </YMaps>

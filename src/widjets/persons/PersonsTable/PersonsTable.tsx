@@ -1,6 +1,6 @@
 'use client'
 import { TPerson } from '@/services/api/persons/personType';
-import { TPagination } from '@/services/types/paginationType';
+// import { TPagination } from '@/services/types/paginationType';
 import BaseGrid from '@/widjets/BaseGrid/BaseGrid';
 import React, { useState } from 'react';
 import { productColumns } from './columns';

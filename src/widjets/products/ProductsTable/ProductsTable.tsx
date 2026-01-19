@@ -26,7 +26,7 @@ const optionsOrdered = [
 ]
 
 const ProductsTable = (props: ProductsTableProps) => {
-  const { products = [], orderProducts = [] } = props;
+  const { products = [], } = props;
   
   const [productsState, setProductsState] = useState(products);
   const [search, setSearch] = useState('');

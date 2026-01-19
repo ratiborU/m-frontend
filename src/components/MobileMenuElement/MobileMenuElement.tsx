@@ -15,7 +15,7 @@ type MobileMenuElementProps = {
 }
 
 const MobileMenuElement = (props: MobileMenuElementProps) => {
-  const { icon = home, activeIcon = homeActive, text = 'Главная', to = '/' } = props;
+  const { icon = home, activeIcon = homeActive, to = '/' } = props;
   const [isActive, setIsActive] = useState(false);
   const pathName = usePathname();
 

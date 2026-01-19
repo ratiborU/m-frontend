@@ -3,9 +3,9 @@
 import { TProduct } from '@/services/api/products/productType';
 import React, { useState } from 'react';
 import styles from './leaveComment.module.css';
-import Image from 'next/image';
-import star from '../../../public/Star rate.svg'
-import starGrey from '../../../public/Star rate gray filled.svg'
+// import Image from 'next/image';
+// import star from '../../../public/Star rate.svg'
+// import starGrey from '../../../public/Star rate gray filled.svg'
 import Textarea from '../UI/Textarea/Textarea';
 import Button from '../UI/Button/Button';
 // import { Button } from '@mui/material';

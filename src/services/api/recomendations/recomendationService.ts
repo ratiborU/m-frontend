@@ -4,6 +4,7 @@ import { api } from "../api";
 import { TProduct } from "../products/productType";
 // import { TPagination } from "../../types/paginationType";
 import { cookies } from "next/headers";
+// import { getAllProducts } from "../products/productService";
 
 // export const createComment = async (data: TCommentCreate): Promise<TComment> => {
 //   const response = await api('comments', {
@@ -22,8 +23,14 @@ export const getAllSimularsByProductId = async (id: number | string): Promise<TP
 export const getAllRecommendations = async (): Promise<TProduct[]> => {
   // добавить пагинацию
   const id = cookies().get('personId')?.value;
-  const response = await api(`recomendations/recomendationsByPersonId/${id}`);
-  return response;
+  if (id) {
+    const response = await api(`recomendations/recomendationsByPersonId/${id}`);
+    return response;
+  } else {
+    const response = await api(`products`);
+    return response.rows;
+  }
+  
 }
 
 // export const getCommentsByProductId = async (id: number | string): Promise<TPagination<TComment>> => {
